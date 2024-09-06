@@ -1,0 +1,106 @@
+@mixin colors {
+  --grey-10: #ffffff;
+  --grey-25: #fafafa;
+  --grey-50: #f4f5f6;
+  --grey-75: #efeff1;
+  --grey-100: #e9eaec;
+  --grey-150: #dbdce0;
+  --grey-200: #cccfd3;
+  --grey-250: #bec1c7;
+  --grey-300: #afb4ba;
+  --grey-350: #a1a6ae;
+  --grey-400: #9298a1;
+  --grey-450: #848b95;
+  --grey-500: #757d88;
+  --grey-550: #6a717b;
+  --grey-600: #5f656e;
+  --grey-650: #545961;
+  --grey-700: #494e55;
+  --grey-750: #3d4248;
+  --grey-800: #32363b;
+  --grey-850: #272a2e;
+  --grey-900: #1c1e21;
+  --grey-925: #151719;
+  --grey-950: #0e0f11;
+  --grey-975: #070808;
+  --grey-990: #000000;
+
+  --azure-10: #ebf6ff;
+  --azure-25: #cce9ff;
+  --azure-50: #aedcff;
+  --azure-75: #8fceff;
+  --azure-100: #70c1ff;
+  --azure-200: #54b1f7;
+  --azure-300: #38a0f0;
+  --azure-400: #1c90e8;
+  --azure-500: #007fe0;
+  --azure-600: #0071c7;
+  --azure-700: #0062ad;
+  --azure-800: #005494;
+  --azure-900: #00457a;
+  --azure-925: #003a66;
+  --azure-950: #002e52;
+  --azure-975: #00233d;
+  --azure-990: #001729;
+
+  --puce-10: #FAF0F2;
+  --puce-25: #F5E1E5;
+  --puce-50: #F0D2D7;
+  --puce-75: #EAC2CA;
+  --puce-100: #E5B3BC;
+  --puce-200: #DDA4AE;
+  --puce-300: #D695A0;
+  --puce-400: #CE8592;
+  --puce-500: #C67685;
+  --puce-600: #BE6777;
+  --puce-700: #B75869;
+  --puce-800: #AF485B;
+  --puce-900: #A7394D;
+
+  --almond-10: #FAF5F0;
+  --almond-25: #F6EEE4;
+  --almond-50: #F3E7D9;
+  --almond-75: #EFDFCD;
+  --almond-100: #EBD8C1;
+  --almond-200: #DFC9AE;
+  --almond-300: #D3BA9C;
+  --almond-400: #C7AB89;
+  --almond-500: #BC9C77;
+  --almond-600: #B08C64;
+  --almond-700: #A47D51;
+  --almond-800: #986E3F;
+  --almond-900: #8C5F2C;
+
+  --zomp-10: #F2F7F6;
+  --zomp-25: #E6EFED;
+  --zomp-50: #D9E8E5;
+  --zomp-75: #CDE0DC;
+  --zomp-100: #C0D8D3;
+  --zomp-200: #B2CDC7;
+  --zomp-300: #A4C2BC;
+  --zomp-400: #95B6B0;
+  --zomp-500: #87ABA4;
+  --zomp-600: #79A098;
+  --zomp-700: #6B958D;
+  --zomp-800: #5C8981;
+  --zomp-900: #4E7E75;
+
+  --tropical-indigo-10: #F3F1F8;
+  --tropical-indigo-25: #E7E4F1;
+  --tropical-indigo-50: #DCD6EB;
+  --tropical-indigo-75: #D0C9E4;
+  --tropical-indigo-100: #C4BBDD;
+  --tropical-indigo-200: #B9AED6;
+  --tropical-indigo-300: #ADA1CF;
+  --tropical-indigo-400: #A294C7;
+  --tropical-indigo-500: #9687C0;
+  --tropical-indigo-600: #8B79B9;
+  --tropical-indigo-700: #7F6CB2;
+  --tropical-indigo-800: #745FAA;
+  --tropical-indigo-900: #6852A3;
+}
+
+
+// grey-900 text
+// grey-600 disabled text
+// azure-600 is "anchor links"

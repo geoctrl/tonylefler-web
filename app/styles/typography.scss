@@ -1,0 +1,43 @@
+@mixin typography {
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h4 {
+    @apply text-lg;
+  }
+
+  a {
+    @apply text-azure-500;
+  }
+
+  code {
+    @apply bg-almond-100/50 text-nowrap rounded-md px-1 font-bold dark:bg-grey-100/20;
+  }
+
+  p {
+    @apply mb-2;
+  }
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/app/assets/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/app/assets/fonts/InterVariable-Italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+}

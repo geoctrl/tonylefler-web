@@ -1,0 +1,91 @@
+@use "colors" as *;
+@use "color-use-cases";
+@use "typography" as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @include colors;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+    }
+  }
+
+  body {
+    @apply w-full overflow-hidden overscroll-none bg-grey-10 text-base text-grey-900 dark:bg-grey-900 dark:text-grey-100;
+  }
+
+  .rainbow {
+    z-index: 0;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      left: -100%;
+      top: -450%;
+      width: 300%;
+      height: 1000%;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: -50% -50%;
+      background-image: conic-gradient(
+        #7944d3,
+        #b81e8c,
+        #d8325a,
+        #fc693c,
+        #7944d3
+      );
+      animation: rotate 4s linear infinite;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 2px;
+      top: 2px;
+      width: calc(100% - 4px);
+      height: calc(100% - 4px);
+      background: rgb(28, 30, 33);
+      border-radius: 7px;
+      opacity: 1;
+    }
+  }
+
+  @include typography;
+}
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@layer utilities {
+  .layout-container {
+    //    @apply mb-8 flex items-center justify-between px-4 py-5 sm:mx-6 sm:px-2 p;
+  }
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
