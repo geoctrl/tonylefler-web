@@ -1,7 +1,8 @@
 import React from "react";
-import logo from "../assets/neon-transfer-logo.svg";
 import { isClient } from "~/utils/is-client";
-console.log(logo);
+import { Clickable } from "~/common/clickable";
+import { Button } from "~/common/button";
+import { Link } from "@remix-run/react";
 
 type Props = {
   className?: string;
@@ -17,10 +18,8 @@ export function Logo(props: Props) {
     }
   }
   return (
-    <div>
-      <img src={logo} style={{ height: 20 }} />
-    </div>
-    // width={120}
-    // height={30}
+    <Button as={Link} to="/" className="font-mono">
+      tonylefler.com
+    </Button>
   );
 }

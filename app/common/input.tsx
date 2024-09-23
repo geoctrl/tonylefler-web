@@ -9,8 +9,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { RenderIcon } from "~/common/icon/render-icon";
-import { IconsOrElement } from "~/types/icons";
+import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
+import { IconOrElement } from "~/types/icons";
 
 type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -20,8 +20,8 @@ type InputProps = Omit<
   onChange?: (value: string, event: FormEvent<HTMLInputElement>) => void;
   formSize?: "sm" | "md" | "lg";
   label?: string | ReactNode;
-  iconLeft?: IconsOrElement;
-  iconRight?: IconsOrElement;
+  iconLeft?: IconOrElement;
+  iconRight?: IconOrElement;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -79,10 +79,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           }}
         />
         <div className="pointer-events-none absolute bottom-0 left-0 top-0 flex size-10 items-center justify-center">
-          <RenderIcon icon={iconLeft} />
+          <RenderIconOrElement iconOrElement={iconLeft} />
         </div>
         <div className="pointer-events-none absolute bottom-0 right-0 top-0 flex size-10 items-center justify-center">
-          <RenderIcon icon={iconRight} />
+          <RenderIconOrElement iconOrElement={iconRight} />
         </div>
       </div>
     </div>

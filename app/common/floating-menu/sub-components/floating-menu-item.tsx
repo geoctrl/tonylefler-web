@@ -7,10 +7,10 @@ import React, {
 
 import { Menu, MenuProps } from "../menu";
 import { Icon } from "~/common/icon/icon";
-import { RenderIcon } from "~/common/icon/render-icon";
+import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
 import { Link, LinkProps } from "@remix-run/react";
 import { always, maybe } from "~/utils/classname-helpers";
-import { IconsOrElement } from "~/types/icons";
+import { IconOrElement } from "~/types/icons";
 
 type FloatingMenuItemAsButton = {
   as?: "button";
@@ -28,8 +28,8 @@ type FloatingMenuItemAs =
 type MenuItemProps = MenuProps &
   FloatingMenuItemAs & {
     text: string | ReactNode;
-    iconLeft?: IconsOrElement;
-    iconRight?: IconsOrElement;
+    iconLeft?: IconOrElement;
+    iconRight?: IconOrElement;
     block?: boolean;
   };
 
@@ -51,11 +51,13 @@ export const FloatingMenuItem = React.forwardRef<
       )}
     >
       <div className="flex items-center justify-between gap-4">
-        {!!iconLeft && <RenderIcon icon={iconLeft} className="size-3.5" />}
+        {!!iconLeft && (
+          <RenderIconOrElement iconOrElement={iconLeft} className="size-3.5" />
+        )}
         {text}
       </div>
       {!!iconRight && !isSubMenu && (
-        <RenderIcon icon={iconRight} className="size-3.5" />
+        <RenderIconOrElement iconOrElement={iconRight} className="size-3.5" />
       )}
       {isSubMenu && <Icon className="size-3.5" name="angle-right" />}
     </Wrapper>

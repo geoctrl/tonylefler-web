@@ -1,6 +1,6 @@
-@use 'sass:list';
-@use 'sass:string';
-@use 'sass:map';
+@use "sass:list";
+@use "sass:string";
+@use "sass:map";
 
 @mixin generateThemeVariables($use-case) {
   $returnMap: ();
@@ -15,7 +15,7 @@
         $returnMap: map.set($returnMap, $theme, $themeList);
       }
     } @else {
-      @each $theme in ('light', 'dark') {
+      @each $theme in ("light", "dark") {
         $themeList: map.get($returnMap, $theme);
         @if $themeList == null {
           $themeList: ();
@@ -43,7 +43,7 @@
 }
 
 @function buildRgb($color) {
-  @return #{#{red($color)}, #{green($color)}, azure($color)};
+  @return #{#{red($color)}, #{green($color)}, primary($color)};
 }
 
 @function v($var) {

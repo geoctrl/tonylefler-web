@@ -1,23 +1,20 @@
-import React, {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  ComponentType,
-  forwardRef,
-} from "react";
+import React, { ComponentProps } from "react";
 import { Link, LinkProps } from "@remix-run/react";
-import { always } from "~/utils/classname-helpers";
 import { tv } from "tailwind-variants";
+
+import { always } from "~/utils/classname-helpers";
 import { inlineSwitch } from "~/utils/inline-switch";
-import { RenderIcon } from "~/common/icon/render-icon";
-import { IconsOrElement } from "~/types/icons";
+import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
+import { IconOrElement } from "~/types/icons";
 
 type ButtonButtonProps = {
   as?: "button";
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & React.ButtonHTMLAttributes<HTMLButtonElement> &
+  ComponentProps<"button">;
 
 type ButtonAnchorProps = {
   as?: "a";
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 type ButtonLinkProps = {
   as?: typeof Link;
@@ -26,15 +23,13 @@ type ButtonLinkProps = {
 type ButtonAs = ButtonButtonProps | ButtonAnchorProps | ButtonLinkProps;
 
 export type ButtonProps = ButtonAs & {
-  isActive?: boolean;
   alignContent?: "left" | "right" | "center";
   block?: boolean;
   disabled?: boolean;
-  iconLeft?: IconsOrElement;
-  iconOnly?: IconsOrElement;
-  iconRight?: IconsOrElement;
-  isLoading?: boolean;
   formSize?: "sm" | "md" | "lg";
+  iconLeft?: IconOrElement;
+  iconOnly?: IconOrElement;
+  iconRight?: IconOrElement;
   intent?:
     | "primary"
     | "secondary"
@@ -43,9 +38,11 @@ export type ButtonProps = ButtonAs & {
     | "tertiary"
     | "ai"
     | "listItem";
+  isActive?: boolean;
+  isLoading?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
       as = "button",
@@ -59,45 +56,47 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       block,
       className,
       children,
+      disabled,
       ...rest
     } = props;
-    const Wrapper: ComponentType<any> | string = as || "button";
+    const Wrapper = as === "a" ? "a" : as === "button" ? "button" : Link;
 
-    // icon size
-    const iconSize = inlineSwitch(
-      formSize!,
-      {
-        sm: "size-3.5",
-        md: "size-4",
-        lg: "size-5",
+    const iconSize = tv({
+      base: "size-4",
+      variants: {
+        formSize: {
+          sm: "size-3.5",
+          md: "size-4",
+          lg: "size-5",
+        },
       },
-      "size-4",
-    );
+    })({ formSize });
 
     return (
       <Wrapper
-        {...rest}
+        {...(rest as any)}
         ref={ref}
+        disabled={disabled}
         role={intent === "listItem" ? "menuitem" : undefined}
         className={tv({
           base: "relative inline-flex shrink-0 cursor-pointer select-none items-center whitespace-nowrap rounded-lg align-middle font-medium transition ease-out",
           variants: {
             intent: {
               primary:
-                "bg-azure-500 text-grey-100 hover:bg-azure-600 active:bg-azure-700",
+                "bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-grey-100",
               secondary: always(
                 "bg-grey-500/10 text-grey-900 hover:bg-grey-500/20 active:bg-grey-500/25 dark:text-grey-100",
-                "dark:bg-grey-500/10 dark:text-grey-100 hover:dark:bg-grey-500/20 active:dark:bg-grey-500/25",
+                "dark:bg-grey-500/10 dark:text-grey-100 dark:hover:bg-grey-500/20 active:dark:bg-grey-500/25",
               ),
               secondaryColor:
-                "bg-azure-500/10 text-azure-500 hover:bg-azure-500/20 active:bg-azure-500/25",
+                "bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 active:bg-primary-500/25",
               border: always(
                 "border border-solid border-grey-900/30 text-grey-500 hover:border-grey-900/40 hover:bg-grey-500/10 active:border-grey-900/50 active:bg-grey-500/15 dark:text-grey-100",
                 "dark:border-grey-100/50 dark:text-grey-100 dark:hover:bg-grey-500/10 dark:active:bg-grey-100/15",
               ),
               tertiary: always(
                 "text-grey-900",
-                "hover:bg-grey-500/10 active:bg-grey-500/15 hover:dark:bg-grey-100/10",
+                "hover:bg-grey-500/10 active:bg-grey-500/15 dark:hover:bg-grey-100/10",
                 "dark:text-grey-100 dark:active:bg-grey-100/15",
               ),
               listItem: always(
@@ -144,20 +143,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {
               intent: "primary",
               isActive: true,
-              class: "bg-azure-700 hover:bg-azure-700",
+              class: "bg-primary-700 hover:bg-primary-700",
             },
             {
               intent: "secondary",
               isActive: true,
               class: always(
                 "bg-grey-500/25 hover:bg-grey-500/25",
-                "dark:bg-grey-500/25 hover:dark:bg-grey-500/25",
+                "dark:bg-grey-500/25 dark:hover:bg-grey-500/25",
               ),
             },
             {
               intent: "secondaryColor",
               isActive: true,
-              class: "bg-azure-500/25 hover:bg-azure-500/25",
+              class: "bg-primary-500/25 hover:bg-primary-500/25",
             },
             {
               intent: "border",
@@ -184,15 +183,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           alignContent,
           isActive,
           className,
+          disabled,
         })}
       >
-        {!!iconOnly && <RenderIcon icon={iconOnly} className={iconSize} />}
-        {!iconOnly && iconLeft && (
-          <RenderIcon icon={iconLeft} className={iconSize} />
-        )}
-        {!iconOnly && children}
-        {!iconOnly && iconRight && (
-          <RenderIcon icon={iconRight} className={iconSize} />
+        {!!iconOnly ? (
+          <RenderIconOrElement iconOrElement={iconOnly} className={iconSize} />
+        ) : (
+          <>
+            {iconLeft && (
+              <RenderIconOrElement
+                iconOrElement={iconLeft}
+                className={iconSize}
+              />
+            )}
+            {children}
+            {iconRight && (
+              <RenderIconOrElement
+                iconOrElement={iconRight}
+                className={iconSize}
+              />
+            )}
+          </>
         )}
       </Wrapper>
     );

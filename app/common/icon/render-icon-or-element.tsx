@@ -2,25 +2,25 @@ import React, { isValidElement, ReactNode } from "react";
 
 import { Icon, IconProps } from "~/common/icon/icon";
 import { Icons } from "~/types/icon-gen";
-import { IconsOrElement } from "~/types/icons";
+import { IconOrElement } from "~/types/icons";
 
 export type RenderIconProps = Omit<IconProps, "name"> & {
-  icon: IconsOrElement;
+  iconOrElement: IconOrElement;
 };
 
-export function RenderIcon({
-  icon,
+export function RenderIconOrElement({
+  iconOrElement,
   className,
 }: RenderIconProps): ReactNode | null {
-  if (typeof icon === "string") {
-    return <Icon name={icon as Icons} className={className} />;
+  if (typeof iconOrElement === "string") {
+    return <Icon name={iconOrElement as Icons} className={className} />;
   }
-  const iconProps = icon as IconProps;
+  const iconProps = iconOrElement as IconProps;
   if (typeof iconProps === "object" && iconProps?.name) {
     return <Icon {...iconProps} className={className} />;
   }
-  if (isValidElement(icon)) {
-    return icon;
+  if (isValidElement(iconOrElement)) {
+    return iconOrElement;
   }
   return null;
 }

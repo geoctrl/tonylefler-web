@@ -16,13 +16,25 @@
   }
 
   a {
-    @apply text-azure-500;
+    @apply text-primary-500;
   }
 
-  code {
-    @apply bg-almond-100/50 text-nowrap rounded-md px-1 font-bold dark:bg-grey-100/20;
-  }
+  // code {
+  // @apply text-nowrap rounded-md bg-almond-100/50 px-1 font-bold dark:bg-grey-100/20;
+  // }
 
+  p {
+    @apply mb-2;
+  }
+}
+
+.docs {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   p {
     @apply mb-2;
   }

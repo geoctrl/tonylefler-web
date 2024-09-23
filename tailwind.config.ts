@@ -50,7 +50,7 @@ export default {
         975: "#070808",
         990: "#000000",
       },
-      azure: {
+      primary: {
         10: "#ebf6ff",
         25: "#cce9ff",
         50: "#aedcff",

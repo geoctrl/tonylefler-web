@@ -24,7 +24,9 @@ export function Clickable(props: ClickableProps) {
     <Component
       className={always(
         className,
-        "cursor-pointer rounded-lg p-2 transition ease-out hover:bg-grey-500/10",
+        "cursor-pointer rounded-lg p-2 transition ease-out",
+        "hover:bg-grey-500/10 active:bg-grey-500/15 dark:hover:bg-grey-100/10",
+        "dark:text-grey-100 dark:active:bg-grey-100/15",
       )}
       {...(rest as any)}
       {...otherProps}
