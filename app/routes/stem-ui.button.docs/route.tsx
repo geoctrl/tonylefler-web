@@ -1,17 +1,17 @@
-import { DemoAlignContent } from "~/routes/stem-ui.button.docs/demo-align-content";
-import { DemoIntent } from "~/routes/stem-ui.button.docs/demo-intent";
+import { ButtonAlignContent } from "~/routes/stem-ui.button.docs/button-align-content";
+import { ButtonIntent } from "~/routes/stem-ui.button.docs/button-intent";
+import { Demo } from "~/components/demo";
+import { Button } from "stem-ui";
 
 export default function () {
   return (
-    <div>
-      <h3>Intent</h3>
-      <p>
-        The <code>intent</code> prop is used to style the button based on its
-        purpose.
-      </p>
-      <DemoIntent />
+    <>
+      <Demo raw={`const hey = () => {}`}>
+        <Button>Hello World</Button>
+      </Demo>
+      <ButtonIntent />
       <h3>AlignContent</h3>
-      <DemoAlignContent />
-    </div>
+      <ButtonAlignContent />
+    </>
   );
 }

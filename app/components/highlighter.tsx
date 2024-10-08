@@ -18,13 +18,21 @@ function useCodeToHtmlTsx(code: string) {
       let h;
       if (!highlighterTsx) {
         h = highlighterTsx = await createHighlighter({
-          langs: ["typescript"],
-          themes: ["github-dark"],
+          langs: ["tsx"],
+          themes: ["github-dark", "github-light"],
         });
       } else {
         h = highlighterTsx;
       }
-      setHtml(h.codeToHtml(code, { lang: "typescript", theme: "github-dark" }));
+      setHtml(
+        h.codeToHtml(code, {
+          lang: "tsx",
+          themes: {
+            light: "github-light",
+            dark: "github-dark",
+          },
+        }),
+      );
     })();
   }, [code]);
   return html;
@@ -38,23 +46,31 @@ function useCodeToHtmlScss(code: string) {
       if (!highlighterScss) {
         h = highlighterScss = await createHighlighter({
           langs: ["scss"],
-          themes: ["github-dark"],
+          themes: ["github-dark", "github-light"],
         });
       } else {
         h = highlighterScss;
       }
-      setHtml(h.codeToHtml(code, { lang: "scss", theme: "github-dark" }));
+      setHtml(
+        h.codeToHtml(code, {
+          lang: "scss",
+          themes: {
+            light: "github-light",
+            dark: "github-dark",
+          },
+        }),
+      );
     })();
   }, [code]);
   return html;
 }
 
 type HighlighterProps = {
-  code: string;
+  code?: string;
   round?: boolean;
 };
 
-export function CodeTsx({ code, round = true }: HighlighterProps) {
+export function CodeTsx({ code = "", round = true }: HighlighterProps) {
   const result = useCodeToHtmlTsx(code);
   return (
     <div
@@ -65,7 +81,7 @@ export function CodeTsx({ code, round = true }: HighlighterProps) {
   );
 }
 
-export function CodeScss({ code, round = true }: HighlighterProps) {
+export function CodeScss({ code = "", round = true }: HighlighterProps) {
   const result = useCodeToHtmlScss(code);
   return (
     <div

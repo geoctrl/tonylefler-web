@@ -29,14 +29,38 @@
 }
 
 .docs {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    @apply mb-2;
+  @apply prose dark:prose-invert;
+  //h1 {
+  //  @apply mb-4;
+  //}
+  //h2 {
+  //  @apply mb-3.5;
+  //}
+  //h3 {
+  //  @apply mb-3;
+  //}
+  //h4 {
+  //  @apply mb-2.5;
+  //}
+  //h5,
+  //h6 {
+  //  @apply mb-2;
+  //}
+  //h6,
+  //p {
+  //  @apply mb-4;
+  //}
+  code {
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      Liberation Mono,
+      Courier New,
+      monospace;
+    @apply rounded-[.2em] bg-tropical-indigo-900/20 px-[.2em] py-[.1em] font-normal dark:bg-tropical-indigo-900/60;
   }
 }
 
@@ -52,4 +76,36 @@
   src: url("/app/assets/fonts/InterVariable-Italic.woff2") format("woff2");
   font-weight: 100 900;
   font-style: italic;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-bold-italic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: fallback;
 }

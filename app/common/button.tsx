@@ -34,9 +34,8 @@ export type ButtonProps = ButtonAs & {
     | "primary"
     | "secondary"
     | "secondaryColor"
-    | "border"
+    | "outline"
     | "tertiary"
-    | "ai"
     | "listItem";
   isActive?: boolean;
   isLoading?: boolean;
@@ -83,14 +82,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variants: {
             intent: {
               primary:
-                "bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-grey-100",
+                "bg-primary-500 text-grey-100 hover:bg-primary-600 active:bg-primary-700",
               secondary: always(
                 "bg-grey-500/10 text-grey-900 hover:bg-grey-500/20 active:bg-grey-500/25 dark:text-grey-100",
                 "dark:bg-grey-500/10 dark:text-grey-100 dark:hover:bg-grey-500/20 active:dark:bg-grey-500/25",
               ),
               secondaryColor:
                 "bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 active:bg-primary-500/25",
-              border: always(
+              outline: always(
                 "border border-solid border-grey-900/30 text-grey-500 hover:border-grey-900/40 hover:bg-grey-500/10 active:border-grey-900/50 active:bg-grey-500/15 dark:text-grey-100",
                 "dark:border-grey-100/50 dark:text-grey-100 dark:hover:bg-grey-500/10 dark:active:bg-grey-100/15",
               ),
@@ -102,10 +101,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               listItem: always(
                 "rounded-none text-grey-900 shadow-none outline-none focus:bg-grey-500/15 active:bg-grey-500/15",
                 "dark:text-grey-100 dark:focus:bg-grey-100/15 dark:active:bg-grey-100/15",
-              ),
-              ai: always(
-                "rainbow",
-                "dark:after:transition-colors dark:hover:before:bg-[#b81e8c] dark:hover:before:bg-none dark:hover:after:bg-[#b81e8c]",
               ),
             },
             formSize: {
@@ -159,7 +154,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               class: "bg-primary-500/25 hover:bg-primary-500/25",
             },
             {
-              intent: "border",
+              intent: "outline",
               isActive: true,
               class: always(
                 "border-grey-900/50 bg-grey-500/15 hover:border-grey-900/50 hover:bg-grey-500/15",

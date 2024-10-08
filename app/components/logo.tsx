@@ -1,6 +1,5 @@
 import React from "react";
 import { isClient } from "~/utils/is-client";
-import { Clickable } from "~/common/clickable";
 import { Button } from "~/common/button";
 import { Link } from "@remix-run/react";
 
@@ -12,9 +11,9 @@ export function Logo(props: Props) {
   const { className } = props;
   if (isClient()) {
     if (window?.matchMedia("(prefers-color-scheme: dark)").matches) {
-      console.log("dark mode");
+      // console.log("dark mode");
     } else {
-      console.log("light mode");
+      // console.log("light mode");
     }
   }
   return (

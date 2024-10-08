@@ -1,7 +1,7 @@
 import { Button } from "stem-ui";
 import { Demo } from "~/components/demo";
 
-export const DemoAlignContent = () => (
+export const ButtonAlignContent = () => (
   <Demo
     raw={`<Button alignContent="left">Left</Button>
 <Button alignContent="center">Center</Button>

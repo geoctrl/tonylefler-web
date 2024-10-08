@@ -11,6 +11,7 @@ export default {
       sans: ["Inter", "sans-serif"],
       serif: ["serif"],
       mono: [
+        "Hack",
         "ui-monospace",
         "SFMono-Regular",
         "Menlo",
@@ -140,6 +141,22 @@ export default {
       "3xl": "3.2rem",
       "4xl": "4rem",
       full: "99999px",
+    },
+
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            fontSize: "1.6rem",
+            "code:before": {
+              content: '""',
+            },
+            "code:after": {
+              content: '""',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [
