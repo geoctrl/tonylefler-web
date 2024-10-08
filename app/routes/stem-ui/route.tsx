@@ -8,7 +8,7 @@ export default function () {
     <>
       <AppHeader />
 
-      <div className="app-layout-padding">
+      <div className="">
         <div className="flex items-start gap-16">
           <div className="wrap w-32 shrink-0">
             <NavHeader>Inputs</NavHeader>

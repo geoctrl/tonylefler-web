@@ -67,10 +67,6 @@
   }
 
   @include typography;
-
-  .app-border {
-    @apply border-grey-990/20 dark:border-grey-10/20;
-  }
 }
 
 .animate-in {
@@ -80,6 +76,10 @@
 @layer utilities {
   .layout-container {
     //    @apply mb-8 flex items-center justify-between px-4 py-5 sm:mx-6 sm:px-2 p;
+  }
+
+  .app-border {
+    @apply border-grey-990/20 dark:border-grey-10/20;
   }
 }
 

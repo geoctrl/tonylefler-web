@@ -5,32 +5,36 @@ import { Link } from "@remix-run/react";
 
 export default function AppHeader() {
   return (
-    <div className="">
-      <div className="flex items-center justify-between py-5 app-layout-container-padding">
-        <div className="flex items-center">
-          <Logo />
-        </div>
+    <div className="flex items-center justify-between border-b app-border">
+      <div className="flex items-center">
+        <Logo />
+      </div>
 
-        <div className="flex items-center gap-2">
-          <Button as={Link} to="/stem-ui">
-            StemUI
-          </Button>
-          <Button>Projects</Button>
-          <Button
-            iconOnly="linkedin"
-            as="a"
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.linkedin.com/in/tonylefler/"
-          />
-          <Button
-            iconOnly="bluesky"
-            as="a"
-            target="_blank"
-            rel="noreferrer"
-            href="https://bsky.app/profile/geoctrl.bsky.social"
-          />
-        </div>
+      <div className="mr-2 flex items-center gap-2">
+        <Button as={Link} to="/stem-ui" intent="tertiary" formSize="sm">
+          StemUI
+        </Button>
+        <Button intent="tertiary" formSize="sm">
+          Projects
+        </Button>
+        <Button
+          iconOnly="linkedin"
+          as="a"
+          intent="tertiary"
+          formSize="sm"
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.linkedin.com/in/tonylefler/"
+        />
+        <Button
+          iconOnly="bluesky"
+          as="a"
+          intent="tertiary"
+          formSize="sm"
+          target="_blank"
+          rel="noreferrer"
+          href="https://bsky.app/profile/geoctrl.bsky.social"
+        />
       </div>
     </div>
   );

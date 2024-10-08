@@ -3,7 +3,6 @@ import { Link, LinkProps } from "@remix-run/react";
 import { tv } from "tailwind-variants";
 
 import { always } from "~/utils/classname-helpers";
-import { inlineSwitch } from "~/utils/inline-switch";
 import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
 import { IconOrElement } from "~/types/icons";
 
@@ -39,23 +38,26 @@ export type ButtonProps = ButtonAs & {
     | "listItem";
   isActive?: boolean;
   isLoading?: boolean;
+  isSquare?: boolean;
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
+      alignContent,
       as = "button",
+      children,
+      className,
+      block,
+      disabled,
       formSize = "md",
-      intent = "secondary",
-      iconOnly,
       iconLeft,
       iconRight,
-      alignContent,
+      iconOnly,
+      intent = "secondary",
       isActive,
-      block,
-      className,
-      children,
-      disabled,
+      isLoading,
+      isSquare,
       ...rest
     } = props;
     const Wrapper = as === "a" ? "a" : as === "button" ? "button" : Link;
@@ -125,6 +127,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             iconOnly: {
               true: "justify-center p-0",
             },
+            isSquare: {
+              true: "rounded-none",
+            },
           },
           compoundVariants: [
             // list item AND size "md"
@@ -166,7 +171,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               isActive: true,
               class: always(
                 "bg-grey-500/15 hover:bg-grey-500/15",
-                "dark:bg-grey-100/15 dark:hover:bg-grey-100/15",
+                "dark:bg-grey-100/15 dark:hover:bg-grey-100/25",
               ),
             },
           ],
@@ -177,6 +182,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           block: !!block,
           alignContent,
           isActive,
+          isSquare,
           className,
           disabled,
         })}
