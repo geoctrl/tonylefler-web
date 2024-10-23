@@ -8,11 +8,15 @@ export default function () {
     <>
       <AppHeader />
 
-      <div className="">
+      <div>
         <div className="flex items-start gap-16">
-          <div className="wrap w-32 shrink-0">
+          <div className="wrap w-32 min-w-40 shrink-0 p-8">
             <NavHeader>Inputs</NavHeader>
-            <NavButton to="button/docs">Button</NavButton>
+            <NavButton to="button">Button</NavButton>
+            <div className="pl-8">
+              <NavButton to="button/docs">API</NavButton>
+              <NavButton to="button/code">Code</NavButton>
+            </div>
             <NavButton to="input/docs">Input</NavButton>
             <NavHeader>Data Display</NavHeader>
             <NavButton to="avatar/docs">Avatar</NavButton>

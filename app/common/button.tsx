@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React from "react";
 import { Link, LinkProps } from "@remix-run/react";
 import { tv } from "tailwind-variants";
 
@@ -8,8 +8,7 @@ import { IconOrElement } from "~/types/icons";
 
 type ButtonButtonProps = {
   as?: "button";
-} & React.ButtonHTMLAttributes<HTMLButtonElement> &
-  ComponentProps<"button">;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 type ButtonAnchorProps = {
   as?: "a";
@@ -92,8 +91,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               secondaryColor:
                 "bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 active:bg-primary-500/25",
               outline: always(
-                "border border-solid border-grey-900/30 text-grey-500 hover:border-grey-900/40 hover:bg-grey-500/10 active:border-grey-900/50 active:bg-grey-500/15 dark:text-grey-100",
-                "dark:border-grey-100/50 dark:text-grey-100 dark:hover:bg-grey-500/10 dark:active:bg-grey-100/15",
+                "border border-solid border-grey-900/30 hover:bg-grey-500/10 active:bg-grey-500/15 dark:text-grey-100",
+                "dark:border-grey-100/50 dark:text-grey-100 dark:hover:bg-grey-100/10 dark:active:bg-grey-100/15",
               ),
               tertiary: always(
                 "text-grey-900",

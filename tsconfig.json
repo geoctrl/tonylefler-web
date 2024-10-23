@@ -6,6 +6,7 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
+    "src/**/*.mdx",
     "app/root.jsx"
   ],
   "compilerOptions": {

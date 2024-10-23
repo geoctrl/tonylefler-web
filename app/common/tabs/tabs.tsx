@@ -27,7 +27,7 @@ export function Tabs(props: TabsProps) {
       style={style}
       className={always(
         className,
-        "flex items-center border-b border-grey-10/20 px-4",
+        "flex items-center border-b px-4 app-border",
         maybe(border, "border-b app-border"),
       )}
     >

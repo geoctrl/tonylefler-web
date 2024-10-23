@@ -1,66 +1,16 @@
-@mixin typography {
-  h1 {
-    @apply text-3xl;
-  }
-
-  h2 {
-    @apply text-2xl;
-  }
-
-  h3 {
-    @apply text-xl;
-  }
-
-  h4 {
-    @apply text-lg;
-  }
-
-  a {
-    @apply text-primary-500;
-  }
-
-  // code {
-  // @apply text-nowrap rounded-md bg-almond-100/50 px-1 font-bold dark:bg-grey-100/20;
-  // }
-
-  p {
-    @apply mb-2;
-  }
-}
-
 .docs {
   @apply prose dark:prose-invert;
-  //h1 {
-  //  @apply mb-4;
-  //}
-  //h2 {
-  //  @apply mb-3.5;
-  //}
-  //h3 {
-  //  @apply mb-3;
-  //}
-  //h4 {
-  //  @apply mb-2.5;
-  //}
-  //h5,
-  //h6 {
-  //  @apply mb-2;
-  //}
-  //h6,
-  //p {
-  //  @apply mb-4;
-  //}
-  code {
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      Liberation Mono,
-      Courier New,
-      monospace;
-    @apply rounded-[.2em] bg-tropical-indigo-900/30 px-[.2em] py-[.1em] font-normal dark:bg-tropical-indigo-900/60;
+
+  pre.shiki {
+    @apply border app-border;
+  }
+
+  pre code {
+    all: unset;
+  }
+
+  code:not(pre code) {
+    @apply rounded-[.2em] bg-primary-500/20 px-[.2em] py-[.1em] font-normal dark:bg-primary-500/40;
   }
 }
 

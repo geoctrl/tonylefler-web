@@ -1,17 +1,15 @@
-import { ButtonAlignContent } from "~/routes/stem-ui.button.docs/button-align-content";
-import { ButtonIntent } from "~/routes/stem-ui.button.docs/button-intent";
-import { Demo } from "~/components/demo";
-import { Button } from "stem-ui";
+import ButtonAlignContent from "~/routes/stem-ui.button.docs/button-align-content.mdx";
+import ButtonIntent from "~/routes/stem-ui.button.docs/button-intent.mdx";
+import ButtonAs from "~/routes/stem-ui.button.docs/button-as.mdx";
+import { useSuperCode } from "~/hooks/use-super-code";
 
 export default function () {
+  useSuperCode();
   return (
     <>
-      <Demo raw={`const hey = () => {}`}>
-        <Button>Hello World</Button>
-      </Demo>
-      <ButtonIntent />
-      <h3>AlignContent</h3>
+      <ButtonAs />
       <ButtonAlignContent />
+      <ButtonIntent />
     </>
   );
 }
