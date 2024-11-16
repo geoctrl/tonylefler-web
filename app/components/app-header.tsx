@@ -14,9 +14,9 @@ export default function AppHeader() {
         <Button as={Link} to="/stem-ui" intent="tertiary" formSize="sm">
           StemUI
         </Button>
-        <Button intent="tertiary" formSize="sm">
-          Projects
-        </Button>
+        {/* <Button intent="tertiary" formSize="sm"> */}
+        {/* Projects */}
+        {/* </Button> */}
         <Button
           iconOnly="linkedin"
           as="a"

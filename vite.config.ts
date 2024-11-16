@@ -3,7 +3,9 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import mdx from "@mdx-js/rollup";
 import path from "path";
-import shikiMdxPlugin from "./shiki-mdx-plugin";
+import rehypeShiki from "./rehype-shiki";
+import rehypeSlug from "rehype-slug";
+import rehypeLead from "./rehype-lead";
 
 export default defineConfig({
   resolve: {
@@ -15,7 +17,7 @@ export default defineConfig({
   plugins: [
     {
       ...mdx({
-        rehypePlugins: [shikiMdxPlugin],
+        rehypePlugins: [rehypeShiki, rehypeSlug, rehypeLead],
       }),
       enforce: "pre",
     },

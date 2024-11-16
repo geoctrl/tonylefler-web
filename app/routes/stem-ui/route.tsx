@@ -11,20 +11,12 @@ export default function () {
       <div>
         <div className="flex items-start gap-16">
           <div className="wrap w-32 min-w-40 shrink-0 p-8">
-            <NavHeader>Inputs</NavHeader>
+            {/* Stem-ui */}
+            {/* <NavHeader>Inputs</NavHeader> */}
             <NavButton to="button">Button</NavButton>
-            <div className="pl-8">
-              <NavButton to="button/docs">API</NavButton>
-              <NavButton to="button/code">Code</NavButton>
-            </div>
-            <NavButton to="input/docs">Input</NavButton>
-            <NavHeader>Data Display</NavHeader>
-            <NavButton to="avatar/docs">Avatar</NavButton>
-            <NavButton to="badge/docs">Badge</NavButton>
-            <NavHeader>Feedback</NavHeader>
-            <NavButton to="modal/docs">Modal</NavButton>
+            <NavButton to="button-raw">Button Code</NavButton>
           </div>
-          <div className="grow overflow-hidden">
+          <div className="grow overflow-hidden p-8">
             <Outlet />
           </div>
         </div>

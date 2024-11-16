@@ -8,8 +8,7 @@ export function Logo() {
     <Button
       as={Link}
       to="/"
-      className="font-mono"
-      isSquare
+      className="rounded-none font-mono"
       intent="tertiary"
       formSize="lg"
     >

@@ -5,6 +5,7 @@ import { tv } from "tailwind-variants";
 import { always } from "~/utils/classname-helpers";
 import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
 import { IconOrElement } from "~/types/icons";
+import { Loader, LoaderSize, LoaderIntent } from "~/common/loader/loader";
 
 type ButtonButtonProps = {
   as?: "button";
@@ -20,21 +21,40 @@ type ButtonLinkProps = {
 
 type ButtonAs = ButtonButtonProps | ButtonAnchorProps | ButtonLinkProps;
 
+type ButtonIntent =
+  | "primary"
+  | "secondary"
+  | "secondaryColor"
+  | "outline"
+  | "tertiary"
+  | "listItem";
+
+type ButtonFormSize = "sm" | "md" | "lg";
+
+const intentToIntentMap: Record<ButtonIntent, LoaderIntent> = {
+  primary: "onColor",
+  secondary: "grey",
+  secondaryColor: "primary",
+  outline: "grey",
+  tertiary: "grey",
+  listItem: "grey",
+};
+
+const formSizeToSizeMap: Record<ButtonFormSize, LoaderSize> = {
+  sm: "xs",
+  md: "sm",
+  lg: "md",
+};
+
 export type ButtonProps = ButtonAs & {
   alignContent?: "left" | "right" | "center";
   block?: boolean;
   disabled?: boolean;
-  formSize?: "sm" | "md" | "lg";
+  formSize?: ButtonFormSize;
   iconLeft?: IconOrElement;
   iconOnly?: IconOrElement;
   iconRight?: IconOrElement;
-  intent?:
-    | "primary"
-    | "secondary"
-    | "secondaryColor"
-    | "outline"
-    | "tertiary"
-    | "listItem";
+  intent?: ButtonIntent;
   isActive?: boolean;
   isLoading?: boolean;
   isSquare?: boolean;
@@ -43,7 +63,7 @@ export type ButtonProps = ButtonAs & {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
-      alignContent,
+      alignContent = "center",
       as = "button",
       children,
       className,
@@ -72,11 +92,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       },
     })({ formSize });
 
+    let isDisabled = isLoading || disabled;
+
+    const renderLoader = (
+      <Loader
+        intent={intentToIntentMap[intent]}
+        formSize={formSizeToSizeMap[formSize]}
+      />
+    );
+
     return (
       <Wrapper
         {...(rest as any)}
         ref={ref}
-        disabled={disabled}
+        disabled={isDisabled}
         role={intent === "listItem" ? "menuitem" : undefined}
         className={tv({
           base: "relative inline-flex shrink-0 cursor-pointer select-none items-center whitespace-nowrap rounded-lg align-middle font-medium transition ease-out",
@@ -121,7 +150,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               true: "",
             },
             disabled: {
-              true: "",
+              true: "cursor-default opacity-50",
             },
             iconOnly: {
               true: "justify-center p-0",
@@ -173,6 +202,43 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 "dark:bg-grey-100/15 dark:hover:bg-grey-100/25",
               ),
             },
+            // disabled
+            {
+              disabled: true,
+              intent: "primary",
+              class:
+                "cursor hover:bg-primary-500 focus:bg-primary-500 active:bg-primary-500",
+            },
+            {
+              disabled: true,
+              intent: "secondary",
+              class:
+                "hover:bg-grey-500/10 focus:bg-grey-500/10 active:bg-grey-500/10 dark:hover:bg-grey-500/10 dark:focus:bg-grey-500/10 dark:active:bg-grey-500/10",
+            },
+            {
+              disabled: true,
+              intent: "secondaryColor",
+              class:
+                "hover:bg-primary-500/10 focus:bg-primary-500/10 active:bg-primary-500/10",
+            },
+            {
+              disabled: true,
+              intent: "outline",
+              class:
+                "hover:bg-transparent focus:bg-transparent active:bg-transparent dark:hover:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent",
+            },
+            {
+              disabled: true,
+              intent: "tertiary",
+              class:
+                "hover:bg-transparent focus:bg-transparent active:bg-transparent dark:hover:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent",
+            },
+            {
+              disabled: true,
+              intent: "listItem",
+              class:
+                "hover:bg-transparent focus:bg-transparent active:bg-transparent dark:hover:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent",
+            },
           ],
         })({
           intent,
@@ -183,19 +249,29 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           isActive,
           isSquare,
           className,
-          disabled,
+          disabled: isDisabled,
         })}
       >
         {!!iconOnly ? (
-          <RenderIconOrElement iconOrElement={iconOnly} className={iconSize} />
+          <>
+            {isLoading ? (
+              renderLoader
+            ) : (
+              <RenderIconOrElement
+                iconOrElement={iconOnly}
+                className={iconSize}
+              />
+            )}
+          </>
         ) : (
           <>
-            {iconLeft && (
+            {iconLeft && !isLoading && (
               <RenderIconOrElement
                 iconOrElement={iconLeft}
                 className={iconSize}
               />
             )}
+            {isLoading && renderLoader}
             {children}
             {iconRight && (
               <RenderIconOrElement

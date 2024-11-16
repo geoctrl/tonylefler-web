@@ -1,14 +1,10 @@
 import React, { ReactNode, CSSProperties } from "react";
-import { NavLink } from "@remix-run/react";
+import { NavLink, NavLinkProps } from "@remix-run/react";
 import { always, maybe } from "~/utils/classname-helpers";
 import { twMerge } from "tailwind-merge";
+import { Button, ButtonProps } from "~/common/button";
 
-type NavButtonProps = {
-  children?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-  to: string;
-};
+type NavButtonProps = Omit<ButtonProps, "as"> & NavLinkProps;
 
 export function NavButton(props: NavButtonProps) {
   const { children, to } = props;
@@ -23,7 +19,7 @@ export function NavButton(props: NavButtonProps) {
             "dark:hover:border-grey-10 dark:hover:text-grey-10",
             maybe(
               isActive,
-              "border-primary-500 text-primary-500 font-bold",
+              "border-primary-500 font-bold text-primary-500",
               "dark:border-primary-500 dark:text-primary-500",
               "hover:border-primary-500 hover:text-primary-500",
               "dark:hover:border-primary-500 dark:hover:text-primary-500",
