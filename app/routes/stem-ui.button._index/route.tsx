@@ -1,4 +1,4 @@
-import ButtonDocs from "~/routes/stem-ui.button._index/button-docs.mdx";
+import ButtonDocs from "./button-docs.mdx";
 
 export default function () {
   return (
