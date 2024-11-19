@@ -15,6 +15,7 @@ export default function () {
             {/* <NavHeader>Inputs</NavHeader> */}
             <NavButton to="button">Button</NavButton>
             <NavButton to="icon">Icon</NavButton>
+            <NavButton to="loader">Loader</NavButton>
           </div>
           <div className="grow overflow-hidden p-8">
             <Outlet />

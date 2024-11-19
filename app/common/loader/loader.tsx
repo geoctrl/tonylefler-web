@@ -1,6 +1,7 @@
-import React from "react";
-import { always, maybe } from "../../utils/classname-helpers";
+import { HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
+
+import { a, always, maybe } from "../../utils/classname-helpers";
 
 export type LoaderIntent =
   | "primary"
@@ -11,27 +12,26 @@ export type LoaderIntent =
 
 export type LoaderSize = "xs" | "sm" | "md" | "lg";
 
-export type LoaderProps = {
-  className?: string;
-  style?: React.CSSProperties;
-  formSize?: LoaderSize;
+export type LoaderProps = HTMLAttributes<HTMLDivElement> & {
+  size?: LoaderSize;
   intent?: LoaderIntent;
 };
 
 export function Loader(props: LoaderProps) {
-  const { className, style, formSize = "md", intent = "primary" } = props;
+  const { className, style, size = "md", intent = "primary", ...rest } = props;
   return (
     <div
       role="status"
       className={always(
         className,
         "relative",
-        maybe(formSize === "xs", "size-4"),
-        maybe(formSize === "sm", "size-5"),
-        maybe(formSize === "md", "size-6"),
-        maybe(formSize === "lg", "size-8"),
+        maybe(size === "xs", "size-4"),
+        maybe(size === "sm", "size-5"),
+        maybe(size === "md", "size-6"),
+        maybe(size === "lg", "size-8"),
       )}
       style={style}
+      {...rest}
     >
       <svg
         aria-hidden="true"
