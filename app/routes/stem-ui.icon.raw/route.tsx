@@ -1,10 +1,10 @@
 import { CodeTsx } from "../../components/highlighter";
-import ButtonRaw from "../../common/button?raw";
+import IconRaw from "../../common/icon/icon?raw";
 
 export default function () {
   return (
     <div>
-      <CodeTsx code={ButtonRaw} />
+      <CodeTsx code={IconRaw} />
     </div>
   );
 }

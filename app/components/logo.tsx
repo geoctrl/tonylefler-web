@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@remix-run/react";
 
-import { Button } from "~/common/button";
+import { Button } from "../common/button/button";
 
 export function Logo() {
   return (

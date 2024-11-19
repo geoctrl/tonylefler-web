@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { always } from "~/utils/classname-helpers";
+import { always } from "../../utils/classname-helpers";
 
 type ModalFooterProps = HTMLAttributes<HTMLDivElement>;
 

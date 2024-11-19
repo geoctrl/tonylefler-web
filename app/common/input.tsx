@@ -1,4 +1,4 @@
-import { always } from "~/utils/classname-helpers";
+import { always } from "../utils/classname-helpers";
 import { ulid } from "ulid";
 import { tv } from "tailwind-variants";
 import {
@@ -9,8 +9,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
-import { IconOrElement } from "~/types/icons";
+import { RenderIconOrElement } from "../common/icon/render-icon-or-element";
+import { IconOrElement } from "../types/icons";
 
 type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,

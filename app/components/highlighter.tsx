@@ -5,7 +5,7 @@ import {
   BundledLanguage,
   BundledTheme,
 } from "shiki";
-import { always, maybe } from "~/utils/classname-helpers";
+import { always, maybe } from "../utils/classname-helpers";
 
 let highlighterTsx: HighlighterGeneric<BundledLanguage, BundledTheme>;
 let highlighterScss: HighlighterGeneric<BundledLanguage, BundledTheme>;

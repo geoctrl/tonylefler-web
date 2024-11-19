@@ -1,8 +1,8 @@
 import React, { forwardRef, ReactNode, useMemo } from "react";
 import { tv } from "tailwind-variants";
 import { motion } from "framer-motion";
-import { overlayTransition } from "~/services/overlay-service";
-import { inlineSwitch } from "~/utils/inline-switch";
+import { overlayTransition } from "../services/overlay-service";
+import { inlineSwitch } from "../utils/inline-switch";
 
 export type DrawerOpts = {
   width?: "sm" | "md" | "lg";

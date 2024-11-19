@@ -3,7 +3,7 @@ import {
   mediaQueryObservable,
   getValue,
   ScreenSize,
-} from "~/utils/media-query";
+} from "../utils/media-query";
 import { Subscription } from "rxjs";
 
 export function useMediaQuery(

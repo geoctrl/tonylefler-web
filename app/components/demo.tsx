@@ -1,9 +1,8 @@
 import React from "react";
-import { Tabs } from "~/common/tabs/tabs";
-import { TabsItem } from "~/common/tabs/tabs-item";
+import { Tabs } from "../common/tabs/tabs";
+import { TabsItem } from "../common/tabs/tabs-item";
 import { CodeTsx } from "./highlighter";
 import { useState } from "react";
-import { always } from "~/utils/classname-helpers";
 
 type DemoProps = {
   raw?: string;

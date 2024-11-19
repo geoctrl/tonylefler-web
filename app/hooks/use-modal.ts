@@ -1,8 +1,8 @@
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { ulid } from "ulid";
 
-import { OverlayContext, overlayService } from "~/services/overlay-service";
-import { OverlayModalConfig } from "~/services/overlay-service.types";
+import { OverlayContext, overlayService } from "../services/overlay-service";
+import { OverlayModalConfig } from "../services/overlay-service.types";
 
 export const useModal = ({
   component,

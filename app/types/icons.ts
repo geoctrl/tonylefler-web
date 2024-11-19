@@ -1,5 +1,6 @@
-import { IconProps } from "~/common/icon/icon";
+import { IconProps } from "../common/icon/icon";
 import { ReactNode } from "react";
-import { Icons } from "./icon-gen";
+import { IconName } from "./icon-gen";
 
+export type Icons = IconName;
 export type IconOrElement = Icons | IconProps | ReactNode;

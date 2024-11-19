@@ -1,12 +1,11 @@
-import React, { ForwardedRef, forwardRef } from "react";
+import { ForwardedRef, forwardRef, SVGAttributes } from "react";
 import { twMerge } from "tailwind-merge";
-import { Icons } from "~/types/icon-gen";
 
-export type IconProps = {
-  name: Icons;
-  className?: string;
-  fill?: string;
-  style?: React.StyleHTMLAttributes<any>;
+import spriteHref from "/icons.svg";
+import { Icons } from "../../types/icons";
+
+export type IconProps = SVGAttributes<SVGSVGElement> & {
+  name?: Icons;
 };
 
 export const Icon = forwardRef(function Icon(
@@ -18,7 +17,7 @@ export const Icon = forwardRef(function Icon(
   return (
     <svg
       ref={ref}
-      className={twMerge("inline-block size-4 fill-current", className)}
+      className={twMerge("inline-block size-5 fill-current", className)}
       style={{
         flexShrink: 0,
         ...(fill ? { fill } : {}),
@@ -27,7 +26,7 @@ export const Icon = forwardRef(function Icon(
       viewBox="0 0 24 24"
       {...rest}
     >
-      <use href={`#${name}`} xlinkHref={`#${name}`} />
+      <use href={`${spriteHref}#${name}`} xlinkHref={`${spriteHref}#${name}`} />
     </svg>
   );
 });

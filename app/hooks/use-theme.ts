@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { isClient } from "~/utils/is-client";
+import { isClient } from "../utils/is-client";
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<"light" | "dark">(() => {

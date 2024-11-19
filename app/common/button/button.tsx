@@ -2,10 +2,10 @@ import React from "react";
 import { Link, LinkProps } from "@remix-run/react";
 import { tv } from "tailwind-variants";
 
-import { always } from "~/utils/classname-helpers";
-import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
-import { IconOrElement } from "~/types/icons";
-import { Loader, LoaderSize, LoaderIntent } from "~/common/loader/loader";
+import { always } from "../../utils/classname-helpers";
+import { RenderIconOrElement } from "../../common/icon/render-icon-or-element";
+import { IconOrElement } from "../../types/icons";
+import { Loader, LoaderSize, LoaderIntent } from "../../common/loader/loader";
 
 type ButtonButtonProps = {
   as?: "button";
@@ -133,6 +133,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 "dark:text-grey-100 dark:focus:bg-grey-100/15 dark:active:bg-grey-100/15",
               ),
             },
+            asAnchor: {
+              true: "no-underline",
+            },
             formSize: {
               sm: "h-8 gap-1.5 px-2.5 text-sm",
               md: "h-10 gap-2 px-3 text-base",
@@ -241,6 +244,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             },
           ],
         })({
+          asAnchor: as === "a",
           intent,
           formSize,
           iconOnly: !!iconOnly,

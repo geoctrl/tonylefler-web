@@ -1,8 +1,9 @@
 import React, { ReactNode, CSSProperties } from "react";
 import { NavLink, NavLinkProps } from "@remix-run/react";
-import { always, maybe } from "~/utils/classname-helpers";
 import { twMerge } from "tailwind-merge";
-import { Button, ButtonProps } from "~/common/button";
+
+import { always, maybe } from "../../utils/classname-helpers";
+import { Button, ButtonProps } from "../../common/button/button";
 
 type NavButtonProps = Omit<ButtonProps, "as"> & NavLinkProps;
 

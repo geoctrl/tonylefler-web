@@ -1,6 +1,6 @@
 import React from "react";
-import { Logo } from "~/components/logo";
-import { Button } from "~/common/button";
+import { Logo } from "../components/logo";
+import { Button } from "../common/button/button";
 import { Link } from "@remix-run/react";
 
 export default function AppHeader() {

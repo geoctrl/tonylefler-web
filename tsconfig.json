@@ -25,7 +25,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
       "stem-ui": ["./app/common"]
     },
 

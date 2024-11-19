@@ -1,8 +1,8 @@
 import { forwardRef, ReactNode } from "react";
-import { overlayTransition } from "~/services/overlay-service";
+import { overlayTransition } from "../../services/overlay-service";
 import { motion } from "framer-motion";
 import { tv } from "tailwind-variants";
-import { always } from "~/utils/classname-helpers";
+import { always } from "../../utils/classname-helpers";
 
 export type ModalOpts = {
   width?: "sm" | "md" | "lg";

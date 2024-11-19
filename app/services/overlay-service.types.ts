@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 
-import { ModalOpts } from "~/common/modal/modal";
-import { DrawerOpts } from "~/common/drawer";
+import { ModalOpts } from "../common/modal/modal";
+import { DrawerOpts } from "../common/drawer";
 
 /** TYPES **/
 export type OverlayOpts = {

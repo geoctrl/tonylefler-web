@@ -1,6 +1,6 @@
 import { ReactNode, CSSProperties } from "react";
-import { always, maybe } from "~/utils/classname-helpers";
-import { TabsContext } from "~/common/tabs/tabs-context";
+import { always, maybe } from "../../utils/classname-helpers";
+import { TabsContext } from "../../common/tabs/tabs-context";
 
 type TabsProps = {
   children?: ReactNode;

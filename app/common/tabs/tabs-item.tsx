@@ -1,7 +1,7 @@
-import { always, maybe, toggle } from "~/utils/classname-helpers";
+import { always, maybe, toggle } from "../../utils/classname-helpers";
 import { twMerge } from "tailwind-merge";
 import { ReactNode, useContext } from "react";
-import { TabsContext } from "~/common/tabs/tabs-context";
+import { TabsContext } from "../../common/tabs/tabs-context";
 
 export type TabsItemProps = {
   isActive?: boolean;
@@ -24,7 +24,7 @@ export function TabsItem(props: TabsItemProps) {
           toggle(block, "w-full", "px-4"),
           maybe(
             active,
-            "text-primary-500 font-medium",
+            "font-medium text-primary-500",
             "after:border-info-500 after:pointer-events-none after:absolute after:-bottom-[.1rem] after:left-0 after:right-0 after:border-b-[.3rem] after:bg-grey-500",
           ),
         ),

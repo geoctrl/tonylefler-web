@@ -1,8 +1,8 @@
 import React, { isValidElement, ReactNode } from "react";
 
-import { Icon, IconProps } from "~/common/icon/icon";
-import { Icons } from "~/types/icon-gen";
-import { IconOrElement } from "~/types/icons";
+import { Icon, IconProps } from "../../common/icon/icon";
+import { Icons } from "../../types/icons";
+import { IconOrElement } from "../../types/icons";
 
 export type RenderIconProps = Omit<IconProps, "name"> & {
   iconOrElement: IconOrElement;

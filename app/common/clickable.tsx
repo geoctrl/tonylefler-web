@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ButtonHTMLAttributes } from "react";
-import { always } from "~/utils/classname-helpers";
+import { always } from "../utils/classname-helpers";
 import { Link, LinkProps } from "@remix-run/react";
 
 type ClickableDiv = { as?: "div" } & HTMLAttributes<HTMLDivElement>;

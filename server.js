@@ -24,6 +24,8 @@ const build = viteDevServer
 
 app.all("*", createRequestHandler({ build }));
 
+app.use("/icons.svg", express.static("public/icons.svg", { maxAge: "0" }));
+
 app.listen(3000, () => {
   console.log("app is listening on http://localhost:3000");
 });

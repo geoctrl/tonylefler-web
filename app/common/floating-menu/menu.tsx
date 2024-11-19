@@ -22,7 +22,7 @@ import {
   FloatingFocusManager,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { always } from "~/utils/classname-helpers";
+import { always } from "../../utils/classname-helpers";
 
 export type MenuProps = {
   children?: ReactNode;

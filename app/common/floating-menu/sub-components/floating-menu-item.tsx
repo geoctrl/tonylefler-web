@@ -4,13 +4,13 @@ import React, {
   ComponentType,
   ReactNode,
 } from "react";
+import { Link, LinkProps } from "@remix-run/react";
 
 import { Menu, MenuProps } from "../menu";
-import { Icon } from "~/common/icon/icon";
-import { RenderIconOrElement } from "~/common/icon/render-icon-or-element";
-import { Link, LinkProps } from "@remix-run/react";
-import { always, maybe } from "~/utils/classname-helpers";
-import { IconOrElement } from "~/types/icons";
+import { Icon } from "../../../common/icon/icon";
+import { RenderIconOrElement } from "../../../common/icon/render-icon-or-element";
+import { always, maybe } from "../../../utils/classname-helpers";
+import { IconOrElement } from "../../../types/icons";
 
 type FloatingMenuItemAsButton = {
   as?: "button";

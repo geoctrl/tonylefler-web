@@ -1,9 +1,9 @@
 import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/node";
-import appStyles from "~/styles/globals.scss?url";
-import favicon from "~/assets/favicon.png";
-import { DivModalBlur, OverlayEntry } from "~/services/overlay-service";
-import { GlobalSvg } from "~/components/global-svg";
+import appStyles from "./styles/globals.scss?url";
+import favicon from "./assets/favicon.png";
+import { DivModalBlur, OverlayEntry } from "./services/overlay-service";
+import { GlobalSvg } from "./components/global-svg";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStyles },
@@ -21,7 +21,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <GlobalSvg />
+        {/* <GlobalSvg /> */}
         <DivModalBlur>
           <Outlet />
         </DivModalBlur>

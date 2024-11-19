@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from "react";
-import { overlayTransition } from "~/services/overlay-service";
+import { overlayTransition } from "../services/overlay-service";
 import { motion } from "framer-motion";
 import { tv } from "tailwind-variants";
 

@@ -9,8 +9,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Subject } from "rxjs";
 import { ulid } from "ulid";
 
-import { always, maybe, toggle } from "~/utils/classname-helpers";
-import { Modal } from "~/common/modal/modal";
+import { always, maybe, toggle } from "../utils/classname-helpers";
+import { Modal } from "../common/modal/modal";
 import {
   OverlayActive,
   OverlayCloseAllAction,
@@ -18,9 +18,9 @@ import {
   OverlayCreateAction,
   OverlayDrawerConfig,
   OverlayModalConfig,
-} from "~/services/overlay-service.types";
-import { Drawer } from "~/common/drawer";
-import { createClientPortal } from "~/utils/create-client-portal";
+} from "../services/overlay-service.types";
+import { Drawer } from "../common/drawer";
+import { createClientPortal } from "../utils/create-client-portal";
 
 const overlaySubjectIn = new Subject<
   OverlayCreateAction | OverlayCloseByIdAction | OverlayCloseAllAction
