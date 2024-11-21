@@ -1,5 +1,5 @@
 import React, { ReactNode, CSSProperties, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants } from "motion/react";
 
 type AiShadowProps = {
   children?: ReactNode;

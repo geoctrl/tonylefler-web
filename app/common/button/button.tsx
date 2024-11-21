@@ -57,7 +57,6 @@ export type ButtonProps = ButtonAs & {
   intent?: ButtonIntent;
   isActive?: boolean;
   isLoading?: boolean;
-  isSquare?: boolean;
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -76,7 +75,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       intent = "secondary",
       isActive,
       isLoading,
-      isSquare,
       ...rest
     } = props;
     const Wrapper = as === "a" ? "a" : as === "button" ? "button" : Link;
@@ -115,7 +113,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           block: !!block,
           alignContent,
           isActive,
-          isSquare,
           className,
           disabled: isDisabled,
         })}

@@ -4,6 +4,7 @@ import appStyles from "./styles/globals.scss?url";
 import favicon from "./assets/favicon.png";
 import { DivModalBlur, OverlayEntry } from "./services/overlay-service";
 import { GlobalSvg } from "./components/global-svg";
+import { DialogEntry } from "./common/dialog/dialog-entry";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStyles },
@@ -27,6 +28,7 @@ export default function App() {
         </DivModalBlur>
         <OverlayEntry />
         <Scripts />
+        <DialogEntry />
       </body>
     </html>
   );

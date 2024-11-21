@@ -5,12 +5,12 @@ import {
   createContext,
   HTMLAttributes,
 } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Subject } from "rxjs";
 import { ulid } from "ulid";
 
 import { always, maybe, toggle } from "../utils/classname-helpers";
-import { Modal } from "../common/modal/modal";
+import { Modal } from "../common/modal-old/modal";
 import {
   OverlayActive,
   OverlayCloseAllAction,

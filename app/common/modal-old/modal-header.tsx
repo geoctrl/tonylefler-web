@@ -1,6 +1,6 @@
 import { ReactNode, CSSProperties } from "react";
 
-import { Button } from "../../common/button/button";
+import { Button } from "../button/button";
 import { useModalContext } from "../../hooks/use-modal";
 
 type Props = {

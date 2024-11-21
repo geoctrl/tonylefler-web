@@ -1,6 +1,7 @@
 import { forwardRef, ReactNode } from "react";
+import { motion } from "motion/react";
+
 import { overlayTransition } from "../../services/overlay-service";
-import { motion } from "framer-motion";
 import { tv } from "tailwind-variants";
 import { always } from "../../utils/classname-helpers";
 

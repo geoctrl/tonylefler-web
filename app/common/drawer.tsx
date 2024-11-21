@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode, useMemo } from "react";
 import { tv } from "tailwind-variants";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { overlayTransition } from "../services/overlay-service";
 import { inlineSwitch } from "../utils/inline-switch";
 

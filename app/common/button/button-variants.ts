@@ -52,9 +52,6 @@ export const buttonVariants = tv({
     iconOnly: {
       true: "justify-center p-0",
     },
-    isSquare: {
-      true: "rounded-none",
-    },
   },
   compoundVariants: [
     // list item AND size "md"

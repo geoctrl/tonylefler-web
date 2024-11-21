@@ -6,7 +6,7 @@ import { NavHeader } from "../../routes/stem-ui/nav-header";
 export default function () {
   return (
     <>
-      <AppHeader />
+      {/*<AppHeader />*/}
 
       <div>
         <div className="flex items-start gap-16">
@@ -16,6 +16,7 @@ export default function () {
             <NavButton to="button">Button</NavButton>
             <NavButton to="icon">Icon</NavButton>
             <NavButton to="loader">Loader</NavButton>
+            <NavButton to="dialog">Dialog</NavButton>
           </div>
           <div className="grow overflow-hidden p-8">
             <Outlet />
