@@ -266,4 +266,5 @@ export default {
       });
     }),
   ],
+  safelist: [{ pattern: /mr-/ }, { pattern: /h-/ }, { pattern: /min-h-/ }],
 } satisfies Config;

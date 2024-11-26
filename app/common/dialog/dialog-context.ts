@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 export const DialogContext = createContext({
-  closeDialog: (result: any) => {},
+  closeDialog: (result?: any) => {},
 });
 
 export const useDialogContext = () => {

@@ -9,6 +9,7 @@ type DialogEventOpen = {
     id: string;
     component: React.FC<any>;
     props: any;
+    opts: DialogOpts;
     resolve: (result: any) => void;
     updateProps: (newProps: any) => void;
   };
@@ -29,6 +30,11 @@ type DialogEventUpdate = {
   };
 };
 
+export type DialogOpts = {
+  id?: string;
+  size?: "sm" | "md" | "lg";
+};
+
 class DialogService {
   public eventBus = new EventBus<
     DialogEventOpen | DialogEventClose | DialogEventUpdate
@@ -39,10 +45,9 @@ class DialogService {
   async render<T>(
     DialogComponent: React.FC<T>,
     props?: T,
-    options: { id?: string } = {},
+    options: DialogOpts = {},
   ): Promise<any> {
-    const id = options.id || ulid();
-
+    const { id = ulid(), ...opts } = options;
     return new Promise((resolve) => {
       this.dialogStack.set(id, { resolve });
       const updateProps = (newProps: Partial<T>) => {
@@ -57,6 +62,7 @@ class DialogService {
         data: {
           id,
           component: DialogComponent,
+          opts,
           props,
           resolve,
           updateProps,

@@ -1,5 +1,6 @@
 import { tv } from "tailwind-variants";
 import { always } from "../../utils/classname-helpers";
+import { formSizes } from "../../types/form-sizes";
 
 export const buttonVariants = tv({
   base: "relative inline-flex shrink-0 cursor-pointer select-none items-center whitespace-nowrap rounded-lg align-middle font-medium transition ease-out",
@@ -31,9 +32,9 @@ export const buttonVariants = tv({
       true: "no-underline",
     },
     formSize: {
-      sm: "h-8 gap-1.5 px-2.5 text-sm",
-      md: "h-10 gap-2 px-3 text-base",
-      lg: "h-12 gap-3 px-4 text-lg",
+      sm: `h-${formSizes.sm} gap-1.5 px-2.5 text-sm`,
+      md: `h-${formSizes.md} gap-2 px-3 text-base`,
+      lg: `h-${formSizes.lg} gap-3 px-4 text-lg`,
     },
     alignContent: {
       left: "justify-start",

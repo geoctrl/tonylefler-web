@@ -2,10 +2,11 @@ import React from "react";
 import { Link, LinkProps } from "@remix-run/react";
 import { tv } from "tailwind-variants";
 
-import { RenderIconOrElement } from "../../common/icon/render-icon-or-element";
+import { RenderIconOrElement } from "../icon/render-icon-or-element";
 import { IconOrElement } from "../../types/icons";
-import { Loader, LoaderSize, LoaderIntent } from "../../common/loader/loader";
+import { Loader, LoaderSize, LoaderIntent } from "../loader/loader";
 import { buttonVariants } from "./button-variants";
+import { FormSize } from "../../types/form-sizes";
 
 type ButtonButtonProps = {
   as?: "button";
@@ -29,8 +30,6 @@ type ButtonIntent =
   | "tertiary"
   | "listItem";
 
-type ButtonFormSize = "sm" | "md" | "lg";
-
 const intentToIntentMap: Record<ButtonIntent, LoaderIntent> = {
   primary: "onColor",
   secondary: "grey",
@@ -40,7 +39,7 @@ const intentToIntentMap: Record<ButtonIntent, LoaderIntent> = {
   listItem: "grey",
 };
 
-const formSizeToSizeMap: Record<ButtonFormSize, LoaderSize> = {
+const formSizeToSizeMap: Record<FormSize, LoaderSize> = {
   sm: "xs",
   md: "sm",
   lg: "md",
@@ -50,7 +49,7 @@ export type ButtonProps = ButtonAs & {
   alignContent?: "left" | "right" | "center";
   block?: boolean;
   disabled?: boolean;
-  formSize?: ButtonFormSize;
+  formSize?: FormSize;
   iconLeft?: IconOrElement;
   iconOnly?: IconOrElement;
   iconRight?: IconOrElement;

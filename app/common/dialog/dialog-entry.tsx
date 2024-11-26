@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { dialogService } from "./dialog-service";
+import { DialogOpts, dialogService } from "./dialog-service";
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -14,10 +14,12 @@ import {
 } from "@floating-ui/react";
 import { motion, AnimatePresence } from "motion/react";
 import { DialogContext } from "./dialog-context";
+import { always, maybe } from "../../utils/classname-helpers";
 
 type DialogState = {
   id: string;
   component: React.FC<any>;
+  opts: DialogOpts;
   props: any;
 };
 
@@ -30,6 +32,7 @@ export const DialogEntry: React.FC = () => {
   const DialogComponent = currentDialog?.component;
   const props = currentDialog?.props;
   const id = currentDialog?.id;
+  const opts = currentDialog?.opts;
 
   const { refs, context } = useFloating({
     open: isOpen,
@@ -59,7 +62,12 @@ export const DialogEntry: React.FC = () => {
       if (action === "dialog_open") {
         setDialogStack((prevStack) => [
           ...prevStack,
-          { id: data.id, component: data.component, props: data.props },
+          {
+            id: data.id,
+            component: data.component,
+            props: data.props,
+            opts: data.opts,
+          },
         ]);
       } else if (action === "dialog_close") {
         setDialogStack((prevStack) =>
@@ -85,15 +93,13 @@ export const DialogEntry: React.FC = () => {
     dialogService.close(id, result);
   }
 
-  console.log("rerender");
-
   return (
     <DialogContext.Provider value={{ closeDialog }}>
       <FloatingPortal>
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.1, ease: "easeOut" }}
               key="dialog"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -105,11 +111,19 @@ export const DialogEntry: React.FC = () => {
               >
                 <FloatingFocusManager context={context}>
                   <motion.div
-                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    transition={{ duration: 0.1, ease: "easeOut" }}
                     initial={{ y: "-3.2rem" }}
                     animate={{ y: 0 }}
                     exit={{ y: "-3.2rem" }}
-                    className="rounded-lg bg-grey-10 p-6 shadow-lg dark:bg-grey-800"
+                    className={always(
+                      "relative rounded-lg bg-grey-10 p-4 shadow-lg dark:bg-grey-800",
+                      maybe(opts?.size === "sm", "w-[30rem]"),
+                      maybe(
+                        opts?.size === "md" || opts?.size === undefined,
+                        "w-[40rem]",
+                      ),
+                      maybe(opts?.size === "lg", "w-[56rem]"),
+                    )}
                     ref={refs.setFloating}
                     aria-labelledby={headingId}
                     aria-describedby={descriptionId}

@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useRef } from "react";
 import { ulid } from "ulid";
 
-import { dialogService } from "./dialog-service";
+import { DialogOpts, dialogService } from "./dialog-service";
 
-export function useDialog<T>(ModalComponent: FC<T>, opts: any = {}) {
+export function useDialog<T>(ModalComponent: FC<T>, opts: DialogOpts = {}) {
   const modalId = useRef(opts?.id || ulid());
 
   useEffect(() => {
