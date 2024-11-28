@@ -1,0 +1,48 @@
+import {} from "root";
+import { ViewOnGithub } from "../../components/view-on-github";
+
+<ViewOnGithub href="https://github.com/geoctrl/tonylefler-web/blob/main/app/common/dialog/dialog.tsx" />
+
+# Dialog Service
+
+:: A window of content placed on top of the viewport, rendering the content
+underneath inert.
+
+## Doing something different
+
+### Problem
+
+Dialogs/modals are commonly written as components. Rendering these dialogs
+typically involves managing their "display" state in the parent component and
+passing callbacks like `onSubmit` to it. While this works, the parent component
+must manage the dialog's state and behavior, which results in duplicated logic
+across all consumers of it. Even if you write an abstraction for this
+functionality, this state management is still required for all consumers... and
+it's cumbersome.
+
+### Solution
+
+The `dialogService` aims to solve these problems by providing tooling that
+allows them to be extremely reusable with minimal boilerplate. Opening a dialog
+is as easy as calling a function. The dialog opens in a `DialogEntry` component
+rendered in the root of your application.
+
+The ultimate goal is ease of reusability. Writing your dialog in a custom hook
+affords all of the above:
+
+```tsx
+// abstraction
+function useHelloWorldDialog() {
+  return useDialog(() => <div>Hello, World!</div>);
+}
+
+// implementation
+function ParentComponent() {
+  const myDialog = useHelloWorldDialog();
+  return <Button onClick={() => myDialog()}>Open modal</Button>;
+}
+```
+
+## 🚧 Under construction 🚧
+
+:: More documentation coming soon.

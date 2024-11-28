@@ -1,4 +1,4 @@
-import { Button } from "stem-ui";
+import { Button } from "root";
 
 type ViewOnGithubProps = {
   href?: string;

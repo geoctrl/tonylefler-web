@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config";
-import { isServer } from "../utils/is-client";
+import { isServer } from "./is-client";
 
 const fullConfig = resolveConfig(tailwindConfig);
 const screenSizes = fullConfig.theme.screens as Record<string, string>;

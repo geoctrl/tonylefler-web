@@ -23,9 +23,7 @@ export default function App() {
       </head>
       <body>
         {/* <GlobalSvg /> */}
-        <DivModalBlur>
-          <Outlet />
-        </DivModalBlur>
+        <Outlet />
         <OverlayEntry />
         <Scripts />
         <DialogEntry />

@@ -12,7 +12,7 @@ import kebabCase from "lodash/kebabCase";
 export default defineConfig({
   resolve: {
     alias: {
-      "stem-ui": path.resolve(__dirname, "app/common"),
+      root: path.resolve(__dirname, "app/common"),
     },
   },
   plugins: [

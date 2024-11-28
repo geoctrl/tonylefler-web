@@ -8,5 +8,5 @@ type DialogBodyProps = {
 
 export function DialogBody(props: DialogBodyProps) {
   const { children } = props;
-  return <div>{children}</div>;
+  return <div className="p-4">{children}</div>;
 }

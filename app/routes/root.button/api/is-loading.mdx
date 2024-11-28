@@ -1,0 +1,26 @@
+import { Button } from "root";
+
+### isLoading
+
+```
+isLoading?: boolean;
+```
+
+Adds a loading spinner to the button. The button is disabled while loading.
+`iconLeft` and `iconOnly` icons are replaced with the loader.
+
+<div className="flex gap-2">
+  <Button isLoading>Regular</Button>
+  <Button iconOnly="star" isLoading />
+  <Button iconLeft="star" iconRight="star" isLoading>
+    With Icons
+  </Button>
+</div>
+
+```tsx
+<Button isLoading>Regular</Button>
+<Button iconOnly="star" isLoading />
+<Button iconLeft="star" iconRight="star" isLoading>
+  With Icons
+</Button>
+```

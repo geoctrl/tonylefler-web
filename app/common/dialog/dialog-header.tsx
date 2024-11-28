@@ -1,37 +1,47 @@
-import React, { ReactNode, CSSProperties, FC } from "react";
-import { Button } from "stem-ui";
+import React, { ReactNode, CSSProperties } from "react";
+import { Button } from "root";
 import { useDialogContext } from "./dialog-context";
 import { formSizes } from "../../types/form-sizes";
+import { always, toggle } from "../../utils/classname-helpers";
 
 type DialogHeaderProps = {
-  children?: ReactNode;
   className?: string;
+  title: string;
   style?: CSSProperties;
-  renderActions?: () => ReactNode;
+  description?: string;
+  actions?: ReactNode;
+  hideCloseButton?: boolean;
 };
 
 export function DialogHeader(props: DialogHeaderProps) {
-  const { children, renderActions } = props;
+  const { title, actions, description, hideCloseButton } = props;
   const { closeDialog } = useDialogContext();
   return (
     <>
       <div
-        className={`mr-${formSizes.sm + 2} flex items-start justify-between min-h-${formSizes.sm + 2}`}
+        className={always(
+          `flex justify-between min-h-${formSizes.sm + 2} w-full gap-4 pl-4 pr-4 pt-4`,
+          toggle(!!description, "items-start", "items-center"),
+        )}
       >
-        {/*title*/}
-        <div>
-          <div className="text-lg font-semibold">{children}</div>
-          {/*<div className="text-sm opacity-50">hey</div>*/}
+        <div className="flex items-center gap-4">
+          <div>
+            <div className="text-lg font-semibold">{title}</div>
+            {description && (
+              <div className="text-sm opacity-50">{description}</div>
+            )}
+          </div>
         </div>
-        {/*actions*/}
-        <div>
-          {renderActions?.()}
-          <Button
-            onClick={() => closeDialog()}
-            iconOnly="xmark"
-            formSize="sm"
-            className="absolute right-4 top-4 rounded-full"
-          />
+        <div className="flex items-center gap-2">
+          {actions}
+          {!hideCloseButton && (
+            <Button
+              onClick={() => closeDialog()}
+              iconOnly="xmark"
+              intent="tertiary"
+              formSize="sm"
+            />
+          )}
         </div>
       </div>
     </>

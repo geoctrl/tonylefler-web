@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, LinkProps } from "@remix-run/react";
-import { tv } from "tailwind-variants";
 
 import { RenderIconOrElement } from "../icon/render-icon-or-element";
 import { IconOrElement } from "../../types/icons";
 import { Loader, LoaderSize, LoaderIntent } from "../loader/loader";
 import { buttonVariants } from "./button-variants";
 import { FormSize } from "../../types/form-sizes";
+import { useIconFormSize } from "../../hooks/use-icon-form-size";
 
 type ButtonButtonProps = {
   as?: "button";
@@ -78,16 +78,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     } = props;
     const Wrapper = as === "a" ? "a" : as === "button" ? "button" : Link;
 
-    const iconSize = tv({
-      base: "size-4",
-      variants: {
-        formSize: {
-          sm: "size-3.5",
-          md: "size-4",
-          lg: "size-5",
-        },
-      },
-    })({ formSize });
+    const iconSize = useIconFormSize(formSize);
 
     let isDisabled = isLoading || disabled;
 

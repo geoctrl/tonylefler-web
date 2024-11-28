@@ -116,7 +116,7 @@ export const DialogEntry: React.FC = () => {
                     animate={{ y: 0 }}
                     exit={{ y: "-3.2rem" }}
                     className={always(
-                      "relative rounded-lg bg-grey-10 p-4 shadow-lg dark:bg-grey-800",
+                      "relative rounded-lg bg-grey-10 shadow-lg dark:bg-grey-800",
                       maybe(opts?.size === "sm", "w-[30rem]"),
                       maybe(
                         opts?.size === "md" || opts?.size === undefined,

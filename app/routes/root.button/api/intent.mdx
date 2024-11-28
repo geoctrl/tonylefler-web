@@ -1,0 +1,38 @@
+import { Button } from "root";
+
+### intent
+
+```
+intent?:
+  | "primary"
+  | "secondary"
+  | "secondaryColor"
+  | "outline"
+  | "tertiary"
+  | "listItem";
+```
+
+The `intent` prop is used to style the button based on its purpose. Defaults to
+`secondary`.
+
+{
+
+<div className="flex gap-2">
+  <Button intent="primary">Primary</Button>
+  <Button intent="secondary">Secondary</Button>
+  <Button intent="secondaryColor">Secondary Color</Button>
+  <Button intent="outline">Outline</Button>
+  <Button intent="tertiary">Tertiary</Button>
+  <Button intent="listItem">List Item</Button>
+</div>
+
+}
+
+```tsx
+<Button intent="primary">Primary</Button>
+<Button intent="secondary">Secondary</Button>
+<Button intent="secondaryColor">Secondary Color</Button>
+<Button intent="outline">Outline</Button>
+<Button intent="tertiary">Tertiary</Button>
+<Button intent="listItem">List Item</Button>
+```

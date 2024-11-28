@@ -3,9 +3,11 @@
 export const iconNames = [
   "xmark",
   "star",
+  "sidebar",
   "person-to-portal",
   "magnifying-glass",
   "linkedin",
+  "house",
   "github",
   "caret-down",
   "bluesky",

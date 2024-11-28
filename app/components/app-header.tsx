@@ -11,8 +11,8 @@ export default function AppHeader() {
       </div>
 
       <div className="mr-2 flex items-center gap-2">
-        <Button as={Link} to="/stem-ui" intent="tertiary" formSize="sm">
-          StemUI
+        <Button as={Link} to="/root" intent="tertiary" formSize="sm">
+          RootUI
         </Button>
         {/* <Button intent="tertiary" formSize="sm"> */}
         {/* Projects */}

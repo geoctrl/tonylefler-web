@@ -8,5 +8,9 @@ type DialogFooterProps = {
 
 export function DialogFooter(props: DialogFooterProps) {
   const { children } = props;
-  return <div>{children}</div>;
+  return (
+    <div className="flex items-center justify-end gap-4 border-t p-4 app-border">
+      {children}
+    </div>
+  );
 }
