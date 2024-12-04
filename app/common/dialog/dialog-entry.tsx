@@ -57,8 +57,8 @@ export const DialogEntry: React.FC = () => {
   const descriptionId = useId();
 
   useEffect(() => {
-    const eventListener = dialogService.eventBus.on((event) => {
-      const { action, data } = event.detail;
+    const eventListener = dialogService.eventBus.on((result) => {
+      const { action, data } = result;
       if (action === "dialog_open") {
         setDialogStack((prevStack) => [
           ...prevStack,
@@ -106,7 +106,7 @@ export const DialogEntry: React.FC = () => {
               exit={{ opacity: 0 }}
             >
               <FloatingOverlay
-                className="grid place-items-center bg-grey-990/10"
+                className="grid place-items-center bg-grey-990/50"
                 lockScroll
               >
                 <FloatingFocusManager context={context}>

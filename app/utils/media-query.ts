@@ -1,12 +1,13 @@
-import { BehaviorSubject } from "rxjs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config";
 import { isServer } from "./is-client";
+import { EventBus } from "./event-bus";
+
+export type MediaQueryScreenSize = keyof typeof screenSizes;
+export type MediaQueryState = Record<MediaQueryScreenSize, boolean>;
 
 const fullConfig = resolveConfig(tailwindConfig);
 const screenSizes = fullConfig.theme.screens as Record<string, string>;
-export type ScreenSize = keyof typeof screenSizes;
-type MediaQueryState = Record<ScreenSize, boolean>;
 
 const serverScreenSizes = {
   sm: true,
@@ -19,8 +20,8 @@ const serverScreenSizes = {
 const initializeMediaQueryState = (): MediaQueryState => {
   if (isServer()) return serverScreenSizes;
   const queries = Object.keys(screenSizes).map((size) => ({
-    size: size as ScreenSize,
-    query: `(min-width: ${screenSizes[size as ScreenSize]})`,
+    size: size as MediaQueryScreenSize,
+    query: `(min-width: ${screenSizes[size as MediaQueryScreenSize]})`,
   }));
 
   return queries.reduce((acc, { size, query }) => {
@@ -30,13 +31,16 @@ const initializeMediaQueryState = (): MediaQueryState => {
 };
 
 const mediaQueryState = initializeMediaQueryState();
-const mediaQuerySubject = new BehaviorSubject<MediaQueryState>(mediaQueryState);
+const getMediaQueryState = () => mediaQueryState;
+const mediaQueryEventBus = new EventBus<MediaQueryState>();
 
+// Update media query state and emit changes
 const handleChange = () => {
   if (isServer()) return;
+
   const queries = Object.keys(screenSizes).map((size) => ({
-    size: size as ScreenSize,
-    query: `(min-width: ${screenSizes[size as ScreenSize]})`,
+    size: size as MediaQueryScreenSize,
+    query: `(min-width: ${screenSizes[size as MediaQueryScreenSize]})`,
   }));
 
   const newState = queries.reduce((acc, { size, query }) => {
@@ -44,11 +48,13 @@ const handleChange = () => {
     return acc;
   }, {} as MediaQueryState);
 
-  mediaQuerySubject.next(newState);
+  // Emit the new state via the EventBus
+  mediaQueryEventBus.emit(newState);
 };
 
+// Attach listeners to each media query
 const queries = Object.keys(screenSizes).map(
-  (size) => `(min-width: ${screenSizes[size as ScreenSize]})`,
+  (size) => `(min-width: ${screenSizes[size as MediaQueryScreenSize]})`,
 );
 queries.forEach((query) => {
   if (isServer()) return;
@@ -56,7 +62,4 @@ queries.forEach((query) => {
   mql.addEventListener("change", handleChange);
 });
 
-const mediaQueryObservable = mediaQuerySubject.asObservable();
-const getValue = () => mediaQuerySubject.getValue();
-
-export { mediaQueryObservable, screenSizes, getValue };
+export { mediaQueryEventBus, screenSizes, getMediaQueryState };

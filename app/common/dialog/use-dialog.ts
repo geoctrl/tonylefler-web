@@ -14,7 +14,7 @@ export function useDialog<T>(ModalComponent: FC<T>, opts: DialogOpts = {}) {
 
   return useCallback(
     (props?: T): Promise<any> => {
-      return dialogService.render<T>(ModalComponent, props, {
+      return dialogService.open<T>(ModalComponent, props, {
         id: modalId.current,
         ...opts,
       });

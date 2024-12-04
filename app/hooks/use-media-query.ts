@@ -1,50 +1,44 @@
 import { useState, useEffect } from "react";
 import {
-  mediaQueryObservable,
-  getValue,
-  ScreenSize,
+  mediaQueryEventBus,
+  getMediaQueryState,
+  MediaQueryScreenSize,
 } from "../utils/media-query";
-import { Subscription } from "rxjs";
 
 export function useMediaQuery(
-  ...sizes: ScreenSize[]
-): Partial<Record<ScreenSize, boolean>> {
-  const [matches, setMatches] = useState<Partial<Record<ScreenSize, boolean>>>(
-    () => {
-      return sizes.reduce(
-        (acc, size) => {
-          acc[size] = getValue()[size];
-          return acc;
-        },
-        {} as Partial<Record<ScreenSize, boolean>>,
-      );
-    },
-  );
+  ...sizes: MediaQueryScreenSize[]
+): Partial<Record<MediaQueryScreenSize, boolean>> {
+  const [matches, setMatches] = useState<
+    Partial<Record<MediaQueryScreenSize, boolean>>
+  >(() => {
+    return sizes.reduce(
+      (acc, size) => {
+        acc[size] = getMediaQueryState()[size];
+        return acc;
+      },
+      {} as Partial<Record<MediaQueryScreenSize, boolean>>,
+    );
+  });
 
   useEffect(() => {
-    const subscription: Subscription = mediaQueryObservable.subscribe(
-      (newState) => {
-        const hasChanged = sizes.some(
-          (size) => matches[size] !== newState[size],
-        );
-        if (!hasChanged) return;
-
-        setMatches(
-          sizes.reduce(
-            (acc, size) => {
-              acc[size] = newState[size];
-              return acc;
-            },
-            {} as Partial<Record<ScreenSize, boolean>>,
-          ),
-        );
-      },
-    );
+    const subscription = mediaQueryEventBus.on((newState) => {
+      const hasChanged = sizes.some((size) => matches[size] !== newState[size]);
+      if (!hasChanged) return;
+      setMatches(
+        sizes.reduce(
+          (acc, size) => {
+            acc[size] = newState[size];
+            return acc;
+          },
+          {} as Partial<Record<MediaQueryScreenSize, boolean>>,
+        ),
+      );
+    });
 
     return () => {
-      subscription.unsubscribe();
+      subscription.remove();
     };
-  }, [Object.keys(sizes)]);
+  }, [sizes, matches]);
 
   return matches;
 }

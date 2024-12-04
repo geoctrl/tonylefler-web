@@ -1,7 +1,7 @@
 import React from "react";
 import { ulid } from "ulid";
 
-import { EventBus } from "../../tools/event-bus";
+import { EventBus } from "../../utils/event-bus";
 
 type DialogEventOpen = {
   action: "dialog_open";
@@ -38,11 +38,11 @@ export type DialogOpts = {
 class DialogService {
   public eventBus = new EventBus<
     DialogEventOpen | DialogEventClose | DialogEventUpdate
-  >("dialog");
+  >();
   private dialogStack: Map<string, { resolve: (result: any) => void }> =
     new Map();
 
-  async render<T>(
+  async open<T>(
     DialogComponent: React.FC<T>,
     props?: T,
     options: DialogOpts = {},
@@ -71,7 +71,7 @@ class DialogService {
     });
   }
 
-  close(id: string, result: any = null): void {
+  close(id: string, result: unknown = null): void {
     const dialog = this.dialogStack.get(id);
     if (dialog) {
       dialog.resolve(result);

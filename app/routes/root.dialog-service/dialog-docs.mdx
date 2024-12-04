@@ -1,5 +1,6 @@
 import {} from "root";
 import { ViewOnGithub } from "../../components/view-on-github";
+import { DialogExample1 } from "./dialog-example-1";
 
 <ViewOnGithub href="https://github.com/geoctrl/tonylefler-web/blob/main/app/common/dialog/dialog.tsx" />
 
@@ -7,6 +8,10 @@ import { ViewOnGithub } from "../../components/view-on-github";
 
 :: A window of content placed on top of the viewport, rendering the content
 underneath inert.
+
+<DialogExample1 />
+
+See [useDialog](update-this-link) for full documentation on hook usage.
 
 ## Doing something different
 
@@ -32,17 +37,141 @@ affords all of the above:
 
 ```tsx
 // abstraction
-function useHelloWorldDialog() {
+function useCustomDialog() {
   return useDialog(() => <div>Hello, World!</div>);
 }
 
 // implementation
 function ParentComponent() {
-  const myDialog = useHelloWorldDialog();
-  return <Button onClick={() => myDialog()}>Open modal</Button>;
+  const myDialog = useCustomDialog();
+  return <Button onClick={() => myDialog()}>Open dialog</Button>;
 }
 ```
 
-## 🚧 Under construction 🚧
+## Promise-based API
 
-:: More documentation coming soon.
+The `dialogService` handles opening/closing with promises. This means that when
+you open a dialog, you can await its result. The state of when a dialog closes
+is completely in the hands of the dialog itself.
+
+In this example, the dialog is a yes/no confirmation:
+
+```tsx
+function useConfirmDialog() {
+  return useDialog(() => {
+    const { closeDialog } = useDialogContext();
+    return (
+      <>
+        <p>Are you sure?</p>
+        <button onClick={() => closeDialog(true)}>Yes</button>
+        <button onClick={() => closeDialog(false)}>No</button>
+      </>
+    );
+  });
+}
+```
+
+We can now await the response of the dialog - no state changes, no callbacks,...
+just a simple await:
+
+```tsx
+function MyComponent() {
+  const myDialog = useConfirmDialog();
+
+  async function openDialog() {
+    if (await myDialog()) {
+      console.log("Confirmed");
+    } else {
+      console.log("Denied");
+    }
+  }
+
+  return <button onClick={openDialog}>Open Dialog</button>;
+}
+```
+
+This does 2 things:
+
+1. It separates the dialog into its own component for easy reusability.
+2. It pulls all state and callback management out of the parent component. The
+   parent component has **no** idea what the child component does, except what
+   it should output.
+
+## Outside a component
+
+Sometimes dialogs need to be rendered outside a component. The `useDialog` hook
+is just a wrapper around the `dialogService.open` function.
+
+```tsx
+const result = await dialogService.open(() => <div>Hello, World!</div>);
+```
+
+Internally, the service will keep track of this dialog with a dynamically
+generated `id`. In some rare cases, you might want to force close the dialog
+from the parent which will require passing in an `id` to the `options` object.
+Reuse this `id` to close it:
+
+```tsx
+const id = "super-id";
+// open
+dialogService.open(() => <div>Hello, World!</div>, undefined, { id });
+// close
+dialogService.close(id);
+```
+
+---
+
+## Methods
+
+### open
+
+```
+open<T>(
+  DialogComponent: React.FC<T>,
+  props?: T,
+  options: {
+    id?: string;
+    size?: "sm" | "md" | "lg";
+  } = {},
+): Promise
+```
+
+Open a dialog using a passed-in component, props, and options. A promise is
+returned that resolves when the dialog closes.
+
+```tsx
+function MyComponent({ name }: { name: string }) {
+  return <button onClick={myDialog}>Open Dialog</button>;
+}
+
+const result = await dialogService.open(
+  MyComponent,
+  { name: "John Doe" },
+  { size: "sm", id: "custom-id" },
+);
+```
+
+### close
+
+```
+close(id: string, result: unknown): void
+```
+
+Manually close the dialog from the parent. Requires the `id` of the dialog to
+close.
+
+```tsx
+dialogService.close("custom-id", "result");
+```
+
+### closeAll
+
+```
+closeAll(): void
+```
+
+Close all open dialogs.
+
+```tsx
+dialogService.closeAll();
+```

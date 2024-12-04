@@ -6,33 +6,44 @@ import { Input } from "../../common/input/input";
 import rootLogo from "../../assets/root-logo-banner-lg.png";
 import { useState } from "react";
 import { Button } from "root";
+import { AppNav } from "../../components/app-nav/app-nav";
 
 export default function () {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <AppHeader />
-      <div className="flex overflow-auto">
-        <div className="sticky top-0 w-[30rem] min-w-40 shrink-0 flex-col border-r app-border">
-          <Link className="flex items-center justify-start p-10" to="/root">
-            <img src={rootLogo} alt="root Logo" />
-          </Link>
-          <div className="p-4">
-            <div className="mb-2">
-              <Input placeholder="Quick find" iconLeft="magnifying-glass" />
-            </div>
-            <NavHeader>Components</NavHeader>
-            <NavButton to="button">Button</NavButton>
-            <NavButton to="icon">Icon</NavButton>
-            <NavButton to="loader">Loader</NavButton>
-            <NavHeader>Services</NavHeader>
-            <NavButton to="dialog-service">Dialog</NavButton>
-          </div>
-        </div>
-        <div className="p-8">
+      {/*<div className="flex flex-1 overflow-hidden">*/}
+      {/*  <div className="p-8">*/}
+      {/*    <Outlet />*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+      {/* Main Content */}
+      <div className="flex flex-1">
+        {/* Left Sidebar */}
+        <aside className="bg-gray-100">
+          <AppNav />
+        </aside>
+
+        {/* Middle Section */}
+        <main className="bg-white flex-1 overflow-y-auto p-8">
           <Outlet />
-        </div>
-      </div>
-    </>
+        </main>
+
+        {/* Right Sidebar */}
+        <aside className="bg-gray-100 w-64 p-4">
+          <div className="sticky top-0 max-h-screen overflow-y-auto">
+            <h2 className="text-lg font-semibold">Right Sidebar</h2>
+            <ul>
+              <li>Widget 1</li>
+              <li>Widget 2</li>
+              <li>Widget 3</li>
+              <li>Widget 4</li>
+              <li>Widget 5</li>
+            </ul>
+          </div>
+        </aside>
+      </div>{" "}
+    </div>
   );
 }
