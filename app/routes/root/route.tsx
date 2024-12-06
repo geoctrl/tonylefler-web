@@ -43,7 +43,7 @@ export default function () {
           duration: 0.3,
         }}
         className={always(
-          "fixed inset-0 z-30 w-[var(--app-menu-width)] translate-x-[-28rem] overflow-auto bg-grey-900 pt-[var(--app-header-height)]",
+          "fixed inset-0 z-30 w-[var(--app-menu-width)] translate-x-[-28rem] overflow-auto bg-grey-10 pt-[var(--app-header-height)] dark:bg-grey-900",
           "lg:z-0 lg:hidden",
         )}
       >
@@ -52,7 +52,7 @@ export default function () {
       <div
         id="desktop"
         className={always(
-          "fixed hidden w-[var(--app-menu-width)] overflow-auto bg-grey-900 pt-[var(--app-header-height)]",
+          "fixed hidden w-[var(--app-menu-width)] overflow-auto bg-grey-10 pt-[var(--app-header-height)] dark:bg-grey-900",
           "lg:block",
         )}
       >
@@ -60,7 +60,7 @@ export default function () {
       </div>
       <div
         className={always(
-          "sticky top-[var(--app-header-height)] z-10 flex items-center gap-2 border-b bg-grey-800 app-border",
+          "sticky top-[var(--app-header-height)] z-10 flex items-center gap-2 border-b bg-grey-50 app-border dark:bg-grey-800",
           "lg:hidden",
         )}
       >
