@@ -106,7 +106,7 @@ export const DialogEntry: React.FC = () => {
               exit={{ opacity: 0 }}
             >
               <FloatingOverlay
-                className="grid place-items-center bg-grey-990/50"
+                className="z-40 grid place-items-center bg-grey-990/50"
                 lockScroll
               >
                 <FloatingFocusManager context={context}>
@@ -116,7 +116,7 @@ export const DialogEntry: React.FC = () => {
                     animate={{ y: 0 }}
                     exit={{ y: "-3.2rem" }}
                     className={always(
-                      "relative rounded-lg bg-grey-10 shadow-lg dark:bg-grey-800",
+                      "relative mx-4 max-w-[calc(100vw-3.2rem)] rounded-lg bg-grey-10 shadow-lg dark:bg-grey-800",
                       maybe(opts?.size === "sm", "w-[30rem]"),
                       maybe(
                         opts?.size === "md" || opts?.size === undefined,

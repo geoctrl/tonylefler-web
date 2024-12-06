@@ -71,7 +71,8 @@ export default function () {
           className="rounded-none"
           formSize="lg"
         />
-        <Nav crumbs={[{ label: "Components" }, { label: "Button" }]} />
+        RootUI
+        {/*<Nav crumbs={[{ label: "Components" }, { label: "Button" }]} />*/}
       </div>
       <div
         className={always(
