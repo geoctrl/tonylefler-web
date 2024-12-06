@@ -6,7 +6,7 @@ export default function () {
     <>
       <AppHeader />
 
-      <div className="pt-16 app-layout-container-padding">
+      <div className="app-container-padding pt-24">
         <div>
           <div className="font-bold typo-title-1">Hi 👋 I'm Tony</div>
           <div className="mb-4 typo-title-3 typo-subdue">

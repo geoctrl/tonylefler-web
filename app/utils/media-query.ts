@@ -5,7 +5,6 @@ import { EventBus } from "./event-bus";
 
 const fullConfig = resolveConfig(tailwindConfig);
 const screenSizes = fullConfig.theme.screens;
-console.log(screenSizes);
 
 export type MediaQueryScreenSize = keyof typeof screenSizes;
 export type MediaQueryState = Record<MediaQueryScreenSize, boolean>;

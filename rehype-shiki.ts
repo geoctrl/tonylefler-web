@@ -13,7 +13,6 @@ import rehypeStringify from "rehype-stringify";
 type supportedLanguages = "scss" | "tsx";
 
 async function getHighlighterTsx() {
-  console.log("how many?");
   return await createHighlighter({
     langs: ["tsx"],
     themes: ["github-dark", "github-light"],
