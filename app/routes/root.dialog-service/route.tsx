@@ -1,9 +1,10 @@
 import DialogDocs from "./dialog-docs.mdx";
+import { Layout } from "../../components/layout";
 
 export default function () {
   return (
-    <div className="docs">
+    <Layout name="dialogService">
       <DialogDocs />
-    </div>
+    </Layout>
   );
 }

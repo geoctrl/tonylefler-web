@@ -5,6 +5,7 @@ export const iconNames = [
   "star",
   "sidebar",
   "person-to-portal",
+  "percent",
   "magnifying-glass",
   "linkedin",
   "house",

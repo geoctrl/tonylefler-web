@@ -1,11 +1,99 @@
 import { Input } from "root";
 import { ViewOnGithub } from "../../components/view-on-github";
+import { InputExample1 } from "./input-example-1";
 
 <ViewOnGithub href="https://github.com/geoctrl/tonylefler-web/blob/main/app/common/input/input.tsx" />
 
 # Input
 
-:: Component for text input, supporting multiple configurations to meet common
-form requirements.
+:: Single-line text field with some goodies built in.
 
-## 🚧 Under construction 🚧
+<div className="max-w-xs">
+  <Input placeholder="Type something..." />
+</div>
+
+```tsx
+<Input placeholder="Type something..." />
+```
+
+---
+
+## Props
+
+- [formSize](#formsize)
+- [iconLeft](#iconleft)
+- [iconRight](#iconright)
+- [onChange](#onchange)
+- [value](#value)
+
+### formSize
+
+The size of the input. Defaults to `md`.
+
+{
+
+<div className="flex flex-wrap items-center gap-4">
+  <Input formSize="sm" placeholder="sm" />
+  <Input formSize="md" placeholder="md" />
+  <Input formSize="lg" placeholder="lg" />
+</div>
+}
+
+```tsx
+<Input formSize="small" />
+<Input formSize="medium" />
+<Input formSize="large" />
+```
+
+### iconLeft
+
+An icon to display on the left side of the input. Padding is automatically
+added.
+
+<div className="max-w-xs">
+  <Input iconLeft="magnifying-glass" />
+</div>
+
+```tsx
+<Input iconLeft="magnifying-glass" />
+```
+
+### iconRight
+
+An icon to display on the right side of the input. Padding is automatically
+added.
+
+<div className="max-w-xs">
+  <Input iconRight="percent" />
+</div>
+
+```tsx
+<Input iconRight="percent" />
+```
+
+### onChange
+
+The change handler for the input.
+
+<InputExample1 />
+
+```tsx
+import { useState } from "react";
+
+function MyComponent() {
+  const [val, setVal] = useState("");
+  return <Input value={val} onChange={setVal} />;
+}
+```
+
+### value
+
+The value of the input.
+
+<div className="max-w-xs">
+  <Input value="Hello, World!" />
+</div>
+
+```tsx
+<Input value="Hello, World!" />
+```

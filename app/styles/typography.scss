@@ -1,6 +1,7 @@
 .docs {
   @apply prose dark:prose-invert;
   width: auto;
+  max-width: 100%;
   padding-bottom: 12rem;
 
   &:where(h2, h3, h4):not(:where([class~="not-prose"] *)) {

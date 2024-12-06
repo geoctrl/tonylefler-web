@@ -34,4 +34,18 @@
   .app-border {
     @apply border-grey-990/20 dark:border-grey-10/20;
   }
+
+  .app-container {
+    @apply mx-auto w-full max-w-screen-2xl;
+  }
+
+  .app-container-padding {
+    @apply mx-auto w-full max-w-screen-2xl px-4 lg:px-8;
+  }
+}
+
+@layer components {
+  .super-duper {
+    @apply border-grey-990/20 dark:border-grey-10/20;
+  }
 }

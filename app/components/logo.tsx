@@ -5,13 +5,7 @@ import { Button } from "../common/button/button";
 
 export function Logo() {
   return (
-    <Button
-      as={Link}
-      to="/"
-      className="rounded-none font-mono"
-      intent="tertiary"
-      formSize="lg"
-    >
+    <Link to="/" className="rounded-none font-mono">
       <svg
         viewBox="0 0 496 101"
         version="1.1"
@@ -35,6 +29,6 @@ export function Logo() {
           <path d="M469.526,75.847l11.781,0l-0,-24.031c-0,-5.226 3.816,-8.821 9.015,-8.821c1.631,0 3.871,0.277 4.977,0.636l0,-10.453c-1.051,-0.249 -2.516,-0.415 -3.705,-0.415c-4.757,0 -8.656,2.766 -10.204,8.02l-0.443,-0l0,-7.411l-11.421,-0l0,42.475Z" />
         </g>
       </svg>
-    </Button>
+    </Link>
   );
 }

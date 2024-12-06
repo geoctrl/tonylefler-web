@@ -1,9 +1,10 @@
 import LoaderDocs from "./loader-docs.mdx";
+import { Layout } from "../../components/layout";
 
 export default function () {
   return (
-    <div className="docs">
+    <Layout name="Loader">
       <LoaderDocs />
-    </div>
+    </Layout>
   );
 }

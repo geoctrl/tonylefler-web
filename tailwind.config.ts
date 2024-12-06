@@ -207,6 +207,9 @@ export default {
           "border-style": "solid",
         },
 
+        ".app-container": {},
+        ".app-container-padding": {},
+
         // typography
         ".typo-title-1": {
           "@apply text-4xl leading-snug": {},
@@ -251,9 +254,6 @@ export default {
         // },
 
         // app-layout
-        ".app-layout-container-padding": {
-          "@apply px-4 sm:px-8 lg:px-0 lg:max-w-[960px] lg:mx-auto": {},
-        },
 
         ".app-layout-container-no-padding": {
           "@apply lg:mx-auto lg:max-w-[960px]": {},

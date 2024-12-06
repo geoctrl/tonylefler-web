@@ -47,11 +47,7 @@ export const DialogEntry: React.FC = () => {
   const role = useRole(context);
   const dismiss = useDismiss(context, { outsidePressEvent: "mousedown" });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    role,
-    dismiss,
-  ]);
+  const { getFloatingProps } = useInteractions([click, role, dismiss]);
 
   const headingId = useId();
   const descriptionId = useId();
@@ -99,7 +95,8 @@ export const DialogEntry: React.FC = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              transition={{ duration: 0.1, ease: "easeOut" }}
+              className="fixed inset-0 z-40"
+              transition={{ duration: 0.2, ease: "easeOut" }}
               key="dialog"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -111,7 +108,7 @@ export const DialogEntry: React.FC = () => {
               >
                 <FloatingFocusManager context={context}>
                   <motion.div
-                    transition={{ duration: 0.1, ease: "easeOut" }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                     initial={{ y: "-3.2rem" }}
                     animate={{ y: 0 }}
                     exit={{ y: "-3.2rem" }}

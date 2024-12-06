@@ -1,9 +1,10 @@
 import InputDocs from "./input-docs.mdx";
+import { Layout } from "../../components/layout";
 
 export default function () {
   return (
-    <div className="docs">
+    <Layout name="Input">
       <InputDocs />
-    </div>
+    </Layout>
   );
 }
