@@ -1,6 +1,8 @@
 import React, { ReactNode, CSSProperties, Fragment } from "react";
 import { Link } from "@remix-run/react";
 import { Button, Icon } from "root";
+import { formSizes } from "../types/form-sizes";
+import { always, maybe } from "../utils/classname-helpers";
 
 type NavProps = {
   children?: ReactNode;
@@ -15,6 +17,7 @@ export function Nav(props: NavProps) {
     <div className="flex items-center gap-1">
       {crumbs?.map((crumb, index) => {
         const showCaret = index < crumbs.length - 1;
+        const isActive = index === crumbs.length - 1;
         return (
           <Fragment key={crumb.label}>
             {crumb?.to ? (
@@ -22,7 +25,12 @@ export function Nav(props: NavProps) {
                 {crumb.label}
               </Button>
             ) : (
-              <div className="px-2.5 text-sm font-bold opacity-50">
+              <div
+                className={always(
+                  `px-2.5 text-sm font-bold h-${formSizes.sm} flex cursor-default items-center`,
+                  maybe(!isActive, "opacity-50"),
+                )}
+              >
                 {crumb.label}
               </div>
             )}

@@ -1,9 +1,9 @@
-import InputDocs from "./input-docs.mdx";
+import UseMediaDocs from "./use-media-docs.mdx";
 
 export default function () {
   return (
     <div className="docs">
-      <InputDocs />
+      <UseMediaDocs />
     </div>
   );
 }

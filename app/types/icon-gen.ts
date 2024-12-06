@@ -11,6 +11,7 @@ export const iconNames = [
   "github",
   "caret-down",
   "bluesky",
+  "bars",
   "bars-filter",
   "angle-right",
 ] as const;

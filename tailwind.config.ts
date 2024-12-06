@@ -196,6 +196,11 @@ export default {
           height: "4.4rem",
         },
 
+        // app bg
+        ".app-bg": {
+          "@apply bg-grey-10 dark:bg-grey-900": {},
+        },
+
         // app border
         ".app-border": {
           "border-color": `var(--app-border)`,

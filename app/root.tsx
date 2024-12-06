@@ -5,6 +5,7 @@ import favicon from "./assets/favicon.png";
 import { DivModalBlur, OverlayEntry } from "./services/overlay-service";
 import { GlobalSvg } from "./components/global-svg";
 import { DialogEntry } from "./common/dialog/dialog-entry";
+import { ScrollToTop } from "./utils/scroll-top-top";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStyles },
@@ -23,6 +24,7 @@ export default function App() {
       </head>
       <body>
         {/* <GlobalSvg /> */}
+        <ScrollToTop />
         <Outlet />
         <OverlayEntry />
         <Scripts />

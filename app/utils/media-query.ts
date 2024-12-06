@@ -3,11 +3,11 @@ import tailwindConfig from "../../tailwind.config";
 import { isServer } from "./is-client";
 import { EventBus } from "./event-bus";
 
+const fullConfig = resolveConfig(tailwindConfig);
+const screenSizes = fullConfig.theme.screens;
+
 export type MediaQueryScreenSize = keyof typeof screenSizes;
 export type MediaQueryState = Record<MediaQueryScreenSize, boolean>;
-
-const fullConfig = resolveConfig(tailwindConfig);
-const screenSizes = fullConfig.theme.screens as Record<string, string>;
 
 const serverScreenSizes = {
   sm: true,

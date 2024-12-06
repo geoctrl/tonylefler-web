@@ -10013,6 +10013,7 @@ __metadata:
     rehype-slug: "npm:^6.0.0"
     rehype-stringify: "npm:^10.0.1"
     remark-stringify: "npm:^11.0.0"
+    remix-utils: "npm:^7.7.0"
     rxjs: "npm:^7.8.1"
     sass: "npm:^1.77.2"
     shiki: "npm:^1.17.6"
@@ -11349,6 +11350,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remix-utils@npm:^7.7.0":
+  version: 7.7.0
+  resolution: "remix-utils@npm:7.7.0"
+  dependencies:
+    type-fest: "npm:^4.18.1"
+  peerDependencies:
+    "@remix-run/cloudflare": ^2.0.0
+    "@remix-run/node": ^2.0.0
+    "@remix-run/react": ^2.0.0
+    "@remix-run/router": ^1.7.2
+    crypto-js: ^4.1.1
+    intl-parse-accept-language: ^1.0.0
+    is-ip: ^5.0.1
+    react: ^18.0.0
+    zod: ^3.22.4
+  peerDependenciesMeta:
+    "@remix-run/cloudflare":
+      optional: true
+    "@remix-run/node":
+      optional: true
+    "@remix-run/react":
+      optional: true
+    "@remix-run/router":
+      optional: true
+    crypto-js:
+      optional: true
+    intl-parse-accept-language:
+      optional: true
+    is-ip:
+      optional: true
+    react:
+      optional: true
+    zod:
+      optional: true
+  checksum: 10/eba6331e68dc5440222f803f6b70e05068a9141f57f5a733b34d2451f1e14f03199dc4d376e46dc2a71e742ad11c4e3283b856ad09a6ea453ca0ce7506453384
+  languageName: node
+  linkType: hard
+
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -12559,6 +12598,13 @@ __metadata:
   version: 0.21.3
   resolution: "type-fest@npm:0.21.3"
   checksum: 10/f4254070d9c3d83a6e573bcb95173008d73474ceadbbf620dd32d273940ca18734dff39c2b2480282df9afe5d1675ebed5499a00d791758748ea81f61a38961f
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^4.18.1":
+  version: 4.30.0
+  resolution: "type-fest@npm:4.30.0"
+  checksum: 10/46c733df4feb87dfd281fba4fa3913dc38b45136be35adffbcef95e13414105a4669476c1f8686680b9c98e59ed5dc85efe42caf67adbaa04f48dfc41f8330fa
   languageName: node
   linkType: hard
 

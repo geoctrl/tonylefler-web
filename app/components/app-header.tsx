@@ -5,7 +5,7 @@ import { Link } from "@remix-run/react";
 
 export default function AppHeader() {
   return (
-    <div className="flex items-center justify-between border-b app-border">
+    <div className="app-bg fixed left-0 right-0 top-0 z-20 flex items-center justify-between border-b app-border">
       <div className="flex items-center">
         <Logo />
       </div>

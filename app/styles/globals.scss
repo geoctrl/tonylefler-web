@@ -9,6 +9,9 @@
 @layer base {
   :root {
     @include colors;
+
+    --app-header-height: 4.9rem;
+    --app-menu-width: 28rem;
   }
 
   @media (prefers-color-scheme: dark) {
