@@ -3,11 +3,14 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import mdx from "@mdx-js/rollup";
 import path from "path";
-import { generateRehypeShikiPlugin } from "./rehype-shiki";
 import rehypeSlug from "rehype-slug";
-import rehypeLead from "./rehype-lead";
 import { iconsSpritesheet } from "vite-plugin-icons-spritesheet";
 import kebabCase from "lodash/kebabCase";
+import dts from "vite-plugin-dts";
+import tailwindcss from "@tailwindcss/vite";
+
+import rehypeLead from "./rehype-lead";
+import { generateRehypeShikiPlugin } from "./rehype-shiki";
 
 export default defineConfig(async () => {
   const rehypeShikiPlugin = await generateRehypeShikiPlugin();
@@ -19,6 +22,7 @@ export default defineConfig(async () => {
       },
     },
     plugins: [
+      tailwindcss(),
       iconsSpritesheet({
         withTypes: true,
         typesOutputFile: path.resolve(__dirname, "app/types/icon-gen.ts"),
@@ -34,6 +38,9 @@ export default defineConfig(async () => {
         }),
         enforce: "pre",
       },
+      dts({
+        insertTypesEntry: true,
+      }),
       remix(),
       tsconfigPaths(),
     ],

@@ -1,8 +1,7 @@
-// tailwind size 4x multiplier
 export const formSizes = {
-  sm: 8,
-  md: 10,
-  lg: 12,
+  sm: { h: "h-8", min_h: "min-h-8" },
+  md: { h: "h-10", min_h: "min-h-10" },
+  lg: { h: "h-12", min_h: "min-h-12" },
 } as const;
 
 export type FormSize = keyof typeof formSizes;

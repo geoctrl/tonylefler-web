@@ -27,7 +27,7 @@ export function Nav(props: NavProps) {
             ) : (
               <div
                 className={always(
-                  `px-2.5 text-sm font-bold h-${formSizes.sm} flex cursor-default items-center`,
+                  `px-2.5 text-sm font-bold ${formSizes.sm.h} flex cursor-default items-center`,
                   maybe(!isActive, "opacity-50"),
                 )}
               >

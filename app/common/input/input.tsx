@@ -1,17 +1,16 @@
 import { always } from "../../utils/classname-helpers";
-import { ulid } from "ulid";
 import {
   FormEvent,
   forwardRef,
+  HTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
-  useEffect,
-  useState,
 } from "react";
 import { RenderIconOrElement } from "../icon/render-icon-or-element";
 import { IconOrElement } from "../../types/icons";
 import { useIconFormSize } from "../../hooks/use-icon-form-size";
 import { inputVariants } from "./input-variants";
+import { Label } from "../label/label";
 
 type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -23,47 +22,45 @@ type InputProps = Omit<
   label?: string | ReactNode;
   iconLeft?: IconOrElement;
   iconRight?: IconOrElement;
+  inputProps?: HTMLAttributes<HTMLDivElement>;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    className,
+    iconLeft,
+    iconRight,
+    id,
+    inputProps,
     formSize = "md",
     onChange,
     label,
     style,
-    className,
-    iconLeft,
-    iconRight,
-    ...inputProps
+    required,
+    ...rest
   } = props;
-
-  const [id, setId] = useState("");
-
-  useEffect(() => {
-    setId(props.id || ulid());
-  }, []);
 
   const iconSize = useIconFormSize(formSize);
 
   return (
-    <div className={always("align-middle", className)} style={style}>
-      {!!label && (
-        <div className="typo-label">
-          <label htmlFor={id}>{label}</label>
-        </div>
-      )}
-      <div className="relative">
+    <>
+      {!!label && <Label htmlFor={id}>{label}</Label>}
+      <div className="relative" {...rest}>
         <input
-          {...inputProps}
           id={id}
-          className={inputVariants({
-            size: formSize,
-            iconLeft: !!iconLeft,
-            iconRight: !!iconRight,
-          })}
+          className={always(
+            inputVariants({
+              size: formSize,
+              iconLeft: !!iconLeft,
+              iconRight: !!iconRight,
+            }),
+            inputProps?.className,
+          )}
           onChange={(e) => {
             onChange?.(e.target.value, e);
           }}
+          required={required}
+          style={style}
         />
         <div className="pointer-events-none absolute bottom-0 left-0 top-0 flex size-10 items-center justify-center">
           <RenderIconOrElement iconOrElement={iconLeft} className={iconSize} />
@@ -72,6 +69,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           <RenderIconOrElement iconOrElement={iconRight} className={iconSize} />
         </div>
       </div>
-    </div>
+    </>
   );
 });

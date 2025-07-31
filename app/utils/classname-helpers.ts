@@ -18,5 +18,3 @@ export const toggle = (
   const two = Array.isArray(className2) ? className2.join(" ") : className2;
   return enabled ? one : two;
 };
-
-export { always as a, maybe as m, toggle as t };

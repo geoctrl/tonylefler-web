@@ -10,7 +10,7 @@ export function Logo() {
         viewBox="0 0 496 101"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ height: "2.2rem" }}
+        style={{ height: "22px" }}
       >
         <g className="fill-primary-500">
           <path d="M33.324,97.001l-0,-55.334l13.676,-0c1.657,-0 3,-1.343 3,-3l0,-35.664c0,-1.656 -1.343,-3.003 -3,-3.003l-44,0c-1.657,0 -3,1.347 -3,3.003l0,93.998c0,1.656 1.343,3 3,3l27.324,-0c1.656,-0 3,-1.344 3,-3" />

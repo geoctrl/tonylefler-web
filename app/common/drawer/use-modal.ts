@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useRef } from "react";
 import { ulid } from "ulid";
 
-import { ModalOpts, modalService } from "../common/modal/modal-service";
+import { ModalOpts, modalService } from "./modal-service";
 
 export function useModal<T>(ModalComponent: FC<T>, opts: ModalOpts = {}) {
   const modalId = useRef(opts?.id || ulid());

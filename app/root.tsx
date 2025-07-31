@@ -1,10 +1,8 @@
 import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/node";
-import appStyles from "./styles/globals.scss?url";
+import appStyles from "./styles/app.css?url";
 import favicon from "./assets/favicon.png";
-import { DivModalBlur, OverlayEntry } from "./services/overlay-service";
-import { GlobalSvg } from "./components/global-svg";
-import { DialogEntry } from "./common/dialog/dialog-entry";
+import { DrawerEntry } from "./common/modal/drawer-entry";
 import { ScrollToTop } from "./utils/scroll-top-top";
 
 export const links: LinksFunction = () => [
@@ -26,9 +24,8 @@ export default function App() {
         {/* <GlobalSvg /> */}
         <ScrollToTop />
         <Outlet />
-        <OverlayEntry />
         <Scripts />
-        <DialogEntry />
+        <DrawerEntry />
       </body>
     </html>
   );

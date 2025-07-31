@@ -1,0 +1,49 @@
+import { Badge, Button, BadgeAffix } from "root";
+
+# BadgeAffix
+
+::Affix a badge to another component.
+
+```tsx
+<BadgeAffix
+  className="inline-flex"
+  badge={
+    <Badge circle intent="important-solid" size="sm">
+      99
+    </Badge>
+  }
+>
+  <Button>Button</Button>
+</BadgeAffix>
+```
+
+{
+
+<div className="flex flex-col gap-4">
+  <div>
+    <BadgeAffix
+      className="inline-flex"
+      badge={
+        <Badge circle intent="important-solid" size="sm">
+          99
+        </Badge>
+      }
+    >
+      <Button>Button</Button>
+    </BadgeAffix>
+  </div>
+  <div>
+    <BadgeAffix
+      className="inline-flex"
+      badge={
+        <Badge intent="info-solid" size="sm">
+          NEW
+        </Badge>
+      }
+    >
+      <Button>Button</Button>
+    </BadgeAffix>
+  </div>
+</div>
+
+}

@@ -8,6 +8,10 @@ import { InputExample1 } from "./input-example-1";
 
 :: Single-line text field with some goodies built in.
 
+This component is a wrapper around the native `input` element. It provides a
+consistent look and feel across browsers and devices, and includes some
+additional features like icons and labels.
+
 <div className="max-w-xs">
   <Input placeholder="Type something..." />
 </div>
@@ -20,9 +24,12 @@ import { InputExample1 } from "./input-example-1";
 
 ## Props
 
+Inherits all props from `HTMLElement`, including the following additional props:
+
 - [formSize](#formsize)
 - [iconLeft](#iconleft)
 - [iconRight](#iconright)
+- [label](#label)
 - [onChange](#onchange)
 - [value](#value)
 
@@ -69,6 +76,27 @@ added.
 
 ```tsx
 <Input iconRight="percent" />
+```
+
+### label
+
+The label for the input. Without an `id` prop, the label will not be clickable.
+
+<div>
+  <Input
+    label="Label"
+    id="my-input1"
+    containerProps={{ className: "inline-block" }}
+  />
+  <Input
+    label="Label"
+    id="my-input2"
+    containerProps={{ className: "inline-block" }}
+  />
+</div>
+
+```tsx
+<Input label="Label" id="my-input" />
 ```
 
 ### onChange

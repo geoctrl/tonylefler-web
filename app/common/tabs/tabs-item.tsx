@@ -25,7 +25,7 @@ export function TabsItem(props: TabsItemProps) {
           maybe(
             active,
             "font-medium text-primary-500",
-            "after:border-info-500 after:pointer-events-none after:absolute after:-bottom-[.1rem] after:left-0 after:right-0 after:border-b-[.3rem] after:bg-grey-500",
+            "after:pointer-events-none after:absolute after:-bottom-[1px] after:left-0 after:right-0 after:border-b-[.3rem] after:border-info-500 after:bg-grey-500",
           ),
         ),
       )}

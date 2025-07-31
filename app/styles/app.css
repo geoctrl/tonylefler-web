@@ -1,0 +1,283 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: Inter, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: Hack, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-grey-10: #ffffff;
+  --color-grey-25: #fafafa;
+  --color-grey-50: #f4f5f6;
+  --color-grey-75: #efeff1;
+  --color-grey-100: #e9eaec;
+  --color-grey-150: #dbdce0;
+  --color-grey-200: #cccfd3;
+  --color-grey-250: #bec1c7;
+  --color-grey-300: #afb4ba;
+  --color-grey-350: #a1a6ae;
+  --color-grey-400: #9298a1;
+  --color-grey-450: #848b95;
+  --color-grey-500: #757d88;
+  --color-grey-550: #6a717b;
+  --color-grey-600: #5f656e;
+  --color-grey-650: #545961;
+  --color-grey-700: #494e55;
+  --color-grey-750: #3d4248;
+  --color-grey-800: #32363b;
+  --color-grey-850: #272a2e;
+  --color-grey-900: #1c1e21;
+  --color-grey-925: #151719;
+  --color-grey-950: #0e0f11;
+  --color-grey-975: #070808;
+  --color-grey-990: #000000;
+
+  --color-primary-10: #ebf6ff;
+  --color-primary-25: #cce9ff;
+  --color-primary-50: #aedcff;
+  --color-primary-75: #8fceff;
+  --color-primary-100: #70c1ff;
+  --color-primary-200: #54b1f7;
+  --color-primary-300: #38a0f0;
+  --color-primary-400: #1c90e8;
+  --color-primary-500: #007fe0;
+  --color-primary-600: #0071c7;
+  --color-primary-700: #0062ad;
+  --color-primary-800: #005494;
+  --color-primary-900: #00457a;
+  --color-primary-925: #003a66;
+  --color-primary-950: #002e52;
+  --color-primary-975: #00233d;
+  --color-primary-990: #001729;
+
+  --color-important-10: #faf0f2;
+  --color-important-25: #f5e1e5;
+  --color-important-50: #f0d2d7;
+  --color-important-75: #eac2ca;
+  --color-important-100: #e5b3bc;
+  --color-important-200: #dda4ae;
+  --color-important-300: #d695a0;
+  --color-important-400: #ce8592;
+  --color-important-500: #c67685;
+  --color-important-600: #be6777;
+  --color-important-700: #b75869;
+  --color-important-800: #af485b;
+  --color-important-900: #a7394d;
+
+  --color-notice-10: #faf5f0;
+  --color-notice-25: #f6eee4;
+  --color-notice-50: #f3e7d9;
+  --color-notice-75: #efdfcd;
+  --color-notice-100: #ebd8c1;
+  --color-notice-200: #dfc9ae;
+  --color-notice-300: #d3ba9c;
+  --color-notice-400: #c7ab89;
+  --color-notice-500: #bc9c77;
+  --color-notice-600: #b08c64;
+  --color-notice-700: #a47d51;
+  --color-notice-800: #986e3f;
+  --color-notice-900: #8c5f2c;
+
+  --color-success-10: #f2f7f6;
+  --color-success-25: #e6efed;
+  --color-success-50: #d9e8e5;
+  --color-success-75: #cde0dc;
+  --color-success-100: #c0d8d3;
+  --color-success-200: #b2cdc7;
+  --color-success-300: #a4c2bc;
+  --color-success-400: #95b6b0;
+  --color-success-500: #87aba4;
+  --color-success-600: #79a098;
+  --color-success-700: #6b958d;
+  --color-success-800: #5c8981;
+  --color-success-900: #4e7e75;
+
+  --color-info-10: #f3f1f8;
+  --color-info-25: #e7e4f1;
+  --color-info-50: #dcd6eb;
+  --color-info-75: #d0c9e4;
+  --color-info-100: #c4bbdd;
+  --color-info-200: #b9aed6;
+  --color-info-300: #ada1cf;
+  --color-info-400: #a294c7;
+  --color-info-500: #9687c0;
+  --color-info-600: #8b79b9;
+  --color-info-700: #7f6cb2;
+  --color-info-800: #745faa;
+  --color-info-900: #6852a3;
+}
+
+@layer base {
+  :root {
+    --app-header-height: 49px;
+    --app-menu-width: 280px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .shiki,
+    .shiki span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+
+  body {
+    @apply w-full bg-grey-10 text-base text-grey-900 dark:bg-grey-900 dark:text-grey-100;
+  }
+
+}
+
+@layer components {
+  .app-border {
+    @apply border-grey-990/10 dark:border-grey-10/25;
+  }
+
+  .app-bg {
+    @apply bg-grey-10 dark:bg-grey-900;
+  }
+
+  .app-text {
+    @apply text-grey-900 dark:text-grey-100;
+  }
+
+  .app-container {
+    @apply mx-auto w-full max-w-screen-2xl;
+  }
+
+  .app-container-padding {
+    @apply mx-auto w-full max-w-screen-2xl px-4 lg:px-8;
+  }
+
+  .app-focus-none {
+    @apply shadow-none outline-none;
+  }
+
+  .app-focus {
+    @apply focus:border-grey-700 dark:focus:border-grey-400 focus:border focus:shadow-none focus:outline-none;
+  }
+
+  .app-focus-element {
+    @apply border-primary-500 pointer-events-none absolute inset-0 border-2 shadow-none outline-none;
+  }
+
+  .app-focus-element-error {
+    @apply border-important-500 pointer-events-none absolute inset-0 border-2 shadow-none outline-none;
+  }
+
+  /*------------------------------------------
+  TYPOGRAPHY
+  ------------------------------------------*/
+  .typo-label {
+    @apply text-grey-990/50 dark:text-grey-10/50 mb-1 block text-xs;
+  }
+
+  .typo-label-block {
+    @apply text-grey-990/50 dark:text-grey-10/50 mb-2 block w-full text-xs;
+  }
+
+  .typo-subdued {
+    @apply text-grey-990/50 dark:text-grey-10/50;
+  }
+}
+
+.app-border {
+}
+.app-bg {
+}
+.app-text {
+}
+.app-container {
+}
+.app-container-padding {
+}
+.app-focus-none {
+}
+.app-focus {
+}
+.app-focus-element {
+}
+.app-focus-element-error {
+}
+.typo-label {
+}
+.typo-label-block {
+}
+.typo-subdued {
+}
+
+
+.docs {
+  @apply prose dark:prose-invert;
+  width: auto;
+  max-width: 100%;
+  padding-bottom: 120px;
+
+  &:where(h2, h3, h4):not(:where([class~="not-prose"] *)) {
+    scroll-padding-top: 2000px;
+  }
+
+  pre.shiki {
+    @apply border border-grey-990/10 dark:border-grey-10/25;
+  }
+
+  pre code {
+    all: unset;
+  }
+
+  pre.simple {
+    @apply rounded-[.2em] bg-primary-500/10 font-normal text-grey-900 dark:bg-primary-500/10 dark:text-grey-10;
+  }
+
+  code:not(pre code) {
+    @apply rounded-[.2em] bg-primary-500/20 px-[.2em] py-[.1em] font-normal text-grey-900 dark:bg-primary-500/20 dark:text-grey-10;
+  }
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/app/assets/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/app/assets/fonts/InterVariable-Italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-bold-italic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Hack";
+  src: url("/app/assets/fonts/hack-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: fallback;
+}

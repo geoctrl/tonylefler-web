@@ -32,9 +32,9 @@ export const buttonVariants = tv({
       true: "no-underline",
     },
     formSize: {
-      sm: `h-${formSizes.sm} gap-1.5 px-2.5 text-sm`,
-      md: `h-${formSizes.md} gap-2 px-3 text-base`,
-      lg: `h-${formSizes.lg} gap-3 px-4 text-lg`,
+      sm: `${formSizes.sm.h} gap-1.5 px-2.5 text-sm`,
+      md: `${formSizes.md.h} gap-2 px-3 text-base`,
+      lg: `${formSizes.lg.h} gap-3 px-4 text-lg`,
     },
     alignContent: {
       left: "justify-start",

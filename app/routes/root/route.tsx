@@ -23,7 +23,7 @@ export default function () {
         <div
           id="desktop"
           className={always(
-            "fixed inset-0 left-[max(0px,calc(50%-76.8rem))] hidden w-[var(--app-menu-width)] overflow-auto pt-[var(--app-header-height)]",
+            "fixed inset-0 left-[max(0px,calc(50%-768px))] hidden w-[var(--app-menu-width)] overflow-auto pt-[var(--app-header-height)]",
             "lg:block",
           )}
         >
@@ -37,14 +37,14 @@ export default function () {
         {() => (
           <motion.div
             id="mobile"
-            initial={{ x: "-28rem" }}
-            animate={{ x: drawerIsOpen && !lg ? 0 : "-28rem" }}
+            initial={{ x: "-280px" }}
+            animate={{ x: drawerIsOpen && !lg ? 0 : "-280px" }}
             transition={{
               ease: "easeInOut",
               duration: 0.3,
             }}
             className={always(
-              "fixed inset-0 z-30 w-[var(--app-menu-width)] translate-x-[-28rem] overflow-auto bg-grey-10 pt-[var(--app-header-height)] dark:bg-grey-900",
+              "bg-grey-10 dark:bg-grey-900 fixed inset-0 z-30 w-[var(--app-menu-width)] translate-x-[-280px] overflow-auto pt-[var(--app-header-height)]",
               "lg:z-0 lg:hidden",
             )}
           >
@@ -57,7 +57,7 @@ export default function () {
         {drawerIsOpen && (
           <motion.div
             onClick={() => setDrawerIsOpen(false)}
-            className="fixed inset-0 z-20 bg-grey-990/40 lg:hidden"
+            className="bg-grey-990/40 fixed inset-0 z-20 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: drawerIsOpen ? 1 : 0 }}
             exit={{ opacity: 0 }}

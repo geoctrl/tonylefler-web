@@ -1,10 +1,13 @@
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../../tailwind.config";
 import { isServer } from "./is-client";
 import { EventBus } from "./event-bus";
 
-const fullConfig = resolveConfig(tailwindConfig);
-const screenSizes = fullConfig.theme.screens;
+const screenSizes = {
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
+  "2xl": "1536px",
+};
 
 export type MediaQueryScreenSize = keyof typeof screenSizes;
 export type MediaQueryState = Record<MediaQueryScreenSize, boolean>;

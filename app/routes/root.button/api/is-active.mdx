@@ -9,14 +9,16 @@ isActive?: boolean;
 `isActive` is a manual way of setting the "active" state of the button. The
 style is the same as its "active" (pressed) state.
 
-This prop is useful in scenarios where you
+This prop is useful in scenarios where you need to manually set the active state
+of the button, such as when the button is a dropdown trigger and the dropdown is
+open.
 
+<Button>Normal state</Button>
+<Button isActive>Active state</Button>
+
+```tsx
 <div className="flex gap-2">
   <Button>Normal state</Button>
   <Button isActive>Active state</Button>
 </div>
-
-```tsx
-<Button>Normal state</Button>
-<Button isActive>Active state</Button>
 ```

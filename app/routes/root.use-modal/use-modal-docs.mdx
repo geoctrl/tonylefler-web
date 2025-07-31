@@ -1,0 +1,42 @@
+import { ModalExample1 } from "./modal-example-1";
+
+# useModal
+
+:: Hook to reuse modals with ease.
+
+```
+useModal<T>(
+  ModalComponent: FC<T>,
+  opts?: ModalOpts
+): (props?: T) => Promise<any>
+```
+
+---
+
+## Example
+
+`useModal` is a hook abstraction around the `modalService.open` method. It
+provides a simple way to open modals, while also closing the modal when your
+component unmounts.
+
+<ModalExample1 />
+
+```tsx
+function MyComponent() {
+  const helloWorldModal = useModal(() => <div>Hello, World!</div>);
+  return <button onClick={helloWorldModal}>Open Modal</button>;
+}
+```
+
+Pass in a component to render:
+
+```tsx
+function MyComponent() {
+  const helloWorldModal = useModal(() => <div>Hello, World!</div>);
+  return <button onClick={helloWorldModal}>Open Modal</button>;
+}
+```
+
+<ModalExample1 />
+
+### ModalOpts
