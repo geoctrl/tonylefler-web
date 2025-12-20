@@ -1,16 +1,16 @@
-import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
-import { LinksFunction } from "@remix-run/node";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import type { Route } from "./+types/root";
 import appStyles from "./styles/app.css?url";
 import favicon from "./assets/favicon.png";
 import { DrawerEntry } from "./common/modal/drawer-entry";
 import { ScrollToTop } from "./utils/scroll-top-top";
 
-export const links: LinksFunction = () => [
+export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: appStyles },
   { rel: "icon", href: favicon, type: "image/png" },
 ];
 
-export default function App() {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <head>
@@ -21,12 +21,16 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {/* <GlobalSvg /> */}
         <ScrollToTop />
-        <Outlet />
-        <Scripts />
+        {children}
         <DrawerEntry />
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   );
+}
+
+export default function App() {
+  return <Outlet />;
 }

@@ -1,32 +1,37 @@
-import { ForwardedRef, forwardRef, SVGAttributes } from "react";
+import { ComponentProps, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 import spriteHref from "/icons.svg";
 import { Icons } from "../../types/icons";
 
-export type IconProps = SVGAttributes<SVGSVGElement> & {
+export type IconProps = ComponentProps<"svg"> & {
+  /**
+   * Icon name from the icon sprite. Available icons are auto-generated from the icons directory.
+   */
   name?: Icons;
 };
 
-export const Icon = forwardRef(function Icon(
-  props: IconProps,
-  ref: ForwardedRef<any>,
-) {
-  const { name, className, fill, style, ...rest } = props;
+export const Icon = forwardRef<SVGSVGElement, IconProps>(
+  function Icon(props, ref) {
+    const { name, className, fill, style, ...rest } = props;
 
-  return (
-    <svg
-      ref={ref}
-      className={twMerge("inline-block size-5 fill-current", className)}
-      style={{
-        flexShrink: 0,
-        ...(fill ? { fill } : {}),
-        ...(style || {}),
-      }}
-      viewBox="0 0 24 24"
-      {...rest}
-    >
-      <use href={`${spriteHref}#${name}`} xlinkHref={`${spriteHref}#${name}`} />
-    </svg>
-  );
-});
+    return (
+      <svg
+        ref={ref}
+        className={twMerge("inline-block size-5 fill-current", className)}
+        style={{
+          flexShrink: 0,
+          ...(fill ? { fill } : {}),
+          ...(style || {}),
+        }}
+        viewBox="0 0 24 24"
+        {...rest}
+      >
+        <use
+          href={`${spriteHref}#${name}`}
+          xlinkHref={`${spriteHref}#${name}`}
+        />
+      </svg>
+    );
+  },
+);

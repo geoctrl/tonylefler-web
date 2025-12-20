@@ -1,5 +1,5 @@
 import React, { ReactNode, CSSProperties, Fragment } from "react";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import { Button, Icon } from "root";
 import { formSizes } from "../types/form-sizes";
 import { always, maybe } from "../utils/classname-helpers";

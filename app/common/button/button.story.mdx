@@ -1,0 +1,420 @@
+import { Button } from "./button";
+import { Link, NavLink } from "react-router";
+import { PropsTable } from "../props-table/props-table";
+import { Example, ApiSection, Do, Dont, DoDontGrid } from "../docs";
+import { Icon } from "../icon/icon.tsx";
+
+export const meta = {
+  title: 'Button',
+  category: 'components',
+  order: 1
+};
+
+# Button
+
+A versatile button component with multiple intents, sizes, and loading states.
+
+## Import
+
+```tsx
+import { Button } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex gap-2">
+    <Button>Hello, World!</Button>
+  </div>
+</Example>
+
+```tsx
+<Button>Hello, World!</Button>
+```
+
+
+## Props
+
+`<Button>` accepts all [HTML button attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes) and Polymorphic Props per the `as` component type, including the following:
+
+<PropsTable props={[
+  {
+    name: "as",
+    type: '"button" | "a" | Link | NavLink',
+    description: "The element or component to render as",
+    default: '"button"',
+    required: false,
+  },
+  {
+    name: "alignContent",
+    type: '"left" | "right" | "center"',
+    description: "Horizontal alignment of button content",
+    default: '"center"',
+    required: false,
+  },
+  {
+    name: "block",
+    type: "boolean",
+    description: "Makes the button full-width of its container",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables the button and prevents user interaction",
+    required: false,
+  },
+  {
+    name: "formSize",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the button",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName | ReactElement",
+    description: "Icon to display on the left side of the button text",
+    required: false,
+  },
+  {
+    name: "iconOnly",
+    type: "IconName | ReactElement",
+    description: "Icon to display as the only content (removes text and centers icon)",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName | ReactElement",
+    description: "Icon to display on the right side of the button text",
+    required: false,
+  },
+  {
+    name: "intent",
+    type: '"primary" | "secondary" | "secondaryColor" | "outline" | "tertiary" | "tertiaryReverse" | "listItem"',
+    description: "Visual style of the button",
+    default: '"secondary"',
+    required: false,
+  },
+  {
+    name: "isActive",
+    type: "boolean",
+    description: "Shows the button in an active/selected state",
+    required: false,
+  },
+  {
+    name: "isLoading",
+    type: "boolean",
+    description: "Shows a loading spinner and disables the button",
+    required: false,
+  },
+  {
+    name: "type",
+    type: '"button" | "submit" | "reset"',
+    description: "HTML button type attribute",
+    required: false,
+  },
+]} />
+
+## Intent
+
+### `intent="primary"`
+The most prominent style. High contrast, draws immediate attention.
+
+- **When to use:** The single most important action on the page.
+- **Example:** Form submissions where the user completes a workflow.
+
+<Example>
+  <div className="flex gap-4">
+    <Button intent="primary">Save Changes</Button>
+    <Button intent="secondary">Cancel</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="primary">Save Changes</Button>
+<Button intent="secondary">Cancel</Button>
+```
+
+### `intent="secondaryColor"`
+
+Secondary style with primary color accent. More emphasis than standard secondary.
+
+- **When to use:** Important actions that aren't the primary CTA, or when you need multiple emphasized buttons.
+- **Example:** Card actions where multiple options have similar importance.
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="secondaryColor">View Details</Button>
+    <Button intent="secondaryColor">Download</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="secondaryColor">View Details</Button>
+<Button intent="secondaryColor">Download</Button>
+```
+
+### `intent="secondary"`
+Balanced appearance with moderate emphasis. The default choice for most actions.
+
+- **When to use:** General actions, navigation, secondary controls.
+- **Example:** Standard page actions and navigation.
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="secondary">Back</Button>
+    <Button intent="secondary">Next</Button>
+    <Button intent="secondary">Settings</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="secondary">Back</Button>
+<Button intent="secondary">Next</Button>
+<Button intent="secondary">Settings</Button>
+```
+
+### `intent="outline"`
+Border-only style with minimal visual weight while maintaining clear affordance.
+
+- **When to use:** Alternative actions, toggles, or when you need many buttons without overwhelming the UI.
+- **Example:** Filter buttons or card actions.
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="outline">All</Button>
+    <Button intent="outline">Active</Button>
+    <Button intent="outline">Completed</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="outline">All</Button>
+<Button intent="outline">Active</Button>
+<Button intent="outline">Completed</Button>
+```
+
+### `intent="tertiary"`
+Minimal style with the least visual weight. Subtle and non-intrusive.
+
+- **When to use:** Auxiliary controls, toolbar actions, or anywhere you need many buttons in a compact space.
+- **Example:** Toolbar buttons or inline actions within content.
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="tertiary">Edit</Button>
+    <Button intent="tertiary">Delete</Button>
+    <Button intent="tertiary">Share</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="tertiary">Edit</Button>
+<Button intent="tertiary">Delete</Button>
+<Button intent="tertiary">Share</Button>
+```
+
+### `intent="tertiaryReverse"`
+Reversed minimal style for use on dark or colored backgrounds.
+
+- **When to use:** Toolbar actions or auxiliary controls on hero sections, colored cards, or dark backgrounds.
+- **Example:** Actions overlaid on images or in dark themed sections.
+
+<Example>
+  <div className="flex gap-2 bg-grey-900 dark:bg-grey-100 p-4 rounded-lg">
+    <Button intent="tertiaryReverse">Edit</Button>
+    <Button intent="tertiaryReverse">Delete</Button>
+    <Button intent="tertiaryReverse">Share</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="tertiaryReverse">Edit</Button>
+<Button intent="tertiaryReverse">Delete</Button>
+<Button intent="tertiaryReverse">Share</Button>
+```
+
+### `intent="listItem"`
+Specialized style for menu items.
+
+- **When to use:** Only inside dropdown menus, navigation lists, or context menus.
+- **Example:** Dropdown menu options.
+
+```tsx
+<Button intent="listItem">Menu Item</Button>
+```
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="listItem">Hello, World!</Button>
+  </div>
+</Example>
+
+
+## Form Size
+
+Basic scaling for form elements. Follows the `form-size` utility class convention.
+
+<Example>
+  <div className="flex items-center gap-2">
+    <Button formSize="sm">Small</Button>
+    <Button formSize="md">Medium</Button>
+    <Button formSize="lg">Large</Button>
+  </div>
+</Example>
+
+```tsx
+<Button formSize="sm">Small</Button>
+<Button formSize="md">Medium</Button>
+<Button formSize="lg">Large</Button>
+```
+
+## With Icons
+
+### `iconLeft`, `iconRight`
+
+Icons can be added to the left or right side of the button text.
+
+<Example>
+  <div className="flex gap-2">
+    <Button iconLeft="star">Add Item</Button>
+    <Button iconRight="angle-right">Next</Button>
+  </div>
+</Example>
+
+```tsx
+<Button iconLeft="star">Add Item</Button>
+<Button iconRight="angle-right">Next</Button>
+```
+
+### `iconOnly`
+
+Use the `iconOnly` prop to render an icon button with no text content. `children` and the other `icon*` props will be ignored.
+
+<Example>
+  <div className="flex gap-2">
+    <Button iconOnly="house" />
+    <Button iconOnly="angle-right" />
+  </div>
+</Example>
+
+```tsx
+<Button iconOnly="house" />
+<Button iconOnly="angle-right" />
+```
+
+
+
+## Loading State
+
+<Example>
+  <div className="flex gap-2">
+    <Button isLoading>Loading</Button>
+    <Button isLoading intent="primary">Saving</Button>
+  </div>
+</Example>
+
+```tsx
+<Button isLoading>Loading</Button>
+<Button isLoading intent="primary">Saving</Button>
+```
+
+## Disabled
+
+<Example>
+  <div className="flex gap-2">
+    <Button disabled>Cancel</Button>
+    <Button disabled intent="primary">Submit</Button>
+  </div>
+</Example>
+
+```tsx
+<Button disabled>Cancel</Button>
+<Button disabled intent="primary">Submit</Button>
+```
+
+## Polymorphic Rendering
+
+The Button component can render as different HTML elements while maintaining consistent styling.
+
+### `as="button"` (default)
+Use for actions that don't navigate, like form submissions or triggering dialogs.
+
+**When to use:** Actions that perform operations without navigation (submit, delete, toggle, open modal).
+
+<Example>
+  <Button onClick={() => alert('Clicked!')}>
+    Click Me
+  </Button>
+</Example>
+
+```tsx
+<Button onClick={handleSubmit}>
+  Submit Form
+</Button>
+```
+
+### `as={Link}` (React Router)
+Use for client-side navigation within your app. Maintains SPA behavior.
+
+**When to use:** Navigation to other pages in your application.
+
+<Example>
+  <Button as={Link} to="/settings">
+    Go to Settings
+  </Button>
+</Example>
+
+```tsx
+import { Link } from "react-router";
+
+<Button as={Link} to="/dashboard">
+  Dashboard
+</Button>
+```
+
+### `as={NavLink}` (React Router)
+Use for navigation links that need to show active state. Automatically applies `isActive` prop when the current route matches.
+
+**When to use:** Navigation menus, tabs, or sidebars where you want to highlight the current page.
+
+<Example>
+  <div className="flex gap-2">
+    <Button as={NavLink} to="/button">
+      Button (Active)
+    </Button>
+    <Button as={NavLink} to="/root/input">
+      Input
+    </Button>
+  </div>
+</Example>
+
+```tsx
+import { NavLink } from "react-router";
+
+<Button as={NavLink} to="/dashboard">
+  Dashboard
+</Button>
+```
+
+### `as="a"`
+Use for external links or downloads. Creates a standard `<a>` tag.
+
+**When to use:** Links to external sites, downloads, or email/tel links.
+
+<Example>
+  <Button as="a" href="https://example.com" target="_blank">
+    External Link
+  </Button>
+</Example>
+
+```tsx
+<Button as="a" href="https://example.com" target="_blank">
+  Visit Site
+</Button>
+
+<Button as="a" href="/file.pdf" download>
+  Download PDF
+</Button>
+```

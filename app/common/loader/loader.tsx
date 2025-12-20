@@ -1,7 +1,8 @@
 import { HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
 
-import { a, always, maybe } from "../../utils/classname-helpers";
+import { maybe } from "../../utils/classname-helpers";
+import { twMerge } from "tailwind-merge";
 
 export type LoaderIntent =
   | "primary"
@@ -13,7 +14,16 @@ export type LoaderIntent =
 export type LoaderSize = "xs" | "sm" | "md" | "lg";
 
 export type LoaderProps = HTMLAttributes<HTMLDivElement> & {
+  /**
+   * Size of the loader
+   * @default "md"
+   */
   size?: LoaderSize;
+
+  /**
+   * Visual style of the loader
+   * @default "primary"
+   */
   intent?: LoaderIntent;
 };
 
@@ -22,20 +32,20 @@ export function Loader(props: LoaderProps) {
   return (
     <div
       role="status"
-      className={always(
-        className,
-        "relative",
+      className={twMerge(
+        "relative shrink-0",
         maybe(size === "xs", "size-4"),
         maybe(size === "sm", "size-5"),
         maybe(size === "md", "size-6"),
         maybe(size === "lg", "size-8"),
+        className,
       )}
       style={style}
       {...rest}
     >
       <svg
         aria-hidden="true"
-        className="text-gray-200 dark:text-gray-600 fill-blue-600 h-full w-full animate-spin"
+        className="text-grey-200 dark:text-grey-600 fill-primary-600 h-full w-full animate-spin"
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

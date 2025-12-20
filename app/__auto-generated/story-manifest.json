@@ -1,0 +1,48 @@
+{
+  "stories": [
+    {
+      "meta": {
+        "title": "Icon",
+        "category": "components",
+        "order": 5
+      },
+      "filePath": "app/common/icon/icon.story.mdx",
+      "routePath": "routes/icon/index.tsx",
+      "slug": "icon"
+    },
+    {
+      "meta": {
+        "title": "Loader",
+        "category": "components",
+        "order": 10
+      },
+      "filePath": "app/common/loader/loader.story.mdx",
+      "routePath": "routes/loader/index.tsx",
+      "slug": "loader"
+    }
+  ],
+  "categories": {
+    "components": [
+      {
+        "meta": {
+          "title": "Icon",
+          "category": "components",
+          "order": 5
+        },
+        "filePath": "app/common/icon/icon.story.mdx",
+        "routePath": "routes/icon/index.tsx",
+        "slug": "icon"
+      },
+      {
+        "meta": {
+          "title": "Loader",
+          "category": "components",
+          "order": 10
+        },
+        "filePath": "app/common/loader/loader.story.mdx",
+        "routePath": "routes/loader/index.tsx",
+        "slug": "loader"
+      }
+    ]
+  }
+}

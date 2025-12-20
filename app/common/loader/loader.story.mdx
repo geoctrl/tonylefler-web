@@ -1,0 +1,207 @@
+import { Loader } from "./loader";
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../docs";
+
+export const meta = {
+  title: 'Loader',
+  category: 'components',
+  order: 10,
+  component: './loader.tsx'
+};
+
+# Loader
+
+An animated loading spinner with multiple intents and sizes.
+
+## Import
+
+```tsx
+import { Loader } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <Loader />
+</Example>
+
+```tsx
+<Loader />
+```
+
+## Props
+
+`<Loader>` accepts all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "size",
+    type: '"xs" | "sm" | "md" | "lg"',
+    description: "Size of the loader",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "intent",
+    type: '"primary" | "primaryReverse" | "grey" | "greyReverse" | "onColor"',
+    description: "Visual style of the loader",
+    default: '"primary"',
+    required: false,
+  },
+]} />
+
+## Intent
+
+### `intent="primary"`
+Colored spinner using the primary brand color. Most prominent style.
+
+- **When to use:** Primary loading states, form submissions, main content loading.
+- **Example:** Loading button states, page transitions.
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Loader intent="primary" />
+    <span className="text-grey-900 dark:text-grey-100">Loading content...</span>
+  </div>
+</Example>
+
+```tsx
+<Loader intent="primary" />
+```
+
+### `intent="grey"`
+Neutral grey spinner. Subtle and balanced.
+
+- **When to use:** Secondary loading states, inline loaders, when you don't want to emphasize the loading state.
+- **Example:** Loading list items, background processes.
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Loader intent="grey" />
+    <span className="text-grey-900 dark:text-grey-100">Loading items...</span>
+  </div>
+</Example>
+
+```tsx
+<Loader intent="grey" />
+```
+
+### `intent="primaryReverse"`
+Primary colored spinner for use on dark backgrounds.
+
+- **When to use:** Loading states on dark hero sections or colored cards.
+- **Example:** Dark themed sections, overlays on images.
+
+<Example>
+  <div className="flex gap-4 items-center bg-grey-900 dark:bg-grey-100 p-4 rounded-lg">
+    <Loader intent="primaryReverse" />
+    <span className="text-grey-10 dark:text-grey-990">Loading...</span>
+  </div>
+</Example>
+
+```tsx
+<Loader intent="primaryReverse" />
+```
+
+### `intent="greyReverse"`
+Grey spinner for use on dark backgrounds.
+
+- **When to use:** Subtle loading states on dark backgrounds, toolbar actions.
+- **Example:** Dark UI sections, tertiary actions on dark backgrounds.
+
+<Example>
+  <div className="flex gap-4 items-center bg-grey-900 dark:bg-grey-100 p-4 rounded-lg">
+    <Loader intent="greyReverse" />
+    <span className="text-grey-10 dark:text-grey-990">Processing...</span>
+  </div>
+</Example>
+
+```tsx
+<Loader intent="greyReverse" />
+```
+
+### `intent="onColor"`
+White spinner for use on colored backgrounds.
+
+- **When to use:** Loading states on brand-colored buttons or backgrounds.
+- **Example:** Inside primary buttons, on colored cards.
+
+<Example>
+  <div className="flex gap-4 items-center bg-primary-500 p-4 rounded-lg">
+    <Loader intent="onColor" />
+    <span className="text-grey-10">Saving changes...</span>
+  </div>
+</Example>
+
+```tsx
+<Loader intent="onColor" />
+```
+
+## Size
+
+Control the size of the loader to match surrounding content.
+
+<Example>
+  <div className="flex items-center gap-4">
+    <Loader size="xs" />
+    <Loader size="sm" />
+    <Loader size="md" />
+    <Loader size="lg" />
+  </div>
+</Example>
+
+```tsx
+<Loader size="xs" />
+<Loader size="sm" />
+<Loader size="md" />
+<Loader size="lg" />
+```
+
+## Size Reference
+
+The loader sizes map to form element sizes:
+
+- **xs**: 16px (1rem) - Inline with small text
+- **sm**: 20px (1.25rem) - Small buttons
+- **md**: 24px (1.5rem) - Default, medium buttons
+- **lg**: 32px (2rem) - Large buttons
+
+<Example>
+  <div className="space-y-4">
+    <div className="flex items-center gap-2">
+      <Loader size="xs" />
+      <span className="text-sm text-grey-900 dark:text-grey-100">Extra small - inline with text</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Loader size="sm" />
+      <span className="text-grey-900 dark:text-grey-100">Small - for compact UIs</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Loader size="md" />
+      <span className="text-grey-900 dark:text-grey-100">Medium - default size</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Loader size="lg" />
+      <span className="text-lg text-grey-900 dark:text-grey-100">Large - for prominent loading states</span>
+    </div>
+  </div>
+</Example>
+
+## Accessibility
+
+The Loader component includes built-in accessibility features:
+
+- `role="status"` announces loading state to screen readers
+- `aria-hidden="true"` on the SVG prevents redundant announcements
+- Screen reader only text "Loading..." provides context
+
+```tsx
+// Accessible by default
+<Loader />
+
+// Equivalent to:
+<div role="status">
+  <svg aria-hidden="true">...</svg>
+  <span className="sr-only">Loading...</span>
+</div>
+```

@@ -4,7 +4,7 @@ import React, {
   ComponentType,
   ReactNode,
 } from "react";
-import { Link, LinkProps } from "@remix-run/react";
+import { Link, LinkProps } from "react-router";
 
 import { Menu, MenuProps } from "../menu";
 import { Icon } from "../../../common/icon/icon";

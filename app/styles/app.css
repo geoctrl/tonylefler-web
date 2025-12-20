@@ -281,3 +281,9 @@
   font-style: italic;
   font-display: fallback;
 }
+
+/* Remove automatic backticks from prose code elements */
+:where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+:where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: none !important;
+}

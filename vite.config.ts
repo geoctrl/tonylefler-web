@@ -1,9 +1,10 @@
-import { vitePlugin as remix } from "@remix-run/dev";
+import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import mdx from "@mdx-js/rollup";
 import path from "path";
 import rehypeSlug from "rehype-slug";
+import rehypeExternalLinks from "rehype-external-links";
 import { iconsSpritesheet } from "vite-plugin-icons-spritesheet";
 import kebabCase from "lodash/kebabCase";
 import dts from "vite-plugin-dts";
@@ -16,11 +17,6 @@ export default defineConfig(async () => {
   const rehypeShikiPlugin = await generateRehypeShikiPlugin();
 
   return {
-    resolve: {
-      alias: {
-        root: path.resolve(__dirname, "app/common"),
-      },
-    },
     plugins: [
       tailwindcss(),
       iconsSpritesheet({
@@ -34,16 +30,32 @@ export default defineConfig(async () => {
       }),
       {
         ...mdx({
-          rehypePlugins: [rehypeShikiPlugin, rehypeSlug, rehypeLead],
+          rehypePlugins: [
+            rehypeShikiPlugin,
+            rehypeSlug,
+            rehypeLead,
+            [
+              rehypeExternalLinks,
+              { target: "_blank", rel: ["noopener", "noreferrer"] },
+            ],
+          ],
         }),
         enforce: "pre",
       },
       dts({
         insertTypesEntry: true,
       }),
-      remix(),
+      reactRouter(),
       tsconfigPaths(),
     ],
+    resolve: {
+      alias: {
+        root: path.resolve(__dirname, "app/common"),
+      },
+    },
+    server: {
+      port: 3000,
+    },
     clearScreen: false,
   };
 });

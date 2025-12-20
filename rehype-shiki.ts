@@ -10,7 +10,7 @@ import { toString } from "hast-util-to-string";
 import { unified } from "unified";
 import rehypeStringify from "rehype-stringify";
 
-type supportedLanguages = "scss" | "tsx";
+type supportedLanguages = "scss" | "tsx" | "shell";
 
 async function getHighlighterTsx() {
   return await createHighlighter({
@@ -26,9 +26,17 @@ async function getHighlighterScss() {
   });
 }
 
+async function getHighlighterShell() {
+  return await createHighlighter({
+    langs: ["shell"],
+    themes: ["github-dark", "github-light"],
+  });
+}
+
 export async function generateRehypeShikiPlugin() {
   const highlighterTsx = await getHighlighterTsx();
   const highlighterScss = await getHighlighterScss();
+  const highlighterShell = await getHighlighterShell();
 
   return () => {
     return async (tree: any) => {
@@ -38,6 +46,7 @@ export async function generateRehypeShikiPlugin() {
           {
             "language-tsx": highlighterTsx,
             "language-scss": highlighterScss,
+            "language-shell": highlighterShell,
           } as Record<string, HighlighterGeneric<BundledLanguage, BundledTheme>>
         )[className];
 

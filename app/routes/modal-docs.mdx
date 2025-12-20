@@ -1,0 +1,177 @@
+import {} from "root";
+import { ViewOnGithub } from "../components/view-on-github.tsx";
+import { ModalExample1 } from "./root/modal-service/modal-example-1.tsx";
+
+<ViewOnGithub href="https://github.com/geoctrl/tonylefler-web/blob/main/app/common/modal/modal-service.ts" />
+
+# Modal Service
+
+:: A window of content placed on top of the viewport, rendering the content
+underneath inert.
+
+<ModalExample1 />
+
+See [useModal](/root/use-modal) for full documentation on hook usage.
+
+## Doing something different
+
+### Problem
+
+Modals are commonly written as components. Rendering these modals typically
+involves managing their "display" state in the parent component and passing
+callbacks like `onSubmit` to it. While this works, the parent component must
+manage the modal's state and behavior, which results in duplicated logic across
+all consumers of it. Even if you write an abstraction for this functionality,
+this state management is still required for all consumers... and it's
+cumbersome.
+
+### Solution
+
+The `modalService` aims to solve these problems by providing tooling that allows
+them to be extremely reusable with minimal boilerplate. Opening a modal is as
+easy as calling a function. The modal opens in a `DrawerEntry` component
+rendered in the root of your application.
+
+The ultimate goal is ease of reusability. Writing your modal in a custom hook
+affords all of the above:
+
+```tsx
+// abstraction
+function useCustomModal() {
+  return useModal(() => <div>Hello, World!</div>);
+}
+
+// implementation
+function ParentComponent() {
+  const myModal = useCustomModal();
+  return <Button onClick={() => myModal()}>Open modal</Button>;
+}
+```
+
+## Promise-based API
+
+The `modalService` handles opening/closing with promises. This means that when
+you open a modal, you can await its result. The state of when a modal closes is
+completely in the hands of the modal itself.
+
+In this example, the modal is a yes/no confirmation:
+
+```tsx
+function useConfirmModal() {
+  return useModal(() => {
+    const { closeModal } = useModalContext();
+    return (
+      <>
+        <p>Are you sure?</p>
+        <button onClick={() => closeModal(true)}>Yes</button>
+        <button onClick={() => closeModal(false)}>No</button>
+      </>
+    );
+  });
+}
+```
+
+We can now await the response of the modal - no state changes, no callbacks,...
+just a simple await:
+
+```tsx
+function MyComponent() {
+  const myModal = useConfirmModal();
+
+  async function openModal() {
+    if (await myModal()) {
+      console.log("Confirmed");
+    } else {
+      console.log("Denied");
+    }
+  }
+
+  return <button onClick={openModal}>Open Modal</button>;
+}
+```
+
+This does 2 things:
+
+1. It separates the modal into its own component for easy reusability.
+2. It pulls all state and callback management out of the parent component. The
+   parent component has **no** idea what the child component does, except what
+   it should output.
+
+## Outside a component
+
+Sometimes modals need to be rendered outside a component. The `useModal` hook is
+just a wrapper around the `modalService.open` function.
+
+```tsx
+const result = await modalService.open(() => <div>Hello, World!</div>);
+```
+
+Internally, the service will keep track of this modal with a dynamically
+generated `id`. In some rare cases, you might want to force close the modal from
+the parent which will require passing in an `id` to the `options` object. Reuse
+this `id` to close it:
+
+```tsx
+const id = "super-id";
+// open
+modalService.open(() => <div>Hello, World!</div>, undefined, { id });
+// close
+modalService.close(id);
+```
+
+---
+
+## Methods
+
+### open
+
+```
+open<T>(
+  ModalComponent: React.FC<T>,
+  props?: T,
+  options: {
+    id?: string;
+    size?: "sm" | "md" | "lg";
+  } = {},
+): Promise
+```
+
+Open a modal using a passed-in component, props, and options. A promise is
+returned that resolves when the modal closes.
+
+```tsx
+function MyComponent({ name }: { name: string }) {
+  return <button onClick={myModal}>Open Modal</button>;
+}
+
+const result = await modalService.open(
+  MyComponent,
+  { name: "John Doe" },
+  { size: "sm", id: "custom-id" },
+);
+```
+
+### close
+
+```
+close(id: string, result: unknown): void
+```
+
+Manually close the modal from the parent. Requires the `id` of the modal to
+close.
+
+```tsx
+modalService.close("custom-id", "result");
+```
+
+### closeAll
+
+```
+closeAll(): void
+```
+
+Close all open modals.
+
+```tsx
+modalService.closeAll();
+```

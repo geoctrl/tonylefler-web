@@ -1,15 +1,13 @@
 import React from "react";
 import { Logo } from "./logo";
 import { Button } from "root";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 
 export default function AppHeader() {
   return (
-    <div className="fixed left-0 right-0 top-0 z-20 border-b app-bg app-border">
+    <div className="app-bg app-border fixed top-0 right-0 left-0 z-20 border-b">
       <div className="app-container-padding flex h-12 items-center justify-between">
-        <div className="flex items-center">
-          <Logo />
-        </div>
+        <div className="flex items-center">{/*<Logo />*/}</div>
 
         <div className="mr-2 flex items-center gap-2">
           <Button as={Link} to="/root" intent="tertiary" formSize="sm">

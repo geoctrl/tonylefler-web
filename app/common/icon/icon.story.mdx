@@ -1,0 +1,294 @@
+import { Icon } from "./icon";
+import { Button } from "../button/button";
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../docs";
+
+export const meta = {
+  title: 'Icon',
+  category: 'components',
+  order: 5,
+  component: './icon.tsx'
+};
+
+# Icon
+
+SVG icons loaded from an optimized sprite sheet with automatic color inheritance.
+
+## Import
+
+```tsx
+import { Icon } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Icon name="house" />
+    <Icon name="user" />
+    <Icon name="gear" />
+    <Icon name="star" />
+  </div>
+</Example>
+
+```tsx
+<Icon name="house" />
+<Icon name="user" />
+<Icon name="gear" />
+```
+
+## Props
+
+`<Icon>` accepts all [SVG element attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "name",
+    type: "Icons",
+    description:
+      "Icon name from the icon sprite. Available icons are auto-generated from the icons directory.",
+    required: false,
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes to apply to the SVG element.",
+    required: false,
+  },
+  {
+    name: "fill",
+    type: "string",
+    description: "Fill color for the icon. Overrides the default fill-current behavior.",
+    required: false,
+  },
+  {
+    name: "style",
+    type: "React.CSSProperties",
+    description: "Inline styles to apply to the SVG element.",
+    required: false,
+  },
+]} />
+
+## Icon System
+
+Icons are sourced from an SVG sprite sheet for optimal performance:
+
+- **Font Awesome** is the primary icon library
+- Custom icons can be added by placing SVG files in the `icons/` directory
+- Build process generates a sprite sheet and TypeScript types
+- Icons are referenced by name (e.g., `name="house"`)
+- TypeScript provides autocomplete for all available icon names
+
+## Size
+
+Icons inherit their size from the parent element or can be sized using Tailwind utility classes.
+
+### Default Size
+
+The default icon size is `size-5` (20px × 20px).
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Icon name="house" />
+    <span className="text-grey-900 dark:text-grey-100">Default size (20px)</span>
+  </div>
+</Example>
+
+```tsx
+<Icon name="house" />
+```
+
+### Custom Sizes
+
+Use Tailwind `size-*` utilities to control icon dimensions.
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Icon name="star" className="size-3" />
+    <Icon name="star" className="size-4" />
+    <Icon name="star" className="size-5" />
+    <Icon name="star" className="size-6" />
+    <Icon name="star" className="size-8" />
+    <Icon name="star" className="size-10" />
+  </div>
+</Example>
+
+```tsx
+<Icon name="star" className="size-3" />
+<Icon name="star" className="size-4" />
+<Icon name="star" className="size-5" />
+<Icon name="star" className="size-6" />
+<Icon name="star" className="size-8" />
+<Icon name="star" className="size-10" />
+```
+
+## Color
+
+Icons automatically inherit text color from their parent element via `fill-current`.
+
+### Inheriting Text Color
+
+<Example>
+  <div className="flex gap-6 items-center">
+    <div className="text-grey-900 dark:text-grey-100">
+      <Icon name="heart" className="size-6" />
+    </div>
+    <div className="text-primary-500">
+      <Icon name="heart" className="size-6" />
+    </div>
+    <div className="text-important-500">
+      <Icon name="heart" className="size-6" />
+    </div>
+    <div className="text-success-500">
+      <Icon name="heart" className="size-6" />
+    </div>
+  </div>
+</Example>
+
+```tsx
+<div className="text-primary-500">
+  <Icon name="heart" />
+</div>
+```
+
+### Custom Fill Color
+
+Use the `fill` prop or Tailwind `fill-*` classes for direct color control.
+
+<Example>
+  <div className="flex gap-6 items-center">
+    <Icon name="star" className="size-6" fill="#FFD700" />
+    <Icon name="star" className="size-6 fill-primary-500" />
+    <Icon name="star" className="size-6 fill-important-500" />
+  </div>
+</Example>
+
+```tsx
+<Icon name="star" fill="#FFD700" />
+<Icon name="star" className="fill-primary-500" />
+```
+
+## Using with Components
+
+Icons work seamlessly with other components like Button.
+
+### With Button Component
+
+<Example>
+  <div className="flex gap-2">
+    <Button iconLeft="star">Favorite</Button>
+    <Button iconRight="arrow-right">Next</Button>
+    <Button iconOnly="gear" />
+  </div>
+</Example>
+
+```tsx
+<Button iconLeft="star">Favorite</Button>
+<Button iconRight="arrow-right">Next</Button>
+<Button iconOnly="gear" />
+```
+
+### Inline with Text
+
+Icons display inline by default, making them easy to use within text content.
+
+<Example>
+  <div className="text-grey-900 dark:text-grey-100">
+    <p className="flex items-center gap-2">
+      Click the <Icon name="gear" /> icon to open settings.
+    </p>
+  </div>
+</Example>
+
+```tsx
+<p className="flex items-center gap-2">
+  Click the <Icon name="gear" /> icon to open settings.
+</p>
+```
+
+## Common Patterns
+
+### Icon Buttons
+
+<Example>
+  <div className="flex gap-2">
+    <Button iconOnly="magnifying-glass" intent="secondary" />
+    <Button iconOnly="bell" intent="secondary" />
+    <Button iconOnly="user" intent="secondary" />
+  </div>
+</Example>
+
+```tsx
+<Button iconOnly="magnifying-glass" intent="secondary" />
+```
+
+### Icon Lists
+
+<Example>
+  <div className="space-y-2">
+    <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
+      <Icon name="check" className="text-success-500" />
+      <span>Feature enabled</span>
+    </div>
+    <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
+      <Icon name="check" className="text-success-500" />
+      <span>Email notifications active</span>
+    </div>
+    <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
+      <Icon name="xmark" className="text-important-500" />
+      <span>Push notifications disabled</span>
+    </div>
+  </div>
+</Example>
+
+```tsx
+<div className="flex items-center gap-2">
+  <Icon name="check" className="text-success-500" />
+  <span>Feature enabled</span>
+</div>
+```
+
+### Navigation Icons
+
+<Example>
+  <div className="flex gap-2">
+    <Button intent="tertiary" iconLeft="house">Home</Button>
+    <Button intent="tertiary" iconLeft="user">Profile</Button>
+    <Button intent="tertiary" iconLeft="gear">Settings</Button>
+  </div>
+</Example>
+
+```tsx
+<Button intent="tertiary" iconLeft="house">Home</Button>
+<Button intent="tertiary" iconLeft="user">Profile</Button>
+<Button intent="tertiary" iconLeft="gear">Settings</Button>
+```
+
+## Adding Custom Icons
+
+To add custom icons to your project:
+
+1. **Add SVG file**: Place your SVG icon in the `icons/` directory
+2. **Restart dev server**: The build process automatically generates the sprite and types
+3. **Use the icon**: Reference it by filename: `<Icon name="my-icon" />`
+
+**Requirements:**
+- SVG files must have a `viewBox="0 0 24 24"` attribute
+- Keep icons simple and monochrome for best results with `fill-current`
+- Font Awesome is the primary source, but any SVG icon can be added
+
+## Accessibility
+
+For decorative icons, use `aria-hidden`:
+
+```tsx
+<Icon name="star" aria-hidden="true" />
+```
+
+For semantic icons, add appropriate ARIA labels:
+
+```tsx
+<button aria-label="Close dialog">
+  <Icon name="xmark" />
+</button>
+```

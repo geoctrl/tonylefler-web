@@ -1,4 +1,5 @@
 import React, { isValidElement, ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Icon, IconProps } from "../../common/icon/icon";
 import { Icons } from "../../types/icons";
@@ -17,7 +18,12 @@ export function RenderIconOrElement({
   }
   const iconProps = iconOrElement as IconProps;
   if (typeof iconProps === "object" && iconProps?.name) {
-    return <Icon {...iconProps} className={className} />;
+    return (
+      <Icon
+        {...iconProps}
+        className={twMerge(className, iconProps?.className)}
+      />
+    );
   }
   if (isValidElement(iconOrElement)) {
     return iconOrElement;

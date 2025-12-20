@@ -7,11 +7,13 @@
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
     "src/**/*.mdx",
-    "app/root.jsx"
+    "app/root.jsx",
+    ".react-router/types/**/*"
   ],
+  "exclude": ["node_modules", "old-tailwind.ts"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client"],
+    "types": ["@react-router/node", "vite/client"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
@@ -21,12 +23,14 @@
     "target": "ES2022",
     "strict": true,
     "allowJs": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "root": ["./app/common"]
+      "root": ["./app/common"],
+      "~/*": ["./*"]
     },
+    "rootDirs": [".", "./.react-router/types"],
 
     // Vite takes care of building everything, not tsc.
     "noEmit": true

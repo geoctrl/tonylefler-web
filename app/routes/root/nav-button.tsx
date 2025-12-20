@@ -1,5 +1,5 @@
 import React, { ReactNode, CSSProperties } from "react";
-import { NavLink, NavLinkProps } from "@remix-run/react";
+import { NavLink, NavLinkProps } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 import { always, maybe } from "../../utils/classname-helpers";

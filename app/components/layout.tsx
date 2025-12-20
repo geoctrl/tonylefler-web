@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { always } from "../utils/classname-helpers";
 import { Button } from "root";
 import { Nav } from "./nav";
-import { useOutletContext } from "react-router";
 
 type LayoutProps = {
   children?: ReactNode;
@@ -11,19 +10,15 @@ type LayoutProps = {
 
 export function Layout(props: LayoutProps) {
   const { children, name } = props;
-  const { setDrawerIsOpen } = useOutletContext<{
-    setDrawerIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }>();
   return (
     <>
       <div
         className={always(
-          "sticky top-[var(--app-header-height)] z-10 flex items-center gap-2 border-b bg-grey-50 app-border dark:bg-grey-800",
+          "bg-grey-50 app-border dark:bg-grey-800 sticky top-[var(--app-header-height)] z-10 flex items-center gap-2 border-b",
           "lg:hidden",
         )}
       >
         <Button
-          onClick={() => setDrawerIsOpen((prev) => !prev)}
           intent="tertiary"
           iconOnly="bars"
           className="rounded-none"

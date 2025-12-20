@@ -1,0 +1,40 @@
+import { Icon } from "root";
+import { ViewOnGithub } from "../../../components/view-on-github";
+import { PropsTable } from "../../../common/props-table/props-table";
+import { iconProps } from "../../../common/icon/icon-props";
+
+<ViewOnGithub href="https://github.com/geoctrl/tonylefler-web/blob/main/app/common/icon/icon.tsx" />
+
+# Icon
+
+Primitive SVG component using a spritesheet.
+
+Set up with Vite using
+[vite-plugin-icons-spritesheet](https://github.com/forge42dev/vite-plugin-icons-spritesheet)
+with exported types.
+
+## Import
+
+```tsx
+import { Icon } from "root";
+```
+
+## Basic Usage
+
+<div className="flex gap-2">
+  <Icon name="star" />
+  <Icon name="magnifying-glass" />
+  <Icon name="person-to-portal" />
+</div>
+
+```tsx
+<Icon name="star" />
+<Icon name="magnifying-glass" />
+<Icon name="person-to-portal" />
+```
+
+## Props
+
+`<Icon>` accepts all [HTML SVG element attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) and the following:
+
+<PropsTable props={iconProps} />

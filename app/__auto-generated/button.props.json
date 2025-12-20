@@ -1,0 +1,243 @@
+{
+  "as": {
+    "defaultValue": {
+      "value": "\"button\""
+    },
+    "description": "The element or component to render as",
+    "name": "as",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      },
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "\"button\" | \"a\" | (\"button\" & ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>) | ... 4 more ... | (ForwardRefExoticComponent<...> & (\"button\" | ... 2 more ... | ForwardRefExoticComponent<...>))"
+    },
+    "docType": "\"button\" | \"a\" | Link | NavLink"
+  },
+  "alignContent": {
+    "defaultValue": {
+      "value": "\"center\""
+    },
+    "description": "Horizontal alignment of button content",
+    "name": "alignContent",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "enum",
+      "raw": "\"left\" | \"right\" | \"center\"",
+      "value": [
+        {
+          "value": "\"left\""
+        },
+        {
+          "value": "\"right\""
+        },
+        {
+          "value": "\"center\""
+        }
+      ]
+    },
+    "docType": "\"left\" | \"right\" | \"center\""
+  },
+  "block": {
+    "defaultValue": null,
+    "description": "Makes the button full-width of its container",
+    "name": "block",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "boolean"
+    }
+  },
+  "formSize": {
+    "defaultValue": {
+      "value": "\"md\""
+    },
+    "description": "Size of the button",
+    "name": "formSize",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "enum",
+      "raw": "\"sm\" | \"md\" | \"lg\"",
+      "value": [
+        {
+          "value": "\"sm\""
+        },
+        {
+          "value": "\"md\""
+        },
+        {
+          "value": "\"lg\""
+        }
+      ]
+    },
+    "docType": "\"sm\" | \"md\" | \"lg\""
+  },
+  "iconLeft": {
+    "defaultValue": null,
+    "description": "Icon to display on the left side of the button text",
+    "name": "iconLeft",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "IconOrElement"
+    },
+    "docType": "IconName | ReactElement"
+  },
+  "iconOnly": {
+    "defaultValue": null,
+    "description": "Icon to display as the only content (removes text and centers icon)",
+    "name": "iconOnly",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "IconOrElement"
+    },
+    "docType": "IconName | ReactElement"
+  },
+  "iconRight": {
+    "defaultValue": null,
+    "description": "Icon to display on the right side of the button text",
+    "name": "iconRight",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "IconOrElement"
+    },
+    "docType": "IconName | ReactElement"
+  },
+  "intent": {
+    "defaultValue": {
+      "value": "\"secondary\""
+    },
+    "description": "w\nVisual style of the button",
+    "name": "intent",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "enum",
+      "raw": "ButtonIntent",
+      "value": [
+        {
+          "value": "\"primary\""
+        },
+        {
+          "value": "\"secondary\""
+        },
+        {
+          "value": "\"secondaryColor\""
+        },
+        {
+          "value": "\"outline\""
+        },
+        {
+          "value": "\"tertiary\""
+        },
+        {
+          "value": "\"tertiaryReverse\""
+        },
+        {
+          "value": "\"listItem\""
+        }
+      ]
+    },
+    "docType": "\"primary\" | \"secondary\" | \"secondaryColor\" | \"outline\" | \"tertiary\" | \"tertiaryReverse\" | \"listItem\""
+  },
+  "isActive": {
+    "defaultValue": null,
+    "description": "Shows the button in an active/selected state",
+    "name": "isActive",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "boolean"
+    }
+  },
+  "isLoading": {
+    "defaultValue": null,
+    "description": "Shows a loading spinner and disables the button",
+    "name": "isLoading",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/button/button.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "boolean"
+    }
+  }
+}

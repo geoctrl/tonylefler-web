@@ -1,12 +1,13 @@
 import React from "react";
-import { Link, LinkProps } from "@remix-run/react";
+import { Link, NavLink, NavLinkProps, NavLinkRenderProps } from "react-router";
+import type { LinkProps } from "react-router";
 
 import { RenderIconOrElement } from "../icon/render-icon-or-element";
 import { IconOrElement } from "../../types/icons";
 import { Loader, LoaderSize, LoaderIntent } from "../loader/loader";
-import { buttonVariants } from "./button-variants";
 import { FormSize } from "../../types/form-sizes";
 import { useIconFormSize } from "../../hooks/use-icon-form-size";
+import { buttonVariants } from "./button-variants";
 
 type ButtonButtonProps = {
   as?: "button";
@@ -20,7 +21,18 @@ type ButtonLinkProps = {
   as?: typeof Link;
 } & LinkProps;
 
-type ButtonAs = ButtonButtonProps | ButtonAnchorProps | ButtonLinkProps;
+type ButtonNavLinkProps = {
+  as?: typeof NavLink;
+  className?: string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+} & Omit<NavLinkProps, "className" | "style" | "children">;
+
+type ButtonAs =
+  | ButtonButtonProps
+  | ButtonAnchorProps
+  | ButtonLinkProps
+  | ButtonNavLinkProps;
 
 type ButtonIntent =
   | "primary"
@@ -28,14 +40,16 @@ type ButtonIntent =
   | "secondaryColor"
   | "outline"
   | "tertiary"
+  | "tertiaryReverse"
   | "listItem";
 
 const intentToIntentMap: Record<ButtonIntent, LoaderIntent> = {
-  primary: "onColor",
+  primary: "primary",
   secondary: "grey",
   secondaryColor: "primary",
   outline: "grey",
   tertiary: "grey",
+  tertiaryReverse: "greyReverse",
   listItem: "grey",
 };
 
@@ -46,16 +60,60 @@ const formSizeToSizeMap: Record<FormSize, LoaderSize> = {
 };
 
 export type ButtonProps = ButtonAs & {
+  /**
+   * The element or component to render as
+   * @default "button"
+   */
+  as?: "button" | "a" | typeof Link | typeof NavLink;
+
+  /**
+   * Horizontal alignment of button content
+   * @default "center"
+   */
   alignContent?: "left" | "right" | "center";
+
+  /** Makes the button full-width of its container */
   block?: boolean;
+
+  /** Disables the button and prevents user interaction */
   disabled?: boolean;
+
+  /**
+   * Size of the button
+   * @default "md"
+   */
   formSize?: FormSize;
+
+  /**
+   * Icon to display on the left side of the button text
+   * @docType IconName | ReactElement
+   */
   iconLeft?: IconOrElement;
+
+  /**
+   * Icon to display as the only content (removes text and centers icon)
+   */
   iconOnly?: IconOrElement;
+
+  /**
+   * Icon to display on the right side of the button text
+   */
   iconRight?: IconOrElement;
+
+  /**w
+   * Visual style of the button
+   * @default "secondary"
+   */
   intent?: ButtonIntent;
+
+  /** Shows the button in an active/selected state */
   isActive?: boolean;
+
+  /** Shows a loading spinner and disables the button */
   isLoading?: boolean;
+
+  /** HTML button type attribute */
+  type?: "button" | "submit" | "reset";
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -71,16 +129,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconLeft,
       iconRight,
       iconOnly,
+      type = "button",
       intent = "secondary",
       isActive,
       isLoading,
       ...rest
     } = props;
-    const Wrapper = as === "a" ? "a" : as === "button" ? "button" : Link;
+    const Wrapper = as === "a" ? "a" : as === "button" ? "button" : as;
 
     const iconSize = useIconFormSize(formSize);
 
-    let isDisabled = isLoading || disabled;
+    const isDisabled = isLoading || disabled;
 
     const renderLoader = (
       <Loader
@@ -89,25 +148,36 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       />
     );
 
+    function renderClassName(navLinkRenderProps?: NavLinkRenderProps) {
+      return buttonVariants({
+        intent,
+        formSize,
+        className,
+        iconOnly: !!iconOnly,
+        block: !!block,
+        alignContent,
+        isActive: isActive || navLinkRenderProps?.isActive,
+        disabled: isDisabled,
+      });
+    }
+
+    const isNavLink = as === NavLink;
+
     return (
       <Wrapper
         {...(rest as any)}
+        type={type}
         ref={ref}
         disabled={isDisabled}
         role={intent === "listItem" ? "menuitem" : undefined}
-        className={buttonVariants({
-          asAnchor: as === "a",
-          intent,
-          formSize,
-          iconOnly: !!iconOnly,
-          block: !!block,
-          alignContent,
-          isActive,
-          className,
-          disabled: isDisabled,
-        })}
+        className={
+          isNavLink
+            ? (navLinkRenderProps: NavLinkRenderProps) =>
+                renderClassName(navLinkRenderProps)
+            : renderClassName()
+        }
       >
-        {!!iconOnly ? (
+        {iconOnly ? (
           <>
             {isLoading ? (
               renderLoader
@@ -127,7 +197,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               />
             )}
             {isLoading && renderLoader}
-            {children}
+            {isLoading ? (
+              <span className="truncate">{children}</span>
+            ) : (
+              children
+            )}
             {iconRight && (
               <RenderIconOrElement
                 iconOrElement={iconRight}

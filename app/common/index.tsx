@@ -5,3 +5,5 @@ export * from "./input/input";
 export * from "./loader/loader";
 export * from "./toggle/toggle";
 export * from "./badge-affix/badge-affix";
+export * from "./props-table/props-table";
+export * from "./docs";
