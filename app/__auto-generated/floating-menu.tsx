@@ -1,7 +1,7 @@
-import StoryContent from "../common/button/button.story.mdx";
+import StoryContent from "../common/floating-menu/floating-menu.story.mdx";
 import { PageOutline } from "../components/page-outline";
 
-export default function ButtonStory() {
+export default function FloatingMenuStory() {
   return (
     <div className="flex gap-8 flex-1 pt-[var(--app-header-height)]">
       <main className="flex-1 min-w-0">

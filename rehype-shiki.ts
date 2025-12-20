@@ -12,64 +12,51 @@ import rehypeStringify from "rehype-stringify";
 
 type supportedLanguages = "scss" | "tsx" | "shell";
 
-async function getHighlighterTsx() {
-  return await createHighlighter({
-    langs: ["tsx"],
-    themes: ["github-dark", "github-light"],
-  });
-}
+// Cache highlighter at module level to prevent creating multiple instances
+let cachedHighlighter: HighlighterGeneric<BundledLanguage, BundledTheme> | null = null;
 
-async function getHighlighterScss() {
-  return await createHighlighter({
-    langs: ["scss"],
-    themes: ["github-dark", "github-light"],
-  });
-}
-
-async function getHighlighterShell() {
-  return await createHighlighter({
-    langs: ["shell"],
-    themes: ["github-dark", "github-light"],
-  });
+async function getHighlighter() {
+  if (!cachedHighlighter) {
+    cachedHighlighter = await createHighlighter({
+      langs: ["tsx", "scss", "shell"],
+      themes: ["github-dark", "github-light"],
+    });
+  }
+  return cachedHighlighter;
 }
 
 export async function generateRehypeShikiPlugin() {
-  const highlighterTsx = await getHighlighterTsx();
-  const highlighterScss = await getHighlighterScss();
-  const highlighterShell = await getHighlighterShell();
+  const highlighter = await getHighlighter();
 
   return () => {
     return async (tree: any) => {
       visit(tree, "element", (node: any) => {
         const className = node?.children?.[0]?.properties?.className?.[0];
-        const highlighter = (
-          {
-            "language-tsx": highlighterTsx,
-            "language-scss": highlighterScss,
-            "language-shell": highlighterShell,
-          } as Record<string, HighlighterGeneric<BundledLanguage, BundledTheme>>
-        )[className];
 
-        if (node.tagName === "pre" && highlighter) {
+        if (node.tagName === "pre" && className?.startsWith("language-")) {
           const lang = className.replace("language-", "") as supportedLanguages;
-          const html = highlighter.codeToHtml(toString(node), {
-            lang,
-            themes: {
-              light: "github-light",
-              dark: "github-dark",
-            },
-          });
 
-          const rehypeTree = unified()
-            .use(rehypeParse, { fragment: true })
-            .use(rehypeStringify)
-            .parse(html) as any;
+          // Check if this is a supported language
+          if (["tsx", "scss", "shell"].includes(lang)) {
+            const html = highlighter.codeToHtml(toString(node), {
+              lang,
+              themes: {
+                light: "github-light",
+                dark: "github-dark",
+              },
+            });
 
-          const el = rehypeTree.children[0];
-          node.type = el.type;
-          node.tagName = el.tagName;
-          node.properties = el.properties;
-          node.children = el.children;
+            const rehypeTree = unified()
+              .use(rehypeParse, { fragment: true })
+              .use(rehypeStringify)
+              .parse(html) as any;
+
+            const el = rehypeTree.children[0];
+            node.type = el.type;
+            node.tagName = el.tagName;
+            node.properties = el.properties;
+            node.children = el.children;
+          }
         } else if (node.tagName === "pre") {
           // add classname "simple" to pre
           node.properties.className = ["simple"];

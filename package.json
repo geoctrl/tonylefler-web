@@ -2,13 +2,11 @@
   "name": "tonylefler-web",
   "type": "module",
   "scripts": {
-    "generate-stories": "tsx scripts/generate-stories.ts",
-    "dev-old": "yarn generate-stories && react-router dev",
     "dev": "react-router dev",
     "test": "jest",
     "test:watch": "jest --watch",
     "start": "react-router-serve ./build/server/index.js",
-    "build": "yarn generate-stories && react-router build",
+    "build": "react-router build",
     "typecheck": "react-router typegen && tsc"
   },
   "packageManager": "yarn@4.1.1",

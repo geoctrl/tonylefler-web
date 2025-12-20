@@ -7,7 +7,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { iconsSpritesheet } from "vite-plugin-icons-spritesheet";
 import kebabCase from "lodash/kebabCase";
-import dts from "vite-plugin-dts";
 import tailwindcss from "@tailwindcss/vite";
 
 import rehypeLead from "./rehype-lead";
@@ -27,6 +26,7 @@ export default defineConfig(async () => {
         fileName: "icons.svg",
         formatter: "prettier",
         iconNameTransformer: (fileName) => kebabCase(fileName),
+        pathToPublicDir: path.resolve(__dirname, "public"),
       }),
       {
         ...mdx({
@@ -42,9 +42,6 @@ export default defineConfig(async () => {
         }),
         enforce: "pre",
       },
-      dts({
-        insertTypesEntry: true,
-      }),
       reactRouter(),
       tsconfigPaths(),
     ],

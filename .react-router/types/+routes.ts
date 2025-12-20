@@ -17,6 +17,9 @@ type Pages = {
   "/components/button": {
     params: {};
   };
+  "/components/floating-menu": {
+    params: {};
+  };
   "/components/icon": {
     params: {};
   };
@@ -28,7 +31,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/components/button" | "/components/icon" | "/components/loader";
+    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/loader";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -36,11 +39,15 @@ type RouteFiles = {
   };
   "routes/root/layout.tsx": {
     id: "routes/root/layout";
-    page: "/components/button" | "/components/icon" | "/components/loader";
+    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/loader";
   };
   "common/button/button-route.tsx": {
     id: "common/button/button-route";
     page: "/components/button";
+  };
+  "common/floating-menu/floating-menu-route.tsx": {
+    id: "common/floating-menu/floating-menu-route";
+    page: "/components/floating-menu";
   };
   "common/icon/icon-route.tsx": {
     id: "common/icon/icon-route";
@@ -57,6 +64,7 @@ type RouteModules = {
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/root/layout": typeof import("./app/routes/root/layout.tsx");
   "common/button/button-route": typeof import("./app/common/button/button-route.tsx");
+  "common/floating-menu/floating-menu-route": typeof import("./app/common/floating-menu/floating-menu-route.tsx");
   "common/icon/icon-route": typeof import("./app/common/icon/icon-route.tsx");
   "common/loader/loader-route": typeof import("./app/common/loader/loader-route.tsx");
 };

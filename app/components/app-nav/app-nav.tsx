@@ -18,6 +18,7 @@ const navCategories = [
     label: "Components",
     items: [
       { title: "Button", path: "/components/button" },
+      { title: "Floating Menu", path: "/components/floating-menu" },
       { title: "Icon", path: "/components/icon" },
       { title: "Loader", path: "/components/loader" },
     ],
@@ -35,7 +36,7 @@ export function AppNav(props: AppNavProps) {
     <div
       id="desktop"
       className={always(
-        "sticky top-[var(--app-header-height)] hidden w-[var(--app-menu-width)] h-[calc(100vh-var(--app-header-height))] overflow-auto shrink-0",
+        "sticky top-[var(--app-header-height)] hidden h-[calc(100vh-var(--app-header-height))] w-[var(--app-menu-width)] shrink-0 overflow-auto",
         "lg:block",
       )}
     >

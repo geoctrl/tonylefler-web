@@ -211,8 +211,9 @@
 
 .docs {
   @apply prose dark:prose-invert;
-  width: auto;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   padding-bottom: 120px;
 
   &:where(h2, h3, h4):not(:where([class~="not-prose"] *)) {
@@ -221,10 +222,14 @@
 
   pre.shiki {
     @apply border border-grey-990/10 dark:border-grey-10/25;
+    overflow-x: auto !important;
+    max-width: 100%;
+    width: 100%;
   }
 
   pre code {
     all: unset;
+    display: block;
   }
 
   pre.simple {

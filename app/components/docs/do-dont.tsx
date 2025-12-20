@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Icon } from "../icon/icon";
+import { Icon } from "../../common/icon/icon";
 
 interface BaseProps {
   /** Content to display */

@@ -42,8 +42,7 @@
     "required": false,
     "type": {
       "name": "\"button\" | \"a\" | (\"button\" & ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>) | ... 4 more ... | (ForwardRefExoticComponent<...> & (\"button\" | ... 2 more ... | ForwardRefExoticComponent<...>))"
-    },
-    "docType": "\"button\" | \"a\" | Link | NavLink"
+    }
   },
   "alignContent": {
     "defaultValue": {
@@ -72,8 +71,7 @@
           "value": "\"center\""
         }
       ]
-    },
-    "docType": "\"left\" | \"right\" | \"center\""
+    }
   },
   "block": {
     "defaultValue": null,
@@ -117,8 +115,7 @@
           "value": "\"lg\""
         }
       ]
-    },
-    "docType": "\"sm\" | \"md\" | \"lg\""
+    }
   },
   "iconLeft": {
     "defaultValue": null,
@@ -149,8 +146,7 @@
     "required": false,
     "type": {
       "name": "IconOrElement"
-    },
-    "docType": "IconName | ReactElement"
+    }
   },
   "iconRight": {
     "defaultValue": null,
@@ -165,8 +161,7 @@
     "required": false,
     "type": {
       "name": "IconOrElement"
-    },
-    "docType": "IconName | ReactElement"
+    }
   },
   "intent": {
     "defaultValue": {
@@ -207,8 +202,7 @@
           "value": "\"listItem\""
         }
       ]
-    },
-    "docType": "\"primary\" | \"secondary\" | \"secondaryColor\" | \"outline\" | \"tertiary\" | \"tertiaryReverse\" | \"listItem\""
+    }
   },
   "isActive": {
     "defaultValue": null,

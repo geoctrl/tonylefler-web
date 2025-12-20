@@ -1,24 +1,35 @@
-import { forwardRef } from "react";
-import { useFloatingParentNodeId, FloatingTree } from "@floating-ui/react";
+import { FloatingTree } from "@floating-ui/react";
+import * as React from "react";
 
-import { Menu, MenuProps } from "./menu";
+import {
+  FloatingMenuInner,
+  FloatingMenuInnerProps,
+} from "./floating-menu-inner";
+import { FloatingMenuButton } from "./sub-components/floating-menu-button";
+import { FloatingMenuDivider } from "./sub-components/floating-menu-divider";
+import { ForwardRefExoticComponent } from "react";
 
-export type FloatingMenuProps = Omit<MenuProps, "label">;
+export type FloatingMenuProps = FloatingMenuInnerProps &
+  React.HTMLProps<HTMLButtonElement>;
 
-export const FloatingMenu = forwardRef<HTMLButtonElement, FloatingMenuProps>(
-  function FloatingMenu(props, ref) {
-    const parentId = useFloatingParentNodeId();
+export type FloatingMenuComponent =
+  ForwardRefExoticComponent<FloatingMenuProps> & {
+    Item: typeof FloatingMenuButton;
+    Divider: typeof FloatingMenuDivider;
+  };
 
-    if (parentId == null) {
-      return (
-        <FloatingTree>
-          <Menu {...props} ref={ref} />
-        </FloatingTree>
-      );
-    }
+export const FloatingMenu = React.forwardRef<
+  HTMLButtonElement,
+  FloatingMenuInnerProps & React.HTMLProps<HTMLButtonElement>
+>((props, ref) => {
+  return (
+    <FloatingTree>
+      <FloatingMenuInner {...props} ref={ref} />
+    </FloatingTree>
+  );
+}) as FloatingMenuComponent;
 
-    return <Menu {...props} ref={ref} />;
-  },
-);
+FloatingMenu.Item = FloatingMenuButton;
+FloatingMenu.Divider = FloatingMenuDivider;
 
 FloatingMenu.displayName = "Menu";

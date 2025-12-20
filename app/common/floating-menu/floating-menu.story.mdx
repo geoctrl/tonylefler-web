@@ -1,0 +1,459 @@
+import { FloatingMenu } from "./floating-menu";
+import { Button } from "../button/button";
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { useState } from "react";
+
+export const meta = {
+  title: 'Floating Menu',
+  category: 'components',
+  order: 6
+};
+
+# Floating Menu
+
+A flexible dropdown menu component with support for nested menus, keyboard navigation, and context menus.
+
+## Import
+
+```tsx
+import { FloatingMenu } from "root";
+```
+
+## Basic Usage
+
+{
+<Example>
+  <FloatingMenu
+    renderTrigger={(props, { isOpen }) => (
+      <Button {...props} iconRight="caret-down">
+        Actions
+      </Button>
+    )}
+  >
+    <FloatingMenu.Item text="Edit" />
+    <FloatingMenu.Item text="Duplicate" />
+    <FloatingMenu.Item text="Delete" />
+  </FloatingMenu>
+</Example>
+}
+
+```tsx
+<FloatingMenu
+  renderTrigger={(props) => (
+    <Button {...props} iconRight="caret-down">
+      Actions
+    </Button>
+  )}
+>
+  <FloatingMenu.Item text="Edit" iconLeft="pencil" />
+  <FloatingMenu.Item text="Duplicate" iconLeft="copy" />
+  <FloatingMenu.Divider />
+  <FloatingMenu.Item text="Delete" iconLeft="trash-can" />
+</FloatingMenu>
+```
+
+## `<FloatingMenu>` Props
+
+<PropsTable props={[
+  {
+    name: "renderTrigger",
+    type: "(props, opts: { isOpen: boolean }) => ReactNode",
+    description: "Function to render the trigger element that opens the menu",
+    required: true,
+  },
+  {
+    name: "placement",
+    type: '"bottom-start" | "bottom-end" | "right-start"',
+    description: "Placement of the menu relative to the trigger",
+    default: '"bottom-start"',
+    required: false,
+  },
+  {
+    name: "contextTrigger",
+    type: "RefObject<HTMLElement>",
+    description: "Element reference for context menu (right-click) functionality",
+    required: false,
+  },
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Menu items and dividers",
+    required: true,
+  },
+]} />
+
+## `<FloatingMenu.Item>` Props
+
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string | ReactNode",
+    description: "Primary text content of the menu item",
+    required: false,
+  },
+  {
+    name: "subtext",
+    type: "string | ReactNode",
+    description: "Secondary text displayed below the primary text",
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the left side of the item",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the right side of the item",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables the menu item",
+    required: false,
+  },
+  {
+    name: "as",
+    type: '"button" | "a" | Link',
+    description: "Element type to render as",
+    default: '"button"',
+    required: false,
+  },
+  {
+    name: "onClick",
+    type: "(e?: Event, meta?: any) => void",
+    description: "Click handler for the menu item",
+    required: false,
+  },
+]} />
+
+## Trigger Element
+
+The `renderTrigger` prop is a render function that controls what element triggers the menu to open. This function receives two arguments:
+
+1. **`props`**: Event handlers and refs that must be spread onto your trigger element
+2. **`opts`**: An object containing `{ isOpen: boolean }` to track menu state
+
+**Important:** Always spread the `props` onto your trigger element for proper functionality.
+
+### Basic Trigger
+
+The simplest trigger is a button:
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props}>Open Menu</Button>
+    )}
+  >
+    <FloatingMenu.Item text="Action 1" />
+    <FloatingMenu.Item text="Action 2" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu
+  renderTrigger={(props) => (
+    <Button {...props}>Open Menu</Button>
+  )}
+>
+  <FloatingMenu.Item text="Action 1" />
+</FloatingMenu>
+```
+
+### Dynamic Trigger (Using isOpen)
+
+Use the `isOpen` state to change the trigger appearance:
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props, { isOpen }) => (
+      <Button {...props} intent={isOpen ? "primary" : "secondary"}>
+        {isOpen ? "Close" : "Open"}
+      </Button>
+    )}
+  >
+    <FloatingMenu.Item text="Action 1" />
+    <FloatingMenu.Item text="Action 2" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu
+  renderTrigger={(props, { isOpen }) => (
+    <Button {...props} intent={isOpen ? "primary" : "secondary"}>
+      {isOpen ? "Close" : "Open"}
+    </Button>
+  )}
+>
+  <FloatingMenu.Item text="Action 1" />
+</FloatingMenu>
+```
+
+### Icon-Only Trigger
+
+Perfect for toolbar menus:
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props} iconOnly="bars" />
+    )}
+  >
+    <FloatingMenu.Item text="Action 1" />
+    <FloatingMenu.Item text="Action 2" />
+    <FloatingMenu.Item text="Action 3" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu
+  renderTrigger={(props) => (
+    <Button {...props} iconOnly="bars" />
+  )}
+>
+  <FloatingMenu.Item text="Action 1" />
+</FloatingMenu>
+```
+
+## Placement
+
+Control where the menu appears relative to the trigger.
+
+### `placement="bottom-start"`
+
+Default placement. Menu opens below the trigger, aligned to the left.
+
+<Example>
+  <FloatingMenu
+    placement="bottom-start"
+    renderTrigger={(props) => (
+      <Button {...props}>Bottom Start</Button>
+    )}
+  >
+    <FloatingMenu.Item text="Option 1" />
+    <FloatingMenu.Item text="Option 2" />
+    <FloatingMenu.Item text="Option 3" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu placement="bottom-start" renderTrigger={(props) => <Button {...props}>Menu</Button>}>
+  <FloatingMenu.Item text="Option 1" />
+</FloatingMenu>
+```
+
+### `placement="bottom-end"`
+
+Menu opens below the trigger, aligned to the right.
+
+<Example>
+  <div className="flex justify-end">
+    <FloatingMenu
+      placement="bottom-end"
+      renderTrigger={(props) => (
+        <Button {...props}>Bottom End</Button>
+      )}
+    >
+      <FloatingMenu.Item text="Option 1" />
+      <FloatingMenu.Item text="Option 2" />
+      <FloatingMenu.Item text="Option 3" />
+    </FloatingMenu>
+  </div>
+</Example>
+
+```tsx
+<FloatingMenu placement="bottom-end" renderTrigger={(props) => <Button {...props}>Menu</Button>}>
+  <FloatingMenu.Item text="Option 1" />
+</FloatingMenu>
+```
+
+## With Icons
+
+Menu items can display icons on either side.
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props} iconOnly="bars" />
+    )}
+  >
+    <FloatingMenu.Item text="Edit" iconLeft="pencil" />
+    <FloatingMenu.Item text="Share" iconLeft="share" />
+    <FloatingMenu.Item text="Download" iconLeft="download" />
+    <FloatingMenu.Divider />
+    <FloatingMenu.Item text="Delete" iconLeft="trash-can" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu renderTrigger={(props) => <Button {...props} iconOnly="bars" />}>
+  <FloatingMenu.Item text="Edit" iconLeft="pencil" />
+  <FloatingMenu.Item text="Share" iconLeft="share" />
+  <FloatingMenu.Item text="Delete" iconLeft="trash-can" />
+</FloatingMenu>
+```
+
+## With Subtext
+
+Menu items can display secondary text below the primary text.
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props}>Account</Button>
+    )}
+  >
+    <FloatingMenu.Item
+      text="Profile"
+      subtext="View and edit your profile"
+      iconLeft="user"
+    />
+    <FloatingMenu.Item
+      text="Settings"
+      subtext="Manage your preferences"
+      iconLeft="gear"
+    />
+    <FloatingMenu.Divider />
+    <FloatingMenu.Item
+      text="Sign out"
+      subtext="tony@example.com"
+      iconLeft="arrow-right-from-bracket"
+    />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu renderTrigger={(props) => <Button {...props}>Account</Button>}>
+  <FloatingMenu.Item
+    text="Profile"
+    subtext="View and edit your profile"
+    iconLeft="user"
+  />
+  <FloatingMenu.Item
+    text="Settings"
+    subtext="Manage your preferences"
+    iconLeft="gear"
+  />
+</FloatingMenu>
+```
+
+## Disabled Items
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props}>Edit</Button>
+    )}
+  >
+    <FloatingMenu.Item text="Cut" iconLeft="scissors" disabled />
+    <FloatingMenu.Item text="Copy" iconLeft="copy" disabled />
+    <FloatingMenu.Item text="Paste" iconLeft="paste" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu renderTrigger={(props) => <Button {...props}>Edit</Button>}>
+  <FloatingMenu.Item text="Cut" disabled />
+  <FloatingMenu.Item text="Copy" disabled />
+  <FloatingMenu.Item text="Paste" />
+</FloatingMenu>
+```
+
+## Nested Menus
+
+Create multi-level menus by nesting `FloatingMenu.Item` components.
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props}>File</Button>
+    )}
+  >
+    <FloatingMenu.Item text="New" iconLeft="file-lines">
+      <FloatingMenu.Item text="Document" iconLeft="file-lines" />
+      <FloatingMenu.Item text="Spreadsheet" iconLeft="table" />
+      <FloatingMenu.Item text="Presentation" iconLeft="presentation-screen" />
+    </FloatingMenu.Item>
+    <FloatingMenu.Item text="Open" iconLeft="folder-open" />
+    <FloatingMenu.Item text="Save" iconLeft="flippy-disk" />
+    <FloatingMenu.Divider />
+    <FloatingMenu.Item text="Export" iconLeft="file-export">
+      <FloatingMenu.Item text="PDF" iconLeft="file-pdf" />
+      <FloatingMenu.Item text="Word" iconLeft="file-word" />
+      <FloatingMenu.Item text="Excel" iconLeft="file-excel" />
+    </FloatingMenu.Item>
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu renderTrigger={(props) => <Button {...props}>File</Button>}>
+  <FloatingMenu.Item text="New" iconLeft="file-lines">
+    <FloatingMenu.Item text="Document" iconLeft="file-lines" />
+    <FloatingMenu.Item text="Spreadsheet" iconLeft="table" />
+  </FloatingMenu.Item>
+  <FloatingMenu.Item text="Open" iconLeft="folder-open" />
+</FloatingMenu>
+```
+
+## With Dividers
+
+Use `FloatingMenu.Divider` to separate groups of related items.
+
+<Example>
+  <FloatingMenu
+    renderTrigger={(props) => (
+      <Button {...props}>Options</Button>
+    )}
+  >
+    <FloatingMenu.Item text="Cut" iconLeft="scissors" />
+    <FloatingMenu.Item text="Copy" iconLeft="copy" />
+    <FloatingMenu.Item text="Paste" iconLeft="paste" />
+    <FloatingMenu.Divider />
+    <FloatingMenu.Item text="Select All" iconLeft="star" />
+    <FloatingMenu.Divider />
+    <FloatingMenu.Item text="Delete" iconLeft="trash-can" />
+  </FloatingMenu>
+</Example>
+
+```tsx
+<FloatingMenu renderTrigger={(props) => <Button {...props}>Options</Button>}>
+  <FloatingMenu.Item text="Cut" iconLeft="scissors" />
+  <FloatingMenu.Item text="Copy" iconLeft="copy" />
+  <FloatingMenu.Divider />
+  <FloatingMenu.Item text="Delete" iconLeft="trash-can" />
+</FloatingMenu>
+```
+
+## Keyboard Navigation
+
+The Floating Menu component supports full keyboard navigation:
+
+- **Arrow Keys**: Navigate between menu items
+- **Enter/Space**: Activate the focused item
+- **Escape**: Close the menu
+- **Right Arrow**: Open nested menu (when focused on an item with children)
+- **Left Arrow**: Close nested menu and return to parent
+- **Type-ahead**: Type to quickly find and focus items
+
+## Accessibility
+
+The Floating Menu component includes built-in accessibility features:
+
+- Proper ARIA roles (`role="menu"` and `role="menuitem"`)
+- Keyboard navigation support
+- Focus management with focus trap
+- Screen reader announcements
+- Disabled state handling
+
+```tsx
+// Accessible by default
+<FloatingMenu renderTrigger={(props) => <Button {...props}>Menu</Button>}>
+  <FloatingMenu.Item text="Action 1" />
+  <FloatingMenu.Item text="Action 2" />
+</FloatingMenu>
+```

@@ -1,0 +1,89 @@
+{
+  "nested": {
+    "defaultValue": null,
+    "description": "",
+    "name": "nested",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/floating-menu/floating-menu-inner.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "boolean"
+    }
+  },
+  "placement": {
+    "defaultValue": null,
+    "description": "",
+    "name": "placement",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/floating-menu/floating-menu-inner.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "enum",
+      "raw": "\"right-start\" | \"bottom-start\" | \"bottom-end\"",
+      "value": [
+        {
+          "value": "\"right-start\""
+        },
+        {
+          "value": "\"bottom-start\""
+        },
+        {
+          "value": "\"bottom-end\""
+        }
+      ]
+    }
+  },
+  "renderItem": {
+    "defaultValue": null,
+    "description": "",
+    "name": "renderItem",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/floating-menu/floating-menu-inner.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "(props: any) => ReactNode"
+    }
+  },
+  "renderTrigger": {
+    "defaultValue": null,
+    "description": "",
+    "name": "renderTrigger",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/floating-menu/floating-menu-inner.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "(refProps: any, opts: { isOpen: boolean; }) => ReactNode"
+    }
+  },
+  "contextTrigger": {
+    "defaultValue": null,
+    "description": "",
+    "name": "contextTrigger",
+    "declarations": [
+      {
+        "fileName": "tonylefler-web/app/common/floating-menu/floating-menu-inner.tsx",
+        "name": "TypeLiteral"
+      }
+    ],
+    "required": false,
+    "type": {
+      "name": "RefObject<HTMLElement>"
+    }
+  }
+}

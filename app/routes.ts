@@ -11,6 +11,7 @@ export default [
 
   layout("routes/root/layout.tsx", [
     route("components/button", "common/button/button-route.tsx"),
+    route("components/floating-menu", "common/floating-menu/floating-menu-route.tsx"),
     route("components/icon", "common/icon/icon-route.tsx"),
     route("components/loader", "common/loader/loader-route.tsx"),
   ]),

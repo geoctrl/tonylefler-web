@@ -29,8 +29,7 @@
           "value": "\"lg\""
         }
       ]
-    },
-    "docType": "\"xs\" | \"sm\" | \"md\" | \"lg\""
+    }
   },
   "intent": {
     "defaultValue": {
@@ -65,7 +64,6 @@
           "value": "\"onColor\""
         }
       ]
-    },
-    "docType": "\"primary\" | \"primaryReverse\" | \"grey\" | \"greyReverse\" | \"onColor\""
+    }
   }
 }
