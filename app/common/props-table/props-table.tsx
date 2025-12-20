@@ -43,6 +43,9 @@ export function PropsTable({ props }: PropsTableProps) {
               Default
             </th>
             <th className="px-4 py-3 text-left text-sm font-semibold">
+              Required
+            </th>
+            <th className="px-4 py-3 text-left text-sm font-semibold">
               Description
             </th>
           </tr>
@@ -54,14 +57,7 @@ export function PropsTable({ props }: PropsTableProps) {
               className="border-grey-200 dark:border-grey-800 border-b"
             >
               <td className="px-4 py-3">
-                <code>
-                  {prop.name}
-                  {prop.required && (
-                    <span className="ml-1 text-red-500" title="Required">
-                      *
-                    </span>
-                  )}
-                </code>
+                <code>{prop.name}</code>
               </td>
               <td className="px-4 py-3">
                 <code className="text-grey-700 dark:text-grey-300 text-xs">
@@ -73,6 +69,13 @@ export function PropsTable({ props }: PropsTableProps) {
                   <code className="bg-grey-100 dark:bg-grey-800 rounded px-2 py-1 text-xs">
                     {prop.default}
                   </code>
+                ) : (
+                  <span className="text-grey-400 dark:text-grey-600">—</span>
+                )}
+              </td>
+              <td className="px-4 py-3 text-center text-sm">
+                {prop.required ? (
+                  <span className="text-danger-500">Yes</span>
                 ) : (
                   <span className="text-grey-400 dark:text-grey-600">—</span>
                 )}

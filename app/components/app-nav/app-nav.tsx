@@ -20,6 +20,8 @@ const navCategories = [
       { title: "Button", path: "/components/button" },
       { title: "Floating Menu", path: "/components/floating-menu" },
       { title: "Icon", path: "/components/icon" },
+      { title: "Input", path: "/components/input" },
+      { title: "Input Field", path: "/components/input-field" },
       { title: "Loader", path: "/components/loader" },
     ],
   },

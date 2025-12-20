@@ -1,50 +1,49 @@
 import { always } from "../../utils/classname-helpers";
-import { formSizes } from "../../types/form-sizes";
 import { tv } from "tailwind-variants";
 
 export const buttonVariants = tv({
-  base: "relative inline-flex shrink-0 cursor-pointer items-center rounded-lg align-middle text-[1rem] font-medium whitespace-nowrap no-underline select-none transition-[box-shadow] duration-200",
+  base: "relative inline-flex shrink-0 cursor-pointer items-center form-radius-md align-middle text-[1rem] font-medium whitespace-nowrap no-underline select-none transition-[box-shadow] duration-200",
   variants: {
     intent: {
       primary: always(
         "bg-primary-500 text-grey-10 hover:bg-primary-700 active:bg-primary-800",
-        "focus:shadow-none focus:outline-none",
-        "focus:ring-primary-500/50 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-primary-500/50 dark:focus:shadow-none dark:focus:ring-3",
+        "form-focus",
+        "focus:ring-primary-500/50",
+        "dark:focus:ring-primary-500/50",
       ),
       secondary: always(
         "bg-grey-900/10 text-grey-900 hover:bg-grey-900/20 active:bg-grey-900/30",
         "dark:bg-grey-100/10 dark:text-grey-10 dark:hover:bg-grey-100/20 active:dark:bg-grey-100/30 dark:focus:border-grey-400",
-        "focus:shadow-none focus:outline-none",
-        "focus:ring-grey-990/20 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-grey-10/30 dark:focus:shadow-none dark:focus:ring-3",
+        "form-focus",
+        "focus:ring-grey-990/20",
+        "dark:focus:ring-grey-10/30",
       ),
       secondaryColor: always(
         "bg-primary-500/10 text-primary-500 dark:text-primary-300 hover:bg-primary-500/20 active:bg-primary-500/25",
-        "focus:shadow-none focus:outline-none",
-        "focus:ring-grey-990/20 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-grey-10/30 dark:focus:shadow-none dark:focus:ring-3",
+        "form-focus",
+        "focus:ring-grey-990/20",
+        "dark:focus:ring-grey-10/30",
       ),
       outline: always(
         "border-grey-900/30 hover:bg-grey-500/10 active:bg-grey-500/15 dark:text-grey-100 border border-solid",
-        "focus:shadow-none focus:outline-none",
+        "form-focus",
         "dark:border-grey-100/50 dark:text-grey-100 dark:hover:bg-grey-100/10 dark:active:bg-grey-100/15",
-        "focus:ring-grey-990/20 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-grey-10/30 dark:focus:shadow-none dark:focus:ring-3",
+        "focus:ring-grey-990/20",
+        "dark:focus:ring-grey-10/30",
       ),
       tertiary: always(
-        "text-grey-900 focus:shadow-none focus:outline-none",
+        "text-grey-900 form-focus",
         "hover:bg-grey-500/10 active:bg-grey-500/15",
         "dark:text-grey-100 dark:hover:bg-grey-100/10 dark:active:bg-grey-100/15",
-        "focus:ring-grey-990/20 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-grey-10/30 dark:focus:shadow-none dark:focus:ring-3",
+        "focus:ring-grey-990/20",
+        "dark:focus:ring-grey-10/30",
       ),
       tertiaryReverse: always(
         "text-grey-100 active:bg-grey-100/15 hover:bg-grey-100/10",
-        "focus:shadow-none focus:outline-none",
+        "form-focus",
         "dark:text-grey-900 dark:active:bg-grey-500/15 dark:hover:bg-grey-500/10",
-        "focus:ring-grey-10/30 focus:shadow-none focus:ring-3",
-        "dark:focus:ring-grey-990/20 dark:focus:shadow-none dark:focus:ring-3",
+        "focus:ring-grey-10/30",
+        "dark:focus:ring-grey-990/20",
       ),
       listItem: always(
         "text-grey-900 focus:bg-grey-500/15 active:bg-grey-500/15 rounded-none",
@@ -55,9 +54,9 @@ export const buttonVariants = tv({
       ),
     },
     formSize: {
-      sm: `${formSizes.sm.h} gap-1.5 px-2.5 text-sm`,
-      md: `${formSizes.md.h} gap-2 px-3`,
-      lg: `${formSizes.lg.h} gap-3 px-4 text-lg`,
+      sm: `form-h-sm gap-1.5 form-px-sm form-text-sm`,
+      md: `form-h-md gap-2 form-px-md`,
+      lg: `form-h-lg gap-3 form-px-lg form-text-lg`,
     },
     alignContent: {
       left: "justify-start",
@@ -82,9 +81,9 @@ export const buttonVariants = tv({
     { intent: "listItem", formSize: "md", class: "px-4" },
 
     // icon only width
-    { formSize: "sm", iconOnly: true, class: `size-8 p-0` },
-    { formSize: "md", iconOnly: true, class: `size-10 p-0` },
-    { formSize: "lg", iconOnly: true, class: `size-12 p-0` },
+    { formSize: "sm", iconOnly: true, class: `form-h-sm w-8 p-0` },
+    { formSize: "md", iconOnly: true, class: `form-h-md w-10 p-0` },
+    { formSize: "lg", iconOnly: true, class: `form-h-lg w-12 p-0` },
     // isActive
     {
       intent: "primary",

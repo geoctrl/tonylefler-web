@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-import spriteHref from "/icons.svg";
+import spriteHref from "/icons.svg?v=2";
 import { Icons } from "../../types/icons";
 
 export type IconProps = ComponentProps<"svg"> & {

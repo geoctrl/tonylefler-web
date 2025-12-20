@@ -1,19 +1,9 @@
-import React, { ReactNode, CSSProperties } from "react";
+import { ComponentProps } from "react";
 import { tv } from "tailwind-variants";
+import { always } from "../../utils/classname-helpers";
 
-export type BadgeProps = {
-  children?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-  intent?:
-    | "important"
-    | "success"
-    | "info"
-    | "notice"
-    | "important-solid"
-    | "success-solid"
-    | "info-solid"
-    | "notice-solid";
+export type BadgeProps = ComponentProps<"div"> & {
+  intent?: "success" | "grey" | "primary" | "danger" | "warning" | "info";
   size?: "sm" | "md" | "lg";
   circle?: boolean;
   round?: boolean;
@@ -24,36 +14,35 @@ export function Badge(props: BadgeProps) {
     children,
     className,
     circle,
-    round,
-    style,
     size = "md",
-    intent = "info",
+    intent = "grey",
+    ...rest
   } = props;
   return (
     <div
       className={tv({
-        base: "inline-flex items-center rounded-md border px-1.5",
+        base: always(
+          "inline-flex items-center rounded-full px-2 py-1 text-xs",
+          className,
+        ),
         variants: {
           intent: {
-            info: "border-info-500 bg-info-500/20 text-info-500",
-            success: "border-success-500 bg-success-500/20 text-success-500",
-            notice: "border-notice-500 bg-notice-500/20 text-notice-500",
-            important:
-              "border-important-500 bg-important-500/20 text-important-500",
-            "info-solid":
-              "border-none bg-info-500 text-grey-10 dark:bg-info-800",
-            "success-solid":
-              "border-none bg-success-500 text-grey-10 dark:bg-success-800",
-            "notice-solid":
-              "border-none bg-notice-500 text-grey-10 dark:bg-notice-800",
-            "important-solid":
-              "border-none bg-important-500 text-grey-10 dark:bg-important-800",
+            success:
+              "bg-success-100 text-success-700 dark:bg-success-900 dark:text-success-200",
+            grey: "bg-grey-100 text-grey-700 dark:bg-grey-800 dark:text-grey-200",
+            primary:
+              "bg-primary-100 text-primary-700 dark:bg-primary-800 dark:text-primary-200",
+            danger:
+              "bg-danger-100 text-danger-700 dark:bg-danger-900 dark:text-danger-200",
+            warning:
+              "bg-warning-100 text-warning-700 dark:bg-warning-800 dark:text-warning-200",
+            info: "bg-info-100 text-info-700 dark:bg-info-900 dark:text-info-200",
           },
           solid: {
-            true: "border-none text-grey-10",
+            true: "text-grey-10 border-none",
           },
           size: {
-            sm: "h-5 text-[10px] leading-none",
+            sm: "h-5 text-xs leading-none",
             md: "h-6 text-xs leading-none",
             lg: "h-7 text-sm leading-none",
           },
@@ -79,6 +68,7 @@ export function Badge(props: BadgeProps) {
           },
         ],
       })({ intent, size, circle })}
+      {...rest}
     >
       {children}
     </div>

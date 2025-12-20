@@ -52,6 +52,9 @@ export default defineConfig(async () => {
     },
     server: {
       port: 3000,
+      watch: {
+        ignored: ['!**/icons/**'],
+      },
     },
     clearScreen: false,
   };

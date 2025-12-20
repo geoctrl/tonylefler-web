@@ -46,7 +46,7 @@ export default [
 ] satisfies RouteConfig;
 ```
 
-**Important:** Routes are NOT auto-discovered. Must explicitly add to `app/routes.ts`.
+**danger:** Routes are NOT auto-discovered. Must explicitly add to `app/routes.ts`.
 
 ### Styling
 

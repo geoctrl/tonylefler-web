@@ -1,0 +1,440 @@
+import { InputField } from "./input-field";
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { useForm } from "react-hook-form";
+import { Button } from "../button/button";
+
+export const meta = {
+  title: 'Input Field',
+  category: 'components',
+  order: 4
+};
+
+# Input Field
+
+A React Hook Form wrapper around the Input component that automatically handles form state, validation, and error display.
+
+## Import
+
+```tsx
+import { InputField } from "root";
+```
+
+## Basic Usage
+
+`InputField` integrates with React Hook Form's `useForm` hook. Like Input, it's a `block` element with full width.
+
+export function BasicFormExample() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data, null, 2));
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <InputField
+        control={control}
+        fieldName="email"
+        label="Email"
+        placeholder="you@example.com"
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+
+<Example>
+  <BasicFormExample />
+</Example>
+
+```tsx
+import { useForm } from "react-hook-form";
+import { InputField, Button } from "root";
+
+function BasicForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <InputField
+        control={control}
+        fieldName="email"
+        label="Email"
+        placeholder="you@example.com"
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+```
+
+## Props
+
+`<InputField>` accepts all `<Input>` props except `value` (managed by React Hook Form) plus:
+
+<PropsTable props={[
+  {
+    name: "control",
+    type: "Control<any>",
+    description: "React Hook Form control object from useForm()",
+    required: true,
+  },
+  {
+    name: "fieldName",
+    type: "string",
+    description: "Name of the field in the form (used for registration)",
+    required: true,
+  },
+]} />
+
+All other props from `<Input>` are supported (formSize, label, iconLeft, iconRight, etc.).
+
+## With Validation
+
+React Hook Form validation rules are automatically connected to error display.
+
+export function ValidationExample() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      username: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data, null, 2));
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <InputField
+        control={control}
+        fieldName="email"
+        label="Email"
+        placeholder="you@example.com"
+        type="email"
+        rules={{
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        }}
+      />
+      <InputField
+        control={control}
+        fieldName="username"
+        label="Username"
+        placeholder="johndoe"
+        iconLeft="user"
+        rules={{
+          required: "Username is required",
+          minLength: {
+            value: 3,
+            message: "Username must be at least 3 characters",
+          },
+        }}
+      />
+      <InputField
+        control={control}
+        fieldName="password"
+        label="Password"
+        type="password"
+        placeholder="Enter password"
+        rules={{
+          required: "Password is required",
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters",
+          },
+        }}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+
+<Example>
+  <ValidationExample />
+</Example>
+
+```tsx
+import { useForm } from "react-hook-form";
+import { InputField, Button } from "root";
+
+function ValidationForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <InputField
+        control={control}
+        fieldName="email"
+        label="Email"
+        rules={{
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        }}
+      />
+      <InputField
+        control={control}
+        fieldName="password"
+        label="Password"
+        type="password"
+        rules={{
+          required: "Password is required",
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters",
+          },
+        }}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+```
+
+## Custom Validation
+
+Use custom validation functions for complex rules.
+
+export function CustomValidationExample() {
+  const { control, handleSubmit, watch } = useForm({
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const password = watch("password");
+
+  const onSubmit = (data) => {
+    alert("Passwords match!");
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <InputField
+        control={control}
+        fieldName="password"
+        label="Password"
+        type="password"
+        rules={{
+          required: "Password is required",
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters",
+          },
+        }}
+      />
+      <InputField
+        control={control}
+        fieldName="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        rules={{
+          required: "Please confirm your password",
+          validate: (value) =>
+            value === password || "Passwords do not match",
+        }}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+
+<Example>
+  <CustomValidationExample />
+</Example>
+
+```tsx
+function CustomValidationForm() {
+  const { control, handleSubmit, watch } = useForm({
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const password = watch("password");
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <InputField
+        control={control}
+        fieldName="password"
+        label="Password"
+        type="password"
+        rules={{ required: "Password is required" }}
+      />
+      <InputField
+        control={control}
+        fieldName="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        rules={{
+          validate: (value) =>
+            value === password || "Passwords do not match",
+        }}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+```
+
+## With Icons and Sizes
+
+All `Input` props work with `InputField`.
+
+export function IconsAndSizesExample() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      search: "",
+      email: "",
+      website: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data, null, 2));
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <InputField
+        control={control}
+        fieldName="search"
+        formSize="sm"
+        iconLeft="magnifying-glass"
+        placeholder="Small search input"
+      />
+      <InputField
+        control={control}
+        fieldName="email"
+        formSize="md"
+        iconLeft="user"
+        placeholder="Medium email input"
+        type="email"
+      />
+      <InputField
+        control={control}
+        fieldName="website"
+        formSize="lg"
+        iconLeft="house"
+        placeholder="Large website input"
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+
+<Example>
+  <IconsAndSizesExample />
+</Example>
+
+```tsx
+<InputField
+  control={control}
+  fieldName="search"
+  formSize="sm"
+  iconLeft="magnifying-glass"
+  placeholder="Search"
+/>
+```
+
+## onChangeValue Callback
+
+Use `onChangeValue` to react to changes while maintaining form state.
+
+export function OnChangeValueExample() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      username: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data, null, 2));
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <InputField
+        control={control}
+        fieldName="username"
+        label="Username"
+        placeholder="Enter username"
+        onChangeValue={(val) => {
+          console.log("Current value:", val);
+        }}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+
+<Example>
+  <OnChangeValueExample />
+</Example>
+
+```tsx
+<InputField
+  control={control}
+  fieldName="username"
+  label="Username"
+  onChangeValue={(val) => {
+    console.log("Current value:", val);
+  }}
+/>
+```
+
+## Why Use InputField?
+
+**InputField** vs **Input**:
+
+- **Automatic state management** - No need for `value` and `onChange`
+- **Built-in validation** - React Hook Form rules integration
+- **Error display** - Validation errors automatically shown
+- **Form integration** - Seamless `useForm()` connection
+- **Less boilerplate** - Fewer props to manage
+
+Use `Input` for simple, non-form inputs. Use `InputField` for form fields with validation.
+
+## Accessibility
+
+InputField inherits all accessibility features from Input:
+
+- Proper label association
+- Error announcements
+- Focus management
+- ARIA attributes support
+
+React Hook Form also provides additional accessibility features like focus management on validation errors.

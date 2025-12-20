@@ -26,6 +26,8 @@ export const iconNames = [
   "file-lines",
   "file-export",
   "file-excel",
+  "eye",
+  "eye-slash",
   "download",
   "copy",
   "caret-down",

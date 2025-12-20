@@ -23,6 +23,12 @@ type Pages = {
   "/components/icon": {
     params: {};
   };
+  "/components/input": {
+    params: {};
+  };
+  "/components/input-field": {
+    params: {};
+  };
   "/components/loader": {
     params: {};
   };
@@ -31,7 +37,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/loader";
+    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -39,7 +45,7 @@ type RouteFiles = {
   };
   "routes/root/layout.tsx": {
     id: "routes/root/layout";
-    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/loader";
+    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader";
   };
   "common/button/button-route.tsx": {
     id: "common/button/button-route";
@@ -52,6 +58,14 @@ type RouteFiles = {
   "common/icon/icon-route.tsx": {
     id: "common/icon/icon-route";
     page: "/components/icon";
+  };
+  "common/input/input-route.tsx": {
+    id: "common/input/input-route";
+    page: "/components/input";
+  };
+  "common/input/input-field-route.tsx": {
+    id: "common/input/input-field-route";
+    page: "/components/input-field";
   };
   "common/loader/loader-route.tsx": {
     id: "common/loader/loader-route";
@@ -66,5 +80,7 @@ type RouteModules = {
   "common/button/button-route": typeof import("./app/common/button/button-route.tsx");
   "common/floating-menu/floating-menu-route": typeof import("./app/common/floating-menu/floating-menu-route.tsx");
   "common/icon/icon-route": typeof import("./app/common/icon/icon-route.tsx");
+  "common/input/input-route": typeof import("./app/common/input/input-route.tsx");
+  "common/input/input-field-route": typeof import("./app/common/input/input-field-route.tsx");
   "common/loader/loader-route": typeof import("./app/common/loader/loader-route.tsx");
 };

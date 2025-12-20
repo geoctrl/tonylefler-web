@@ -1,0 +1,360 @@
+import { Input } from "./input";
+import { Button } from "../button/button";
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { useState } from "react";
+
+export const meta = {
+  title: 'Input',
+  category: 'components',
+  order: 3
+};
+
+# Input
+
+A flexible text input component with support for labels, icons, validation errors, and multiple sizes.
+
+## Import
+
+```tsx
+import { Input } from "root";
+```
+
+## Basic Usage
+
+Input is a `block` element with full width.
+
+<Example>
+  <Input placeholder="Enter text..." />
+</Example>
+
+```tsx
+<Input placeholder="Enter text..." />
+```
+
+For custom width or inline layouts, use `wrapperProps`:
+
+<Example>
+  <div className="flex items-center gap-2">
+    <span>Show</span>
+    <Input placeholder="10" wrapperProps={{ className: "w-20" }} />
+    <span>items per page</span>
+  </div>
+</Example>
+
+```tsx
+<div className="flex items-center gap-2">
+  <span>Show</span>
+  <Input placeholder="10" wrapperProps={{ className: "w-20" }} />
+  <span>items per page</span>
+</div>
+```
+
+## Props
+
+`<Input>` accepts all HTML input attributes and the following:
+
+<PropsTable props={[
+  {
+    name: "formSize",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the input field",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "label",
+    type: "string | ReactNode",
+    description: "Label text displayed above the input",
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the left side",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the right side",
+    required: false,
+  },
+  {
+    name: "iconRightAllowClick",
+    type: "boolean",
+    description: "Allows the right icon to be clickable (e.g., password toggle)",
+    default: "false",
+    required: false,
+  },
+  {
+    name: "error",
+    type: "string | ReactNode",
+    description: "Error message to display below the input",
+    required: false,
+  },
+  {
+    name: "fieldError",
+    type: "FieldError",
+    description: "React Hook Form field error object",
+    required: false,
+  },
+  {
+    name: "onChangeValue",
+    type: "(value: string) => void",
+    description: "Callback that receives just the input value (not the event)",
+    required: false,
+  },
+  {
+    name: "wrapperProps",
+    type: `ComponentProps<"div">`,
+    description: "Props to apply to the wrapper div",
+    required: false,
+  },
+]} />
+
+## Form Size
+
+Basic scaling for form elements. Follows the `form-size` utility class convention.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Input formSize="sm" placeholder="Small input" />
+    <Input formSize="md" placeholder="Medium input" />
+    <Input formSize="lg" placeholder="Large input" />
+  </div>
+</Example>
+
+```tsx
+<Input formSize="sm" placeholder="Small input" />
+<Input formSize="md" placeholder="Medium input" />
+<Input formSize="lg" placeholder="Large input" />
+```
+
+## With Label
+
+Display a label above the input using the `label` prop.
+
+<Example>
+  <Input label="Email address" placeholder="you@example.com" type="email" />
+</Example>
+
+```tsx
+<Input label="Email address" placeholder="you@example.com" type="email" />
+```
+
+## With Icons
+
+### Left Icon
+
+<Example>
+  <Input iconLeft="magnifying-glass" placeholder="Search..." />
+</Example>
+
+```tsx
+<Input iconLeft="magnifying-glass" placeholder="Search..." />
+```
+
+### Right Icon
+
+<Example>
+  <Input iconRight="xmark" placeholder="Clear on right" />
+</Example>
+
+```tsx
+<Input iconRight="xmark" placeholder="Clear on right" />
+```
+
+### Both Icons
+
+<Example>
+  <Input
+    iconLeft="user"
+    iconRight="xmark"
+    placeholder="Username"
+  />
+</Example>
+
+```tsx
+<Input
+  iconLeft="user"
+  iconRight="xmark"
+  placeholder="Username"
+/>
+```
+
+## Interactive Right Icon
+
+Icons, by default, are non-clickable - allowing clicks to directly give focus to the input. Add `iconRightAllowClick` to
+allow clicks, useful for functionality that directly affects the input value - like a password visibility toggle.
+
+export function PasswordToggleExample() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+
+  return (
+    <Input
+      type={showPassword ? "text" : "password"}
+      iconRightAllowClick
+      iconRight={
+        <Button
+          formSize="sm"
+          intent="tertiary"
+          iconOnly={showPassword ? "eye" : "eye-slash"}
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        />
+      }
+      placeholder="Enter password"
+      value={password}
+      onChangeValue={setPassword}
+    />
+  );
+}
+
+<Example>
+  <PasswordToggleExample />
+</Example>
+
+```tsx
+function PasswordToggle() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+
+  return (
+    <Input
+      type={showPassword ? "text" : "password"}
+      iconRightAllowClick
+      iconRight={
+        <Button
+          formSize="sm"
+          intent="tertiary"
+          iconOnly={showPassword ? "eye" : "eye-slash"}
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        />
+      }
+      placeholder="Enter password"
+      value={password}
+      onChangeValue={setPassword}
+    />
+  );
+}
+```
+
+## Error States
+
+Display validation errors below the input using the `error` prop.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Input
+      label="Email"
+      placeholder="you@example.com"
+      error="This email is already taken"
+    />
+    <Input
+      label="Password"
+      type="password"
+      error="Password must be at least 8 characters"
+    />
+  </div>
+</Example>
+
+```tsx
+<Input
+  label="Email"
+  placeholder="you@example.com"
+  error="This email is already taken"
+/>
+
+<Input
+  label="Password"
+  type="password"
+  error="Password must be at least 8 characters"
+/>
+```
+
+## Disabled State
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Input disabled placeholder="Disabled input" />
+    <Input disabled value="Disabled with value" readOnly />
+  </div>
+</Example>
+
+```tsx
+<Input disabled placeholder="Disabled input" />
+<Input disabled value="Disabled with value" readOnly />
+```
+
+## Required Fields
+
+Use the standard `required` prop to mark inputs as required.
+
+<Example>
+  <Input label="Name" placeholder="John Doe" required />
+</Example>
+
+```tsx
+<Input label="Name" placeholder="John Doe" required />
+```
+
+## Controlled Input
+
+Use `value` and `onChangeValue` for controlled inputs.
+
+export function ControlledExample() {
+  const [value, setValue] = useState("");
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Input
+        label="Username"
+        value={value}
+        onChangeValue={setValue}
+        placeholder="Enter username"
+      />
+      <p className="text-sm text-grey-600">Current value: {value || "(empty)"}</p>
+    </div>
+  );
+}
+
+<Example>
+  <ControlledExample />
+</Example>
+
+```tsx
+function ControlledExample() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Input
+      label="Username"
+      value={value}
+      onChangeValue={setValue}
+      placeholder="Enter username"
+    />
+  );
+}
+```
+
+## Accessibility
+
+The Input component includes built-in accessibility features:
+
+- Proper label association with `htmlFor` and `id`
+- Error announcements via Badge component
+- Focus states with visible ring
+- Disabled state handling
+- Support for `required` and `aria-*` attributes
+
+```tsx
+<Input
+  id="email"
+  label="Email"
+  required
+  aria-describedby="email-help"
+/>
+```

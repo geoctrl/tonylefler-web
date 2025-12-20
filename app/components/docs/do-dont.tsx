@@ -32,12 +32,12 @@ export function Do({ children, title }: BaseProps) {
  */
 export function Dont({ children, title }: BaseProps) {
   return (
-    <div className="not-prose border-important-500 bg-important-50 dark:border-important-700 dark:bg-important-900 my-4 rounded-lg border-2 p-4">
-      <div className="text-important-700 dark:text-grey-10 mb-2 flex items-center gap-2">
+    <div className="not-prose border-danger-500 bg-danger-50 dark:border-danger-700 dark:bg-danger-900 my-4 rounded-lg border-2 p-4">
+      <div className="text-danger-700 dark:text-grey-10 mb-2 flex items-center gap-2">
         <Icon name="xmark" className="h-5 w-5" />
         <span className="font-semibold">{title || "Don't"}</span>
       </div>
-      <div className="text-important-900 dark:text-grey-10 text-sm">
+      <div className="text-danger-900 dark:text-grey-10 text-sm">
         {children}
       </div>
     </div>
