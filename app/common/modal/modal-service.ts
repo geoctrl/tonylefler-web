@@ -1,13 +1,16 @@
-import React from "react";
+"use client";
+
+import { ComponentType, ReactNode, useEffect, useRef, useState } from "react";
 import { ulid } from "ulid";
 
 import { EventBus } from "../../utils/event-bus";
+import { useModal } from "./use-modal";
 
 type ModalEventOpen = {
   action: "modal_open";
   data: {
     id: string;
-    component: React.FC<any>;
+    component: ComponentType<any>;
     props: any;
     opts: ModalOpts;
     resolve: (result: any) => void;
@@ -33,6 +36,10 @@ type ModalEventUpdate = {
 export type ModalOpts = {
   id?: string;
   size?: "sm" | "md" | "lg";
+  expandHeight?: boolean;
+  position?: "center" | "top";
+  disableBackdropClick?: boolean;
+  modalType?: "modal" | "drawer";
 };
 
 class ModalService {
@@ -42,8 +49,12 @@ class ModalService {
   private modalStack: Map<string, { resolve: (result: any) => void }> =
     new Map();
 
+  async setup<T>(ModalComponent: ComponentType<T>, options: ModalOpts = {}) {
+    return (props?: T) => this.open(ModalComponent, props, options);
+  }
+
   async open<T>(
-    ModalComponent: React.FC<T>,
+    ModalComponent: ComponentType<T>,
     props?: T,
     options: ModalOpts = {},
   ): Promise<any> {
@@ -84,6 +95,17 @@ class ModalService {
     });
   }
 
+  create<T>(Component: ComponentType<T>, opts: ModalOpts = {}) {
+    const id = opts.id ?? ulid();
+    return {
+      id,
+      hook: () => useModal(Component, opts),
+      open: (props?: T) => this.open(Component, props, opts),
+      update: (props?: T) => this.updateProps(id, props),
+      close: (result?: any) => this.close(id, result),
+    };
+  }
+
   updateProps(id: string, props: any): void {
     this.eventBus.emit({
       action: "modal_update",
@@ -93,3 +115,41 @@ class ModalService {
 }
 
 export const modalService = new ModalService();
+
+export function Modal(
+  props: {
+    show: boolean;
+    onClose: () => void;
+    children?: ReactNode;
+  } & Omit<ModalOpts, "id">,
+) {
+  const { show, children, onClose, ...modalOpts } = props;
+  const modalIdRef = useRef(ulid());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modal = useModal(() => children, {
+    ...modalOpts,
+    id: modalIdRef.current,
+  });
+
+  useEffect(() => {
+    if (show && !isModalOpen) {
+      modal(props).then(() => {
+        onClose?.();
+        setIsModalOpen(false);
+      });
+      setIsModalOpen(true);
+    }
+    if (!show && isModalOpen) {
+      modalService.close(modalIdRef.current);
+      setIsModalOpen(false);
+    }
+  }, [
+    show,
+    props.size,
+    props.expandHeight,
+    props.position,
+    props.disableBackdropClick,
+  ]);
+
+  return null;
+}

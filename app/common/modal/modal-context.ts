@@ -1,7 +1,9 @@
 import { createContext, useContext } from "react";
 
 export const ModalContext = createContext({
-  closeModal: (result?: any) => {},
+  closeModal: (...args: unknown[]) => {
+    void args;
+  },
 });
 
 export const useModalContext = () => {

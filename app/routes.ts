@@ -16,5 +16,6 @@ export default [
     route("components/input", "common/input/input-route.tsx"),
     route("components/input-field", "common/input/input-field-route.tsx"),
     route("components/loader", "common/loader/loader-route.tsx"),
+    route("components/modal", "common/modal/modal-route.tsx"),
   ]),
 ] satisfies RouteConfig;

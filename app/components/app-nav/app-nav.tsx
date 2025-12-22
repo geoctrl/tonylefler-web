@@ -23,6 +23,7 @@ const navCategories = [
       { title: "Input", path: "/components/input" },
       { title: "Input Field", path: "/components/input-field" },
       { title: "Loader", path: "/components/loader" },
+      { title: "Modal", path: "/components/modal" },
     ],
   },
 ];

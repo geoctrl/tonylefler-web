@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-import { ModalOpts, modalService } from "./modal-service";
+import { useState, useEffect, ComponentType } from "react";
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -13,17 +11,19 @@ import {
   useRole,
 } from "@floating-ui/react";
 import { motion, AnimatePresence } from "motion/react";
+
+import { ModalOpts, modalService } from "./modal-service";
 import { ModalContext } from "./modal-context";
-import { always, maybe } from "../../utils/classname-helpers";
+import { always, maybe, toggle } from "../../utils/classname-helpers";
 
 type ModalState = {
   id: string;
-  component: React.FC<any>;
+  component: ComponentType<any>;
   opts: ModalOpts;
   props: any;
 };
 
-export const ModalEntry: React.FC = () => {
+export function ModalEntry() {
   const [modalStack, setModalStack] = useState<ModalState[]>([]);
 
   const currentModal = modalStack[modalStack.length - 1];
@@ -33,6 +33,7 @@ export const ModalEntry: React.FC = () => {
   const props = currentModal?.props;
   const id = currentModal?.id;
   const opts = currentModal?.opts;
+  const isDrawer = opts?.modalType === "drawer";
 
   const { refs, context } = useFloating({
     open: isOpen,
@@ -45,7 +46,10 @@ export const ModalEntry: React.FC = () => {
 
   const click = useClick(context);
   const role = useRole(context);
-  const dismiss = useDismiss(context, { outsidePressEvent: "mousedown" });
+  const dismiss = useDismiss(context, {
+    outsidePressEvent: "mousedown",
+    outsidePress: !opts?.disableBackdropClick,
+  });
 
   const { getFloatingProps } = useInteractions([click, role, dismiss]);
 
@@ -103,23 +107,61 @@ export const ModalEntry: React.FC = () => {
               exit={{ opacity: 0 }}
             >
               <FloatingOverlay
-                className="z-40 grid place-items-center bg-grey-990/50"
+                className={always(
+                  "bg-grey-990/30 dark:bg-grey-990/70 z-40 grid",
+                  toggle(
+                    isDrawer,
+                    always("place-items-end"),
+                    always(
+                      maybe(
+                        opts?.position === "center" || !opts?.position,
+                        "place-items-center",
+                      ),
+                      maybe(
+                        opts?.position === "top",
+                        "items-start justify-center",
+                      ),
+                    ),
+                  ),
+                )}
                 lockScroll
               >
                 <FloatingFocusManager context={context}>
                   <motion.div
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    initial={{ y: "-32px" }}
-                    animate={{ y: 0 }}
-                    exit={{ y: "-32px" }}
+                    initial={isDrawer ? { x: "100%" } : { y: "-32px" }}
+                    animate={isDrawer ? { x: 0 } : { y: 0 }}
+                    exit={isDrawer ? { x: "100%" } : { y: "-32px" }}
                     className={always(
-                      "relative mx-4 max-w-[calc(100vw-32px)] rounded-lg bg-grey-10 shadow-lg dark:bg-grey-800",
-                      maybe(opts?.size === "sm", "w-[300px]"),
-                      maybe(
-                        opts?.size === "md" || opts?.size === undefined,
-                        "w-[400px]",
+                      "bg-grey-10 relative flex flex-col shadow-lg",
+                      "dark:bg-grey-900",
+                      toggle(
+                        isDrawer,
+                        always(
+                          "app-border h-full border-l",
+                          maybe(opts?.size === "sm", "w-[300px]"),
+                          maybe(
+                            opts?.size === "md" || opts?.size === undefined,
+                            "w-[400px]",
+                          ),
+                          maybe(opts?.size === "lg", "w-[560px]"),
+                        ),
+                        always(
+                          "mx-4 max-w-[calc(100vw-24px)] rounded-lg",
+                          toggle(
+                            opts?.expandHeight,
+                            "h-[calc(100vh-24px)]",
+                            "max-h-[calc(100vh-24px)]",
+                          ),
+                          maybe(opts?.size === "sm", "w-[300px]"),
+                          maybe(
+                            opts?.size === "md" || opts?.size === undefined,
+                            "w-[400px]",
+                          ),
+                          maybe(opts?.size === "lg", "w-[560px]"),
+                          maybe(opts?.position === "top", "mt-3"),
+                        ),
                       ),
-                      maybe(opts?.size === "lg", "w-[560px]"),
                     )}
                     ref={refs.setFloating}
                     aria-labelledby={headingId}
@@ -139,4 +181,4 @@ export const ModalEntry: React.FC = () => {
       </FloatingPortal>
     </ModalContext.Provider>
   );
-};
+}

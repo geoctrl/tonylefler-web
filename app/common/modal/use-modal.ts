@@ -1,9 +1,14 @@
-import { FC, useCallback, useEffect, useRef } from "react";
+"use client";
+
+import { ComponentType, useCallback, useEffect, useRef } from "react";
 import { ulid } from "ulid";
 
 import { ModalOpts, modalService } from "./modal-service";
 
-export function useModal<T>(ModalComponent: FC<T>, opts: ModalOpts = {}) {
+export function useModal<T>(
+  ModalComponent: ComponentType<T>,
+  opts: ModalOpts = {},
+) {
   const modalId = useRef(opts?.id || ulid());
 
   useEffect(() => {
@@ -19,6 +24,6 @@ export function useModal<T>(ModalComponent: FC<T>, opts: ModalOpts = {}) {
         ...opts,
       });
     },
-    [ModalComponent],
+    [ModalComponent, opts],
   );
 }

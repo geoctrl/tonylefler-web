@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "root";
-import { ModalHeader } from "../../../common/modal/modal-header";
-import { ModalBody } from "../../../common/modal/modal-body";
-import { ModalFooter } from "../../../common/modal/modal-footer";
+import { ModalHeader } from "../../../common/modal/components/modal-header";
+import { ModalBody } from "../../../common/modal/components/modal-body";
+import { ModalFooter } from "../../../common/modal/components/modal-footer";
 import { useModalContext } from "../../../common/modal/modal-context";
 import { useModal } from "../../../hooks/use-modal";
 

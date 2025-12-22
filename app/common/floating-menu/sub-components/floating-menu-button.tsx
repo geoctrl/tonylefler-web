@@ -12,8 +12,8 @@ import {
 import { Icon } from "../../icon/icon";
 import { IconOrElement } from "../../../types/icons";
 import { FloatingMenuInner } from "../floating-menu-inner";
-import { RenderIconOrElement } from "../../icon/render-icon-or-element";
-import { always, toggle } from "../../../utils/classname-helpers";
+import { Button } from "../../button/button";
+import { always } from "../../../utils/classname-helpers";
 
 type Override<T, U> = Omit<T, keyof U> & U;
 
@@ -67,46 +67,43 @@ export const FloatingMenuButton = forwardRef<
     const tree = useFloatingTree();
     const isActive = item.index === menu.activeIndex;
     const selfRefs = useMergeRefs([item.ref, forwardedRef]);
-    const Wrapper: ComponentType<any> | string = as;
 
     function renderItem({
       refs,
       isSubMenu,
       ...itemProps
     }: Record<string, any>) {
+      const content = subtext ? (
+        <div className="flex flex-col items-start">
+          <div>{text}</div>
+          <div className="text-sm opacity-50">{subtext}</div>
+        </div>
+      ) : (
+        text
+      );
+
       return (
-        <Wrapper
-          {...props}
+        <Button
+          {...(props as any)}
           {...itemProps}
           ref={refs}
-          type="button"
-          className={always(
-            "text-grey-990 dark:text-grey-10 flex min-h-10 w-full min-w-40 items-center justify-between px-3 py-1 text-left no-underline focus:outline-none",
-            toggle(
-              props?.disabled,
-              "cursor-default opacity-50 focus:bg-transparent dark:focus:bg-transparent",
-              "focus:bg-grey-100 dark:focus:bg-grey-800",
-            ),
-          )}
-          role="menuitem"
+          as={as}
+          intent="listItem"
+          disabled={props?.disabled}
+          isActive={isActive}
+          alignContent="left"
+          iconLeft={!isSubMenu ? iconLeft : undefined}
+          iconRight={
+            isSubMenu ? (
+              <Icon className="sub-menu-icon" name="angle-right" />
+            ) : (
+              iconRight
+            )
+          }
+          className={always("min-w-40", props.className)}
         >
-          <div className="flex items-center gap-3">
-            {!!iconLeft && (
-              <RenderIconOrElement
-                iconOrElement={iconLeft}
-                className="size-4"
-              />
-            )}
-            <div>
-              <div>{text}</div>
-              {subtext && <div className="text-sm">{subtext}</div>}
-            </div>
-          </div>
-          {isSubMenu && <Icon className="sub-menu-icon" name="angle-right" />}
-          {!isSubMenu && !!iconRight && (
-            <RenderIconOrElement iconOrElement={iconRight} />
-          )}
-        </Wrapper>
+          {content}
+        </Button>
       );
     }
 

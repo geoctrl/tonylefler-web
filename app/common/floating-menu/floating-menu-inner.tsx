@@ -261,8 +261,9 @@ export const FloatingMenuInner = forwardRef<
                   <div
                     ref={refs.setFloating}
                     className={always(
-                      "bg-grey-10 shadow-lg/30 z-50 flex flex-col overflow-hidden rounded-md py-2 outline-0",
-                      "dark:bg-grey-850",
+                      "bg-grey-10 z-50 flex flex-col overflow-hidden rounded-md py-2 shadow-lg outline-0",
+                      "dark:bg-grey-800 shadow-xl",
+                      "border-grey-900 border",
                     )}
                     style={floatingStyles}
                     {...getFloatingProps()}

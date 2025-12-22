@@ -32,12 +32,15 @@ type Pages = {
   "/components/loader": {
     params: {};
   };
+  "/components/modal": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader";
+    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -45,7 +48,7 @@ type RouteFiles = {
   };
   "routes/root/layout.tsx": {
     id: "routes/root/layout";
-    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader";
+    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal";
   };
   "common/button/button-route.tsx": {
     id: "common/button/button-route";
@@ -71,6 +74,10 @@ type RouteFiles = {
     id: "common/loader/loader-route";
     page: "/components/loader";
   };
+  "common/modal/modal-route.tsx": {
+    id: "common/modal/modal-route";
+    page: "/components/modal";
+  };
 };
 
 type RouteModules = {
@@ -83,4 +90,5 @@ type RouteModules = {
   "common/input/input-route": typeof import("./app/common/input/input-route.tsx");
   "common/input/input-field-route": typeof import("./app/common/input/input-field-route.tsx");
   "common/loader/loader-route": typeof import("./app/common/loader/loader-route.tsx");
+  "common/modal/modal-route": typeof import("./app/common/modal/modal-route.tsx");
 };

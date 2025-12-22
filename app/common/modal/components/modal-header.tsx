@@ -1,12 +1,13 @@
-import React, { ReactNode, CSSProperties } from "react";
-import { Button } from "root";
-import { useModalContext } from "./modal-context";
-import { formSizes } from "../../types/form-sizes";
-import { always, toggle } from "../../utils/classname-helpers";
+import { ReactNode, CSSProperties } from "react";
+
+import { Button } from "../../button/button";
+import { useModalContext } from "../modal-context";
+import { formSizes } from "../../../types/form-sizes";
+import { always, toggle } from "../../../utils/classname-helpers";
 
 type ModalHeaderProps = {
   className?: string;
-  title: string;
+  title?: string | ReactNode;
   style?: CSSProperties;
   description?: string;
   actions?: ReactNode;
@@ -20,7 +21,7 @@ export function ModalHeader(props: ModalHeaderProps) {
     <>
       <div
         className={always(
-          `flex justify-between ${formSizes.sm.min_h} w-full gap-4 pl-4 pr-4 pt-4`,
+          `flex justify-between ${formSizes.sm.min_h} w-full shrink-0 gap-3 py-3 pr-3 pl-6`,
           toggle(!!description, "items-start", "items-center"),
         )}
       >
@@ -39,7 +40,6 @@ export function ModalHeader(props: ModalHeaderProps) {
               onClick={() => closeModal()}
               iconOnly="xmark"
               intent="tertiary"
-              formSize="sm"
             />
           )}
         </div>

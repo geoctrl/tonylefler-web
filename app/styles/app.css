@@ -143,6 +143,10 @@
     @apply border-grey-990/10 dark:border-grey-10/25;
   }
 
+  .app-border-subdued {
+    @apply border-grey-990/15 dark:border-grey-10/15;
+  }
+
   .app-bg {
     @apply bg-grey-10 dark:bg-grey-900;
   }
