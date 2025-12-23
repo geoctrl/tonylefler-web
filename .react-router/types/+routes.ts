@@ -35,12 +35,24 @@ type Pages = {
   "/components/modal": {
     params: {};
   };
+  "/components/textarea": {
+    params: {};
+  };
+  "/components/textarea-field": {
+    params: {};
+  };
+  "/components/toggle": {
+    params: {};
+  };
+  "/components/tooltip": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal";
+    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -48,7 +60,7 @@ type RouteFiles = {
   };
   "routes/root/layout.tsx": {
     id: "routes/root/layout";
-    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal";
+    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
   };
   "common/button/button-route.tsx": {
     id: "common/button/button-route";
@@ -78,6 +90,22 @@ type RouteFiles = {
     id: "common/modal/modal-route";
     page: "/components/modal";
   };
+  "common/textarea/textarea-route.tsx": {
+    id: "common/textarea/textarea-route";
+    page: "/components/textarea";
+  };
+  "common/textarea/textarea-field-route.tsx": {
+    id: "common/textarea/textarea-field-route";
+    page: "/components/textarea-field";
+  };
+  "common/toggle/toggle-route.tsx": {
+    id: "common/toggle/toggle-route";
+    page: "/components/toggle";
+  };
+  "common/tooltip/tooltip-route.tsx": {
+    id: "common/tooltip/tooltip-route";
+    page: "/components/tooltip";
+  };
 };
 
 type RouteModules = {
@@ -91,4 +119,8 @@ type RouteModules = {
   "common/input/input-field-route": typeof import("./app/common/input/input-field-route.tsx");
   "common/loader/loader-route": typeof import("./app/common/loader/loader-route.tsx");
   "common/modal/modal-route": typeof import("./app/common/modal/modal-route.tsx");
+  "common/textarea/textarea-route": typeof import("./app/common/textarea/textarea-route.tsx");
+  "common/textarea/textarea-field-route": typeof import("./app/common/textarea/textarea-field-route.tsx");
+  "common/toggle/toggle-route": typeof import("./app/common/toggle/toggle-route.tsx");
+  "common/tooltip/tooltip-route": typeof import("./app/common/tooltip/tooltip-route.tsx");
 };

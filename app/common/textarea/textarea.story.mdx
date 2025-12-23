@@ -1,0 +1,400 @@
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { Textarea } from "./textarea";
+import { useState } from "react";
+import { Button } from "../button/button";
+
+export const meta = {
+  title: 'Textarea',
+  category: 'components',
+  order: 10
+};
+
+# Textarea
+
+A multi-line text input with automatic height adjustment and icon support.
+
+## Import
+
+```tsx
+import { Textarea } from "root";
+```
+
+## Basic Usage
+
+Textarea is a `block` element with full width.
+
+<Example>
+  <Textarea placeholder="Enter your message..." />
+</Example>
+
+```tsx
+<Textarea placeholder="Enter your message..." />
+```
+
+## With Label
+
+<Example>
+  <Textarea
+    label="Message"
+    placeholder="Enter your message..."
+  />
+</Example>
+
+```tsx
+<Textarea
+  label="Message"
+  placeholder="Enter your message..."
+/>
+```
+
+## Sizes
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Textarea formSize="sm" placeholder="Small textarea" />
+    <Textarea formSize="md" placeholder="Medium textarea (default)" />
+    <Textarea formSize="lg" placeholder="Large textarea" />
+  </div>
+</Example>
+
+```tsx
+<Textarea formSize="sm" placeholder="Small" />
+<Textarea formSize="md" placeholder="Medium" /> {/* default */}
+<Textarea formSize="lg" placeholder="Large" />
+```
+
+## Auto Resize
+
+By default, textareas automatically resize to fit content:
+
+<Example>
+  {(() => {
+    function Demo() {
+      const [value, setValue] = useState("");
+      return (
+        <Textarea
+          value={value}
+          onChangeValue={setValue}
+          placeholder="Start typing... (auto-resizes)"
+          label="Auto-resize enabled (default)"
+        />
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<Textarea
+  autoResize={true} // default
+  placeholder="Grows with content"
+/>
+```
+
+## Min/Max Rows
+
+Control the minimum and maximum height:
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Textarea
+      minRows={4}
+      placeholder="Minimum 4 rows"
+      label="Min rows: 4"
+    />
+    <Textarea
+      minRows={2}
+      maxRows={6}
+      placeholder="2-6 rows, then scrolls"
+      label="Min: 2, Max: 6"
+    />
+  </div>
+</Example>
+
+```tsx
+<Textarea minRows={4} />
+<Textarea minRows={2} maxRows={6} />
+```
+
+## Disable Auto Resize
+
+<Example>
+  <Textarea
+    autoResize={false}
+    rows={4}
+    placeholder="Fixed height"
+    label="Auto-resize disabled"
+  />
+</Example>
+
+```tsx
+<Textarea
+  autoResize={false}
+  rows={4}
+  placeholder="Fixed height"
+/>
+```
+
+## With Icons
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Textarea
+      label="With left icon"
+      iconLeft="pencil"
+      placeholder="Enter text..."
+    />
+    <Textarea
+      label="With right icon"
+      iconRight="magnifying-glass"
+      placeholder="Search..."
+    />
+  </div>
+</Example>
+
+```tsx
+<Textarea iconLeft="pencil" placeholder="Enter text..." />
+<Textarea iconRight="magnifying-glass" placeholder="Search..." />
+```
+
+## Interactive Right Icon
+
+Pass a button component as `iconRight` for interactive icons:
+
+<Example>
+  {(() => {
+    function Demo() {
+      const [value, setValue] = useState("");
+      return (
+        <Textarea
+          label="Message"
+          value={value}
+          onChangeValue={setValue}
+          placeholder="Type something..."
+          iconRight={
+            <Button
+              formSize="sm"
+              intent="tertiary"
+              iconOnly="xmark"
+              onClick={() => setValue("")}
+            />
+          }
+          iconRightAllowClick
+        />
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<Textarea
+  iconRight={
+    <Button
+      formSize="sm"
+      intent="tertiary"
+      iconOnly="xmark"
+      onClick={() => setValue("")}
+    />
+  }
+  iconRightAllowClick
+/>
+```
+
+## Error State
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Textarea
+      label="Bio"
+      error="This field is required"
+      placeholder="Enter your bio..."
+    />
+    <Textarea
+      label="Description"
+      error="Must be at least 10 characters"
+      value="Too short"
+    />
+  </div>
+</Example>
+
+```tsx
+<Textarea
+  label="Bio"
+  error="This field is required"
+/>
+```
+
+## Disabled
+
+<Example>
+  <Textarea
+    label="Disabled textarea"
+    disabled
+    value="This textarea is disabled"
+  />
+</Example>
+
+```tsx
+<Textarea disabled value="..." />
+```
+
+## Custom Width
+
+Use `wrapperProps` to control the wrapper's width:
+
+<Example>
+  <div className="flex items-start gap-2">
+    <span className="mt-2">Description:</span>
+    <Textarea
+      placeholder="Enter description"
+      wrapperProps={{ className: "flex-1" }}
+      minRows={1}
+    />
+  </div>
+</Example>
+
+```tsx
+<Textarea
+  placeholder="Enter description"
+  wrapperProps={{ className: "w-1/2" }}
+/>
+```
+
+## Controlled
+
+<Example>
+  {(() => {
+    function Demo() {
+      const [value, setValue] = useState("");
+      return (
+        <div className="flex flex-col gap-2">
+          <Textarea
+            label="Controlled textarea"
+            value={value}
+            onChangeValue={setValue}
+            placeholder="Type something..."
+          />
+          <p className="text-sm opacity-50">
+            Character count: {value.length}
+          </p>
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+const [value, setValue] = useState("");
+
+<Textarea
+  value={value}
+  onChangeValue={setValue}
+/>
+```
+
+## Props
+
+<PropsTable props={[
+  {
+    name: "label",
+    type: "string | ReactNode",
+    description: "Label text displayed above the textarea",
+    required: false,
+  },
+  {
+    name: "formSize",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the textarea",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "autoResize",
+    type: "boolean",
+    description: "Automatically adjust height to fit content",
+    default: "true",
+    required: false,
+  },
+  {
+    name: "minRows",
+    type: "number",
+    description: "Minimum number of visible rows",
+    default: "2",
+    required: false,
+  },
+  {
+    name: "maxRows",
+    type: "number",
+    description: "Maximum number of visible rows before scrolling",
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the left side",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName | ReactElement",
+    description: "Icon or component displayed on the right side",
+    required: false,
+  },
+  {
+    name: "iconRightAllowClick",
+    type: "boolean",
+    description: "Allow clicking on the right icon (for interactive elements)",
+    default: "false",
+    required: false,
+  },
+  {
+    name: "error",
+    type: "string | ReactNode",
+    description: "Error message to display below the textarea",
+    required: false,
+  },
+  {
+    name: "fieldError",
+    type: "FieldError",
+    description: "React Hook Form field error object",
+    required: false,
+  },
+  {
+    name: "onChangeValue",
+    type: "(value: string) => void",
+    description: "Callback fired when the value changes (passes string directly)",
+    required: false,
+  },
+  {
+    name: "wrapperProps",
+    type: "HTMLAttributes<HTMLDivElement>",
+    description: "Props passed to the wrapper div element",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disable the textarea",
+    default: "false",
+    required: false,
+  },
+  {
+    name: "required",
+    type: "boolean",
+    description: "Mark the textarea as required",
+    default: "false",
+    required: false,
+  },
+]} />
+
+Textarea also accepts all standard HTML textarea attributes (`placeholder`, `rows`, `onChange`, etc.).
+
+## Accessibility
+
+- Uses semantic `<textarea>` element
+- Supports `label` for proper form accessibility
+- Keyboard navigation works as expected
+- Proper focus states with visible focus rings

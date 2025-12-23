@@ -1,0 +1,435 @@
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { TextareaField } from "./textarea-field";
+import { useForm } from "react-hook-form";
+import { Button } from "../button/button";
+
+export const meta = {
+  title: 'Textarea Field',
+  category: 'components',
+  order: 11
+};
+
+# Textarea Field
+
+A React Hook Form wrapper for Textarea with automatic validation and error handling.
+
+## Import
+
+```tsx
+import { TextareaField } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit } = useForm({
+        defaultValues: {
+          message: ""
+        }
+      });
+
+      const onSubmit = (data) => {
+        alert(JSON.stringify(data, null, 2));
+      };
+
+      return (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="message"
+            label="Message"
+            placeholder="Enter your message..."
+          />
+          <Button type="submit" intent="primary">
+            Submit
+          </Button>
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+import { useForm } from "react-hook-form";
+import { TextareaField } from "root";
+
+function MyForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      message: ""
+    }
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextareaField
+        control={control}
+        fieldName="message"
+        label="Message"
+        placeholder="Enter your message..."
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+```
+
+## With Validation
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit } = useForm({
+        defaultValues: {
+          bio: ""
+        }
+      });
+
+      const onSubmit = (data) => {
+        alert("Form submitted!\n\n" + JSON.stringify(data, null, 2));
+      };
+
+      return (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="bio"
+            label="Bio"
+            placeholder="Tell us about yourself..."
+            rules={{
+              required: "Bio is required",
+              minLength: {
+                value: 10,
+                message: "Bio must be at least 10 characters"
+              },
+              maxLength: {
+                value: 200,
+                message: "Bio must not exceed 200 characters"
+              }
+            }}
+          />
+          <Button type="submit" intent="primary">
+            Submit
+          </Button>
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<TextareaField
+  control={control}
+  fieldName="bio"
+  label="Bio"
+  rules={{
+    required: "Bio is required",
+    minLength: {
+      value: 10,
+      message: "Bio must be at least 10 characters"
+    },
+    maxLength: {
+      value: 200,
+      message: "Bio must not exceed 200 characters"
+    }
+  }}
+/>
+```
+
+## Custom Validation
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit, watch } = useForm({
+        defaultValues: {
+          feedback: ""
+        }
+      });
+
+      const feedback = watch("feedback");
+
+      const onSubmit = (data) => {
+        alert("Thank you for your feedback!\n\n" + data.feedback);
+      };
+
+      return (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="feedback"
+            label="Feedback"
+            placeholder="Share your thoughts..."
+            rules={{
+              validate: (value) => {
+                if (!value) return "Feedback is required";
+                if (value.length < 20) return "Please provide more detailed feedback (min 20 characters)";
+                if (value.split(" ").length < 5) return "Please use at least 5 words";
+                return true;
+              }
+            }}
+            minRows={3}
+          />
+          <p className="text-sm opacity-50">
+            Characters: {feedback.length}
+          </p>
+          <Button type="submit" intent="primary">
+            Submit Feedback
+          </Button>
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<TextareaField
+  control={control}
+  fieldName="feedback"
+  rules={{
+    validate: (value) => {
+      if (!value) return "Feedback is required";
+      if (value.length < 20) return "Min 20 characters";
+      if (value.split(" ").length < 5) return "Min 5 words";
+      return true;
+    }
+  }}
+/>
+```
+
+## With Auto-Resize Limits
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit } = useForm({
+        defaultValues: {
+          notes: ""
+        }
+      });
+
+      const onSubmit = (data) => {
+        alert(JSON.stringify(data, null, 2));
+      };
+
+      return (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="notes"
+            label="Notes"
+            placeholder="Add your notes (2-6 rows)"
+            minRows={2}
+            maxRows={6}
+          />
+          <Button type="submit" intent="primary">
+            Save Notes
+          </Button>
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<TextareaField
+  control={control}
+  fieldName="notes"
+  minRows={2}
+  maxRows={6}
+/>
+```
+
+## Different Sizes
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit } = useForm({
+        defaultValues: {
+          small: "",
+          medium: "",
+          large: ""
+        }
+      });
+
+      return (
+        <form className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="small"
+            label="Small"
+            formSize="sm"
+            placeholder="Small textarea"
+          />
+          <TextareaField
+            control={control}
+            fieldName="medium"
+            label="Medium (default)"
+            formSize="md"
+            placeholder="Medium textarea"
+          />
+          <TextareaField
+            control={control}
+            fieldName="large"
+            label="Large"
+            formSize="lg"
+            placeholder="Large textarea"
+          />
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<TextareaField control={control} fieldName="..." formSize="sm" />
+<TextareaField control={control} fieldName="..." formSize="md" />
+<TextareaField control={control} fieldName="..." formSize="lg" />
+```
+
+## With Icons
+
+<Example>
+  {(() => {
+    function Demo() {
+      const { control, handleSubmit } = useForm({
+        defaultValues: {
+          comment: ""
+        }
+      });
+
+      return (
+        <form className="flex flex-col gap-4">
+          <TextareaField
+            control={control}
+            fieldName="comment"
+            label="Comment"
+            placeholder="Add a comment..."
+            iconLeft="pencil"
+          />
+        </form>
+      );
+    }
+    return <Demo />;
+  })()}
+</Example>
+
+```tsx
+<TextareaField
+  control={control}
+  fieldName="comment"
+  iconLeft="pencil"
+/>
+```
+
+## Props
+
+<PropsTable props={[
+  {
+    name: "control",
+    type: "Control<any>",
+    description: "React Hook Form control object",
+    required: true,
+  },
+  {
+    name: "fieldName",
+    type: "string",
+    description: "Name of the form field",
+    required: true,
+  },
+  {
+    name: "rules",
+    type: "ValidationRules",
+    description: "React Hook Form validation rules",
+    required: false,
+  },
+  {
+    name: "label",
+    type: "string | ReactNode",
+    description: "Label text displayed above the textarea",
+    required: false,
+  },
+  {
+    name: "formSize",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the textarea",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "autoResize",
+    type: "boolean",
+    description: "Automatically adjust height to fit content",
+    default: "true",
+    required: false,
+  },
+  {
+    name: "minRows",
+    type: "number",
+    description: "Minimum number of visible rows",
+    default: "2",
+    required: false,
+  },
+  {
+    name: "maxRows",
+    type: "number",
+    description: "Maximum number of visible rows before scrolling",
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName | ReactElement",
+    description: "Icon displayed on the left side",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName | ReactElement",
+    description: "Icon or component displayed on the right side",
+    required: false,
+  },
+  {
+    name: "onChangeValue",
+    type: "(value: string) => void",
+    description: "Additional callback fired when the value changes",
+    required: false,
+  },
+  {
+    name: "wrapperProps",
+    type: "HTMLAttributes<HTMLDivElement>",
+    description: "Props passed to the wrapper div element",
+    required: false,
+  },
+]} />
+
+TextareaField also accepts all Textarea props except `value`, `fieldError`, and `error` (which are managed by React Hook Form).
+
+## Validation Rules
+
+React Hook Form provides several built-in validation rules:
+
+```tsx
+rules={{
+  required: "This field is required",
+  minLength: { value: 10, message: "Min 10 characters" },
+  maxLength: { value: 200, message: "Max 200 characters" },
+  pattern: { value: /^[A-Za-z]+$/, message: "Letters only" },
+  validate: (value) => value.length >= 5 || "Custom validation failed"
+}}
+```
+
+## Accessibility
+
+- Inherits all accessibility features from Textarea
+- Automatic error message association with `aria-describedby`
+- Proper validation state communication
+- Keyboard navigation fully supported

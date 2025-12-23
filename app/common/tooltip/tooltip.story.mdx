@@ -1,0 +1,289 @@
+import { PropsTable } from "../props-table/props-table";
+import { Example } from "../../components/docs";
+import { Tooltip } from "./tooltip";
+import { Button } from "../button/button";
+
+export const meta = {
+  title: 'Tooltip',
+  category: 'components',
+  order: 13
+};
+
+# Tooltip
+
+A floating tooltip that displays contextual information on hover or focus.
+
+## Import
+
+```tsx
+import { Tooltip } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <Tooltip renderTrigger={(refProps) => (
+    <Button {...refProps}>Hover me</Button>
+  )}>
+    This is a helpful tooltip
+  </Tooltip>
+</Example>
+
+```tsx
+<Tooltip renderTrigger={(refProps) => (
+  <Button {...refProps}>Hover me</Button>
+)}>
+  This is a helpful tooltip
+</Tooltip>
+```
+
+## Placement
+
+<Example>
+  <div className="flex flex-wrap items-center justify-center gap-4">
+    <Tooltip
+      placement="top"
+      renderTrigger={(refProps) => (
+        <Button {...refProps}>Top</Button>
+      )}
+    >
+      Tooltip on top
+    </Tooltip>
+    <Tooltip
+      placement="bottom"
+      renderTrigger={(refProps) => (
+        <Button {...refProps}>Bottom</Button>
+      )}
+    >
+      Tooltip on bottom
+    </Tooltip>
+    <Tooltip
+      placement="left"
+      renderTrigger={(refProps) => (
+        <Button {...refProps}>Left</Button>
+      )}
+    >
+      Tooltip on left
+    </Tooltip>
+    <Tooltip
+      placement="right"
+      renderTrigger={(refProps) => (
+        <Button {...refProps}>Right</Button>
+      )}
+    >
+      Tooltip on right
+    </Tooltip>
+  </div>
+</Example>
+
+```tsx
+<Tooltip placement="top" renderTrigger={...}>Top</Tooltip>
+<Tooltip placement="bottom" renderTrigger={...}>Bottom</Tooltip>
+<Tooltip placement="left" renderTrigger={...}>Left</Tooltip>
+<Tooltip placement="right" renderTrigger={...}>Right</Tooltip>
+```
+
+## With Icons
+
+<Example>
+  <div className="flex flex-wrap items-center gap-4">
+    <Tooltip renderTrigger={(refProps) => (
+      <Button {...refProps} iconOnly="gear" intent="tertiary" />
+    )}>
+      Settings
+    </Tooltip>
+    <Tooltip renderTrigger={(refProps) => (
+      <Button {...refProps} iconOnly="trash-can" intent="tertiary" />
+    )}>
+      Delete item
+    </Tooltip>
+    <Tooltip renderTrigger={(refProps) => (
+      <Button {...refProps} iconOnly="copy" intent="tertiary" />
+    )}>
+      Copy to clipboard
+    </Tooltip>
+  </div>
+</Example>
+
+```tsx
+<Tooltip renderTrigger={(refProps) => (
+  <Button {...refProps} iconOnly="gear" />
+)}>
+  Settings
+</Tooltip>
+```
+
+## With Any Element
+
+<Example>
+  <div className="flex flex-wrap items-center gap-4">
+    <Tooltip renderTrigger={(refProps) => (
+      <span {...refProps} className="cursor-help underline decoration-dotted">
+        Hover for info
+      </span>
+    )}>
+      This provides additional context
+    </Tooltip>
+    <Tooltip renderTrigger={(refProps) => (
+      <div {...refProps} className="inline-flex size-6 cursor-help items-center justify-center rounded-full bg-primary-500 text-xs text-white">
+        ?
+      </div>
+    )}>
+      Need help? Click for documentation
+    </Tooltip>
+  </div>
+</Example>
+
+```tsx
+<Tooltip renderTrigger={(refProps) => (
+  <span {...refProps} className="cursor-help underline">
+    Hover for info
+  </span>
+)}>
+  Additional context here
+</Tooltip>
+```
+
+## Long Content
+
+<Example>
+  <Tooltip renderTrigger={(refProps) => (
+    <Button {...refProps}>Long tooltip</Button>
+  )}>
+    This is a longer tooltip that contains more detailed information.
+    It will automatically wrap and adjust its width based on the content,
+    up to a maximum width.
+  </Tooltip>
+</Example>
+
+```tsx
+<Tooltip renderTrigger={...}>
+  This is a longer tooltip that contains more detailed
+  information about the feature or action.
+</Tooltip>
+```
+
+## Positioning Examples
+
+<Example>
+  <div className="flex flex-col items-center gap-8 py-8">
+    <div className="flex gap-4">
+      <Tooltip
+        placement="top-start"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Top Start</Button>
+        )}
+      >
+        Aligned to start
+      </Tooltip>
+      <Tooltip
+        placement="top"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Top Center</Button>
+        )}
+      >
+        Centered on top
+      </Tooltip>
+      <Tooltip
+        placement="top-end"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Top End</Button>
+        )}
+      >
+        Aligned to end
+      </Tooltip>
+    </div>
+    <div className="flex gap-4">
+      <Tooltip
+        placement="bottom-start"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Bottom Start</Button>
+        )}
+      >
+        Aligned to start
+      </Tooltip>
+      <Tooltip
+        placement="bottom"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Bottom Center</Button>
+        )}
+      >
+        Centered on bottom
+      </Tooltip>
+      <Tooltip
+        placement="bottom-end"
+        renderTrigger={(refProps) => (
+          <Button {...refProps} formSize="sm">Bottom End</Button>
+        )}
+      >
+        Aligned to end
+      </Tooltip>
+    </div>
+  </div>
+</Example>
+
+```tsx
+<Tooltip placement="top-start" renderTrigger={...}>...</Tooltip>
+<Tooltip placement="top" renderTrigger={...}>...</Tooltip>
+<Tooltip placement="top-end" renderTrigger={...}>...</Tooltip>
+```
+
+## Interactive States
+
+The tooltip responds to both hover and focus events:
+
+<Example>
+  <div className="flex gap-4">
+    <Tooltip renderTrigger={(refProps) => (
+      <Button {...refProps}>Hover or focus me</Button>
+    )}>
+      Works with both mouse and keyboard
+    </Tooltip>
+    <Tooltip renderTrigger={(refProps) => (
+      <Button {...refProps} iconOnly="gear" />
+    )}>
+      Try tabbing to this button
+    </Tooltip>
+  </div>
+</Example>
+
+```tsx
+<Tooltip renderTrigger={(refProps) => (
+  <Button {...refProps}>Hover or focus me</Button>
+)}>
+  Accessible via keyboard too
+</Tooltip>
+```
+
+## Props
+
+<PropsTable props={[
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Content to display in the tooltip",
+    required: true,
+  },
+  {
+    name: "renderTrigger",
+    type: "(refProps: any, opts: { isOpen: boolean }) => ReactElement",
+    description: "Function that renders the trigger element. Must spread refProps onto the returned element.",
+    required: true,
+  },
+  {
+    name: "placement",
+    type: "Placement",
+    description: "Where to position the tooltip relative to trigger. Options: top, bottom, left, right, and variants with -start/-end",
+    default: '"top"',
+    required: false,
+  },
+]} />
+
+## Accessibility
+
+- Automatically shows on hover with a 200ms delay
+- Shows on keyboard focus for keyboard users
+- Uses proper ARIA `role="tooltip"`
+- Dismisses on Escape key
+- Automatically repositions to stay in viewport
+- Smooth fade and slide animations
