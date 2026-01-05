@@ -3,10 +3,10 @@ import { Link, NavLink, NavLinkProps, NavLinkRenderProps } from "react-router";
 import type { LinkProps } from "react-router";
 
 import { RenderIconOrElement } from "../icon/render-icon-or-element";
-import { IconOrElement } from "../../types/icons";
-import { Loader, LoaderSize, LoaderIntent } from "../loader/loader";
-import { FormSize } from "../../types/form-sizes";
-import { useIconFormSize } from "../../hooks/use-icon-form-size";
+import { IconOrElement } from "~/types/icons";
+import { Loader, LoaderSize, LoaderIntent } from "~/common";
+import { FormSize } from "~/types/form-sizes";
+import { useIconFormSize } from "~/hooks/use-icon-form-size";
 import { buttonVariants } from "./button-variants";
 
 type ButtonButtonProps = {
@@ -114,103 +114,100 @@ export type ButtonProps = ButtonAs & {
 
   /** HTML button type attribute */
   type?: "button" | "submit" | "reset";
+
+  ref?: React.Ref<HTMLButtonElement>;
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      alignContent = "center",
-      as = "button",
-      children,
+export const Button = (props: ButtonProps) => {
+  const {
+    alignContent = "center",
+    as = "button",
+    children,
+    className,
+    block,
+    disabled,
+    formSize = "md",
+    iconLeft,
+    iconRight,
+    iconOnly,
+    type = "button",
+    intent = "secondary",
+    isActive,
+    isLoading,
+    ref,
+    ...rest
+  } = props;
+  const Wrapper = as === "a" ? "a" : as === "button" ? "button" : as;
+
+  const iconSize = useIconFormSize(formSize);
+
+  const isDisabled = isLoading || disabled;
+
+  const renderLoader = (
+    <Loader
+      intent={intentToIntentMap[intent]}
+      size={formSizeToSizeMap[formSize]}
+    />
+  );
+
+  function renderClassName(navLinkRenderProps?: NavLinkRenderProps) {
+    return buttonVariants({
+      intent,
+      formSize,
       className,
-      block,
-      disabled,
-      formSize = "md",
-      iconLeft,
-      iconRight,
-      iconOnly,
-      type = "button",
-      intent = "secondary",
-      isActive,
-      isLoading,
-      ...rest
-    } = props;
-    const Wrapper = as === "a" ? "a" : as === "button" ? "button" : as;
+      iconOnly: !!iconOnly,
+      block: !!block,
+      alignContent,
+      isActive: isActive || navLinkRenderProps?.isActive,
+      disabled: isDisabled,
+    });
+  }
 
-    const iconSize = useIconFormSize(formSize);
+  const isNavLink = as === NavLink;
 
-    const isDisabled = isLoading || disabled;
-
-    const renderLoader = (
-      <Loader
-        intent={intentToIntentMap[intent]}
-        size={formSizeToSizeMap[formSize]}
-      />
-    );
-
-    function renderClassName(navLinkRenderProps?: NavLinkRenderProps) {
-      return buttonVariants({
-        intent,
-        formSize,
-        className,
-        iconOnly: !!iconOnly,
-        block: !!block,
-        alignContent,
-        isActive: isActive || navLinkRenderProps?.isActive,
-        disabled: isDisabled,
-      });
-    }
-
-    const isNavLink = as === NavLink;
-
-    return (
-      <Wrapper
-        {...(rest as any)}
-        type={type}
-        ref={ref}
-        disabled={isDisabled}
-        role={intent === "listItem" ? "menuitem" : undefined}
-        className={
-          isNavLink
-            ? (navLinkRenderProps: NavLinkRenderProps) =>
-                renderClassName(navLinkRenderProps)
-            : renderClassName()
-        }
-      >
-        {iconOnly ? (
-          <>
-            {isLoading ? (
-              renderLoader
-            ) : (
-              <RenderIconOrElement
-                iconOrElement={iconOnly}
-                className={iconSize}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            {iconLeft && !isLoading && (
-              <RenderIconOrElement
-                iconOrElement={iconLeft}
-                className={iconSize}
-              />
-            )}
-            {isLoading && renderLoader}
-            {isLoading ? (
-              <span className="truncate">{children}</span>
-            ) : (
-              children
-            )}
-            {iconRight && (
-              <RenderIconOrElement
-                iconOrElement={iconRight}
-                className={iconSize}
-              />
-            )}
-          </>
-        )}
-      </Wrapper>
-    );
-  },
-);
+  return (
+    <Wrapper
+      {...(rest as any)}
+      type={type}
+      ref={ref}
+      disabled={isDisabled}
+      role={intent === "listItem" ? "menuitem" : undefined}
+      className={
+        isNavLink
+          ? (navLinkRenderProps: NavLinkRenderProps) =>
+              renderClassName(navLinkRenderProps)
+          : renderClassName()
+      }
+    >
+      {iconOnly ? (
+        <>
+          {isLoading ? (
+            renderLoader
+          ) : (
+            <RenderIconOrElement
+              iconOrElement={iconOnly}
+              className={iconSize}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {iconLeft && !isLoading && (
+            <RenderIconOrElement
+              iconOrElement={iconLeft}
+              className={iconSize}
+            />
+          )}
+          {isLoading && renderLoader}
+          {isLoading ? <span className="truncate">{children}</span> : children}
+          {iconRight && (
+            <RenderIconOrElement
+              iconOrElement={iconRight}
+              className={iconSize}
+            />
+          )}
+        </>
+      )}
+    </Wrapper>
+  );
+};

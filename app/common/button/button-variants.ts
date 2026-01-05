@@ -46,7 +46,7 @@ export const buttonVariants = tv({
         "dark:focus:ring-grey-990/20",
       ),
       listItem: always(
-        "text-grey-900 focus:bg-grey-500/15 active:bg-grey-500/15 rounded-none",
+        "text-grey-900 focus:bg-grey-500/15 active:bg-grey-500/15 rounded-none h-auto py-1",
         "shadow-none outline-none",
         "dark:text-grey-100 dark:focus:bg-grey-100/15 dark:active:bg-grey-100/15",
         "focus:shadow-none",

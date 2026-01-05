@@ -1,6 +1,5 @@
 import {
   ReactNode,
-  forwardRef,
   HTMLAttributes,
   RefObject,
   useState,
@@ -44,23 +43,21 @@ export type FloatingMenuInnerProps = {
   renderItem?: (props: any) => ReactNode;
   renderTrigger?: (refProps: any, opts: { isOpen: boolean }) => ReactNode;
   contextTrigger?: RefObject<HTMLElement>;
+  ref?: React.Ref<HTMLButtonElement>;
 };
 
-export const FloatingMenuInner = forwardRef<
-  HTMLButtonElement,
-  FloatingMenuInnerProps & HTMLAttributes<HTMLElement>
->(
-  (
-    {
-      children,
-      renderTrigger,
-      contextTrigger,
-      renderItem,
-      placement = "bottom-start",
-      ...props
-    },
-    forwardedRef,
-  ) => {
+export const FloatingMenuInner = (
+  props: FloatingMenuInnerProps & HTMLAttributes<HTMLElement>
+) => {
+  const {
+    children,
+    renderTrigger,
+    contextTrigger,
+    renderItem,
+    placement = "bottom-start",
+    ref: forwardedRef,
+    ...rest
+  } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [hasFocusInside, setHasFocusInside] = useState(false);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -169,9 +166,9 @@ export const FloatingMenuInner = forwardRef<
       "data-focus-inside": hasFocusInside ? "" : undefined,
       ...getReferenceProps(
         parent.getItemProps({
-          ...props,
+          ...rest,
           onFocus(event: FocusEvent<HTMLButtonElement>) {
-            props.onFocus?.(event);
+            rest.onFocus?.(event);
             setHasFocusInside(false);
             parent.setHasFocusInside(true);
           },
@@ -277,5 +274,4 @@ export const FloatingMenuInner = forwardRef<
         </MenuContext.Provider>
       </FloatingNode>
     );
-  },
-);
+};

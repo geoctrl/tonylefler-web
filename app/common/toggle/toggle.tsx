@@ -1,35 +1,51 @@
-import { always, maybe, toggle } from "../../utils/classname-helpers";
-import { ChangeEvent, forwardRef, useRef } from "react";
+import { ComponentProps, useRef, Ref } from "react";
+import { always, maybe, toggle } from "~/utils/classname-helpers";
+import { twMerge } from "tailwind-merge";
 
-export type ToggleProps = {
+export type ToggleProps = ComponentProps<"input"> & {
   checked: boolean;
-  onChange: (checked: boolean, e: ChangeEvent<HTMLInputElement>) => void;
-  size?: "sm" | "md" | "lg";
+  onChangeValue?: (checked: boolean) => void;
+  formSize?: "sm" | "md" | "lg";
+  wrapperProps?: ComponentProps<"div">;
+  ref?: Ref<HTMLDivElement>;
 };
 
-export const Toggle = forwardRef<HTMLDivElement, ToggleProps>((props, ref) => {
-  const { checked, onChange, size = "md" } = props;
+export const Toggle = (props: ToggleProps) => {
+  const {
+    checked,
+    onChange,
+    onChangeValue,
+    className,
+    formSize = "md",
+    wrapperProps,
+    ref,
+    ...rest
+  } = props;
 
   let toggleRef = useRef<HTMLInputElement>(null);
 
   return (
     <div
       ref={ref}
-      className={always(
-        "relative inline-block rounded-full",
-        maybe(size === "sm", "h-6"),
-        maybe(size === "md", "h-7"),
-        maybe(size === "lg", "h-8"),
+      {...wrapperProps}
+      className={twMerge(
+        "relative inline-flex rounded-full",
+        maybe(formSize === "sm", "h-6"),
+        maybe(formSize === "md", "h-7"),
+        maybe(formSize === "lg", "h-8"),
+        wrapperProps?.className,
       )}
     >
       <input
         ref={toggleRef}
         checked={checked}
         onChange={(e) => {
-          onChange(e.target.checked, e);
+          onChange?.(e);
+          onChangeValue?.(e.target.checked);
         }}
         type="checkbox"
-        className="absolute left-2 top-2 opacity-0"
+        className={twMerge("absolute top-2 left-2 opacity-0", className)}
+        {...rest}
       />
       <div
         className={always(
@@ -39,9 +55,9 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>((props, ref) => {
             "bg-grey-900/25 dark:bg-grey-100/25",
             "bg-primary-500",
           ),
-          maybe(size === "sm", "w-10"),
-          maybe(size === "md", "w-12"),
-          maybe(size === "lg", "w-14"),
+          maybe(formSize === "sm", "w-10"),
+          maybe(formSize === "md", "w-12"),
+          maybe(formSize === "lg", "w-14"),
         )}
         onClick={() => {
           if (toggleRef) {
@@ -52,14 +68,14 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>((props, ref) => {
       >
         <div
           className={always(
-            "absolute left-1 top-1 rounded-full bg-grey-10 transition-transform",
+            "bg-grey-10 absolute top-1 left-1 rounded-full transition-transform",
             maybe(checked, "translate-x-full"),
-            maybe(size === "sm", "h-4 w-4"),
-            maybe(size === "md", "h-5 w-5"),
-            maybe(size === "lg", "h-6 w-6"),
+            maybe(formSize === "sm", "h-4 w-4"),
+            maybe(formSize === "md", "h-5 w-5"),
+            maybe(formSize === "lg", "h-6 w-6"),
           )}
         />
       </div>
     </div>
   );
-});
+};

@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { Control, useController } from "react-hook-form";
 
 import { Textarea, TextareaProps } from "./textarea";
@@ -9,11 +8,8 @@ export type TextareaFieldProps = Omit<TextareaProps, "value"> & {
   fieldName: string;
 };
 
-export const TextareaField = forwardRef<
-  HTMLTextAreaElement,
-  TextareaFieldProps
->(function TextareaField(props, ref) {
-  const { control, fieldName, onChangeValue, ...rest } = props;
+export const TextareaField = (props: TextareaFieldProps) => {
+  const { control, fieldName, onChangeValue, ref, ...rest } = props;
   const {
     field,
     fieldState: { error },
@@ -36,4 +32,4 @@ export const TextareaField = forwardRef<
       {...rest}
     />
   );
-});
+};

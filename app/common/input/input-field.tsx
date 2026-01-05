@@ -1,6 +1,5 @@
 import { Input, InputProps } from "./input";
 import { Control, useController } from "react-hook-form";
-import { forwardRef } from "react";
 import { useMergeRefs } from "../../hooks/use-merge-refs";
 
 export type InputFieldProps = Omit<InputProps, "value"> & {
@@ -8,9 +7,8 @@ export type InputFieldProps = Omit<InputProps, "value"> & {
   fieldName: string;
 };
 
-export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField(props, ref) {
-    const { control, fieldName, onChangeValue, ...rest } = props;
+export const InputField = (props: InputFieldProps) => {
+  const { control, fieldName, onChangeValue, ref, ...rest } = props;
     const {
       field,
       fieldState: { error },
@@ -33,5 +31,4 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
         {...rest}
       />
     );
-  },
-);
+};

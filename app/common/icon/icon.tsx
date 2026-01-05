@@ -1,19 +1,19 @@
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
-import spriteHref from "/icons.svg?v=2";
-import { Icons } from "../../types/icons";
+import spriteHref from "/icons.svg";
+import { Icons } from "~/types/icons";
 
 export type IconProps = ComponentProps<"svg"> & {
   /**
    * Icon name from the icon sprite. Available icons are auto-generated from the icons directory.
    */
   name?: Icons;
+  ref?: React.Ref<SVGSVGElement>;
 };
 
-export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  function Icon(props, ref) {
-    const { name, className, fill, style, ...rest } = props;
+export const Icon = (props: IconProps) => {
+  const { name, className, fill, style, ref, ...rest } = props;
 
     return (
       <svg
@@ -33,5 +33,4 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
         />
       </svg>
     );
-  },
-);
+};

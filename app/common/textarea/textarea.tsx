@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   HTMLAttributes,
   ReactNode,
   TextareaHTMLAttributes,
@@ -28,35 +27,36 @@ export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   autoResize?: boolean;
   minRows?: number;
   maxRows?: number;
+  ref?: React.Ref<HTMLTextAreaElement>;
 };
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (props, ref) => {
-    const {
-      className,
-      error,
-      fieldError,
-      iconLeft,
-      iconRight,
-      iconRightAllowClick,
-      id,
-      wrapperProps,
-      formSize = "md",
-      onChange,
-      label,
-      style,
-      required,
-      disabled,
-      onChangeValue,
-      autoResize = true,
-      minRows = 2,
-      maxRows,
-      ...rest
-    } = props;
+export const Textarea = (props: TextareaProps) => {
+  const {
+    className,
+    error,
+    fieldError,
+    iconLeft,
+    iconRight,
+    iconRightAllowClick,
+    id,
+    wrapperProps,
+    formSize = "md",
+    onChange,
+    label,
+    style,
+    required,
+    disabled,
+    onChangeValue,
+    autoResize = true,
+    minRows = 2,
+    maxRows,
+    ref,
+    ...rest
+  } = props;
 
-    const internalRef = useRef<HTMLTextAreaElement>(null);
-    const textareaRef =
-      (ref as React.RefObject<HTMLTextAreaElement>) || internalRef;
+  const internalRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef =
+    (ref as React.RefObject<HTMLTextAreaElement>) || internalRef;
 
     const hasError = !!error || !!fieldError;
 
@@ -160,5 +160,4 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
       </div>
     );
-  },
-);
+};

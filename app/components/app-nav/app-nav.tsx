@@ -5,7 +5,7 @@ import rootLogo from "../../assets/root-logo-banner-lg.png";
 import { Input } from "../../common/input/input";
 import { NavHeader } from "../../routes/root/nav-header";
 import { NavButton } from "../../routes/root/nav-button";
-import { always } from "~/app/utils/classname-helpers";
+import { always } from "~/utils/classname-helpers";
 
 type AppNavProps = {
   onNavCallback?: () => void;

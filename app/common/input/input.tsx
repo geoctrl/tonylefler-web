@@ -1,6 +1,5 @@
 import {
   ComponentProps,
-  forwardRef,
   InputHTMLAttributes,
   ReactNode,
 } from "react";
@@ -24,9 +23,10 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   onChangeValue?: (val: string) => void;
   wrapperProps?: ComponentProps<"div">;
   iconRightAllowClick?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = (props: InputProps) => {
   const {
     className,
     error,
@@ -43,6 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     required,
     disabled,
     onChangeValue,
+    ref,
     ...rest
   } = props;
 
@@ -132,4 +133,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       )}
     </div>
   );
-});
+};

@@ -3,7 +3,7 @@ import type { Route } from "./+types/root";
 import appStyles from "./styles/app.css?url";
 import favicon from "./assets/favicon.png";
 import { ScrollToTop } from "./utils/scroll-top-top";
-import { ModalEntry } from "~/app/common/modal/modal-entry";
+import { ModalEntry } from "~/common/modal/modal-entry";
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: appStyles },

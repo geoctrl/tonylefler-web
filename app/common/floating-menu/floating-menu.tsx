@@ -7,27 +7,30 @@ import {
 } from "./floating-menu-inner";
 import { FloatingMenuButton } from "./sub-components/floating-menu-button";
 import { FloatingMenuDivider } from "./sub-components/floating-menu-divider";
-import { ForwardRefExoticComponent } from "react";
 
 export type FloatingMenuProps = FloatingMenuInnerProps &
-  React.HTMLProps<HTMLButtonElement>;
-
-export type FloatingMenuComponent =
-  ForwardRefExoticComponent<FloatingMenuProps> & {
-    Item: typeof FloatingMenuButton;
-    Divider: typeof FloatingMenuDivider;
+  React.HTMLProps<HTMLButtonElement> & {
+    ref?: React.Ref<HTMLButtonElement>;
   };
 
-export const FloatingMenu = React.forwardRef<
-  HTMLButtonElement,
-  FloatingMenuInnerProps & React.HTMLProps<HTMLButtonElement>
->((props, ref) => {
+export type FloatingMenuComponent = ((
+  props: FloatingMenuProps,
+) => React.ReactElement) & {
+  Item: typeof FloatingMenuButton;
+  Divider: typeof FloatingMenuDivider;
+  displayName?: string;
+};
+
+const FloatingMenuBase = (props: FloatingMenuProps) => {
+  const { ref, ...rest } = props;
   return (
     <FloatingTree>
-      <FloatingMenuInner {...props} ref={ref} />
+      <FloatingMenuInner {...rest} ref={ref} />
     </FloatingTree>
   );
-}) as FloatingMenuComponent;
+};
+
+export const FloatingMenu = FloatingMenuBase as FloatingMenuComponent;
 
 FloatingMenu.Item = FloatingMenuButton;
 FloatingMenu.Divider = FloatingMenuDivider;

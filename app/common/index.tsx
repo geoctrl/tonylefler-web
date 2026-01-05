@@ -16,5 +16,5 @@ export * from "./toggle/toggle";
 export * from "./toggle/toggle-field";
 export * from "./tooltip/tooltip";
 export * from "./badge-affix/badge-affix";
-export * from "./props-table/props-table";
+export * from "~/components/props-table/props-table";
 export * from "../components/docs";

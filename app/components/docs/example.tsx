@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { always, maybe } from "~/app/utils/classname-helpers";
+import { always, maybe } from "~/utils/classname-helpers";
 
 export interface ExampleProps {
   /** Content to display in the example */

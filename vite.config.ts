@@ -48,6 +48,7 @@ export default defineConfig(async () => {
     resolve: {
       alias: {
         root: path.resolve(__dirname, "app/common"),
+        "~": path.resolve(__dirname, "app"),
       },
     },
     server: {

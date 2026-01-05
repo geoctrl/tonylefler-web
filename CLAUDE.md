@@ -177,7 +177,7 @@ Document keyboard navigation, ARIA roles, screen reader support if applicable.
 **File:** `app/common/component-name/component-name-route.tsx`
 
 ```tsx
-import { DocsLayout } from "~/app/components/docs-layout";
+import { DocsLayout } from "~/components/docs-layout";
 import Story from "./component-name.story.mdx";
 
 export default function () {
