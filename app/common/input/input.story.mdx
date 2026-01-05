@@ -100,7 +100,7 @@ For custom width or inline layouts, use `wrapperProps`:
     required: false,
   },
   {
-    name: "onChangeValue",
+    name: "onValueChange",
     type: "(value: string) => void",
     description: "Callback that receives just the input value (not the event)",
     required: false,
@@ -207,7 +207,7 @@ export function PasswordToggleExample() {
       }
       placeholder="Enter password"
       value={password}
-      onChangeValue={setPassword}
+      onValueChange={setPassword}
     />
   );
 }
@@ -236,7 +236,7 @@ function PasswordToggle() {
       }
       placeholder="Enter password"
       value={password}
-      onChangeValue={setPassword}
+      onValueChange={setPassword}
     />
   );
 }
@@ -303,7 +303,7 @@ Use the standard `required` prop to mark inputs as required.
 
 ## Controlled Input
 
-Use `value` and `onChangeValue` for controlled inputs.
+Use `value` and `onValueChange` for controlled inputs.
 
 export function ControlledExample() {
   const [value, setValue] = useState("");
@@ -313,7 +313,7 @@ export function ControlledExample() {
       <Input
         label="Username"
         value={value}
-        onChangeValue={setValue}
+        onValueChange={setValue}
         placeholder="Enter username"
       />
       <p className="text-sm text-grey-600">Current value: {value || "(empty)"}</p>
@@ -333,7 +333,7 @@ function ControlledExample() {
     <Input
       label="Username"
       value={value}
-      onChangeValue={setValue}
+      onValueChange={setValue}
       placeholder="Enter username"
     />
   );

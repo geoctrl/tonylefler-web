@@ -370,11 +370,11 @@ export function IconsAndSizesExample() {
 />
 ```
 
-## onChangeValue Callback
+## onValueChange Callback
 
-Use `onChangeValue` to react to changes while maintaining form state.
+Use `onValueChange` to react to changes while maintaining form state.
 
-export function OnChangeValueExample() {
+export function OnValueChangeExample() {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       username: "",
@@ -392,7 +392,7 @@ export function OnChangeValueExample() {
         fieldName="username"
         label="Username"
         placeholder="Enter username"
-        onChangeValue={(val) => {
+        onValueChange={(val) => {
           console.log("Current value:", val);
         }}
       />
@@ -402,7 +402,7 @@ export function OnChangeValueExample() {
 }
 
 <Example>
-  <OnChangeValueExample />
+  <OnValueChangeExample />
 </Example>
 
 ```tsx
@@ -410,7 +410,7 @@ export function OnChangeValueExample() {
   control={control}
   fieldName="username"
   label="Username"
-  onChangeValue={(val) => {
+  onValueChange={(val) => {
     console.log("Current value:", val);
   }}
 />

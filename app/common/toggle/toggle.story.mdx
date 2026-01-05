@@ -27,7 +27,7 @@ import { Toggle } from "root";
       const [checked, setChecked] = useState(false);
       return (
         <div className="flex items-center gap-2">
-          <Toggle checked={checked} onChangeValue={setChecked} />
+          <Toggle checked={checked} onValueChange={setChecked} />
           <span className="text-sm opacity-50">
             {checked ? "On" : "Off"}
           </span>
@@ -41,7 +41,7 @@ import { Toggle } from "root";
 ```tsx
 const [checked, setChecked] = useState(false);
 
-<Toggle checked={checked} onChangeValue={setChecked} />
+<Toggle checked={checked} onValueChange={setChecked} />
 ```
 
 ## Sizes
@@ -56,15 +56,15 @@ const [checked, setChecked] = useState(false);
       return (
         <div className="flex items-center gap-6">
           <div className="flex flex-col items-center gap-2">
-            <Toggle formSize="sm" checked={small} onChangeValue={setSmall} />
+            <Toggle formSize="sm" checked={small} onValueChange={setSmall} />
             <span className="text-xs opacity-50">Small</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Toggle formSize="md" checked={medium} onChangeValue={setMedium} />
+            <Toggle formSize="md" checked={medium} onValueChange={setMedium} />
             <span className="text-xs opacity-50">Medium</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Toggle formSize="lg" checked={large} onChangeValue={setLarge} />
+            <Toggle formSize="lg" checked={large} onValueChange={setLarge} />
             <span className="text-xs opacity-50">Large</span>
           </div>
         </div>
@@ -75,9 +75,9 @@ const [checked, setChecked] = useState(false);
 </Example>
 
 ```tsx
-<Toggle formSize="sm" checked={checked} onChangeValue={setChecked} />
-<Toggle formSize="md" checked={checked} onChangeValue={setChecked} /> {/* default */}
-<Toggle formSize="lg" checked={checked} onChangeValue={setChecked} />
+<Toggle formSize="sm" checked={checked} onValueChange={setChecked} />
+<Toggle formSize="md" checked={checked} onValueChange={setChecked} /> {/* default */}
+<Toggle formSize="lg" checked={checked} onValueChange={setChecked} />
 ```
 
 ## With Labels
@@ -97,7 +97,7 @@ const [checked, setChecked] = useState(false);
                 Receive email notifications for updates
               </div>
             </div>
-            <Toggle checked={notifications} onChangeValue={setNotifications} />
+            <Toggle checked={notifications} onValueChange={setNotifications} />
           </div>
           <div className="flex items-center justify-between">
             <div>
@@ -106,7 +106,7 @@ const [checked, setChecked] = useState(false);
                 Use dark theme across the application
               </div>
             </div>
-            <Toggle checked={darkMode} onChangeValue={setDarkMode} />
+            <Toggle checked={darkMode} onValueChange={setDarkMode} />
           </div>
         </div>
       );
@@ -121,7 +121,7 @@ const [checked, setChecked] = useState(false);
     <div>Enable notifications</div>
     <div className="text-sm opacity-50">Description text</div>
   </div>
-  <Toggle checked={checked} onChangeValue={setChecked} />
+  <Toggle checked={checked} onValueChange={setChecked} />
 </div>
 ```
 
@@ -146,7 +146,7 @@ const [checked, setChecked] = useState(false);
             <Toggle
               formSize="sm"
               checked={settings.autoSave}
-              onChangeValue={handleToggle('autoSave')}
+              onValueChange={handleToggle('autoSave')}
             />
             <label className="text-sm">Auto-save</label>
           </div>
@@ -154,7 +154,7 @@ const [checked, setChecked] = useState(false);
             <Toggle
               formSize="sm"
               checked={settings.spellCheck}
-              onChangeValue={handleToggle('spellCheck')}
+              onValueChange={handleToggle('spellCheck')}
             />
             <label className="text-sm">Spell check</label>
           </div>
@@ -162,7 +162,7 @@ const [checked, setChecked] = useState(false);
             <Toggle
               formSize="sm"
               checked={settings.lineNumbers}
-              onChangeValue={handleToggle('lineNumbers')}
+              onValueChange={handleToggle('lineNumbers')}
             />
             <label className="text-sm">Show line numbers</label>
           </div>
@@ -178,7 +178,7 @@ const [checked, setChecked] = useState(false);
   <Toggle
     formSize="sm"
     checked={settings.autoSave}
-    onChangeValue={(value) => handleChange('autoSave', value)}
+    onValueChange={(value) => handleChange('autoSave', value)}
   />
   <label>Auto-save</label>
 </div>
@@ -200,7 +200,7 @@ const [checked, setChecked] = useState(false);
       return (
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <Toggle checked={enabled} onChangeValue={handleChange} />
+            <Toggle checked={enabled} onValueChange={handleChange} />
             <span className="text-sm">Feature {enabled ? 'enabled' : 'disabled'}</span>
           </div>
           <div className="text-xs opacity-50">
@@ -222,7 +222,7 @@ const handleChange = (value) => {
   setClickCount(prev => prev + 1);
 };
 
-<Toggle checked={enabled} onChangeValue={handleChange} />
+<Toggle checked={enabled} onValueChange={handleChange} />
 ```
 
 ## Props
@@ -237,7 +237,7 @@ const handleChange = (value) => {
     required: true,
   },
   {
-    name: "onChangeValue",
+    name: "onValueChange",
     type: "(checked: boolean) => void",
     description: "Callback fired when the toggle state changes, receives the new checked value",
     required: false,

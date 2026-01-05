@@ -88,7 +88,7 @@ export const FloatingMenuButton = (props: FloatingMenuItemProps) => {
       >
         <div className="flex w-full items-center justify-between">
           {content}
-          {isSubMenu && <Icon className="sub-menu-icon" name="angle-right" />}
+          {isSubMenu && <Icon className="size-4" name="angle-right" />}
         </div>
       </Button>
     );

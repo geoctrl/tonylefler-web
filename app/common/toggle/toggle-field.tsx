@@ -19,7 +19,7 @@ export const ToggleField = (props: ToggleFieldProps) => {
     <Toggle
       ref={ref}
       checked={!!value}
-      onChangeValue={(checked) => {
+      onValueChange={(checked) => {
         onChange(checked);
       }}
       {...rest}

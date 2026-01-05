@@ -9,7 +9,7 @@ export type TextareaFieldProps = Omit<TextareaProps, "value"> & {
 };
 
 export const TextareaField = (props: TextareaFieldProps) => {
-  const { control, fieldName, onChangeValue, ref, ...rest } = props;
+  const { control, fieldName, onValueChange, ref, ...rest } = props;
   const {
     field,
     fieldState: { error },
@@ -21,8 +21,8 @@ export const TextareaField = (props: TextareaFieldProps) => {
   return (
     <Textarea
       ref={useMergeRefs([field.ref, ref])}
-      onChangeValue={(val) => {
-        onChangeValue?.(val);
+      onValueChange={(val) => {
+        onValueChange?.(val);
         field.onChange(val);
       }}
       onBlur={field.onBlur}

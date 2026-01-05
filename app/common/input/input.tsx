@@ -1,8 +1,4 @@
-import {
-  ComponentProps,
-  InputHTMLAttributes,
-  ReactNode,
-} from "react";
+import { ComponentProps, InputHTMLAttributes, ReactNode } from "react";
 import { tv } from "tailwind-variants";
 
 import { RenderIconOrElement } from "../icon/render-icon-or-element";
@@ -20,7 +16,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   iconLeft?: IconOrElement;
   iconRight?: IconOrElement;
   label?: string | ReactNode;
-  onChangeValue?: (val: string) => void;
+  onValueChange?: (val: string) => void;
   wrapperProps?: ComponentProps<"div">;
   iconRightAllowClick?: boolean;
   ref?: React.Ref<HTMLInputElement>;
@@ -42,7 +38,7 @@ export const Input = (props: InputProps) => {
     style,
     required,
     disabled,
-    onChangeValue,
+    onValueChange,
     ref,
     ...rest
   } = props;
@@ -92,7 +88,7 @@ export const Input = (props: InputProps) => {
           style={style}
           onChange={(e) => {
             onChange?.(e);
-            onChangeValue?.(e.target.value);
+            onValueChange?.(e.target.value);
           }}
           {...rest}
         />

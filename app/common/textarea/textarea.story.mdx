@@ -75,7 +75,7 @@ By default, textareas automatically resize to fit content:
       return (
         <Textarea
           value={value}
-          onChangeValue={setValue}
+          onValueChange={setValue}
           placeholder="Start typing... (auto-resizes)"
           label="Auto-resize enabled (default)"
         />
@@ -170,7 +170,7 @@ Pass a button component as `iconRight` for interactive icons:
         <Textarea
           label="Message"
           value={value}
-          onChangeValue={setValue}
+          onValueChange={setValue}
           placeholder="Type something..."
           iconRight={
             <Button
@@ -273,7 +273,7 @@ Use `wrapperProps` to control the wrapper's width:
           <Textarea
             label="Controlled textarea"
             value={value}
-            onChangeValue={setValue}
+            onValueChange={setValue}
             placeholder="Type something..."
           />
           <p className="text-sm opacity-50">
@@ -291,7 +291,7 @@ const [value, setValue] = useState("");
 
 <Textarea
   value={value}
-  onChangeValue={setValue}
+  onValueChange={setValue}
 />
 ```
 
@@ -363,7 +363,7 @@ const [value, setValue] = useState("");
     required: false,
   },
   {
-    name: "onChangeValue",
+    name: "onValueChange",
     type: "(value: string) => void",
     description: "Callback fired when the value changes (passes string directly)",
     required: false,

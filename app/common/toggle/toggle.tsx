@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 export type ToggleProps = ComponentProps<"input"> & {
   checked: boolean;
-  onChangeValue?: (checked: boolean) => void;
+  onValueChange?: (checked: boolean) => void;
   formSize?: "sm" | "md" | "lg";
   wrapperProps?: ComponentProps<"div">;
   ref?: Ref<HTMLDivElement>;
@@ -14,7 +14,7 @@ export const Toggle = (props: ToggleProps) => {
   const {
     checked,
     onChange,
-    onChangeValue,
+    onValueChange,
     className,
     formSize = "md",
     wrapperProps,
@@ -41,7 +41,7 @@ export const Toggle = (props: ToggleProps) => {
         checked={checked}
         onChange={(e) => {
           onChange?.(e);
-          onChangeValue?.(e.target.checked);
+          onValueChange?.(e.target.checked);
         }}
         type="checkbox"
         className={twMerge("absolute top-2 left-2 opacity-0", className)}
