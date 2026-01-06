@@ -1,0 +1,486 @@
+import { Breadcrumb } from "./breadcrumb";
+import { BreadcrumbLink } from "./breadcrumb-link";
+import { BreadcrumbText } from "./breadcrumb-text";
+import { Link } from "react-router";
+import { Icon } from "../icon/icon";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Breadcrumb',
+  category: 'components',
+  order: 4
+};
+
+<div className="not-prose mb-2">
+  <Breadcrumb>
+    <BreadcrumbLink to="/">Home</BreadcrumbLink>
+    <BreadcrumbLink to="/components">Components</BreadcrumbLink>
+    <BreadcrumbText>Breadcrumb</BreadcrumbText>
+  </Breadcrumb>
+</div>
+
+# Breadcrumb
+
+A navigation component that shows the current page location within a hierarchical structure.
+
+## Import
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbLink,
+  BreadcrumbText,
+  useBreadcrumbs,
+} from "root";
+```
+
+## Basic Usage
+
+Breadcrumbs use compound components: `BreadcrumbLink` for navigable items and `BreadcrumbText` for the current page.
+
+<Example>
+  <Breadcrumb>
+    <BreadcrumbLink to="/">Home</BreadcrumbLink>
+    <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+    <BreadcrumbText>iPhone 15 Pro</BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+  <BreadcrumbText>iPhone 15 Pro</BreadcrumbText>
+</Breadcrumb>
+```
+
+## Props
+
+### Breadcrumb
+
+`<Breadcrumb>` is the container component that wraps breadcrumb items.
+
+<PropsTable props={[
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Breadcrumb items (BreadcrumbLink or BreadcrumbText components)",
+    required: false,
+  },
+  {
+    name: "items",
+    type: "BreadcrumbItem[]",
+    description: "Auto-render breadcrumbs from data structure (alternative to children). Use with useBreadcrumbs hook",
+    required: false,
+  },
+  {
+    name: "separator",
+    type: "ReactNode",
+    description: "Custom separator between breadcrumb items",
+    default: '"/"',
+    required: false,
+  },
+  {
+    name: "size",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of breadcrumb text",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes",
+    required: false,
+  },
+]} />
+
+### BreadcrumbLink
+
+`<BreadcrumbLink>` renders a navigable breadcrumb item.
+
+<PropsTable props={[
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Link text content",
+    required: false,
+  },
+  {
+    name: "href",
+    type: "string",
+    description: "URL for standard anchor links",
+    required: false,
+  },
+  {
+    name: "to",
+    type: "string",
+    description: "Route path for React Router Link",
+    required: false,
+  },
+  {
+    name: "as",
+    type: '"a" | Link',
+    description: "Component to render as",
+    default: 'Link',
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName",
+    description: "Icon to display on the left side",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName",
+    description: "Icon to display on the right side",
+    required: false,
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes",
+    required: false,
+  },
+]} />
+
+### BreadcrumbText
+
+`<BreadcrumbText>` renders the current page (non-navigable).
+
+<PropsTable props={[
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Text content for the current page",
+    required: false,
+  },
+  {
+    name: "iconLeft",
+    type: "IconName",
+    description: "Icon to display on the left side",
+    required: false,
+  },
+  {
+    name: "iconRight",
+    type: "IconName",
+    description: "Icon to display on the right side",
+    required: false,
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes",
+    required: false,
+  },
+]} />
+
+## Separator
+
+Customize the separator between breadcrumb items.
+
+### String Separator
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Breadcrumb separator=">">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Current</BreadcrumbText>
+    </Breadcrumb>
+    <Breadcrumb separator="›">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Current</BreadcrumbText>
+    </Breadcrumb>
+    <Breadcrumb separator="•">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Current</BreadcrumbText>
+    </Breadcrumb>
+  </div>
+</Example>
+
+```tsx
+<Breadcrumb separator=">">
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+  <BreadcrumbText>Current</BreadcrumbText>
+</Breadcrumb>
+```
+
+### Icon Separator
+
+<Example>
+  <Breadcrumb separator={<Icon name="angle-right" className="size-4" />}>
+    <BreadcrumbLink to="/">Home</BreadcrumbLink>
+    <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+    <BreadcrumbText>Current</BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb separator={<Icon name="angle-right" className="size-4" />}>
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+  <BreadcrumbText>Current</BreadcrumbText>
+</Breadcrumb>
+```
+
+## Size
+
+Three size variants for different contexts.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Breadcrumb size="sm">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Small</BreadcrumbText>
+    </Breadcrumb>
+    <Breadcrumb size="md">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Medium</BreadcrumbText>
+    </Breadcrumb>
+    <Breadcrumb size="lg">
+      <BreadcrumbLink to="/">Home</BreadcrumbLink>
+      <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+      <BreadcrumbText>Large</BreadcrumbText>
+    </Breadcrumb>
+  </div>
+</Example>
+
+```tsx
+<Breadcrumb size="sm">
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbText>Small</BreadcrumbText>
+</Breadcrumb>
+
+<Breadcrumb size="lg">
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbText>Large</BreadcrumbText>
+</Breadcrumb>
+```
+
+## With Icons
+
+Add icons to breadcrumb items for visual context.
+
+<Example>
+  <Breadcrumb>
+    <BreadcrumbLink to="/" iconLeft="house">
+      Home
+    </BreadcrumbLink>
+    <BreadcrumbLink to="/products" iconLeft="file-lines">
+      Products
+    </BreadcrumbLink>
+    <BreadcrumbText iconLeft="folder-open">
+      Electronics
+    </BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbLink to="/" iconLeft="house">
+    Home
+  </BreadcrumbLink>
+  <BreadcrumbLink to="/products" iconLeft="folder">
+    Products
+  </BreadcrumbLink>
+  <BreadcrumbText iconLeft="folder-open">
+    Electronics
+  </BreadcrumbText>
+</Breadcrumb>
+```
+
+## React Router Integration
+
+BreadcrumbLink uses React Router's `Link` by default for client-side navigation.
+
+<Example>
+  <Breadcrumb>
+    <BreadcrumbLink to="/">
+      Home
+    </BreadcrumbLink>
+    <BreadcrumbLink to="/components/button">
+      Button
+    </BreadcrumbLink>
+    <BreadcrumbText>Current Page</BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+  <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+  <BreadcrumbText>Current Page</BreadcrumbText>
+</Breadcrumb>
+```
+
+### External Links
+
+For external links or full page navigation, use `as="a"` with `href`:
+
+```tsx
+<BreadcrumbLink as="a" href="https://example.com" target="_blank">
+  External Link
+</BreadcrumbLink>
+```
+
+## Auto-generating with useBreadcrumbs Hook
+
+The `useBreadcrumbs` hook automatically generates breadcrumbs from the current route.
+
+### Basic Auto-generation
+
+The simplest way to use auto-generated breadcrumbs:
+
+```tsx
+import { useBreadcrumbs, Breadcrumb } from "root";
+
+function MyPage() {
+  const breadcrumbs = useBreadcrumbs();
+  return <Breadcrumb items={breadcrumbs} />;
+}
+```
+
+You can also map manually if you need custom rendering:
+
+```tsx
+function MyPage() {
+  const breadcrumbs = useBreadcrumbs();
+
+  return (
+    <Breadcrumb>
+      {breadcrumbs.map((crumb) =>
+        crumb.isCurrent ? (
+          <BreadcrumbText key={crumb.path}>
+            {crumb.label}
+          </BreadcrumbText>
+        ) : (
+          <BreadcrumbLink key={crumb.path} to={crumb.path}>
+            {crumb.label}
+          </BreadcrumbLink>
+        )
+      )}
+    </Breadcrumb>
+  );
+}
+```
+
+### With Custom Route Labels
+
+Provide custom labels for specific routes:
+
+```tsx
+const breadcrumbs = useBreadcrumbs({
+  routes: [
+    { path: "/products", label: "All Products" },
+    { path: "/products/:id", label: (params) => `Product ${params.id}` },
+    { path: "/account/settings", label: "Account Settings" },
+  ]
+});
+```
+
+### Customizing Home Breadcrumb
+
+```tsx
+// Custom home label
+const breadcrumbs = useBreadcrumbs({
+  home: { label: "Dashboard", path: "/" }
+});
+
+// Disable home breadcrumb
+const breadcrumbs = useBreadcrumbs({
+  home: false
+});
+```
+
+### Custom Label Formatting
+
+Provide a custom formatter for auto-generated labels:
+
+```tsx
+const breadcrumbs = useBreadcrumbs({
+  formatLabel: (segment) => {
+    // Convert "my-products" -> "MY PRODUCTS"
+    return segment.toUpperCase().replace(/-/g, " ");
+  }
+});
+```
+
+## Common Patterns
+
+### E-commerce Navigation
+
+<Example>
+  <Breadcrumb separator="›">
+    <BreadcrumbLink to="/" iconLeft="house">
+      Home
+    </BreadcrumbLink>
+    <BreadcrumbLink to="/products">
+      Products
+    </BreadcrumbLink>
+    <BreadcrumbLink to="/products/electronics">
+      Electronics
+    </BreadcrumbLink>
+    <BreadcrumbText>iPhone 15 Pro</BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb separator="›">
+  <BreadcrumbLink to="/" iconLeft="house">Home</BreadcrumbLink>
+  <BreadcrumbLink to="/products">Products</BreadcrumbLink>
+  <BreadcrumbLink to="/products/electronics">Electronics</BreadcrumbLink>
+  <BreadcrumbText>iPhone 15 Pro</BreadcrumbText>
+</Breadcrumb>
+```
+
+### Documentation Site
+
+<Example>
+  <Breadcrumb>
+    <BreadcrumbLink to="/docs" iconLeft="house">
+      Docs
+    </BreadcrumbLink>
+    <BreadcrumbLink to="/docs/components">
+      Components
+    </BreadcrumbLink>
+    <BreadcrumbText>Breadcrumb</BreadcrumbText>
+  </Breadcrumb>
+</Example>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbLink to="/docs" iconLeft="house">Docs</BreadcrumbLink>
+  <BreadcrumbLink to="/docs/components">Components</BreadcrumbLink>
+  <BreadcrumbText>Breadcrumb</BreadcrumbText>
+</Breadcrumb>
+```
+
+## Accessibility
+
+- Wrapped in `<nav aria-label="breadcrumb">` for screen readers
+- Uses semantic `<ol>` list structure
+- Current page has `aria-current="page"` attribute
+- Separator has `role="presentation"` and `aria-hidden="true"`
+- All links are keyboard navigable
+- Focus states clearly visible
+
+## When to Use
+
+**Use breadcrumbs when:**
+- Site has deep hierarchical structure (3+ levels)
+- Users need to understand their location
+- Users may want to navigate back up the hierarchy
+- Content has clear parent-child relationships
+
+**Don't use breadcrumbs when:**
+- Site has flat structure (1-2 levels)
+- Navigation is linear/sequential (use pagination or back button)
+- Space is limited (mobile: consider hiding or collapsing)

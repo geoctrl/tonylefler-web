@@ -1,0 +1,243 @@
+import { Badge } from "./badge";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Badge',
+  category: 'components',
+  order: 2
+};
+
+# Badge
+
+A compact label component for displaying status, counts, or categories.
+
+## Import
+
+```tsx
+import { Badge } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex gap-2">
+    <Badge>Default</Badge>
+    <Badge intent="primary">New</Badge>
+    <Badge intent="success">Active</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge>Default</Badge>
+<Badge intent="primary">New</Badge>
+<Badge intent="success">Active</Badge>
+```
+
+## Props
+
+`<Badge>` accepts all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "intent",
+    type: '"success" | "grey" | "primary" | "danger" | "warning" | "info"',
+    description: "Visual style indicating status or category",
+    default: '"grey"',
+    required: false,
+  },
+  {
+    name: "size",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the badge",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "circle",
+    type: "boolean",
+    description: "Makes the badge circular, ideal for notification counts",
+    required: false,
+  },
+]} />
+
+## Intent
+
+Badge intents provide semantic meaning through color.
+
+### `intent="grey"` (default)
+
+Neutral badges for general labels or categories.
+
+- **When to use:** Non-status labels, categories, tags, or neutral information.
+- **Example:** User roles, content categories, filter tags.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge>Admin</Badge>
+    <Badge>Member</Badge>
+    <Badge>Guest</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge>Admin</Badge>
+<Badge>Member</Badge>
+<Badge>Guest</Badge>
+```
+
+### `intent="primary"`
+
+Primary color accent for emphasis or branding.
+
+- **When to use:** Highlighting new features, special items, or brand-related tags.
+- **Example:** New releases, featured content, beta features.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="primary">New</Badge>
+    <Badge intent="primary">Featured</Badge>
+    <Badge intent="primary">Beta</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge intent="primary">New</Badge>
+<Badge intent="primary">Featured</Badge>
+<Badge intent="primary">Beta</Badge>
+```
+
+### `intent="success"`
+
+Positive status or successful states.
+
+- **When to use:** Active status, completed tasks, success states, or positive indicators.
+- **Example:** Active subscriptions, published content, verified status.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="success">Active</Badge>
+    <Badge intent="success">Published</Badge>
+    <Badge intent="success">Verified</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge intent="success">Active</Badge>
+<Badge intent="success">Published</Badge>
+<Badge intent="success">Verified</Badge>
+```
+
+### `intent="warning"`
+
+Cautionary states that need attention but aren't critical.
+
+- **When to use:** Pending actions, items needing review, or temporary states.
+- **Example:** Pending approval, expiring soon, trial periods.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="warning">Pending</Badge>
+    <Badge intent="warning">Expiring Soon</Badge>
+    <Badge intent="warning">Trial</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge intent="warning">Pending</Badge>
+<Badge intent="warning">Expiring Soon</Badge>
+<Badge intent="warning">Trial</Badge>
+```
+
+### `intent="danger"`
+
+Error states or critical issues requiring action.
+
+- **When to use:** Errors, blocked states, critical warnings, or destructive actions.
+- **Example:** Failed processes, blocked accounts, overdue items.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="danger">Error</Badge>
+    <Badge intent="danger">Blocked</Badge>
+    <Badge intent="danger">Overdue</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge intent="danger">Error</Badge>
+<Badge intent="danger">Blocked</Badge>
+<Badge intent="danger">Overdue</Badge>
+```
+
+### `intent="info"`
+
+Informational states or neutral notifications.
+
+- **When to use:** Informational labels, tips, or secondary status indicators.
+- **Example:** Draft content, archived items, informational tags.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="info">Draft</Badge>
+    <Badge intent="info">Archived</Badge>
+    <Badge intent="info">Info</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge intent="info">Draft</Badge>
+<Badge intent="info">Archived</Badge>
+<Badge intent="info">Info</Badge>
+```
+
+## Size
+
+Three size options for different contexts.
+
+<Example>
+  <div className="flex items-center gap-2">
+    <Badge size="sm">Small</Badge>
+    <Badge size="md">Medium</Badge>
+    <Badge size="lg">Large</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>
+<Badge size="lg">Large</Badge>
+```
+
+## Circle Badge
+
+Use `circle` prop for notification counts or single-character indicators.
+
+<Example>
+  <div className="flex items-center gap-2">
+    <Badge circle size="sm">3</Badge>
+    <Badge circle size="md">12</Badge>
+    <Badge circle size="lg">99</Badge>
+  </div>
+</Example>
+
+```tsx
+<Badge circle size="sm">3</Badge>
+<Badge circle size="md">12</Badge>
+<Badge circle size="lg">99</Badge>
+```
+
+## Dark Mode
+
+All badge intents automatically adapt to dark mode with appropriate contrast.
+
+<Example>
+  <div className="flex gap-2">
+    <Badge intent="grey">Grey</Badge>
+    <Badge intent="primary">Primary</Badge>
+    <Badge intent="success">Success</Badge>
+    <Badge intent="warning">Warning</Badge>
+    <Badge intent="danger">Danger</Badge>
+    <Badge intent="info">Info</Badge>
+  </div>
+</Example>

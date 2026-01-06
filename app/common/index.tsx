@@ -1,4 +1,8 @@
 export * from "./badge/badge";
+export * from "./badge-affix/badge-affix";
+export * from "./breadcrumb/breadcrumb";
+export * from "./breadcrumb/breadcrumb-link";
+export * from "./breadcrumb/breadcrumb-text";
 export * from "./button/button";
 export * from "./floating-menu/floating-menu";
 export * from "./icon/icon";
@@ -15,6 +19,7 @@ export * from "./textarea/textarea-field";
 export * from "./toggle/toggle";
 export * from "./toggle/toggle-field";
 export * from "./tooltip/tooltip";
-export * from "./badge-affix/badge-affix";
 export * from "~/components/props-table/props-table";
 export * from "../components/docs";
+export { useBreadcrumbs } from "~/hooks/use-breadcrumbs";
+export type { BreadcrumbItem, BreadcrumbRouteConfig } from "~/hooks/use-breadcrumbs";

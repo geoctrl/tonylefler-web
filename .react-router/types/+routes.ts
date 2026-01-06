@@ -14,6 +14,21 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/components/badge": {
+    params: {};
+  };
+  "/components/badge-affix": {
+    params: {};
+  };
+  "/components/breadcrumb": {
+    params: {};
+  };
+  "/components/checkbox": {
+    params: {};
+  };
+  "/components/checkbox-field": {
+    params: {};
+  };
   "/components/button": {
     params: {};
   };
@@ -52,7 +67,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
+    page: "/" | "/components/badge" | "/components/badge-affix" | "/components/breadcrumb" | "/components/checkbox" | "/components/checkbox-field" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -60,7 +75,27 @@ type RouteFiles = {
   };
   "routes/root/layout.tsx": {
     id: "routes/root/layout";
-    page: "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
+    page: "/components/badge" | "/components/badge-affix" | "/components/breadcrumb" | "/components/checkbox" | "/components/checkbox-field" | "/components/button" | "/components/floating-menu" | "/components/icon" | "/components/input" | "/components/input-field" | "/components/loader" | "/components/modal" | "/components/textarea" | "/components/textarea-field" | "/components/toggle" | "/components/tooltip";
+  };
+  "common/badge/badge-route.tsx": {
+    id: "common/badge/badge-route";
+    page: "/components/badge";
+  };
+  "common/badge-affix/badge-affix-route.tsx": {
+    id: "common/badge-affix/badge-affix-route";
+    page: "/components/badge-affix";
+  };
+  "common/breadcrumb/breadcrumb-route.tsx": {
+    id: "common/breadcrumb/breadcrumb-route";
+    page: "/components/breadcrumb";
+  };
+  "common/checkbox/checkbox-route.tsx": {
+    id: "common/checkbox/checkbox-route";
+    page: "/components/checkbox";
+  };
+  "common/checkbox/checkbox-field-route.tsx": {
+    id: "common/checkbox/checkbox-field-route";
+    page: "/components/checkbox-field";
   };
   "common/button/button-route.tsx": {
     id: "common/button/button-route";
@@ -112,6 +147,11 @@ type RouteModules = {
   "root": typeof import("./app/root.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/root/layout": typeof import("./app/routes/root/layout.tsx");
+  "common/badge/badge-route": typeof import("./app/common/badge/badge-route.tsx");
+  "common/badge-affix/badge-affix-route": typeof import("./app/common/badge-affix/badge-affix-route.tsx");
+  "common/breadcrumb/breadcrumb-route": typeof import("./app/common/breadcrumb/breadcrumb-route.tsx");
+  "common/checkbox/checkbox-route": typeof import("./app/common/checkbox/checkbox-route.tsx");
+  "common/checkbox/checkbox-field-route": typeof import("./app/common/checkbox/checkbox-field-route.tsx");
   "common/button/button-route": typeof import("./app/common/button/button-route.tsx");
   "common/floating-menu/floating-menu-route": typeof import("./app/common/floating-menu/floating-menu-route.tsx");
   "common/icon/icon-route": typeof import("./app/common/icon/icon-route.tsx");

@@ -15,22 +15,19 @@ export type IconProps = ComponentProps<"svg"> & {
 export const Icon = (props: IconProps) => {
   const { name, className, fill, style, ref, ...rest } = props;
 
-    return (
-      <svg
-        ref={ref}
-        className={twMerge("inline-block size-5 fill-current", className)}
-        style={{
-          flexShrink: 0,
-          ...(fill ? { fill } : {}),
-          ...(style || {}),
-        }}
-        viewBox="0 0 24 24"
-        {...rest}
-      >
-        <use
-          href={`${spriteHref}#${name}`}
-          xlinkHref={`${spriteHref}#${name}`}
-        />
-      </svg>
-    );
+  return (
+    <svg
+      ref={ref}
+      className={twMerge("inline-block size-5 fill-current", className)}
+      style={{
+        flexShrink: 0,
+        ...(fill ? { fill } : {}),
+        ...(style || {}),
+      }}
+      viewBox="0 0 24 24"
+      {...rest}
+    >
+      <use href={`${spriteHref}#${name}`} xlinkHref={`${spriteHref}#${name}`} />
+    </svg>
+  );
 };

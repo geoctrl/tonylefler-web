@@ -9,6 +9,11 @@ export default [
   index("routes/home.tsx"),
 
   layout("routes/root/layout.tsx", [
+    route("components/badge", "common/badge/badge-route.tsx"),
+    route("components/badge-affix", "common/badge-affix/badge-affix-route.tsx"),
+    route("components/breadcrumb", "common/breadcrumb/breadcrumb-route.tsx"),
+    route("components/checkbox", "common/checkbox/checkbox-route.tsx"),
+    route("components/checkbox-field", "common/checkbox/checkbox-field-route.tsx"),
     route("components/button", "common/button/button-route.tsx"),
     route(
       "components/floating-menu",

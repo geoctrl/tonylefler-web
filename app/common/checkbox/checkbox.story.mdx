@@ -1,0 +1,319 @@
+import { useState } from "react";
+import { Checkbox } from "./checkbox";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Checkbox',
+  category: 'components',
+  order: 5
+};
+
+# Checkbox
+
+A checkbox input with built-in label and error handling.
+
+## Import
+
+```tsx
+import { Checkbox } from "root";
+```
+
+## Basic Usage
+
+export function CheckboxWithState() {
+const [checked, setChecked] = useState(false);
+return (
+  <Checkbox label="Accept terms and conditions" checked={checked} onChangeValue={setChecked} />
+)}
+
+<Example>
+  <CheckboxWithState />
+</Example>
+
+```tsx
+<Checkbox label="Accept terms and conditions" />
+```
+
+## Props
+
+`<Checkbox>` accepts all [HTML input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox) and the following:
+
+<PropsTable props={[
+  {
+    name: "label",
+    type: "string | ReactNode",
+    description: "Label text displayed next to the checkbox",
+    required: false,
+  },
+  {
+    name: "checked",
+    type: "boolean",
+    description: "Whether the checkbox is checked (controlled)",
+    required: false,
+  },
+  {
+    name: "onChangeValue",
+    type: "(checked: boolean) => void",
+    description: "Callback when checkbox state changes, receives boolean value directly",
+    required: false,
+  },
+  {
+    name: "onChange",
+    type: "ChangeEventHandler",
+    description: "Standard onChange handler, receives event object",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables the checkbox",
+    required: false,
+  },
+  {
+    name: "error",
+    type: "string | ReactNode",
+    description: "Error message to display below the checkbox",
+    required: false,
+  },
+  {
+    name: "fieldError",
+    type: "FieldError",
+    description: "React Hook Form field error object",
+    required: false,
+  },
+]} />
+
+## Controlled Usage
+
+Use with `checked` and `onChangeValue` for controlled behavior:
+
+export function ControlledCheckbox() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      <Checkbox
+        label="Subscribe to newsletter"
+        checked={checked}
+        onChangeValue={setChecked}
+      />
+      <div className="text-sm text-grey-600 dark:text-grey-400">
+        Status: {checked ? "Subscribed" : "Not subscribed"}
+      </div>
+    </div>
+  );
+}
+
+<Example>
+  <ControlledCheckbox />
+</Example>
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox
+  label="Subscribe to newsletter"
+  checked={checked}
+  onChangeValue={setChecked}
+/>
+```
+
+## Label Variants
+
+### String Label
+
+export function StringLabelCheckbox() {
+  const [checked, setChecked] = useState(false);
+  return <Checkbox label="Enable notifications" checked={checked} onChangeValue={setChecked} />;
+}
+
+<Example>
+  <StringLabelCheckbox />
+</Example>
+
+```tsx
+<Checkbox label="Enable notifications" />
+```
+
+### Rich Label
+
+Labels can be ReactNodes for complex content:
+
+export function RichLabelCheckbox() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Checkbox
+      checked={checked}
+      onChangeValue={setChecked}
+      label={
+        <span>
+          I agree to the <a href="#" className="text-primary-500 underline">Terms of Service</a>
+        </span>
+      }
+    />
+  );
+}
+
+<Example>
+  <RichLabelCheckbox />
+</Example>
+
+```tsx
+<Checkbox
+  label={
+    <span>
+      I agree to the <a href="#">Terms of Service</a>
+    </span>
+  }
+/>
+```
+
+### No Label
+
+Checkbox can be used without a label:
+
+export function NoLabelCheckbox() {
+  const [checked, setChecked] = useState(false);
+  return <Checkbox aria-label="Select item" checked={checked} onChangeValue={setChecked} />;
+}
+
+<Example>
+  <NoLabelCheckbox />
+</Example>
+
+```tsx
+<Checkbox aria-label="Select item" />
+```
+
+## States
+
+### Checked
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Checkbox label="Unchecked" checked={false} />
+    <Checkbox label="Checked" checked={true} />
+  </div>
+</Example>
+
+```tsx
+<Checkbox label="Unchecked" checked={false} />
+<Checkbox label="Checked" checked={true} />
+```
+
+### Disabled
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Checkbox label="Disabled unchecked" disabled />
+    <Checkbox label="Disabled checked" checked disabled />
+  </div>
+</Example>
+
+```tsx
+<Checkbox label="Disabled unchecked" disabled />
+<Checkbox label="Disabled checked" checked disabled />
+```
+
+## Error State
+
+Display validation errors below the checkbox:
+
+<Example>
+  <Checkbox
+    label="I agree to the terms"
+    error="You must accept the terms to continue"
+  />
+</Example>
+
+```tsx
+<Checkbox
+  label="I agree to the terms"
+  error="You must accept the terms to continue"
+/>
+```
+
+## Multiple Checkboxes
+
+export function MultipleCheckboxes() {
+  const [preferences, setPreferences] = useState({
+    email: true,
+    sms: false,
+    push: true
+  });
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="text-sm font-medium mb-1">Notification Preferences</div>
+      <Checkbox
+        label="Email notifications"
+        checked={preferences.email}
+        onChangeValue={(val) => setPreferences(prev => ({ ...prev, email: val }))}
+      />
+      <Checkbox
+        label="SMS notifications"
+        checked={preferences.sms}
+        onChangeValue={(val) => setPreferences(prev => ({ ...prev, sms: val }))}
+      />
+      <Checkbox
+        label="Push notifications"
+        checked={preferences.push}
+        onChangeValue={(val) => setPreferences(prev => ({ ...prev, push: val }))}
+      />
+    </div>
+  );
+}
+
+<Example>
+  <MultipleCheckboxes />
+</Example>
+
+```tsx
+const [preferences, setPreferences] = useState({
+  email: true,
+  sms: false,
+  push: true
+});
+
+<Checkbox
+  label="Email notifications"
+  checked={preferences.email}
+  onChangeValue={(val) => setPreferences(prev => ({ ...prev, email: val }))}
+/>
+<Checkbox
+  label="SMS notifications"
+  checked={preferences.sms}
+  onChangeValue={(val) => setPreferences(prev => ({ ...prev, sms: val }))}
+/>
+<Checkbox
+  label="Push notifications"
+  checked={preferences.push}
+  onChangeValue={(val) => setPreferences(prev => ({ ...prev, push: val }))}
+/>
+```
+
+## With React Hook Form
+
+For form integration, use `CheckboxField` instead (see [Checkbox Field](/components/checkbox-field)).
+
+## Accessibility
+
+- Uses native `<input type="checkbox">` for full keyboard and screen reader support
+- Label is automatically associated with the input
+- When no label is provided, use `aria-label` attribute
+- Disabled state prevents interaction and is announced to screen readers
+- Error messages are associated with the input for screen reader announcement
+- Focus ring clearly visible on keyboard focus
+
+## When to Use
+
+**Use checkboxes when:**
+- Allowing users to select multiple options from a list
+- Toggling a single setting on/off
+- Users can see all options at once
+- Each option is independent
+
+**Don't use checkboxes when:**
+- Only one option can be selected (use radio buttons)
+- The choice is between two opposite states with different meanings (use toggle switch)
+- There are many options that would clutter the UI (use multi-select dropdown)

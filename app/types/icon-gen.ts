@@ -30,6 +30,7 @@ export const iconNames = [
   "eye-slash",
   "download",
   "copy",
+  "check-small",
   "caret-down",
   "bluesky",
   "bars",

@@ -1,0 +1,301 @@
+import { useState } from "react";
+import { useForm, Controller } from 'react-hook-form';
+
+import { CheckboxField } from "./checkbox-field";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Checkbox Field',
+  category: 'components',
+  order: 6
+};
+
+# Checkbox Field
+
+A checkbox component integrated with React Hook Form for automatic form state management and validation.
+
+## Import
+
+```tsx
+import { CheckboxField } from "root";
+```
+
+## Basic Usage
+
+`CheckboxField` wraps `Checkbox` and connects it to React Hook Form.
+
+```tsx
+import { useForm } from "react-hook-form";
+import { CheckboxField } from "root";
+
+function MyForm() {
+  const { control } = useForm({
+    defaultValues: {
+      terms: false
+    }
+  });
+
+  return (
+    <CheckboxField
+      control={control}
+      fieldName="terms"
+      label="I accept the terms and conditions"
+    />
+  );
+}
+```
+
+## Props
+
+`<CheckboxField>` accepts all [Checkbox props](/components/checkbox#props) except `value`, plus:
+
+<PropsTable props={[
+  {
+    name: "control",
+    type: "Control<any>",
+    description: "React Hook Form control object from useForm()",
+    required: true,
+  },
+  {
+    name: "fieldName",
+    type: "string",
+    description: "Name of the form field",
+    required: true,
+  },
+  {
+    name: "label",
+    type: "string | ReactNode",
+    description: "Label text displayed next to the checkbox",
+    required: false,
+  },
+  {
+    name: "onChangeValue",
+    type: "(checked: boolean) => void",
+    description: "Callback when checkbox state changes (called before form update)",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables the checkbox",
+    required: false,
+  },
+]} />
+
+## Complete Form Example
+
+export function CompleteFormExample() {
+  const { control, handleSubmit, formState } = useForm({
+    defaultValues: {
+      subscribe: false,
+      terms: false,
+      marketing: false
+    }
+  });
+
+  const [result, setResult] = useState(null);
+
+  const onSubmit = (data) => {
+    setResult(JSON.stringify(data, null, 2));
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <CheckboxField
+        control={control}
+        fieldName="subscribe"
+        label="Subscribe to newsletter"
+      />
+      <CheckboxField
+        control={control}
+        fieldName="terms"
+        label="I accept the terms and conditions"
+      />
+      <CheckboxField
+        control={control}
+        fieldName="marketing"
+        label="Send me marketing emails"
+      />
+      <button
+        type="submit"
+        className="self-start rounded-lg bg-primary-500 px-4 py-2 text-sm text-white hover:bg-primary-600"
+      >
+        Submit
+      </button>
+      {result && (
+        <pre className="rounded-lg bg-grey-100 dark:bg-grey-800 p-3 text-xs">
+          {result}
+        </pre>
+      )}
+    </form>
+  );
+}
+
+<Example>
+  <CompleteFormExample />
+</Example>
+
+```tsx
+import { useForm } from "react-hook-form";
+import { CheckboxField } from "root";
+
+function MyForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      subscribe: false,
+      terms: false,
+      marketing: false
+    }
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <CheckboxField
+        control={control}
+        fieldName="subscribe"
+        label="Subscribe to newsletter"
+      />
+      <CheckboxField
+        control={control}
+        fieldName="terms"
+        label="I accept the terms and conditions"
+      />
+      <CheckboxField
+        control={control}
+        fieldName="marketing"
+        label="Send me marketing emails"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+## With Validation
+
+Use React Hook Form's validation rules:
+
+export function ValidationExample() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      terms: false
+    }
+  });
+
+  const [result, setResult] = useState(null);
+
+  const onSubmit = (data) => {
+    setResult("Form submitted successfully!");
+  };
+
+  const onError = () => {
+    setResult("Please fix the errors");
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col gap-4">
+      <Controller
+        name="terms"
+        control={control}
+        rules={{
+          required: "You must accept the terms to continue"
+        }}
+        render={({ field, fieldState }) => (
+          <CheckboxField
+            control={control}
+            fieldName="terms"
+            label="I accept the terms and conditions"
+          />
+        )}
+      />
+      <button
+        type="submit"
+        className="self-start rounded-lg bg-primary-500 px-4 py-2 text-sm text-white hover:bg-primary-600"
+      >
+        Submit
+      </button>
+      {result && (
+        <div className="text-sm text-grey-600 dark:text-grey-400">
+          {result}
+        </div>
+      )}
+    </form>
+  );
+}
+
+<Example>
+  <ValidationExample />
+</Example>
+
+```tsx
+import { useForm } from "react-hook-form";
+import { CheckboxField } from "root";
+
+function MyForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      terms: false
+    }
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="terms"
+        control={control}
+        rules={{
+          required: "You must accept the terms to continue"
+        }}
+        render={() => (
+          <CheckboxField
+            control={control}
+            fieldName="terms"
+            label="I accept the terms and conditions"
+          />
+        )}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+## OnChange Callback
+
+Access the value when it changes:
+
+```tsx
+<CheckboxField
+  control={control}
+  fieldName="terms"
+  label="I accept the terms"
+  onChangeValue={(checked) => {
+    console.log("Checkbox changed:", checked);
+    // Perform side effects
+  }}
+/>
+```
+
+## When to Use
+
+Use `CheckboxField` instead of `Checkbox` when:
+- Building forms with React Hook Form
+- You need automatic validation
+- You want centralized form state management
+- You need to access form values outside the checkbox
+
+Use `Checkbox` when:
+- Not using React Hook Form
+- Managing state manually with `useState`
+- Building non-form UI toggles
+
+## Related Components
+
+- [Checkbox](/components/checkbox) - Standalone checkbox without form integration
+- [Toggle](/components/toggle) - Alternative for on/off states
+- [Toggle Field](/components/toggle-field) - Toggle with React Hook Form integration

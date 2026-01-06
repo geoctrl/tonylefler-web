@@ -17,6 +17,11 @@ const navCategories = [
     key: "components",
     label: "Components",
     items: [
+      { title: "Badge", path: "/components/badge" },
+      { title: "Badge Affix", path: "/components/badge-affix" },
+      { title: "Breadcrumb", path: "/components/breadcrumb" },
+      { title: "Checkbox", path: "/components/checkbox" },
+      { title: "Checkbox Field", path: "/components/checkbox-field" },
       { title: "Button", path: "/components/button" },
       { title: "Floating Menu", path: "/components/floating-menu" },
       { title: "Icon", path: "/components/icon" },

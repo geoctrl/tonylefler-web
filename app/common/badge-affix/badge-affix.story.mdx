@@ -1,0 +1,362 @@
+import { BadgeAffix } from "./badge-affix";
+import { Badge } from "../badge/badge";
+import { Icon } from "../icon/icon";
+import { Button } from "../button/button";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Badge Affix',
+  category: 'components',
+  order: 3
+};
+
+# Badge Affix
+
+A wrapper component that positions a badge relative to another element, commonly used for notification indicators and status overlays.
+
+## Import
+
+```tsx
+import { BadgeAffix, Badge } from "root";
+```
+
+## Basic Usage
+
+Wrap any element with `BadgeAffix` and provide a badge via the `badge` prop.
+
+<Example>
+  <div className="flex gap-6">
+    <BadgeAffix badge={<Badge circle intent="danger">3</Badge>}>
+      <Icon name="user" size="lg" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="primary">12</Badge>}>
+      <Button iconOnly="house" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="success">99</Badge>}>
+      <span className="text-lg">Messages</span>
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="danger">3</Badge>}>
+  <Icon name="user" size="lg" />
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge circle intent="primary">12</Badge>}>
+  <Button iconOnly="house" />
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge circle intent="success">99</Badge>}>
+  <span>Messages</span>
+</BadgeAffix>
+```
+
+## Props
+
+`<BadgeAffix>` accepts the following props:
+
+<PropsTable props={[
+  {
+    name: "badge",
+    type: "ReactNode",
+    description: "The badge content to display (typically a Badge component)",
+    required: false,
+  },
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "The element to wrap with a badge",
+    required: false,
+  },
+  {
+    name: "position",
+    type: '"top-left" | "top-right" | "bottom-left" | "bottom-right"',
+    description: "Position of the badge relative to the wrapped element",
+    default: '"top-right"',
+    required: false,
+  },
+  {
+    name: "offset",
+    type: "[number, number]",
+    description: "Fine-tune badge position with [x, y] offset in pixels. Positive values move right/down, negative values move left/up",
+    required: false,
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the wrapper",
+    required: false,
+  },
+  {
+    name: "style",
+    type: "CSSProperties",
+    description: "Inline styles for the wrapper",
+    required: false,
+  },
+]} />
+
+## Position
+
+Control badge placement with the `position` prop.
+
+### All Positions
+
+<Example>
+  <div className="flex gap-8">
+    <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} position="top-left">
+      <div className="size-12 rounded-lg bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} position="top-right">
+      <div className="size-12 rounded-lg bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} position="bottom-left">
+      <div className="size-12 rounded-lg bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} position="bottom-right">
+      <div className="size-12 rounded-lg bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix position="top-left" badge={<Badge circle>5</Badge>}>
+  <div className="size-12 rounded-lg bg-grey-200" />
+</BadgeAffix>
+
+<BadgeAffix position="top-right" badge={<Badge circle>5</Badge>}>
+  <div className="size-12 rounded-lg bg-grey-200" />
+</BadgeAffix>
+
+<BadgeAffix position="bottom-left" badge={<Badge circle>5</Badge>}>
+  <div className="size-12 rounded-lg bg-grey-200" />
+</BadgeAffix>
+
+<BadgeAffix position="bottom-right" badge={<Badge circle>5</Badge>}>
+  <div className="size-12 rounded-lg bg-grey-200" />
+</BadgeAffix>
+```
+
+### `position="top-right"` (default)
+
+The default position, ideal for notification counts.
+
+- **When to use:** Notification indicators, unread counts, status overlays.
+- **Example:** Inbox unread count, notification bell badge.
+
+<Example>
+  <div className="flex gap-6">
+    <BadgeAffix badge={<Badge circle intent="danger">8</Badge>}>
+      <Icon name="user" size="lg" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="primary">3</Badge>}>
+      <Button iconOnly="house" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="danger">8</Badge>}>
+  <Icon name="user" size="lg" />
+</BadgeAffix>
+```
+
+### `position="top-left"`
+
+Less common, useful for special indicators or LTR language contexts.
+
+- **When to use:** Status indicators, special markers, RTL layouts.
+- **Example:** Premium badge, verified indicator.
+
+<Example>
+  <div className="flex gap-6">
+    <BadgeAffix badge={<Badge intent="primary" size="sm">Pro</Badge>} position="top-left">
+      <div className="size-16 rounded-full bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="success" size="sm">✓</Badge>} position="top-left">
+      <Icon name="user" size="xl" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge intent="primary">Pro</Badge>} position="top-left">
+  <div className="size-16 rounded-full bg-grey-200" />
+</BadgeAffix>
+```
+
+### `position="bottom-right"`
+
+Good for action indicators or contextual badges.
+
+- **When to use:** Online status, action indicators, secondary information.
+- **Example:** User online status, camera icon on profile pictures.
+
+<Example>
+  <div className="flex gap-6">
+    <BadgeAffix badge={<Badge circle intent="success" size="sm">•</Badge>} position="bottom-right">
+      <div className="size-16 rounded-full bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="grey" size="sm"><Icon name="pencil" size="xs" /></Badge>} position="bottom-right">
+      <div className="size-16 rounded-full bg-grey-200 dark:bg-grey-800" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="success">•</Badge>} position="bottom-right">
+  <div className="size-16 rounded-full bg-grey-200" />
+</BadgeAffix>
+```
+
+### `position="bottom-left"`
+
+Mirrors bottom-right for specific design needs.
+
+- **When to use:** RTL layouts, specific design requirements.
+
+<Example>
+  <BadgeAffix badge={<Badge circle intent="warning" size="sm">!</Badge>} position="bottom-left">
+    <Icon name="user" size="xl" />
+  </BadgeAffix>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="warning">!</Badge>} position="bottom-left">
+  <Icon name="user" size="xl" />
+</BadgeAffix>
+```
+
+## Offset
+
+Fine-tune badge positioning with the `offset` prop for pixel-perfect placement.
+
+<Example>
+  <div className="flex gap-8">
+    <div className="flex flex-col items-center gap-2">
+      <BadgeAffix badge={<Badge circle intent="danger">5</Badge>}>
+        <Icon name="user" size="xl" />
+      </BadgeAffix>
+      <span className="text-xs text-grey-600">Default</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} offset={[4, 0]}>
+        <Icon name="user" size="xl" />
+      </BadgeAffix>
+      <span className="text-xs text-grey-600">offset={[4, 0]}</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} offset={[0, 4]}>
+        <Icon name="user" size="xl" />
+      </BadgeAffix>
+      <span className="text-xs text-grey-600">offset={[0, 4]}</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <BadgeAffix badge={<Badge circle intent="danger">5</Badge>} offset={[-2, -2]}>
+        <Icon name="user" size="xl" />
+      </BadgeAffix>
+      <span className="text-xs text-grey-600">offset={[-2, -2]}</span>
+    </div>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle>5</Badge>}>
+  <Icon name="user" size="xl" />
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge circle>5</Badge>} offset={[4, 0]}>
+  <Icon name="user" size="xl" />
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge circle>5</Badge>} offset={[0, 4]}>
+  <Icon name="user" size="xl" />
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge circle>5</Badge>} offset={[-2, -2]}>
+  <Icon name="user" size="xl" />
+</BadgeAffix>
+```
+
+## Common Use Cases
+
+### Notification Icons
+
+Display unread counts on navigation icons.
+
+<Example>
+  <div className="flex gap-4">
+    <BadgeAffix badge={<Badge circle intent="danger">12</Badge>}>
+      <Button iconOnly="user" intent="tertiary" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="primary">3</Badge>}>
+      <Button iconOnly="house" intent="tertiary" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="success">1</Badge>}>
+      <Button iconOnly="gear" intent="tertiary" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="danger">12</Badge>}>
+  <Button iconOnly="user" intent="tertiary" />
+</BadgeAffix>
+```
+
+### Status Indicators
+
+Show online status or verification badges.
+
+<Example>
+  <div className="flex gap-6">
+    <BadgeAffix badge={<Badge circle intent="success" size="sm">•</Badge>} position="bottom-right">
+      <div className="size-12 rounded-full bg-grey-300 dark:bg-grey-700" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="warning" size="sm">•</Badge>} position="bottom-right">
+      <div className="size-12 rounded-full bg-grey-300 dark:bg-grey-700" />
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge circle intent="grey" size="sm">•</Badge>} position="bottom-right">
+      <div className="size-12 rounded-full bg-grey-300 dark:bg-grey-700" />
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge circle intent="success">•</Badge>} position="bottom-right">
+  <div className="size-12 rounded-full bg-grey-300" />
+</BadgeAffix>
+```
+
+### Text Labels
+
+Add badges to text labels or menu items.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <BadgeAffix badge={<Badge intent="primary" size="sm">New</Badge>}>
+      <span className="text-base">Feature Updates</span>
+    </BadgeAffix>
+    <BadgeAffix badge={<Badge intent="danger" size="sm">3</Badge>}>
+      <span className="text-base">Notifications</span>
+    </BadgeAffix>
+  </div>
+</Example>
+
+```tsx
+<BadgeAffix badge={<Badge intent="primary" size="sm">New</Badge>}>
+  <span>Feature Updates</span>
+</BadgeAffix>
+
+<BadgeAffix badge={<Badge intent="danger" size="sm">3</Badge>}>
+  <span>Notifications</span>
+</BadgeAffix>
+```
+
+## Accessibility
+
+- BadgeAffix is purely presentational and uses `pointer-events-none` on the badge container
+- For interactive badges, ensure the wrapped element handles click events
+- Use semantic Badge intents (danger for errors/alerts, success for positive states)
+- Consider adding `aria-label` to the parent element when the badge provides important context
