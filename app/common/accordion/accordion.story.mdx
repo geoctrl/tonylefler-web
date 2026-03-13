@@ -1,0 +1,392 @@
+import { useState } from "react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Accordion',
+  category: 'components',
+  order: 1,
+};
+
+# Accordion
+
+A vertically stacked set of collapsible sections. Each section has a trigger header and a content area that expands and collapses with a smooth animation.
+
+## Import
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <Accordion>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What is root-ui?</AccordionTrigger>
+      <AccordionContent>
+        root-ui is a component library built with React and Tailwind CSS. It provides a set of accessible, reusable components for building modern web applications.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>How do I install it?</AccordionTrigger>
+      <AccordionContent>
+        Install root-ui by adding it to your project and importing components from the "root" alias. Components are tree-shakeable and fully typed.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>Does it support dark mode?</AccordionTrigger>
+      <AccordionContent>
+        Yes. All components support dark mode out of the box via Tailwind's dark mode utilities. Simply apply the dark class to your root element.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```tsx
+<Accordion>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What is root-ui?</AccordionTrigger>
+    <AccordionContent>
+      root-ui is a component library built with React and Tailwind CSS.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>How do I install it?</AccordionTrigger>
+    <AccordionContent>
+      Install root-ui by adding it to your project and importing components.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Props
+
+### `<Accordion>`
+
+<PropsTable props={[
+  {
+    name: "type",
+    type: '"single" | "multiple"',
+    description: 'Controls whether one or multiple items can be expanded at a time. Use "single" for FAQ-style and "multiple" for checklists or settings panels.',
+    default: '"single"',
+    required: false,
+  },
+  {
+    name: "defaultValue",
+    type: "string | string[]",
+    description: "The initially open item(s) in uncontrolled mode. Provide a string for type=\"single\", or an array of strings for type=\"multiple\".",
+    required: false,
+  },
+  {
+    name: "value",
+    type: "string | string[]",
+    description: "The controlled open item(s). Combine with onValueChange for fully controlled usage.",
+    required: false,
+  },
+  {
+    name: "onValueChange",
+    type: "(value: string | string[]) => void",
+    description: "Callback fired when the open items change. Receives a string for type=\"single\" or a string[] for type=\"multiple\".",
+    required: false,
+  },
+]} />
+
+### `<AccordionItem>`
+
+<PropsTable props={[
+  {
+    name: "value",
+    type: "string",
+    description: "Unique identifier for this item. Used to track and control its open/closed state.",
+    required: true,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "When true, the item cannot be expanded or collapsed.",
+    default: "false",
+    required: false,
+  },
+]} />
+
+### `<AccordionTrigger>`
+
+`<AccordionTrigger>` accepts all HTML `<button>` attributes. It automatically receives `aria-expanded` and `aria-controls` attributes.
+
+### `<AccordionContent>`
+
+`<AccordionContent>` accepts all HTML `<div>` attributes. It automatically receives `id`, `role="region"`, and `aria-labelledby` attributes.
+
+## Type
+
+### `type="single"` (default)
+
+Only one item can be open at a time. Opening a new item closes the previously open one. Use for FAQ lists, help sections, or navigation panels.
+
+<Example>
+  <Accordion type="single" defaultValue="billing">
+    <AccordionItem value="account">
+      <AccordionTrigger>Account settings</AccordionTrigger>
+      <AccordionContent>
+        Manage your profile, email address, and password. Changes take effect immediately after saving.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="billing">
+      <AccordionTrigger>Billing and payments</AccordionTrigger>
+      <AccordionContent>
+        View your current plan, update your payment method, and download past invoices from the billing portal.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="notifications">
+      <AccordionTrigger>Notification preferences</AccordionTrigger>
+      <AccordionContent>
+        Choose which events trigger email or push notifications. Unsubscribe from individual notification types without disabling all alerts.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```tsx
+<Accordion type="single" defaultValue="billing">
+  <AccordionItem value="account">
+    <AccordionTrigger>Account settings</AccordionTrigger>
+    <AccordionContent>
+      Manage your profile, email address, and password.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="billing">
+    <AccordionTrigger>Billing and payments</AccordionTrigger>
+    <AccordionContent>
+      View your current plan and download past invoices.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### `type="multiple"`
+
+Multiple items can be open simultaneously. Use for feature checklists, settings panels, or any content where users benefit from comparing sections side by side.
+
+<Example>
+  <Accordion type="multiple" defaultValue={["format", "export"]}>
+    <AccordionItem value="format">
+      <AccordionTrigger>Formatting options</AccordionTrigger>
+      <AccordionContent>
+        Adjust font size, line height, and paragraph spacing. These settings apply to the entire document unless a selection is active.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="export">
+      <AccordionTrigger>Export settings</AccordionTrigger>
+      <AccordionContent>
+        Choose between PDF, Word, and plain-text export formats. PDF export preserves all formatting and embedded images.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="sharing">
+      <AccordionTrigger>Sharing and permissions</AccordionTrigger>
+      <AccordionContent>
+        Control who can view or edit this document. Shared links can be set to expire after a specified date.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```tsx
+<Accordion type="multiple" defaultValue={["format", "export"]}>
+  <AccordionItem value="format">
+    <AccordionTrigger>Formatting options</AccordionTrigger>
+    <AccordionContent>
+      Adjust font size, line height, and paragraph spacing.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="export">
+    <AccordionTrigger>Export settings</AccordionTrigger>
+    <AccordionContent>
+      Choose between PDF, Word, and plain-text export formats.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Default Open
+
+Use `defaultValue` to open one or more items on initial render without controlling state yourself.
+
+<Example>
+  <Accordion defaultValue="getting-started">
+    <AccordionItem value="getting-started">
+      <AccordionTrigger>Getting started</AccordionTrigger>
+      <AccordionContent>
+        This item is open by default because its value matches the defaultValue prop on the Accordion root.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="advanced">
+      <AccordionTrigger>Advanced configuration</AccordionTrigger>
+      <AccordionContent>
+        Advanced configuration topics are covered in the full documentation.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```tsx
+<Accordion defaultValue="getting-started">
+  <AccordionItem value="getting-started">
+    <AccordionTrigger>Getting started</AccordionTrigger>
+    <AccordionContent>This item is open by default.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Controlled
+
+Use `value` and `onValueChange` to manage open state from your own code.
+
+export function ControlledExample() {
+  const [openItem, setOpenItem] = useState("");
+  return (
+    <div className="space-y-3">
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => setOpenItem("step-1")}
+          className="rounded-md border border-grey-900/20 dark:border-grey-100/20 px-3 py-1.5 text-sm text-grey-700 dark:text-grey-300 hover:bg-grey-900/5 dark:hover:bg-grey-100/5 transition-colors"
+        >
+          Open Step 1
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpenItem("step-2")}
+          className="rounded-md border border-grey-900/20 dark:border-grey-100/20 px-3 py-1.5 text-sm text-grey-700 dark:text-grey-300 hover:bg-grey-900/5 dark:hover:bg-grey-100/5 transition-colors"
+        >
+          Open Step 2
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpenItem("")}
+          className="rounded-md border border-grey-900/20 dark:border-grey-100/20 px-3 py-1.5 text-sm text-grey-700 dark:text-grey-300 hover:bg-grey-900/5 dark:hover:bg-grey-100/5 transition-colors"
+        >
+          Close All
+        </button>
+      </div>
+      <Accordion value={openItem} onValueChange={(v) => setOpenItem(v)}>
+        <AccordionItem value="step-1">
+          <AccordionTrigger>Step 1: Choose a plan</AccordionTrigger>
+          <AccordionContent>
+            Select the plan that fits your team size. You can upgrade or downgrade at any time from your billing settings.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="step-2">
+          <AccordionTrigger>Step 2: Add team members</AccordionTrigger>
+          <AccordionContent>
+            Invite collaborators by email. Team members receive an invitation link valid for 48 hours.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}
+
+<Example>
+  <ControlledExample />
+</Example>
+
+```tsx
+function ControlledExample() {
+  const [openItem, setOpenItem] = useState("");
+
+  return (
+    <Accordion value={openItem} onValueChange={(v) => setOpenItem(v)}>
+      <AccordionItem value="step-1">
+        <AccordionTrigger>Step 1: Choose a plan</AccordionTrigger>
+        <AccordionContent>
+          Select the plan that fits your team size.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="step-2">
+        <AccordionTrigger>Step 2: Add team members</AccordionTrigger>
+        <AccordionContent>
+          Invite collaborators by email.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+
+## Disabled Items
+
+Set `disabled` on an `AccordionItem` to prevent it from being expanded or collapsed.
+
+<Example>
+  <Accordion>
+    <AccordionItem value="available">
+      <AccordionTrigger>Available feature</AccordionTrigger>
+      <AccordionContent>
+        This feature is available on your current plan.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="locked" disabled>
+      <AccordionTrigger>Pro feature (locked)</AccordionTrigger>
+      <AccordionContent>
+        Upgrade to Pro to access this feature.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="another">
+      <AccordionTrigger>Another available feature</AccordionTrigger>
+      <AccordionContent>
+        This feature is also available on your current plan.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```tsx
+<Accordion>
+  <AccordionItem value="available">
+    <AccordionTrigger>Available feature</AccordionTrigger>
+    <AccordionContent>This feature is available on your current plan.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="locked" disabled>
+    <AccordionTrigger>Pro feature (locked)</AccordionTrigger>
+    <AccordionContent>Upgrade to Pro to access this feature.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## When to Use
+
+**Use an Accordion when:**
+- Content can be grouped into distinct, labeled sections
+- Users typically need only one or two sections at a time (reducing visual noise)
+- You need to conserve vertical space on long pages
+- Presenting FAQ lists, settings panels, or step-by-step guides
+
+**Prefer visible content when:**
+- Users frequently need all sections simultaneously
+- The content of each section is very short (one or two lines)
+- SEO requires all content to be visible to crawlers
+
+## Accessibility
+
+The Accordion is built to meet [WAI-ARIA Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) requirements:
+
+- Each trigger is a `<button>` element with `aria-expanded` reflecting open state
+- Each trigger has `aria-controls` pointing to the content region's `id`
+- Each content region has `role="region"` and `aria-labelledby` pointing to its trigger
+- Keyboard interaction: `Tab` to move focus between triggers; `Enter` or `Space` to toggle
+
+```tsx
+// The rendered HTML structure (simplified):
+<div> {/* Accordion root */}
+  <div> {/* AccordionItem */}
+    <button aria-expanded="true" aria-controls="content-id">
+      Trigger label
+    </button>
+    <div id="content-id" role="region" aria-labelledby="trigger-id">
+      Content
+    </div>
+  </div>
+</div>
+```

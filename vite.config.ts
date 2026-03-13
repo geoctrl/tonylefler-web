@@ -26,7 +26,6 @@ export default defineConfig(async () => {
         fileName: "icons.svg",
         formatter: "prettier",
         iconNameTransformer: (fileName) => kebabCase(fileName),
-        pathToPublicDir: path.resolve(__dirname, "public"),
       }),
       {
         ...mdx({
@@ -54,7 +53,7 @@ export default defineConfig(async () => {
     server: {
       port: 3000,
       watch: {
-        ignored: ['!**/icons/**'],
+        ignored: ["!**/icons/**"],
       },
     },
     clearScreen: false,

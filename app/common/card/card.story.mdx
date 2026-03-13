@@ -1,0 +1,453 @@
+import { Card, CardHeader, CardBody, CardFooter } from "./card";
+import { Button } from "../button/button";
+import { Icon } from "../icon/icon";
+import { Badge } from "../badge/badge";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Card',
+  category: 'components',
+  order: 3
+};
+
+# Card
+
+A surface container for grouping related content with consistent border, shadow, and padding treatment.
+
+## Import
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <Card className="w-80">
+    <CardHeader>
+      <span className="font-semibold text-grey-900 dark:text-grey-100">Account Settings</span>
+    </CardHeader>
+    <CardBody>
+      <p className="text-grey-700 dark:text-grey-300 text-sm">Manage your account preferences and security settings.</p>
+    </CardBody>
+    <CardFooter>
+      <Button intent="primary" formSize="sm">Save Changes</Button>
+    </CardFooter>
+  </Card>
+</Example>
+
+```tsx
+<Card>
+  <CardHeader>
+    <span className="font-semibold">Account Settings</span>
+  </CardHeader>
+  <CardBody>
+    <p>Manage your account preferences and security settings.</p>
+  </CardBody>
+  <CardFooter>
+    <Button intent="primary" formSize="sm">Save Changes</Button>
+  </CardFooter>
+</Card>
+```
+
+## Props
+
+### `<Card>`
+
+`<Card>` accepts all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "variant",
+    type: '"elevated" | "outlined" | "filled"',
+    description: "Visual style of the card surface",
+    default: '"elevated"',
+    required: false,
+  },
+]} />
+
+### `<CardBody>`
+
+`<CardBody>` accepts all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "padding",
+    type: '"none" | "sm" | "md" | "lg"',
+    description: "Internal padding of the card body",
+    default: '"md"',
+    required: false,
+  },
+]} />
+
+### `<CardHeader>` and `<CardFooter>`
+
+Both accept all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes). They include a border separator and consistent horizontal padding by default.
+
+## Variant
+
+### `variant="elevated"` (default)
+
+A white card with a shadow. Use for primary content surfaces that need to stand out from the page background.
+
+- **When to use:** Dashboard widgets, detail panels, primary content blocks.
+
+<Example>
+  <Card variant="elevated" className="w-80">
+    <CardBody>
+      <p className="text-grey-700 dark:text-grey-300 text-sm">This card uses a shadow to lift above the background.</p>
+    </CardBody>
+  </Card>
+</Example>
+
+```tsx
+<Card variant="elevated">
+  <CardBody>
+    <p>This card uses a shadow to lift above the background.</p>
+  </CardBody>
+</Card>
+```
+
+### `variant="outlined"`
+
+A card with a visible border and no shadow. Use when you want clear separation without depth.
+
+- **When to use:** Lists of items, comparison tables, secondary content areas.
+
+<Example>
+  <Card variant="outlined" className="w-80">
+    <CardBody>
+      <p className="text-grey-700 dark:text-grey-300 text-sm">This card uses a border instead of a shadow.</p>
+    </CardBody>
+  </Card>
+</Example>
+
+```tsx
+<Card variant="outlined">
+  <CardBody>
+    <p>This card uses a border instead of a shadow.</p>
+  </CardBody>
+</Card>
+```
+
+### `variant="filled"`
+
+A card with a muted background fill and no border or shadow. Use for subtle grouping inside another surface.
+
+- **When to use:** Nested content blocks, sidebar sections, inline callouts.
+
+<Example>
+  <Card variant="filled" className="w-80">
+    <CardBody>
+      <p className="text-grey-700 dark:text-grey-300 text-sm">This card uses a filled background for subtle grouping.</p>
+    </CardBody>
+  </Card>
+</Example>
+
+```tsx
+<Card variant="filled">
+  <CardBody>
+    <p>This card uses a filled background for subtle grouping.</p>
+  </CardBody>
+</Card>
+```
+
+### All Variants Side by Side
+
+<Example>
+  <div className="flex flex-wrap gap-4">
+    <Card variant="elevated" className="w-56">
+      <CardBody padding="sm">
+        <p className="text-sm font-medium text-grey-900 dark:text-grey-100">Elevated</p>
+        <p className="text-xs text-grey-600 dark:text-grey-400 mt-1">Shadow surface</p>
+      </CardBody>
+    </Card>
+    <Card variant="outlined" className="w-56">
+      <CardBody padding="sm">
+        <p className="text-sm font-medium text-grey-900 dark:text-grey-100">Outlined</p>
+        <p className="text-xs text-grey-600 dark:text-grey-400 mt-1">Border surface</p>
+      </CardBody>
+    </Card>
+    <Card variant="filled" className="w-56">
+      <CardBody padding="sm">
+        <p className="text-sm font-medium text-grey-900 dark:text-grey-100">Filled</p>
+        <p className="text-xs text-grey-600 dark:text-grey-400 mt-1">Muted background</p>
+      </CardBody>
+    </Card>
+  </div>
+</Example>
+
+```tsx
+<Card variant="elevated">...</Card>
+<Card variant="outlined">...</Card>
+<Card variant="filled">...</Card>
+```
+
+## CardBody Padding
+
+Control the internal spacing of the card body with the `padding` prop.
+
+<Example>
+  <div className="flex flex-wrap gap-4">
+    <Card variant="outlined" className="w-40">
+      <CardBody padding="none">
+        <div className="bg-grey-100 dark:bg-grey-700 text-xs text-center text-grey-600 dark:text-grey-300 py-4">padding="none"</div>
+      </CardBody>
+    </Card>
+    <Card variant="outlined" className="w-40">
+      <CardBody padding="sm">
+        <div className="bg-grey-100 dark:bg-grey-700 text-xs text-center text-grey-600 dark:text-grey-300 py-2">padding="sm"</div>
+      </CardBody>
+    </Card>
+    <Card variant="outlined" className="w-40">
+      <CardBody padding="md">
+        <div className="bg-grey-100 dark:bg-grey-700 text-xs text-center text-grey-600 dark:text-grey-300 py-2">padding="md"</div>
+      </CardBody>
+    </Card>
+    <Card variant="outlined" className="w-40">
+      <CardBody padding="lg">
+        <div className="bg-grey-100 dark:bg-grey-700 text-xs text-center text-grey-600 dark:text-grey-300 py-2">padding="lg"</div>
+      </CardBody>
+    </Card>
+  </div>
+</Example>
+
+```tsx
+<CardBody padding="none">...</CardBody>
+<CardBody padding="sm">...</CardBody>
+<CardBody padding="md">...</CardBody>
+<CardBody padding="lg">...</CardBody>
+```
+
+## With Header and Footer
+
+Use `CardHeader` and `CardFooter` to add titled sections and action areas with automatic border separators.
+
+<Example>
+  <Card className="w-80">
+    <CardHeader>
+      <div className="flex items-center gap-2">
+        <Icon name="user" className="size-4 text-grey-600 dark:text-grey-400" />
+        <span className="font-semibold text-grey-900 dark:text-grey-100">User Profile</span>
+      </div>
+    </CardHeader>
+    <CardBody>
+      <p className="text-sm text-grey-700 dark:text-grey-300">Update your personal information and how it appears across the platform.</p>
+    </CardBody>
+    <CardFooter className="gap-2">
+      <Button intent="primary" formSize="sm">Save Changes</Button>
+      <Button intent="secondary" formSize="sm">Cancel</Button>
+    </CardFooter>
+  </Card>
+</Example>
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center gap-2">
+      <Icon name="user" className="size-4" />
+      <span className="font-semibold">User Profile</span>
+    </div>
+  </CardHeader>
+  <CardBody>
+    <p>Update your personal information...</p>
+  </CardBody>
+  <CardFooter className="gap-2">
+    <Button intent="primary" formSize="sm">Save Changes</Button>
+    <Button intent="secondary" formSize="sm">Cancel</Button>
+  </CardFooter>
+</Card>
+```
+
+## Composition Examples
+
+### Stat Card
+
+<Example>
+  <div className="flex gap-4 flex-wrap">
+    <Card variant="elevated" className="w-52">
+      <CardBody>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-medium text-grey-500 dark:text-grey-400 uppercase tracking-wide">Downloads</span>
+          <Icon name="download" className="size-4 text-grey-400 dark:text-grey-500" />
+        </div>
+        <p className="text-2xl font-bold text-grey-900 dark:text-grey-100">24,591</p>
+        <p className="text-xs text-grey-500 dark:text-grey-400 mt-1">+12% from last month</p>
+      </CardBody>
+    </Card>
+    <Card variant="elevated" className="w-52">
+      <CardBody>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-medium text-grey-500 dark:text-grey-400 uppercase tracking-wide">Stars</span>
+          <Icon name="star" className="size-4 text-grey-400 dark:text-grey-500" />
+        </div>
+        <p className="text-2xl font-bold text-grey-900 dark:text-grey-100">1,408</p>
+        <p className="text-xs text-grey-500 dark:text-grey-400 mt-1">+3% from last month</p>
+      </CardBody>
+    </Card>
+  </div>
+</Example>
+
+```tsx
+<Card variant="elevated">
+  <CardBody>
+    <div className="flex items-center justify-between mb-3">
+      <span className="text-xs font-medium uppercase tracking-wide">Downloads</span>
+      <Icon name="download" className="size-4" />
+    </div>
+    <p className="text-2xl font-bold">24,591</p>
+    <p className="text-xs mt-1">+12% from last month</p>
+  </CardBody>
+</Card>
+```
+
+### Profile Card
+
+<Example>
+  <Card variant="outlined" className="w-72">
+    <CardBody>
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex size-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900">
+          <Icon name="user" className="size-5 text-primary-600 dark:text-primary-300" />
+        </div>
+        <div>
+          <p className="font-semibold text-grey-900 dark:text-grey-100 text-sm">Jane Smith</p>
+          <p className="text-xs text-grey-500 dark:text-grey-400">Product Designer</p>
+        </div>
+        <Badge intent="success" size="sm" className="ml-auto">Active</Badge>
+      </div>
+      <div className="flex gap-2">
+        <Button formSize="sm" intent="primary" block>View Profile</Button>
+        <Button formSize="sm" intent="secondary" iconOnly="share" />
+      </div>
+    </CardBody>
+  </Card>
+</Example>
+
+```tsx
+<Card variant="outlined">
+  <CardBody>
+    <div className="flex items-center gap-3 mb-4">
+      <div className="flex size-10 items-center justify-center rounded-full bg-primary-100">
+        <Icon name="user" className="size-5 text-primary-600" />
+      </div>
+      <div>
+        <p className="font-semibold text-sm">Jane Smith</p>
+        <p className="text-xs text-grey-500">Product Designer</p>
+      </div>
+      <Badge intent="success" size="sm">Active</Badge>
+    </div>
+    <div className="flex gap-2">
+      <Button formSize="sm" intent="primary" block>View Profile</Button>
+      <Button formSize="sm" intent="secondary" iconOnly="share" />
+    </div>
+  </CardBody>
+</Card>
+```
+
+### Action Card with Danger Footer
+
+<Example>
+  <Card variant="outlined" className="w-80">
+    <CardHeader>
+      <span className="font-semibold text-grey-900 dark:text-grey-100">Delete Account</span>
+    </CardHeader>
+    <CardBody>
+      <p className="text-sm text-grey-700 dark:text-grey-300">Permanently delete your account and all associated data. This action cannot be undone.</p>
+    </CardBody>
+    <CardFooter>
+      <Button intent="primary" formSize="sm" iconLeft="trash-can">Delete Account</Button>
+    </CardFooter>
+  </Card>
+</Example>
+
+```tsx
+<Card variant="outlined">
+  <CardHeader>
+    <span className="font-semibold">Delete Account</span>
+  </CardHeader>
+  <CardBody>
+    <p>Permanently delete your account and all associated data.</p>
+  </CardBody>
+  <CardFooter>
+    <Button intent="primary" formSize="sm" iconLeft="trash-can">Delete Account</Button>
+  </CardFooter>
+</Card>
+```
+
+### File Card
+
+<Example>
+  <div className="flex flex-wrap gap-3">
+    <Card variant="elevated" className="w-48">
+      <CardBody padding="sm">
+        <div className="flex items-center gap-2">
+          <Icon name="file-pdf" className="size-5 text-danger-500 dark:text-danger-400" />
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-grey-900 dark:text-grey-100 truncate">Report Q4.pdf</p>
+            <p className="text-xs text-grey-500 dark:text-grey-400">2.4 MB</p>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+    <Card variant="elevated" className="w-48">
+      <CardBody padding="sm">
+        <div className="flex items-center gap-2">
+          <Icon name="file-excel" className="size-5 text-success-600 dark:text-success-400" />
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-grey-900 dark:text-grey-100 truncate">Budget 2026.xlsx</p>
+            <p className="text-xs text-grey-500 dark:text-grey-400">840 KB</p>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+  </div>
+</Example>
+
+```tsx
+<Card variant="elevated">
+  <CardBody padding="sm">
+    <div className="flex items-center gap-2">
+      <Icon name="file-pdf" className="size-5 text-danger-500" />
+      <div>
+        <p className="text-sm font-medium truncate">Report Q4.pdf</p>
+        <p className="text-xs text-grey-500">2.4 MB</p>
+      </div>
+    </div>
+  </CardBody>
+</Card>
+```
+
+## Dark Mode
+
+All card variants automatically adapt to dark mode using Tailwind's `dark:` classes.
+
+<Example>
+  <div className="flex flex-wrap gap-4">
+    <Card variant="elevated" className="w-56">
+      <CardHeader>
+        <span className="font-semibold text-grey-900 dark:text-grey-100 text-sm">Elevated</span>
+      </CardHeader>
+      <CardBody padding="sm">
+        <p className="text-xs text-grey-600 dark:text-grey-400">Shadow on light, deep shadow on dark.</p>
+      </CardBody>
+    </Card>
+    <Card variant="outlined" className="w-56">
+      <CardHeader>
+        <span className="font-semibold text-grey-900 dark:text-grey-100 text-sm">Outlined</span>
+      </CardHeader>
+      <CardBody padding="sm">
+        <p className="text-xs text-grey-600 dark:text-grey-400">Border adapts to dark mode contrast.</p>
+      </CardBody>
+    </Card>
+    <Card variant="filled" className="w-56">
+      <CardHeader>
+        <span className="font-semibold text-grey-900 dark:text-grey-100 text-sm">Filled</span>
+      </CardHeader>
+      <CardBody padding="sm">
+        <p className="text-xs text-grey-600 dark:text-grey-400">Darker fill on dark mode backgrounds.</p>
+      </CardBody>
+    </Card>
+  </div>
+</Example>

@@ -1,4 +1,4 @@
-import { always } from "../../utils/classname-helpers";
+import { always } from "~/utils/classname-helpers";
 import { tv } from "tailwind-variants";
 
 export const buttonVariants = tv({

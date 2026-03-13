@@ -128,26 +128,37 @@ Icons automatically inherit text color from their parent element via `fill-curre
 
 ### Inheriting Text Color
 
+{
 <Example>
   <div className="flex gap-6 items-center">
     <div className="text-grey-900 dark:text-grey-100">
-      <Icon name="heart" className="size-6" />
+      <Icon name="star" className="size-6" />
     </div>
     <div className="text-primary-500">
-      <Icon name="heart" className="size-6" />
+      <Icon name="star" className="size-6" />
     </div>
     <div className="text-danger-500">
-      <Icon name="heart" className="size-6" />
+      <Icon name="star" className="size-6" />
     </div>
     <div className="text-success-500">
-      <Icon name="heart" className="size-6" />
+      <Icon name="star" className="size-6" />
     </div>
   </div>
 </Example>
+}
 
 ```tsx
+<div className="text-grey-900 dark:text-grey-100">
+  <Icon name="star" />
+</div>
 <div className="text-primary-500">
-  <Icon name="heart" />
+  <Icon name="star" />
+</div>
+<div className="text-danger-500">
+  <Icon name="star" />
+</div>
+<div className="text-success-500">
+  <Icon name="star" />
 </div>
 ```
 
@@ -177,14 +188,14 @@ Icons work seamlessly with other components like Button.
 <Example>
   <div className="flex gap-2">
     <Button iconLeft="star">Favorite</Button>
-    <Button iconRight="arrow-right">Next</Button>
+    <Button iconRight="angle-right">Next</Button>
     <Button iconOnly="gear" />
   </div>
 </Example>
 
 ```tsx
 <Button iconLeft="star">Favorite</Button>
-<Button iconRight="arrow-right">Next</Button>
+<Button iconRight="angle-right">Next</Button>
 <Button iconOnly="gear" />
 ```
 
@@ -192,6 +203,7 @@ Icons work seamlessly with other components like Button.
 
 Icons display inline by default, making them easy to use within text content.
 
+{
 <Example>
   <div className="text-grey-900 dark:text-grey-100">
     <p className="flex items-center gap-2">
@@ -199,6 +211,7 @@ Icons display inline by default, making them easy to use within text content.
     </p>
   </div>
 </Example>
+}
 
 ```tsx
 <p className="flex items-center gap-2">
@@ -210,13 +223,15 @@ Icons display inline by default, making them easy to use within text content.
 
 ### Icon Buttons
 
+{
 <Example>
   <div className="flex gap-2">
     <Button iconOnly="magnifying-glass" intent="secondary" />
-    <Button iconOnly="bell" intent="secondary" />
+    <Button iconOnly="bars" intent="secondary" />
     <Button iconOnly="user" intent="secondary" />
   </div>
 </Example>
+}
 
 ```tsx
 <Button iconOnly="magnifying-glass" intent="secondary" />
@@ -224,14 +239,15 @@ Icons display inline by default, making them easy to use within text content.
 
 ### Icon Lists
 
+{
 <Example>
   <div className="space-y-2">
     <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
-      <Icon name="check" className="text-success-500" />
+      <Icon name="check-small" className="text-success-500" />
       <span>Feature enabled</span>
     </div>
     <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
-      <Icon name="check" className="text-success-500" />
+      <Icon name="check-small" className="text-success-500" />
       <span>Email notifications active</span>
     </div>
     <div className="flex items-center gap-2 text-grey-900 dark:text-grey-100">
@@ -240,16 +256,18 @@ Icons display inline by default, making them easy to use within text content.
     </div>
   </div>
 </Example>
+}
 
 ```tsx
 <div className="flex items-center gap-2">
-  <Icon name="check" className="text-success-500" />
+  <Icon name="check-small" className="text-success-500" />
   <span>Feature enabled</span>
 </div>
 ```
 
 ### Navigation Icons
 
+{
 <Example>
   <div className="flex gap-2">
     <Button intent="tertiary" iconLeft="house">Home</Button>
@@ -257,6 +275,7 @@ Icons display inline by default, making them easy to use within text content.
     <Button intent="tertiary" iconLeft="gear">Settings</Button>
   </div>
 </Example>
+}
 
 ```tsx
 <Button intent="tertiary" iconLeft="house">Home</Button>

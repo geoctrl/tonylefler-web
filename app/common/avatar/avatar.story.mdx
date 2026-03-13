@@ -1,0 +1,333 @@
+import { Avatar } from "./avatar";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Avatar',
+  category: 'components',
+  order: 1
+};
+
+# Avatar
+
+A user representation component that displays a profile image with graceful fallbacks to initials or an icon.
+
+## Import
+
+```tsx
+import { Avatar } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex gap-3 items-center">
+    <Avatar name="Alice Johnson" />
+    <Avatar name="Bob Smith" />
+    <Avatar name="Carol White" />
+  </div>
+</Example>
+
+```tsx
+<Avatar name="Alice Johnson" />
+<Avatar name="Bob Smith" />
+<Avatar name="Carol White" />
+```
+
+## Props
+
+`<Avatar>` accepts all [HTML span attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "src",
+    type: "string",
+    description: "URL of the avatar image. Falls back to initials or icon when omitted or on load error.",
+    required: false,
+  },
+  {
+    name: "alt",
+    type: "string",
+    description: "Alt text for the avatar image. Also used as the accessible label when showing initials.",
+    required: false,
+  },
+  {
+    name: "name",
+    type: "string",
+    description: "Full name of the person. Used to generate initials and determine the deterministic fallback background color.",
+    required: false,
+  },
+  {
+    name: "size",
+    type: '"xs" | "sm" | "md" | "lg" | "xl"',
+    description: "Size of the avatar.",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "shape",
+    type: '"circle" | "square"',
+    description: "Shape of the avatar.",
+    default: '"circle"',
+    required: false,
+  },
+  {
+    name: "icon",
+    type: "Icons",
+    description: 'Icon name to display when no image and no name are provided. Defaults to "user".',
+    default: '"user"',
+    required: false,
+  },
+]} />
+
+## With Image
+
+Provide a `src` URL to display a profile photo. If the image fails to load, the avatar falls back to initials or icon automatically.
+
+<Example>
+  <div className="flex gap-3 items-center">
+    <Avatar
+      src="https://i.pravatar.cc/150?img=1"
+      alt="Jane Doe"
+      name="Jane Doe"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=2"
+      alt="Mark Taylor"
+      name="Mark Taylor"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=3"
+      alt="Sarah Chen"
+      name="Sarah Chen"
+    />
+  </div>
+</Example>
+
+```tsx
+<Avatar
+  src="https://i.pravatar.cc/150?img=1"
+  alt="Jane Doe"
+  name="Jane Doe"
+/>
+```
+
+## Initials Fallback
+
+When no `src` is provided (or the image fails to load), the avatar shows initials derived from the `name` prop. Two initials are shown for multi-word names (first and last).
+
+<Example>
+  <div className="flex gap-3 items-center">
+    <Avatar name="Alice Johnson" />
+    <Avatar name="Bob Smith" />
+    <Avatar name="Carol White" />
+    <Avatar name="David" />
+    <Avatar name="Emma Rose Taylor" />
+  </div>
+</Example>
+
+```tsx
+<Avatar name="Alice Johnson" />   {/* → AJ */}
+<Avatar name="Bob Smith" />       {/* → BS */}
+<Avatar name="David" />           {/* → D  */}
+<Avatar name="Emma Rose Taylor" /> {/* → ET */}
+```
+
+## Icon Fallback
+
+When neither `src` nor `name` is provided, a generic icon is displayed. Use the `icon` prop to choose an alternative icon.
+
+<Example>
+  <div className="flex gap-3 items-center">
+    <Avatar />
+    <Avatar icon="user" />
+    <Avatar icon="person-to-portal" />
+  </div>
+</Example>
+
+```tsx
+<Avatar />
+<Avatar icon="user" />
+<Avatar icon="person-to-portal" />
+```
+
+## Size
+
+Five sizes to fit different contexts — from compact list items to prominent profile headers.
+
+<Example>
+  <div className="flex gap-3 items-end">
+    <Avatar name="Alice Johnson" size="xs" />
+    <Avatar name="Alice Johnson" size="sm" />
+    <Avatar name="Alice Johnson" size="md" />
+    <Avatar name="Alice Johnson" size="lg" />
+    <Avatar name="Alice Johnson" size="xl" />
+  </div>
+</Example>
+
+```tsx
+<Avatar name="Alice Johnson" size="xs" />
+<Avatar name="Alice Johnson" size="sm" />
+<Avatar name="Alice Johnson" size="md" />
+<Avatar name="Alice Johnson" size="lg" />
+<Avatar name="Alice Johnson" size="xl" />
+```
+
+Size also applies to image and icon variants:
+
+<Example>
+  <div className="flex gap-3 items-end">
+    <Avatar src="https://i.pravatar.cc/150?img=5" alt="User" size="xs" />
+    <Avatar src="https://i.pravatar.cc/150?img=5" alt="User" size="sm" />
+    <Avatar src="https://i.pravatar.cc/150?img=5" alt="User" size="md" />
+    <Avatar src="https://i.pravatar.cc/150?img=5" alt="User" size="lg" />
+    <Avatar src="https://i.pravatar.cc/150?img=5" alt="User" size="xl" />
+  </div>
+</Example>
+
+```tsx
+<Avatar src="..." alt="User" size="xs" />
+<Avatar src="..." alt="User" size="sm" />
+<Avatar src="..." alt="User" size="md" />
+<Avatar src="..." alt="User" size="lg" />
+<Avatar src="..." alt="User" size="xl" />
+```
+
+## Shape
+
+Use `shape="square"` for non-person entities such as organizations, bots, or workspace icons.
+
+<Example>
+  <div className="flex gap-3 items-center">
+    <Avatar name="Acme Corp" shape="square" />
+    <Avatar name="Root UI" shape="square" />
+    <Avatar src="https://i.pravatar.cc/150?img=8" alt="Workspace" shape="square" />
+    <Avatar icon="folder-open" shape="square" />
+  </div>
+</Example>
+
+```tsx
+<Avatar name="Acme Corp" shape="square" />
+<Avatar src="..." alt="Workspace" shape="square" />
+<Avatar icon="folder-open" shape="square" />
+```
+
+## Deterministic Colors
+
+When showing initials, the background color is deterministic — the same name always produces the same color. This ensures visual consistency across page loads and sessions.
+
+<Example>
+  <div className="flex gap-3 items-center flex-wrap">
+    <Avatar name="Alice Johnson" />
+    <Avatar name="Bob Smith" />
+    <Avatar name="Carol White" />
+    <Avatar name="David Brown" />
+    <Avatar name="Emma Davis" />
+    <Avatar name="Frank Wilson" />
+  </div>
+</Example>
+
+```tsx
+<Avatar name="Alice Johnson" />
+<Avatar name="Bob Smith" />
+<Avatar name="Carol White" />
+<Avatar name="David Brown" />
+<Avatar name="Emma Davis" />
+<Avatar name="Frank Wilson" />
+```
+
+## Common Patterns
+
+### User Profile Header
+
+<Example>
+  <div className="flex items-center gap-3">
+    <Avatar src="https://i.pravatar.cc/150?img=10" alt="Sarah Chen" name="Sarah Chen" size="lg" />
+    <div>
+      <p className="font-medium text-grey-900 dark:text-grey-100">Sarah Chen</p>
+      <p className="text-sm text-grey-500 dark:text-grey-400">Product Designer</p>
+    </div>
+  </div>
+</Example>
+
+```tsx
+<div className="flex items-center gap-3">
+  <Avatar src="..." alt="Sarah Chen" name="Sarah Chen" size="lg" />
+  <div>
+    <p className="font-medium">Sarah Chen</p>
+    <p className="text-sm text-grey-500">Product Designer</p>
+  </div>
+</div>
+```
+
+### Avatar Group
+
+Stack avatars to represent multiple users.
+
+<Example>
+  <div className="flex -space-x-2">
+    <Avatar src="https://i.pravatar.cc/150?img=11" alt="User 1" size="sm" className="ring-2 ring-grey-10 dark:ring-grey-900" />
+    <Avatar src="https://i.pravatar.cc/150?img=12" alt="User 2" size="sm" className="ring-2 ring-grey-10 dark:ring-grey-900" />
+    <Avatar name="Carol White" size="sm" className="ring-2 ring-grey-10 dark:ring-grey-900" />
+    <Avatar name="David Brown" size="sm" className="ring-2 ring-grey-10 dark:ring-grey-900" />
+    <Avatar name="+3" size="sm" className="ring-2 ring-grey-10 dark:ring-grey-900 bg-grey-150 dark:bg-grey-700 text-grey-700 dark:text-grey-200" />
+  </div>
+</Example>
+
+```tsx
+<div className="flex -space-x-2">
+  <Avatar src="..." alt="User 1" size="sm" className="ring-2 ring-white" />
+  <Avatar src="..." alt="User 2" size="sm" className="ring-2 ring-white" />
+  <Avatar name="Carol White" size="sm" className="ring-2 ring-white" />
+  <Avatar name="+3" size="sm" className="ring-2 ring-white" />
+</div>
+```
+
+### Comment Thread
+
+<Example>
+  <div className="space-y-3">
+    <div className="flex gap-2">
+      <Avatar name="Alice Johnson" size="sm" />
+      <div className="flex-1 rounded-md bg-grey-50 dark:bg-grey-800 px-3 py-2">
+        <p className="text-sm font-medium text-grey-900 dark:text-grey-100">Alice Johnson</p>
+        <p className="text-sm text-grey-600 dark:text-grey-400">Looks great! Let's ship this.</p>
+      </div>
+    </div>
+    <div className="flex gap-2">
+      <Avatar name="Bob Smith" size="sm" />
+      <div className="flex-1 rounded-md bg-grey-50 dark:bg-grey-800 px-3 py-2">
+        <p className="text-sm font-medium text-grey-900 dark:text-grey-100">Bob Smith</p>
+        <p className="text-sm text-grey-600 dark:text-grey-400">Agreed, one small nit though.</p>
+      </div>
+    </div>
+  </div>
+</Example>
+
+```tsx
+<div className="flex gap-2">
+  <Avatar name="Alice Johnson" size="sm" />
+  <div className="rounded-md bg-grey-50 px-3 py-2">
+    <p className="font-medium">Alice Johnson</p>
+    <p>Looks great! Let's ship this.</p>
+  </div>
+</div>
+```
+
+## Accessibility
+
+- The `<Avatar>` renders as a `<span>` with `role="img"`.
+- The accessible label is taken from `alt` if provided, then `name`, and defaults to `"Avatar"`.
+- Inner fallback content (initials, icon) uses `aria-hidden="true"` to avoid double-reading by screen readers.
+- Always provide a meaningful `alt` or `name` so assistive technology can identify the user.
+
+```tsx
+{/* Preferred — descriptive label */}
+<Avatar src="..." alt="Jane Doe" name="Jane Doe" />
+
+{/* Acceptable — name used as label */}
+<Avatar name="Jane Doe" />
+
+{/* When anonymous, override the label */}
+<Avatar aria-label="Anonymous user" />
+```

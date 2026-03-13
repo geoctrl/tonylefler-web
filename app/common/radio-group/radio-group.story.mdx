@@ -1,0 +1,439 @@
+import { useState } from "react";
+import { RadioGroup, Radio } from "./radio-group";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Radio Group',
+  category: 'components',
+  order: 10
+};
+
+# Radio Group
+
+A group of radio inputs that allows a user to select exactly one option from a set.
+
+## Import
+
+```tsx
+import { RadioGroup, Radio } from "root";
+```
+
+## Basic Usage
+
+export function BasicRadioGroup() {
+  const [value, setValue] = useState("option-a");
+  return (
+    <RadioGroup name="basic" value={value} onChange={setValue}>
+      <Radio value="option-a" label="Option A" />
+      <Radio value="option-b" label="Option B" />
+      <Radio value="option-c" label="Option C" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <BasicRadioGroup />
+</Example>
+
+```tsx
+const [value, setValue] = useState("option-a");
+
+<RadioGroup name="basic" value={value} onChange={setValue}>
+  <Radio value="option-a" label="Option A" />
+  <Radio value="option-b" label="Option B" />
+  <Radio value="option-c" label="Option C" />
+</RadioGroup>
+```
+
+## Props
+
+### RadioGroup
+
+`<RadioGroup>` accepts the following props:
+
+<PropsTable props={[
+  {
+    name: "name",
+    type: "string",
+    description: "HTML name attribute shared across all radio inputs. Required for native form submission.",
+    required: true,
+  },
+  {
+    name: "value",
+    type: "string",
+    description: "The currently selected value (controlled mode).",
+    required: false,
+  },
+  {
+    name: "onChange",
+    type: "(value: string) => void",
+    description: "Callback fired when the selected value changes.",
+    required: false,
+  },
+  {
+    name: "options",
+    type: "RadioOption[]",
+    description: "Predefined options to render. Alternative to composing Radio children manually.",
+    required: false,
+  },
+  {
+    name: "orientation",
+    type: '"vertical" | "horizontal"',
+    description: "Layout direction of the radio items.",
+    default: '"vertical"',
+    required: false,
+  },
+  {
+    name: "formSize",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the radio controls and text.",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables all radio options in the group.",
+    default: "false",
+    required: false,
+  },
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Individual Radio components. Use this or options, not both.",
+    required: false,
+  },
+]} />
+
+### Radio
+
+`<Radio>` accepts the following props:
+
+<PropsTable props={[
+  {
+    name: "value",
+    type: "string",
+    description: "The value this radio option represents.",
+    required: true,
+  },
+  {
+    name: "label",
+    type: "string",
+    description: "Text label displayed next to the radio input.",
+    required: false,
+  },
+  {
+    name: "description",
+    type: "string",
+    description: "Optional secondary description shown below the label.",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables this individual radio option.",
+    default: "false",
+    required: false,
+  },
+]} />
+
+## Using options Prop
+
+Pass an array of options instead of composing Radio children manually. Each option can include an optional `description` and `disabled` flag.
+
+export function OptionsRadioGroup() {
+  const [plan, setPlan] = useState("monthly");
+  return (
+    <RadioGroup
+      name="plan"
+      value={plan}
+      onChange={setPlan}
+      options={[
+        { value: "monthly", label: "Monthly billing", description: "Billed every month, cancel anytime." },
+        { value: "annual", label: "Annual billing", description: "Save 20% with yearly billing." },
+        { value: "enterprise", label: "Enterprise", description: "Custom pricing for large teams.", disabled: true },
+      ]}
+    />
+  );
+}
+
+<Example>
+  <OptionsRadioGroup />
+</Example>
+
+```tsx
+const [plan, setPlan] = useState("monthly");
+
+<RadioGroup
+  name="plan"
+  value={plan}
+  onChange={setPlan}
+  options={[
+    { value: "monthly", label: "Monthly billing", description: "Billed every month, cancel anytime." },
+    { value: "annual", label: "Annual billing", description: "Save 20% with yearly billing." },
+    { value: "enterprise", label: "Enterprise", description: "Custom pricing for large teams.", disabled: true },
+  ]}
+/>
+```
+
+## Orientation
+
+### Vertical (Default)
+
+Items stack vertically. Best for most use cases, especially with descriptions.
+
+export function VerticalRadioGroup() {
+  const [value, setValue] = useState("read");
+  return (
+    <RadioGroup name="permission-v" value={value} onChange={setValue} orientation="vertical">
+      <Radio value="read" label="Read only" />
+      <Radio value="write" label="Read and write" />
+      <Radio value="admin" label="Full admin access" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <VerticalRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="permissions" value={value} onChange={setValue} orientation="vertical">
+  <Radio value="read" label="Read only" />
+  <Radio value="write" label="Read and write" />
+  <Radio value="admin" label="Full admin access" />
+</RadioGroup>
+```
+
+### Horizontal
+
+Items are arranged in a row. Best for short labels with few options.
+
+export function HorizontalRadioGroup() {
+  const [value, setValue] = useState("all");
+  return (
+    <RadioGroup name="filter" value={value} onChange={setValue} orientation="horizontal">
+      <Radio value="all" label="All" />
+      <Radio value="active" label="Active" />
+      <Radio value="inactive" label="Inactive" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <HorizontalRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="filter" value={value} onChange={setValue} orientation="horizontal">
+  <Radio value="all" label="All" />
+  <Radio value="active" label="Active" />
+  <Radio value="inactive" label="Inactive" />
+</RadioGroup>
+```
+
+## Sizes
+
+### Small
+
+export function SmallRadioGroup() {
+  const [value, setValue] = useState("light");
+  return (
+    <RadioGroup name="theme-sm" value={value} onChange={setValue} formSize="sm">
+      <Radio value="light" label="Light" />
+      <Radio value="dark" label="Dark" />
+      <Radio value="system" label="System default" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <SmallRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="theme" value={value} onChange={setValue} formSize="sm">
+  <Radio value="light" label="Light" />
+  <Radio value="dark" label="Dark" />
+  <Radio value="system" label="System default" />
+</RadioGroup>
+```
+
+### Medium (Default)
+
+export function MediumRadioGroup() {
+  const [value, setValue] = useState("light");
+  return (
+    <RadioGroup name="theme-md" value={value} onChange={setValue} formSize="md">
+      <Radio value="light" label="Light" />
+      <Radio value="dark" label="Dark" />
+      <Radio value="system" label="System default" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <MediumRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="theme" value={value} onChange={setValue} formSize="md">
+  <Radio value="light" label="Light" />
+  <Radio value="dark" label="Dark" />
+  <Radio value="system" label="System default" />
+</RadioGroup>
+```
+
+### Large
+
+export function LargeRadioGroup() {
+  const [value, setValue] = useState("light");
+  return (
+    <RadioGroup name="theme-lg" value={value} onChange={setValue} formSize="lg">
+      <Radio value="light" label="Light" />
+      <Radio value="dark" label="Dark" />
+      <Radio value="system" label="System default" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <LargeRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="theme" value={value} onChange={setValue} formSize="lg">
+  <Radio value="light" label="Light" />
+  <Radio value="dark" label="Dark" />
+  <Radio value="system" label="System default" />
+</RadioGroup>
+```
+
+## With Descriptions
+
+Each `Radio` item can include an optional `description` for additional context below the label.
+
+export function WithDescriptionsRadioGroup() {
+  const [value, setValue] = useState("personal");
+  return (
+    <RadioGroup name="account-type" value={value} onChange={setValue}>
+      <Radio
+        value="personal"
+        label="Personal"
+        description="For individual use. Up to 3 projects."
+      />
+      <Radio
+        value="team"
+        label="Team"
+        description="For small teams. Up to 20 members."
+      />
+      <Radio
+        value="business"
+        label="Business"
+        description="For larger organisations. Unlimited members."
+      />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <WithDescriptionsRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="account-type" value={value} onChange={setValue}>
+  <Radio
+    value="personal"
+    label="Personal"
+    description="For individual use. Up to 3 projects."
+  />
+  <Radio
+    value="team"
+    label="Team"
+    description="For small teams. Up to 20 members."
+  />
+  <Radio
+    value="business"
+    label="Business"
+    description="For larger organisations. Unlimited members."
+  />
+</RadioGroup>
+```
+
+## Disabled States
+
+### Group Disabled
+
+Passing `disabled` to the `RadioGroup` disables all options at once.
+
+export function GroupDisabledRadioGroup() {
+  return (
+    <RadioGroup name="locked" value="standard" disabled>
+      <Radio value="standard" label="Standard" />
+      <Radio value="express" label="Express" />
+      <Radio value="overnight" label="Overnight" />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <GroupDisabledRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="locked" value="standard" disabled>
+  <Radio value="standard" label="Standard" />
+  <Radio value="express" label="Express" />
+  <Radio value="overnight" label="Overnight" />
+</RadioGroup>
+```
+
+### Individual Option Disabled
+
+Individual `Radio` items can be disabled while others remain interactive.
+
+export function IndividualDisabledRadioGroup() {
+  const [value, setValue] = useState("standard");
+  return (
+    <RadioGroup name="shipping" value={value} onChange={setValue}>
+      <Radio value="standard" label="Standard (3-5 days)" />
+      <Radio value="express" label="Express (1-2 days)" />
+      <Radio value="overnight" label="Overnight" description="Not available in your region." disabled />
+    </RadioGroup>
+  );
+}
+
+<Example>
+  <IndividualDisabledRadioGroup />
+</Example>
+
+```tsx
+<RadioGroup name="shipping" value={value} onChange={setValue}>
+  <Radio value="standard" label="Standard (3-5 days)" />
+  <Radio value="express" label="Express (1-2 days)" />
+  <Radio value="overnight" label="Overnight" description="Not available in your region." disabled />
+</RadioGroup>
+```
+
+## Accessibility
+
+- The group container has `role="radiogroup"` for screen reader identification.
+- Individual radio inputs use native `<input type="radio">` for full keyboard support.
+- All radios share the same `name` attribute so the browser handles single-selection semantics natively.
+- Use `aria-label` or `aria-labelledby` on `RadioGroup` when there is no visible heading for the group.
+- Keyboard navigation: `Tab` to focus the group, `Arrow` keys to move between options within the group.
+- Disabled options are announced as disabled by screen readers.
+- Focus rings are clearly visible in both light and dark mode.
+
+## When to Use
+
+**Use RadioGroup when:**
+- Users must choose exactly one option from a small set (2–7 options).
+- All options need to be visible at a glance.
+- The choice is mutually exclusive.
+
+**Don't use RadioGroup when:**
+- Multiple selections are allowed (use `Checkbox` instead).
+- There are many options that would clutter the layout (use a `Select` dropdown instead).
+- The choice is a simple on/off toggle (use `Toggle` instead).

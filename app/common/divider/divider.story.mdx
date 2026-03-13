@@ -1,0 +1,240 @@
+import { Divider } from "./divider";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Divider',
+  category: 'components',
+  order: 5
+};
+
+# Divider
+
+A visual separator used to create clear boundaries between sections of content.
+
+## Import
+
+```tsx
+import { Divider } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <p className="text-sm text-grey-700 dark:text-grey-300">Section above</p>
+    <Divider />
+    <p className="text-sm text-grey-700 dark:text-grey-300">Section below</p>
+  </div>
+</Example>
+
+```tsx
+<Divider />
+```
+
+## Props
+
+`<Divider>` accepts all [HTML hr attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "orientation",
+    type: '"horizontal" | "vertical"',
+    description: "Orientation of the divider line",
+    default: '"horizontal"',
+    required: false,
+  },
+  {
+    name: "variant",
+    type: '"solid" | "dashed" | "dotted"',
+    description: "Line style of the divider",
+    default: '"solid"',
+    required: false,
+  },
+  {
+    name: "label",
+    type: "string",
+    description: "Optional text label centered on the divider",
+    required: false,
+  },
+  {
+    name: "intent",
+    type: '"default" | "strong" | "subtle"',
+    description: "Controls the color intensity of the divider line and label",
+    default: '"default"',
+    required: false,
+  },
+]} />
+
+## Variant
+
+Three line styles are available for different visual needs.
+
+### `variant="solid"` (default)
+
+A clean, continuous line for most use cases.
+
+- **When to use:** Standard content separation, section breaks, or between list items.
+
+<Example>
+  <Divider variant="solid" />
+</Example>
+
+```tsx
+<Divider variant="solid" />
+```
+
+### `variant="dashed"`
+
+A dashed line for lighter, less prominent separation.
+
+- **When to use:** Optional or secondary separations, decorative breaks, or to imply incomplete sections.
+
+<Example>
+  <Divider variant="dashed" />
+</Example>
+
+```tsx
+<Divider variant="dashed" />
+```
+
+### `variant="dotted"`
+
+A dotted line for a subtle decorative effect.
+
+- **When to use:** Decorative purposes, footnotes, or very low-emphasis separations.
+
+<Example>
+  <Divider variant="dotted" />
+</Example>
+
+```tsx
+<Divider variant="dotted" />
+```
+
+## Intent
+
+Intent controls the color intensity of the divider.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <div>
+      <p className="mb-2 text-xs text-grey-500 dark:text-grey-400">subtle</p>
+      <Divider intent="subtle" />
+    </div>
+    <div>
+      <p className="mb-2 text-xs text-grey-500 dark:text-grey-400">default</p>
+      <Divider intent="default" />
+    </div>
+    <div>
+      <p className="mb-2 text-xs text-grey-500 dark:text-grey-400">strong</p>
+      <Divider intent="strong" />
+    </div>
+  </div>
+</Example>
+
+```tsx
+<Divider intent="subtle" />
+<Divider intent="default" />
+<Divider intent="strong" />
+```
+
+## Label
+
+Add a text label centered on the divider for contextual separators.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Divider label="OR" />
+    <Divider label="Continue with" />
+    <Divider label="Section Break" />
+  </div>
+</Example>
+
+```tsx
+<Divider label="OR" />
+<Divider label="Continue with" />
+<Divider label="Section Break" />
+```
+
+### Label with Variants
+
+Labels adapt to all variant and intent combinations.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Divider label="solid" variant="solid" />
+    <Divider label="dashed" variant="dashed" />
+    <Divider label="dotted" variant="dotted" />
+  </div>
+</Example>
+
+```tsx
+<Divider label="solid" variant="solid" />
+<Divider label="dashed" variant="dashed" />
+<Divider label="dotted" variant="dotted" />
+```
+
+## Orientation
+
+### `orientation="horizontal"` (default)
+
+Separates content vertically — the standard use case.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <p className="text-sm text-grey-700 dark:text-grey-300">Personal Information</p>
+    <Divider />
+    <p className="text-sm text-grey-700 dark:text-grey-300">Account Settings</p>
+  </div>
+</Example>
+
+```tsx
+<div className="flex flex-col gap-3">
+  <p>Personal Information</p>
+  <Divider />
+  <p>Account Settings</p>
+</div>
+```
+
+### `orientation="vertical"`
+
+Separates content horizontally — useful inside flex or inline layouts.
+
+<Example>
+  <div className="flex h-8 items-center gap-3">
+    <span className="text-sm text-grey-700 dark:text-grey-300">Edit</span>
+    <Divider orientation="vertical" />
+    <span className="text-sm text-grey-700 dark:text-grey-300">Preview</span>
+    <Divider orientation="vertical" />
+    <span className="text-sm text-grey-700 dark:text-grey-300">Share</span>
+  </div>
+</Example>
+
+```tsx
+<div className="flex h-8 items-center gap-3">
+  <span>Edit</span>
+  <Divider orientation="vertical" />
+  <span>Preview</span>
+  <Divider orientation="vertical" />
+  <span>Share</span>
+</div>
+```
+
+## Dark Mode
+
+All intents and variants automatically adapt to dark mode.
+
+<Example>
+  <div className="flex flex-col gap-4">
+    <Divider intent="subtle" label="subtle" />
+    <Divider intent="default" label="default" />
+    <Divider intent="strong" label="strong" />
+  </div>
+</Example>
+
+## Accessibility
+
+- The outer `<div>` renders with `role="separator"` and `aria-orientation` to communicate the separator's purpose and direction to assistive technologies.
+- The inner `<hr>` elements are marked `aria-hidden="true"` to avoid redundant announcements.
+- When a `label` is provided, it is rendered as a visible `<span>` and conveyed by the wrapping separator role.

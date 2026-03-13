@@ -1,0 +1,325 @@
+import { Chip } from "./chip";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Chip',
+  category: 'components',
+  order: 4
+};
+
+# Chip
+
+A compact, pill-shaped label for representing tags, filters, selections, or status with optional interactivity and dismissal.
+
+## Import
+
+```tsx
+import { Chip } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip>Design</Chip>
+    <Chip intent="primary">New</Chip>
+    <Chip intent="success">Active</Chip>
+    <Chip intent="warning">Pending</Chip>
+    <Chip intent="error">Rejected</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip>Design</Chip>
+<Chip intent="primary">New</Chip>
+<Chip intent="success">Active</Chip>
+<Chip intent="warning">Pending</Chip>
+<Chip intent="error">Rejected</Chip>
+```
+
+## Props
+
+`<Chip>` accepts all HTML span attributes and the following:
+
+<PropsTable props={[
+  {
+    name: "intent",
+    type: '"default" | "primary" | "success" | "warning" | "error"',
+    description: "Visual style indicating the chip's semantic meaning",
+    default: '"default"',
+    required: false,
+  },
+  {
+    name: "size",
+    type: '"sm" | "md" | "lg"',
+    description: "Size of the chip",
+    default: '"md"',
+    required: false,
+  },
+  {
+    name: "icon",
+    type: "IconName",
+    description: "Optional leading icon displayed before the label",
+    required: false,
+  },
+  {
+    name: "onDelete",
+    type: "(event: MouseEvent) => void",
+    description: "Callback fired when the delete button is clicked. When provided, a × button is rendered inside the chip.",
+    required: false,
+  },
+  {
+    name: "onClick",
+    type: "(event: MouseEvent) => void",
+    description: "Makes the chip interactive and clickable with hover and active states.",
+    required: false,
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    description: "Disables the chip and prevents all user interaction.",
+    default: "false",
+    required: false,
+  },
+]} />
+
+## Intent
+
+Chip intents communicate semantic meaning through color.
+
+### `intent="default"` (default)
+
+Neutral chips for general labels, tags, or categories.
+
+- **When to use:** Non-status labels, topic tags, content categories, filter chips.
+- **Example:** Topic tags, search filters, skill labels.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip>JavaScript</Chip>
+    <Chip>TypeScript</Chip>
+    <Chip>React</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip>JavaScript</Chip>
+<Chip>TypeScript</Chip>
+<Chip>React</Chip>
+```
+
+### `intent="primary"`
+
+Primary color for highlighted or featured chips.
+
+- **When to use:** Selected filters, featured tags, or brand-related labels.
+- **Example:** Active filter selections, featured categories.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip intent="primary">Featured</Chip>
+    <Chip intent="primary">Recommended</Chip>
+    <Chip intent="primary">Popular</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip intent="primary">Featured</Chip>
+<Chip intent="primary">Recommended</Chip>
+<Chip intent="primary">Popular</Chip>
+```
+
+### `intent="success"`
+
+Positive states, active status, or approved items.
+
+- **When to use:** Active status, approved or verified labels, completed steps.
+- **Example:** Active plans, verified accounts, completed tasks.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip intent="success">Active</Chip>
+    <Chip intent="success">Verified</Chip>
+    <Chip intent="success">Approved</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip intent="success">Active</Chip>
+<Chip intent="success">Verified</Chip>
+<Chip intent="success">Approved</Chip>
+```
+
+### `intent="warning"`
+
+Cautionary states that require attention.
+
+- **When to use:** Pending states, items needing review, expiring statuses.
+- **Example:** Pending approval, expiring soon, action required.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip intent="warning">Pending</Chip>
+    <Chip intent="warning">Expiring Soon</Chip>
+    <Chip intent="warning">Review Required</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip intent="warning">Pending</Chip>
+<Chip intent="warning">Expiring Soon</Chip>
+<Chip intent="warning">Review Required</Chip>
+```
+
+### `intent="error"`
+
+Error or critical states.
+
+- **When to use:** Failed status, rejected items, critical errors.
+- **Example:** Failed validation, rejected submissions, blocked items.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip intent="error">Failed</Chip>
+    <Chip intent="error">Rejected</Chip>
+    <Chip intent="error">Blocked</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip intent="error">Failed</Chip>
+<Chip intent="error">Rejected</Chip>
+<Chip intent="error">Blocked</Chip>
+```
+
+## Size
+
+Three sizes to fit different layout contexts.
+
+<Example>
+  <div className="flex items-center flex-wrap gap-2">
+    <Chip size="sm">Small</Chip>
+    <Chip size="md">Medium</Chip>
+    <Chip size="lg">Large</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip size="sm">Small</Chip>
+<Chip size="md">Medium</Chip>
+<Chip size="lg">Large</Chip>
+```
+
+## With Icon
+
+Add a leading icon using the `icon` prop to provide visual context alongside the label.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip icon="user">John Smith</Chip>
+    <Chip icon="star" intent="primary">Starred</Chip>
+    <Chip icon="check-small" intent="success">Verified</Chip>
+    <Chip icon="gear" intent="default">Settings</Chip>
+    <Chip icon="folder-open">Documents</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip icon="user">John Smith</Chip>
+<Chip icon="star" intent="primary">Starred</Chip>
+<Chip icon="check-small" intent="success">Verified</Chip>
+<Chip icon="gear" intent="default">Settings</Chip>
+<Chip icon="folder-open">Documents</Chip>
+```
+
+## Deletable Chips
+
+Pass an `onDelete` callback to render a delete button inside the chip. Use this for tag input fields, filter selections, or any removable item.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip onDelete={() => {}}>Design</Chip>
+    <Chip intent="primary" onDelete={() => {}}>Frontend</Chip>
+    <Chip intent="success" onDelete={() => {}}>Active</Chip>
+    <Chip icon="user" onDelete={() => {}}>John Smith</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip onDelete={() => removeTag("Design")}>Design</Chip>
+<Chip intent="primary" onDelete={() => removeTag("Frontend")}>Frontend</Chip>
+<Chip intent="success" onDelete={() => removeTag("Active")}>Active</Chip>
+<Chip icon="user" onDelete={() => removeTag("John Smith")}>John Smith</Chip>
+```
+
+## Clickable Chips
+
+Pass an `onClick` handler to make chips interactive. Clickable chips behave like toggle buttons and are suitable for filter selection UI.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip onClick={() => {}}>All</Chip>
+    <Chip intent="primary" onClick={() => {}}>Active</Chip>
+    <Chip onClick={() => {}}>Archived</Chip>
+    <Chip onClick={() => {}}>Draft</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip onClick={() => setFilter("all")}>All</Chip>
+<Chip intent="primary" onClick={() => setFilter("active")}>Active</Chip>
+<Chip onClick={() => setFilter("archived")}>Archived</Chip>
+<Chip onClick={() => setFilter("draft")}>Draft</Chip>
+```
+
+## Disabled
+
+Use `disabled` to prevent interaction on both clickable and deletable chips.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip disabled>Disabled</Chip>
+    <Chip disabled intent="primary" onDelete={() => {}}>Cannot Remove</Chip>
+    <Chip disabled onClick={() => {}}>Not Clickable</Chip>
+    <Chip disabled icon="star" intent="success">Verified</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip disabled>Disabled</Chip>
+<Chip disabled intent="primary" onDelete={() => {}}>Cannot Remove</Chip>
+<Chip disabled onClick={() => {}}>Not Clickable</Chip>
+<Chip disabled icon="star" intent="success">Verified</Chip>
+```
+
+## Combined Features
+
+Chips can combine icon, delete, and click behaviors together.
+
+<Example>
+  <div className="flex flex-wrap gap-2">
+    <Chip icon="bars-filter" intent="primary" onClick={() => {}} onDelete={() => {}}>In Progress</Chip>
+    <Chip icon="user" onDelete={() => {}}>Assigned to Me</Chip>
+    <Chip icon="star" intent="warning" onDelete={() => {}}>High Priority</Chip>
+  </div>
+</Example>
+
+```tsx
+<Chip icon="bars-filter" intent="primary" onClick={() => toggleFilter()} onDelete={() => clearFilter()}>
+  In Progress
+</Chip>
+<Chip icon="user" onDelete={() => clearAssignee()}>
+  Assigned to Me
+</Chip>
+<Chip icon="star" intent="warning" onDelete={() => clearPriority()}>
+  High Priority
+</Chip>
+```
+
+## Accessibility
+
+- Clickable chips render with `role="button"` and are keyboard accessible via `Enter` and `Space`.
+- The delete button renders as a `<button>` with `aria-label="Remove"` for screen reader clarity.
+- `disabled` chips set `aria-disabled` and remove pointer events and tab focus from the delete button.
+- The leading icon uses `aria-hidden="true"` since it is decorative.

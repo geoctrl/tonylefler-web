@@ -1,0 +1,292 @@
+import { Skeleton } from "./skeleton";
+import { PropsTable } from "~/components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Skeleton',
+  category: 'components',
+  order: 14,
+  component: './skeleton.tsx'
+};
+
+# Skeleton
+
+A loading placeholder that mimics the shape of content while it loads, reducing perceived wait time.
+
+## Import
+
+```tsx
+import { Skeleton } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="space-y-2 w-64">
+    <Skeleton variant="text" />
+    <Skeleton variant="text" width="80%" />
+    <Skeleton variant="text" width="60%" />
+  </div>
+</Example>
+
+```tsx
+<Skeleton variant="text" />
+<Skeleton variant="text" width="80%" />
+<Skeleton variant="text" width="60%" />
+```
+
+## Props
+
+`<Skeleton>` accepts all HTML span attributes and the following:
+
+<PropsTable props={[
+  {
+    name: "variant",
+    type: '"rectangular" | "text" | "circular"',
+    description: 'Shape of the skeleton placeholder. "rectangular" for blocks and cards, "text" for lines of copy, "circular" for avatars and icons.',
+    default: '"rectangular"',
+    required: false,
+  },
+  {
+    name: "animation",
+    type: '"pulse" | "wave" | "none"',
+    description: 'Animation style. "pulse" fades in and out, "none" renders a static placeholder.',
+    default: '"pulse"',
+    required: false,
+  },
+  {
+    name: "width",
+    type: "string | number",
+    description: "Width of the skeleton. Numbers are treated as pixels.",
+    required: false,
+  },
+  {
+    name: "height",
+    type: "string | number",
+    description: "Height of the skeleton. Numbers are treated as pixels. For the text variant this defaults to 1em.",
+    required: false,
+  },
+]} />
+
+## Variant
+
+### `variant="rectangular"`
+
+The default shape. Use for images, cards, buttons, and block-level content.
+
+- **When to use:** Placeholder for images, cards, banners, or any rectangular UI element.
+
+<Example>
+  <div className="space-y-3">
+    <Skeleton variant="rectangular" width="100%" height={160} />
+    <Skeleton variant="rectangular" width={120} height={36} />
+  </div>
+</Example>
+
+```tsx
+<Skeleton variant="rectangular" width="100%" height={160} />
+<Skeleton variant="rectangular" width={120} height={36} />
+```
+
+### `variant="text"`
+
+Sized to a single line of text (`height: 1em`). Stack multiple rows to simulate a paragraph.
+
+- **When to use:** Placeholder for headings, labels, descriptions, or paragraph text.
+
+<Example>
+  <div className="space-y-2 w-72">
+    <Skeleton variant="text" className="text-xl" />
+    <Skeleton variant="text" />
+    <Skeleton variant="text" width="85%" />
+    <Skeleton variant="text" width="70%" />
+  </div>
+</Example>
+
+```tsx
+{/* Heading */}
+<Skeleton variant="text" className="text-xl" />
+
+{/* Paragraph lines */}
+<Skeleton variant="text" />
+<Skeleton variant="text" width="85%" />
+<Skeleton variant="text" width="70%" />
+```
+
+### `variant="circular"`
+
+Forces equal width and height producing a perfect circle. Suitable for avatars and icon placeholders.
+
+- **When to use:** Placeholder for user avatars, circular icons, or status indicators.
+
+<Example>
+  <div className="flex gap-4 items-center">
+    <Skeleton variant="circular" width={32} height={32} />
+    <Skeleton variant="circular" width={40} height={40} />
+    <Skeleton variant="circular" width={48} height={48} />
+    <Skeleton variant="circular" width={64} height={64} />
+  </div>
+</Example>
+
+```tsx
+<Skeleton variant="circular" width={32} height={32} />
+<Skeleton variant="circular" width={40} height={40} />
+<Skeleton variant="circular" width={48} height={48} />
+<Skeleton variant="circular" width={64} height={64} />
+```
+
+## Animation
+
+### `animation="pulse"` (default)
+
+The element fades in and out using Tailwind's `animate-pulse`. Works well for most loading states.
+
+<Example>
+  <Skeleton variant="rectangular" width="100%" height={80} animation="pulse" />
+</Example>
+
+```tsx
+<Skeleton variant="rectangular" width="100%" height={80} animation="pulse" />
+```
+
+### `animation="none"`
+
+No animation. Use when reduced motion is preferred or when showing a stable placeholder.
+
+<Example>
+  <Skeleton variant="rectangular" width="100%" height={80} animation="none" />
+</Example>
+
+```tsx
+<Skeleton variant="rectangular" width="100%" height={80} animation="none" />
+```
+
+## Common Patterns
+
+### Card Placeholder
+
+Mimic a content card while its data loads.
+
+<Example>
+  <div className="w-72 rounded-xl border border-grey-200 dark:border-grey-700 overflow-hidden">
+    <Skeleton variant="rectangular" width="100%" height={160} className="rounded-none" />
+    <div className="p-4 space-y-3">
+      <Skeleton variant="text" className="text-lg" width="60%" />
+      <Skeleton variant="text" />
+      <Skeleton variant="text" width="80%" />
+      <Skeleton variant="text" width="50%" />
+    </div>
+  </div>
+</Example>
+
+```tsx
+<div className="rounded-xl border border-grey-200 overflow-hidden">
+  <Skeleton variant="rectangular" width="100%" height={160} className="rounded-none" />
+  <div className="p-4 space-y-3">
+    <Skeleton variant="text" className="text-lg" width="60%" />
+    <Skeleton variant="text" />
+    <Skeleton variant="text" width="80%" />
+    <Skeleton variant="text" width="50%" />
+  </div>
+</div>
+```
+
+### Profile Row Placeholder
+
+Mimic a list row with an avatar and text.
+
+<Example>
+  <div className="space-y-3 w-80">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="flex items-center gap-3">
+        <Skeleton variant="circular" width={40} height={40} />
+        <div className="flex-1 space-y-1.5">
+          <Skeleton variant="text" width="50%" />
+          <Skeleton variant="text" width="75%" />
+        </div>
+      </div>
+    ))}
+  </div>
+</Example>
+
+```tsx
+<div className="flex items-center gap-3">
+  <Skeleton variant="circular" width={40} height={40} />
+  <div className="flex-1 space-y-1.5">
+    <Skeleton variant="text" width="50%" />
+    <Skeleton variant="text" width="75%" />
+  </div>
+</div>
+```
+
+### Table Placeholder
+
+Mimic rows of tabular data.
+
+<Example>
+  <div className="w-full space-y-2">
+    <div className="flex gap-4">
+      <Skeleton variant="rectangular" width="30%" height={20} />
+      <Skeleton variant="rectangular" width="40%" height={20} />
+      <Skeleton variant="rectangular" width="20%" height={20} />
+    </div>
+    {[1, 2, 3, 4].map((i) => (
+      <div key={i} className="flex gap-4">
+        <Skeleton variant="text" width="30%" />
+        <Skeleton variant="text" width="40%" />
+        <Skeleton variant="text" width="20%" />
+      </div>
+    ))}
+  </div>
+</Example>
+
+```tsx
+<div className="flex gap-4">
+  <Skeleton variant="text" width="30%" />
+  <Skeleton variant="text" width="40%" />
+  <Skeleton variant="text" width="20%" />
+</div>
+```
+
+## Dark Mode
+
+Skeleton automatically adapts to dark mode using `bg-grey-200` in light mode and `bg-grey-700` in dark mode.
+
+<Example>
+  <div className="grid grid-cols-2 gap-4">
+    <div className="rounded-lg bg-grey-50 dark:bg-grey-900 p-4 space-y-2">
+      <p className="text-xs text-grey-500 dark:text-grey-400 mb-3">Light</p>
+      <Skeleton variant="rectangular" width="100%" height={60} />
+      <Skeleton variant="text" />
+      <Skeleton variant="text" width="70%" />
+    </div>
+    <div className="rounded-lg bg-grey-900 dark:bg-grey-50 p-4 space-y-2">
+      <p className="text-xs text-grey-400 dark:text-grey-500 mb-3">Dark</p>
+      <Skeleton variant="rectangular" width="100%" height={60} />
+      <Skeleton variant="text" />
+      <Skeleton variant="text" width="70%" />
+    </div>
+  </div>
+</Example>
+
+## Accessibility
+
+Skeleton uses `aria-hidden="true"` and `role="status"` so screen readers are informed there is a loading state without announcing decorative placeholder shapes. Pair Skeleton with an accessible loading message when announcing the loading state is important:
+
+```tsx
+<div>
+  <span className="sr-only" role="status">Loading profile...</span>
+  <Skeleton variant="circular" width={40} height={40} aria-hidden="true" />
+</div>
+```
+
+Skeletons honor the user's reduced-motion preference when you set `animation="none"`:
+
+```tsx
+<Skeleton
+  variant="rectangular"
+  width="100%"
+  height={80}
+  animation={prefersReducedMotion ? "none" : "pulse"}
+/>
+```

@@ -9,12 +9,18 @@ export default [
   index("routes/home.tsx"),
 
   layout("routes/root/layout.tsx", [
+    route("components/accordion", "common/accordion/accordion-route.tsx"),
+    route("components/alert", "common/alert/alert-route.tsx"),
+    route("components/avatar", "common/avatar/avatar-route.tsx"),
     route("components/badge", "common/badge/badge-route.tsx"),
     route("components/badge-affix", "common/badge-affix/badge-affix-route.tsx"),
     route("components/breadcrumb", "common/breadcrumb/breadcrumb-route.tsx"),
+    route("components/button", "common/button/button-route.tsx"),
+    route("components/card", "common/card/card-route.tsx"),
     route("components/checkbox", "common/checkbox/checkbox-route.tsx"),
     route("components/checkbox-field", "common/checkbox/checkbox-field-route.tsx"),
-    route("components/button", "common/button/button-route.tsx"),
+    route("components/chip", "common/chip/chip-route.tsx"),
+    route("components/divider", "common/divider/divider-route.tsx"),
     route(
       "components/floating-menu",
       "common/floating-menu/floating-menu-route.tsx",
@@ -24,6 +30,8 @@ export default [
     route("components/input-field", "common/input/input-field-route.tsx"),
     route("components/loader", "common/loader/loader-route.tsx"),
     route("components/modal", "common/modal/modal-route.tsx"),
+    route("components/radio-group", "common/radio-group/radio-group-route.tsx"),
+    route("components/skeleton", "common/skeleton/skeleton-route.tsx"),
     route("components/textarea", "common/textarea/textarea-route.tsx"),
     route(
       "components/textarea-field",

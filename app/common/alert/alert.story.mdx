@@ -1,0 +1,280 @@
+import { Alert } from "./alert";
+import { PropsTable } from "../../components/props-table/props-table";
+import { Example } from "../../components/docs";
+
+export const meta = {
+  title: 'Alert',
+  category: 'components',
+  order: 1
+};
+
+# Alert
+
+A contextual feedback message that communicates status, warnings, errors, or informational notices to the user.
+
+## Import
+
+```tsx
+import { Alert } from "root";
+```
+
+## Basic Usage
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Alert intent="info">Your session will expire in 15 minutes.</Alert>
+    <Alert intent="success">Your changes have been saved successfully.</Alert>
+    <Alert intent="warning">Your subscription expires in 3 days.</Alert>
+    <Alert intent="error">Unable to process payment. Please try again.</Alert>
+  </div>
+</Example>
+
+```tsx
+<Alert intent="info">Your session will expire in 15 minutes.</Alert>
+<Alert intent="success">Your changes have been saved successfully.</Alert>
+<Alert intent="warning">Your subscription expires in 3 days.</Alert>
+<Alert intent="error">Unable to process payment. Please try again.</Alert>
+```
+
+## Props
+
+`<Alert>` accepts all [HTML div attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes) and the following:
+
+<PropsTable props={[
+  {
+    name: "intent",
+    type: '"info" | "success" | "warning" | "error"',
+    description: "Visual style and semantic meaning of the alert",
+    default: '"info"',
+    required: false,
+  },
+  {
+    name: "title",
+    type: "string",
+    description: "Optional heading displayed above the body content",
+    required: false,
+  },
+  {
+    name: "icon",
+    type: "IconName",
+    description: "Override the default icon for the current intent",
+    required: false,
+  },
+  {
+    name: "onDismiss",
+    type: "() => void",
+    description: "Callback fired when the dismiss button is clicked. When provided, a dismiss button is rendered.",
+    required: false,
+  },
+  {
+    name: "children",
+    type: "ReactNode",
+    description: "Body content of the alert",
+    required: false,
+  },
+]} />
+
+## Intent
+
+Each intent carries semantic meaning and is styled with an appropriate color scheme.
+
+### `intent="info"` (default)
+
+Neutral informational messages that do not require immediate action.
+
+- **When to use:** Tips, hints, general notices, or secondary contextual information.
+- **ARIA:** Renders with `role="status"` and `aria-live="polite"`.
+
+<Example>
+  <Alert intent="info">
+    You can export your data at any time from the account settings page.
+  </Alert>
+</Example>
+
+```tsx
+<Alert intent="info">
+  You can export your data at any time from the account settings page.
+</Alert>
+```
+
+### `intent="success"`
+
+Positive feedback confirming a completed action.
+
+- **When to use:** After form submissions, completed uploads, successful operations.
+- **ARIA:** Renders with `role="status"` and `aria-live="polite"`.
+
+<Example>
+  <Alert intent="success">
+    Your profile has been updated successfully.
+  </Alert>
+</Example>
+
+```tsx
+<Alert intent="success">
+  Your profile has been updated successfully.
+</Alert>
+```
+
+### `intent="warning"`
+
+Cautionary messages that may require user attention.
+
+- **When to use:** Approaching limits, potential data loss, deprecated features, or actions that are reversible but consequential.
+- **ARIA:** Renders with `role="alert"` and `aria-live="assertive"`.
+
+<Example>
+  <Alert intent="warning">
+    Deleting this project will also remove all associated files. This action can be undone within 30 days.
+  </Alert>
+</Example>
+
+```tsx
+<Alert intent="warning">
+  Deleting this project will also remove all associated files. This action can be undone within 30 days.
+</Alert>
+```
+
+### `intent="error"`
+
+Critical errors that require immediate attention or block progress.
+
+- **When to use:** Validation failures, server errors, failed operations, or destructive conditions.
+- **ARIA:** Renders with `role="alert"` and `aria-live="assertive"`.
+
+<Example>
+  <Alert intent="error">
+    We could not verify your email address. Please check your inbox and try again.
+  </Alert>
+</Example>
+
+```tsx
+<Alert intent="error">
+  We could not verify your email address. Please check your inbox and try again.
+</Alert>
+```
+
+## With Title
+
+Use the `title` prop to add a heading that summarizes the alert at a glance.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Alert intent="info" title="Scheduled Maintenance">
+      The system will be unavailable on Saturday from 2:00 AM to 4:00 AM UTC.
+    </Alert>
+    <Alert intent="success" title="Payment Received">
+      Your invoice #1042 has been paid. A receipt has been sent to your email.
+    </Alert>
+    <Alert intent="warning" title="Storage Nearly Full">
+      You have used 92% of your storage quota. Consider upgrading your plan.
+    </Alert>
+    <Alert intent="error" title="Upload Failed">
+      The file exceeds the 25 MB limit. Please compress the file and try again.
+    </Alert>
+  </div>
+</Example>
+
+```tsx
+<Alert intent="info" title="Scheduled Maintenance">
+  The system will be unavailable on Saturday from 2:00 AM to 4:00 AM UTC.
+</Alert>
+
+<Alert intent="success" title="Payment Received">
+  Your invoice #1042 has been paid. A receipt has been sent to your email.
+</Alert>
+
+<Alert intent="warning" title="Storage Nearly Full">
+  You have used 92% of your storage quota. Consider upgrading your plan.
+</Alert>
+
+<Alert intent="error" title="Upload Failed">
+  The file exceeds the 25 MB limit. Please compress the file and try again.
+</Alert>
+```
+
+## Dismissible
+
+Provide an `onDismiss` callback to render a dismiss button in the top-right corner.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Alert intent="info" title="New Feature Available" onDismiss={() => {}}>
+      Try the new dashboard layout. You can switch back at any time from settings.
+    </Alert>
+    <Alert intent="success" onDismiss={() => {}}>
+      Report generated and downloaded to your device.
+    </Alert>
+    <Alert intent="warning" title="Action Required" onDismiss={() => {}}>
+      Your API key expires in 7 days. Rotate it to avoid service interruption.
+    </Alert>
+    <Alert intent="error" title="Sync Error" onDismiss={() => {}}>
+      Changes could not be synced. Check your connection and try again.
+    </Alert>
+  </div>
+</Example>
+
+```tsx
+<Alert intent="info" title="New Feature Available" onDismiss={() => setVisible(false)}>
+  Try the new dashboard layout. You can switch back at any time from settings.
+</Alert>
+
+<Alert intent="success" onDismiss={() => setVisible(false)}>
+  Report generated and downloaded to your device.
+</Alert>
+```
+
+## Custom Icon
+
+Override the default intent icon using the `icon` prop. Valid icon names come from the icon sprite.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Alert intent="info" icon="gear" title="Configuration Required">
+      Complete your team settings before inviting members.
+    </Alert>
+    <Alert intent="success" icon="download" title="Export Ready">
+      Your CSV export is ready to download.
+    </Alert>
+    <Alert intent="warning" icon="eye-slash" title="Content Hidden">
+      This post is set to private and is not visible to other users.
+    </Alert>
+  </div>
+</Example>
+
+```tsx
+<Alert intent="info" icon="gear" title="Configuration Required">
+  Complete your team settings before inviting members.
+</Alert>
+
+<Alert intent="success" icon="download" title="Export Ready">
+  Your CSV export is ready to download.
+</Alert>
+
+<Alert intent="warning" icon="eye-slash" title="Content Hidden">
+  This post is set to private and is not visible to other users.
+</Alert>
+```
+
+## Title Only
+
+An alert with a `title` and no `children` is useful for brief, single-line notifications.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Alert intent="success" title="Changes saved." />
+    <Alert intent="error" title="Something went wrong. Please try again." />
+  </div>
+</Example>
+
+```tsx
+<Alert intent="success" title="Changes saved." />
+<Alert intent="error" title="Something went wrong. Please try again." />
+```
+
+## Accessibility
+
+- `intent="info"` and `intent="success"` render with `role="status"` and `aria-live="polite"`, allowing assistive technology to announce the message at a natural break.
+- `intent="warning"` and `intent="error"` render with `role="alert"` and `aria-live="assertive"`, interrupting assistive technology immediately to convey urgency.
+- The dismiss button includes an `aria-label="Dismiss"` for screen reader clarity.
+- The icon is marked `aria-hidden="true"` since it is decorative.
