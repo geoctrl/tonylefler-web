@@ -14,6 +14,7 @@ export const iconNames = [
   "percent",
   "pencil",
   "paste",
+  "minus",
   "magnifying-glass",
   "linkedin",
   "house",

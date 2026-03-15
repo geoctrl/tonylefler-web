@@ -1,8 +1,8 @@
 import { Icon } from "./icon";
+
 import { Button } from "../button/button";
 import { PropsTable } from "~/components/props-table/props-table";
 import { Example } from "../../components/docs";
-
 export const meta = {
   title: 'Icon',
   category: 'components',
@@ -22,6 +22,7 @@ import { Icon } from "root";
 
 ## Basic Usage
 
+{
 <Example>
   <div className="flex gap-4 items-center">
     <Icon name="house" />
@@ -30,6 +31,7 @@ import { Icon } from "root";
     <Icon name="star" />
   </div>
 </Example>
+}
 
 ```tsx
 <Icon name="house" />
@@ -41,6 +43,7 @@ import { Icon } from "root";
 
 `<Icon>` accepts all [SVG element attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg#attributes) and the following:
 
+{
 <PropsTable props={[
   {
     name: "name",
@@ -68,16 +71,14 @@ import { Icon } from "root";
     required: false,
   },
 ]} />
+}
 
 ## Icon System
 
 Icons are sourced from an SVG sprite sheet for optimal performance:
 
-- **Font Awesome** is the primary icon library
-- Custom icons can be added by placing SVG files in the `icons/` directory
-- Build process generates a sprite sheet and TypeScript types
-- Icons are referenced by name (e.g., `name="house"`)
-- TypeScript provides autocomplete for all available icon names
+- Any svg-based icon can be used - I highly recommend **Font Awesome**
+- Icon processing is needed, including generating types - view this package's vite config as an example of how to accomplish this
 
 ## Size
 
@@ -85,14 +86,16 @@ Icons inherit their size from the parent element or can be sized using Tailwind 
 
 ### Default Size
 
-The default icon size is `size-5` (20px × 20px).
+The default icon size is `size-5` (20×20px).
 
+{
 <Example>
   <div className="flex gap-4 items-center">
     <Icon name="house" />
     <span className="text-grey-900 dark:text-grey-100">Default size (20px)</span>
   </div>
 </Example>
+}
 
 ```tsx
 <Icon name="house" />
@@ -102,6 +105,7 @@ The default icon size is `size-5` (20px × 20px).
 
 Use Tailwind `size-*` utilities to control icon dimensions.
 
+{
 <Example>
   <div className="flex gap-4 items-center">
     <Icon name="star" className="size-3" />
@@ -112,6 +116,7 @@ Use Tailwind `size-*` utilities to control icon dimensions.
     <Icon name="star" className="size-10" />
   </div>
 </Example>
+}
 
 ```tsx
 <Icon name="star" className="size-3" />
@@ -164,19 +169,20 @@ Icons automatically inherit text color from their parent element via `fill-curre
 
 ### Custom Fill Color
 
-Use the `fill` prop or Tailwind `fill-*` classes for direct color control.
+Use Tailwind `fill-*` classes for direct color control.
 
+{
 <Example>
   <div className="flex gap-6 items-center">
-    <Icon name="star" className="size-6" fill="#FFD700" />
     <Icon name="star" className="size-6 fill-primary-500" />
     <Icon name="star" className="size-6 fill-danger-500" />
   </div>
 </Example>
+}
 
 ```tsx
-<Icon name="star" fill="#FFD700" />
-<Icon name="star" className="fill-primary-500" />
+<Icon name="star" className="size-6 fill-primary-500" />
+<Icon name="star" className="size-6 fill-danger-500" />
 ```
 
 ## Using with Components
@@ -185,6 +191,7 @@ Icons work seamlessly with other components like Button.
 
 ### With Button Component
 
+{
 <Example>
   <div className="flex gap-2">
     <Button iconLeft="star">Favorite</Button>
@@ -192,6 +199,7 @@ Icons work seamlessly with other components like Button.
     <Button iconOnly="gear" />
   </div>
 </Example>
+}
 
 ```tsx
 <Button iconLeft="star">Favorite</Button>
@@ -290,11 +298,6 @@ To add custom icons to your project:
 1. **Add SVG file**: Place your SVG icon in the `icons/` directory
 2. **Restart dev server**: The build process automatically generates the sprite and types
 3. **Use the icon**: Reference it by filename: `<Icon name="my-icon" />`
-
-**Requirements:**
-- SVG files must have a `viewBox="0 0 24 24"` attribute
-- Keep icons simple and monochrome for best results with `fill-current`
-- Font Awesome is the primary source, but any SVG icon can be added
 
 ## Accessibility
 

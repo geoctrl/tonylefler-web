@@ -19,16 +19,15 @@ export function GlobalSvg() {
 `;
 
 (async () => {
-  const iconNames = [];
-  const iconsRaw = [];
+  const iconNames: string[] = [];
+  const iconsRaw: string[] = [];
 
-  async function dirIcons(dir) {
+  async function dirIcons(dir: string): Promise<void> {
     const icons = await fs.readdir(dir, { withFileTypes: true });
     const promises = icons.map(async (file) => {
       const filePath = path.join(dir, file.name);
       if (file.isDirectory()) {
-        const nestedFiles = await dirIcons(filePath);
-        iconNames.concat(nestedFiles);
+        await dirIcons(filePath);
       } else if (file.isFile() && path.extname(file.name) === ".svg") {
         const file = await fs.readFile(filePath, { encoding: "utf8" });
         const name = path.parse(filePath).name;

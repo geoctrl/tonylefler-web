@@ -24,7 +24,7 @@ import { Checkbox } from "root";
 export function CheckboxWithState() {
 const [checked, setChecked] = useState(false);
 return (
-  <Checkbox label="Accept terms and conditions" checked={checked} onChangeValue={setChecked} />
+  <Checkbox label="Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions Accept terms and conditions " checked={checked} onChangeValue={setChecked} />
 )}
 
 <Example>
@@ -80,6 +80,12 @@ return (
     name: "fieldError",
     type: "FieldError",
     description: "React Hook Form field error object",
+    required: false,
+  },
+  {
+    name: "indeterminate",
+    type: "boolean",
+    description: "Displays the checkbox in an indeterminate (mixed) state, overrides checked appearance",
     required: false,
   },
 ]} />
@@ -215,9 +221,72 @@ export function NoLabelCheckbox() {
 <Checkbox label="Disabled checked" checked disabled />
 ```
 
+### Indeterminate
+
+Used when a checkbox represents a group where some (but not all) items are selected. Sets the native `indeterminate` DOM property on the input.
+
+<Example>
+  <div className="flex flex-col gap-3">
+    <Checkbox label="Select all" indeterminate />
+    <Checkbox label="Select all (disabled)" indeterminate disabled />
+  </div>
+</Example>
+
+```tsx
+<Checkbox label="Select all" indeterminate />
+```
+
+A common pattern is a "select all" checkbox that reflects mixed selection state:
+
+export function IndeterminateExample() {
+  const [items, setItems] = useState([
+    { label: "First item", checked: true },
+    { label: "Second item", checked: false },
+    { label: "Third item", checked: true },
+  ]);
+  const allChecked = items.every(i => i.checked);
+  const someChecked = items.some(i => i.checked);
+  return (
+    <div className="flex flex-col gap-2">
+      <Checkbox
+        label="Select all"
+        checked={allChecked}
+        indeterminate={someChecked && !allChecked}
+        onChangeValue={(val) => setItems(items.map(i => ({ ...i, checked: val })))}
+      />
+      <div className="ml-6 flex flex-col gap-2 border-l border-grey-200 dark:border-grey-700 pl-4">
+        {items.map((item, idx) => (
+          <Checkbox
+            key={idx}
+            label={item.label}
+            checked={item.checked}
+            onChangeValue={(val) => setItems(items.map((i, j) => j === idx ? { ...i, checked: val } : i))}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+<Example>
+  <IndeterminateExample />
+</Example>
+
+```tsx
+const allChecked = items.every(i => i.checked);
+const someChecked = items.some(i => i.checked);
+
+<Checkbox
+  label="Select all"
+  checked={allChecked}
+  indeterminate={someChecked && !allChecked}
+  onChangeValue={(val) => setItems(items.map(i => ({ ...i, checked: val })))}
+/>
+```
+
 ## Error State
 
-Display validation errors below the checkbox:
+Validation errors are displayed as a danger badge below the checkbox.
 
 <Example>
   <Checkbox
@@ -302,7 +371,8 @@ For form integration, use `CheckboxField` instead (see [Checkbox Field](/compone
 - Label is automatically associated with the input
 - When no label is provided, use `aria-label` attribute
 - Disabled state prevents interaction and is announced to screen readers
-- Error messages are associated with the input for screen reader announcement
+- Error messages are displayed as a badge and announced to screen readers
+- The `indeterminate` prop sets the native DOM `indeterminate` property, which screen readers announce as "mixed"
 - Focus ring clearly visible on keyboard focus
 
 ## When to Use

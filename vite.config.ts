@@ -22,7 +22,7 @@ export default defineConfig(async () => {
         withTypes: true,
         typesOutputFile: path.resolve(__dirname, "app/types/icon-gen.ts"),
         inputDir: path.resolve(__dirname, "icons"),
-        outputDir: path.resolve(__dirname, "public"),
+        outputDir: path.resolve(__dirname, "app/assets"),
         fileName: "icons.svg",
         formatter: "prettier",
         iconNameTransformer: (fileName) => kebabCase(fileName),

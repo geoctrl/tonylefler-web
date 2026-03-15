@@ -66,7 +66,7 @@ export default [
 
 **System:**
 - Source: `icons/` directory (SVG files)
-- Build: `icons-build.js` generates spritesheet
+- Build: `icons-build.ts` generates spritesheet
 - Types: Auto-generated in `app/types/icon-gen.ts`
 - Usage: `<Icon name="star" />`
 

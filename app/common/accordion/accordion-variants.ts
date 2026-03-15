@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const accordionVariants = tv({
   slots: {
-    root: "w-full divide-y divide-grey-900/10 dark:divide-grey-100/10 border border-grey-900/15 dark:border-grey-100/15 rounded-md overflow-hidden",
+    root: "w-full divide-y divide-grey-900/10 dark:divide-grey-100/10 border app-border rounded-md overflow-hidden",
     item: "bg-grey-10 dark:bg-grey-900",
     trigger: [
       "flex w-full items-center justify-between gap-3 px-4 py-3.5",
@@ -13,8 +13,10 @@ export const accordionVariants = tv({
       "transition-colors duration-150",
       "disabled:cursor-default disabled:opacity-50",
     ],
-    caret: "size-4 shrink-0 text-grey-500 dark:text-grey-400 transition-transform duration-200",
-    contentWrapper: "grid transition-[grid-template-rows] duration-200 ease-in-out",
+    caret:
+      "size-4 shrink-0 text-grey-500 dark:text-grey-400 transition-transform duration-200",
+    contentWrapper:
+      "grid transition-[grid-template-rows] duration-200 ease-in-out",
     contentInner: "overflow-hidden",
     content: "px-4 pb-4 pt-1 text-sm text-grey-700 dark:text-grey-300",
   },
